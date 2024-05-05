@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=11 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" path="res://Database.gd" id="1_ie8y7"]
 [ext_resource type="Script" path="res://main.gd" id="1_nvv5i"]
 [ext_resource type="Script" path="res://StructTree.gd" id="3_b23bh"]
 [ext_resource type="Script" path="res://LocationCreationDialogue.gd" id="3_cw6ng"]
+[ext_resource type="Texture2D" uid="uid://b82gyeyblxd5l" path="res://textures/title.png" id="4_ms148"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1gvr"]
 bg_color = Color(0.605274, 0.605274, 0.605274, 1)
@@ -11,6 +12,27 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h135y"]
+bg_color = Color(0.709804, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4n64a"]
+bg_color = Color(0.862745, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_us7rp"]
+bg_color = Color(0.52549, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blt5x"]
 bg_color = Color(0.168627, 0.168627, 0.168627, 1)
@@ -39,10 +61,8 @@ tree_selector_dialogue = NodePath("TreeSelectionDialogue")
 location_creation_dialogue = NodePath("LocationCreationDialogue")
 tree_element = NodePath("TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree")
 
-[node name="Database" type="Node" parent="." node_paths=PackedStringArray("name_text", "score_text")]
+[node name="Database" type="Node" parent="."]
 script = ExtResource("1_ie8y7")
-name_text = NodePath("")
-score_text = NodePath("")
 
 [node name="LocationCreationDialogue" type="Control" parent="." node_paths=PackedStringArray("parent_button")]
 layout_mode = 1
@@ -89,17 +109,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0.227451)
 
-[node name="Title" type="Label" parent="LocationCreationDialogue/M/P"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 57.0
-grow_horizontal = 2
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 41
-text = "Create Location"
-horizontal_alignment = 1
-
 [node name="VBoxContainer" type="VBoxContainer" parent="LocationCreationDialogue/M/P"]
 layout_mode = 1
 anchors_preset = -1
@@ -137,7 +146,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 36
-text = "test"
+placeholder_text = "Enter a Location Name"
 alignment = 1
 
 [node name="LocationParentCont" type="Panel" parent="LocationCreationDialogue/M/P/VBoxContainer"]
@@ -153,7 +162,7 @@ offset_left = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 0
-text = "Location"
+text = "Parent Location"
 vertical_alignment = 1
 
 [node name="ParentSelectionButton" type="Button" parent="LocationCreationDialogue/M/P/VBoxContainer/LocationParentCont"]
@@ -165,13 +174,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 36
-text = "Parent"
 
 [node name="LocationSaveCont" type="Panel" parent="LocationCreationDialogue/M/P/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SaveLocationButton" type="Button" parent="LocationCreationDialogue/M/P/VBoxContainer/LocationSaveCont"]
+[node name="HBoxContainer" type="HBoxContainer" parent="LocationCreationDialogue/M/P/VBoxContainer/LocationSaveCont"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.3
@@ -179,8 +187,48 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="SaveLocationButton" type="Button" parent="LocationCreationDialogue/M/P/VBoxContainer/LocationSaveCont/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
 theme_override_font_sizes/font_size = 36
 text = "Save Location"
+
+[node name="CancelLocationButton" type="Button" parent="LocationCreationDialogue/M/P/VBoxContainer/LocationSaveCont/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_h135y")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4n64a")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_us7rp")
+text = "Cancel"
+
+[node name="TextureRect" type="TextureRect" parent="LocationCreationDialogue"]
+self_modulate = Color(0.168536, 0.168536, 0.168536, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.175
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_ms148")
+expand_mode = 2
+
+[node name="Title" type="Label" parent="LocationCreationDialogue/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.412
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 43
+text = "Create Location"
+horizontal_alignment = 1
 
 [node name="TreeSelectionDialogue" type="Control" parent="."]
 visible = false

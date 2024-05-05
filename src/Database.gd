@@ -8,13 +8,6 @@ const verbosity_level : int = SQLite.VERBOSE
 var database_path = "user://data.db"
 
 var location_data = {
-	1 : ["a1", 0],
-		2 : ["b1", 1],
-		3 : ["b2", 1],
-	4 : ["c1", 0],
-		5 : ["d1", 4],
-			6 : ["e1", 5],
-			7 : ["e2", 6]
 }
 
 
@@ -24,11 +17,23 @@ func get_location_name_by_id(location_id):
 	return ""
 
 
+func get_locations_data():
+	#location_data.clear()
+	var localion_db_data = db.select_rows("locations", "", ["*"])
+	print(localion_db_data)
+	for i in range(localion_db_data.size()):
+		location_data[localion_db_data[i].id] = [
+			localion_db_data[i].name, 
+			0 if !localion_db_data[i].parent_id else localion_db_data[i].parent_id,
+			localion_db_data[i].description]
+
+
 func _ready():
 	db = SQLite.new()
 	db.path = database_path
 	db.open_db()
 	create_tables()
+	get_locations_data()
 
 
 func get_tables():
@@ -56,12 +61,15 @@ func create_tables():
 		var locations_table = {
 			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
 			"name" : {"data_type" : "text"},
-			"parent_id" : {"data_type" : "id"}
+			"parent_id" : {"data_type" : "id",
+			"description" : {"data_type" : "text"}
+			}
 		}
 		db.create_table("locations", locations_table)
 		var category_table = {
 			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
 			"name" : {"data_type" : "text"},
+			"description" : {"data_type" : "text"},
 			"parent_id" : {"data_type" : "id"}
 		}
 		db.create_table("categories", category_table)
