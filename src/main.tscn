@@ -1,0 +1,247 @@
+[gd_scene load_steps=7 format=3 uid="uid://bjythu8jrsr5o"]
+
+[ext_resource type="Script" path="res://Database.gd" id="1_ie8y7"]
+[ext_resource type="Script" path="res://main.gd" id="1_nvv5i"]
+[ext_resource type="Script" path="res://StructTree.gd" id="3_b23bh"]
+[ext_resource type="Script" path="res://LocationCreationDialogue.gd" id="3_cw6ng"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1gvr"]
+bg_color = Color(0.605274, 0.605274, 0.605274, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blt5x"]
+bg_color = Color(0.168627, 0.168627, 0.168627, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.403922)
+shadow_size = 10
+shadow_offset = Vector2(10, 10)
+
+[node name="Main" type="Control" node_paths=PackedStringArray("tree_selector_dialogue", "location_creation_dialogue", "tree_element")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nvv5i")
+tree_selector_dialogue = NodePath("TreeSelectionDialogue")
+location_creation_dialogue = NodePath("LocationCreationDialogue")
+tree_element = NodePath("TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree")
+
+[node name="Database" type="Node" parent="." node_paths=PackedStringArray("name_text", "score_text")]
+script = ExtResource("1_ie8y7")
+name_text = NodePath("")
+score_text = NodePath("")
+
+[node name="LocationCreationDialogue" type="Control" parent="." node_paths=PackedStringArray("parent_button")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_cw6ng")
+parent_button = NodePath("M/P/VBoxContainer/LocationParentCont/ParentSelectionButton")
+
+[node name="ColorRect" type="ColorRect" parent="LocationCreationDialogue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.168627, 0.168627, 0.168627, 1)
+
+[node name="M" type="MarginContainer" parent="LocationCreationDialogue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="P" type="Panel" parent="LocationCreationDialogue/M"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e1gvr")
+
+[node name="ColorRect" type="ColorRect" parent="LocationCreationDialogue/M/P"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.227451)
+
+[node name="Title" type="Label" parent="LocationCreationDialogue/M/P"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 57.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 41
+text = "Create Location"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LocationCreationDialogue/M/P"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.15
+anchor_right = 0.9
+anchor_bottom = 0.85
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 11
+
+[node name="LocationNameCont" type="Panel" parent="LocationCreationDialogue/M/P/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="LocationCreationDialogue/M/P/VBoxContainer/LocationNameCont"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.3
+offset_left = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+text = "Location Name"
+vertical_alignment = 1
+
+[node name="LocationNameLineEdit" type="LineEdit" parent="LocationCreationDialogue/M/P/VBoxContainer/LocationNameCont"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.3
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 36
+text = "test"
+alignment = 1
+
+[node name="LocationParentCont" type="Panel" parent="LocationCreationDialogue/M/P/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="LocationCreationDialogue/M/P/VBoxContainer/LocationParentCont"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.3
+offset_left = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+text = "Location"
+vertical_alignment = 1
+
+[node name="ParentSelectionButton" type="Button" parent="LocationCreationDialogue/M/P/VBoxContainer/LocationParentCont"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.3
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "Parent"
+
+[node name="LocationSaveCont" type="Panel" parent="LocationCreationDialogue/M/P/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SaveLocationButton" type="Button" parent="LocationCreationDialogue/M/P/VBoxContainer/LocationSaveCont"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.3
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "Save Location"
+
+[node name="TreeSelectionDialogue" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CancelTreeSelection" type="Button" parent="TreeSelectionDialogue"]
+self_modulate = Color(1, 1, 1, 0.454902)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TSL" type="Control" parent="TreeSelectionDialogue"]
+layout_mode = 1
+anchor_top = 0.09
+anchor_right = 1.0
+anchor_bottom = 0.91
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="TreeSelectionDialogue/TSL"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Control" type="Panel" parent="TreeSelectionDialogue/TSL/AspectRatioContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_blt5x")
+
+[node name="ColorRect" type="ColorRect" parent="TreeSelectionDialogue/TSL/AspectRatioContainer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StructTree" type="Tree" parent="TreeSelectionDialogue/TSL/AspectRatioContainer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.03
+anchor_right = 0.97
+anchor_bottom = 0.97
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_b23bh")
+
+[connection signal="pressed" from="LocationCreationDialogue/M/P/VBoxContainer/LocationParentCont/ParentSelectionButton" to="." method="_on_parent_selection_button_pressed"]
+[connection signal="pressed" from="TreeSelectionDialogue/CancelTreeSelection" to="." method="_on_cancel_tree_selection_pressed"]
+[connection signal="item_selected" from="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" to="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" method="_on_item_selected"]
