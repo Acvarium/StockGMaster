@@ -27,18 +27,21 @@ func get_image_by_id(image_id):
 
 func get_location_name_by_id(location_id):
 	if location_id in location_data.keys():
-		return location_data[location_id][0]
+		return location_data[location_id].name
 	return ""
+
+
+func get_location_data_by_id(location_id):
+	if location_id in location_data.keys():
+		return location_data[location_id]
+	return null
 
 
 func pull_locations_data():
 	location_data.clear()
 	var localion_db_data = db.select_rows("locations", "", ["*"])
 	for i in range(localion_db_data.size()):
-		location_data[localion_db_data[i].id] = [
-			localion_db_data[i].name, 
-			0 if !localion_db_data[i].parent_id else localion_db_data[i].parent_id,
-			localion_db_data[i].description]
+		location_data[localion_db_data[i].id] = localion_db_data[i]
 
 
 func pull_items_data():
@@ -140,6 +143,19 @@ func store_image_example():
 	var pba = image.get_image().save_jpg_to_buffer()
 	var data = {"image" : pba}
 	db.insert_row("images", data)
+
+
+func build_location_address(location_id):
+	var addr = "/"
+	var current_location_data = get_location_data_by_id(location_id)
+	while current_location_data != null:
+		addr = current_location_data.name + "/" + addr
+		if "parent_id" in current_location_data.keys() and current_location_data.parent_id:
+			current_location_data = get_location_data_by_id(current_location_data.parent_id)
+		else:
+			current_location_data = null
+	addr = "/" + addr.left(addr.length() - 1)
+	return addr
 
 
 func load_image_example():

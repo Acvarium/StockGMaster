@@ -14,13 +14,14 @@ func build_tree(tree_data : Dictionary):
 			var current_key = tree_data.keys()[i]
 			if current_key in item_dict.keys():
 				continue
-			if tree_data[current_key][1] == index_list[0]:
+			if tree_data[current_key].parent_id == index_list[0] or \
+					index_list[0] == 0 and tree_data[current_key].parent_id == null:
 				var current_parent_item = root
 				if index_list[0] != 0:
 					current_parent_item = item_dict[index_list[0]]
 				item_dict[current_key] = create_item(current_parent_item)
 				index_list.append(current_key)
-				item_dict[current_key].set_text(0, tree_data[current_key][0])
+				item_dict[current_key].set_text(0, tree_data[current_key].name)
 				item_dict[current_key].set_metadata(0, current_key)
 		index_list.remove_at(0)
 

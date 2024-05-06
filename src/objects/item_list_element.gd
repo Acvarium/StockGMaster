@@ -23,16 +23,20 @@ func set_data(new_data):
 		$DPanel/ItemDescription.text = item_description
 	else:
 		$DPanel/ItemDescription.text = ""
-		
 	var image_loaded = false
 	if "image_id" in new_data.keys() and new_data.image_id != null:
 		var image = main_node.get_image_by_id(new_data.image_id)
 		$IPanel/ItemIcon.texture = ImageTexture.create_from_image(image)
 		image_loaded = true
-		
+	if "location_id" in new_data.keys() and new_data.location_id != null:
+		var location_addr = main_node.get_location_address(new_data.location_id)
+		if location_addr:
+			$LPanel/LocationAddr.text = location_addr
+			$LPanel/LocationAddr.tooltip_text = location_addr
+			$ItemName.tooltip_text = location_addr
 	$IPanel/ItemIcon.visible = image_loaded
 	$IPanel.self_modulate.a = 1.0 if image_loaded else 0.5
-		
+
 
 func unfold(to_unfold = true):
 	if is_unfolded == to_unfold:

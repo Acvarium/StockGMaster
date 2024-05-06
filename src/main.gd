@@ -21,6 +21,10 @@ func hide_tree_selector():
 	tree_selector_dialogue.visible = false
 
 
+func get_location_address(location_id):
+	return $Database.build_location_address(location_id)
+
+
 func show_tree_selector_dialogue(tree_index):
 	tree_selection_index = tree_index
 	if tree_index == Global.TreeSelection.ParentLocation:
