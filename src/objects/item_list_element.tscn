@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://l7og0lhat66"]
+
+[ext_resource type="Texture2D" uid="uid://dn1q6s8e7t55l" path="res://w_rect.png" id="1_5sw8e"]
+
+[node name="ItemListElement" type="Panel"]
+custom_minimum_size = Vector2(0, 55)
+
+[node name="ItemName" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_right = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Name of the item asdasd as dasd asd asd asd as da sdad asd "
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="ItemDescription" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Name of the item"
+vertical_alignment = 1
+
+[node name="ItemIcon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5sw8e")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="UnfoldButton" type="TextureButton" parent="."]
+self_modulate = Color(0.172549, 0.172549, 0.172549, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_right = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_5sw8e")
+ignore_texture_size = true
+stretch_mode = 5

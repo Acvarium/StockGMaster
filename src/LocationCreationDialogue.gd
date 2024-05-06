@@ -1,6 +1,6 @@
 extends Control
 @export var parent_button : Button
-
+@export var title_label : Label
 
 func _ready():
 	pass # Replace with function body.
