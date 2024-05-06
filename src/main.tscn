@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=15 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" path="res://Database.gd" id="1_ie8y7"]
 [ext_resource type="Script" path="res://main.gd" id="1_nvv5i"]
 [ext_resource type="Script" path="res://StructTree.gd" id="3_b23bh"]
 [ext_resource type="Script" path="res://LocationCreationDialogue.gd" id="3_cw6ng"]
+[ext_resource type="Script" path="res://ItemsTab.gd" id="3_vserw"]
 [ext_resource type="Script" path="res://FitLabel.gd" id="4_clukf"]
 [ext_resource type="Texture2D" uid="uid://b82gyeyblxd5l" path="res://textures/title.png" id="4_ms148"]
 [ext_resource type="Script" path="res://FitRichTextLabel.gd" id="5_a7r6l"]
@@ -51,7 +52,7 @@ shadow_color = Color(0, 0, 0, 0.403922)
 shadow_size = 10
 shadow_offset = Vector2(10, 10)
 
-[node name="Main" type="Control" node_paths=PackedStringArray("tree_selector_dialogue", "location_creation_dialogue", "tree_element")]
+[node name="Main" type="Control" node_paths=PackedStringArray("tree_selector_dialogue", "location_creation_dialogue", "tree_element", "items_tab")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,6 +63,7 @@ script = ExtResource("1_nvv5i")
 tree_selector_dialogue = NodePath("TreeSelectionDialogue")
 location_creation_dialogue = NodePath("LocationCreationDialogue")
 tree_element = NodePath("TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree")
+items_tab = NodePath("MainControl/TabContainer/Items")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -75,7 +77,7 @@ color = Color(0.168627, 0.168627, 0.168627, 1)
 [node name="Database" type="Node" parent="."]
 script = ExtResource("1_ie8y7")
 
-[node name="Control" type="Control" parent="."]
+[node name="MainControl" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -83,31 +85,50 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TabContainer" type="TabContainer" parent="Control"]
+[node name="TabContainer" type="TabContainer" parent="MainControl"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -43.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Items" type="Control" parent="Control/TabContainer"]
+[node name="Items" type="Control" parent="MainControl/TabContainer" node_paths=PackedStringArray("items_holder")]
 layout_mode = 2
+script = ExtResource("3_vserw")
+items_holder = NodePath("ItemsListPanel/ScrollContainer/VBoxContainer")
 
-[node name="Panel" type="Panel" parent="Control/TabContainer/Items"]
+[node name="ItemsToolPanel" type="Panel" parent="MainControl/TabContainer/Items"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 5.0
+offset_top = 8.0
+offset_right = -5.0
+offset_bottom = 45.0
+grow_horizontal = 2
+
+[node name="ItemsSearchLineEdit" type="LineEdit" parent="MainControl/TabContainer/Items/ItemsToolPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemsListPanel" type="Panel" parent="MainControl/TabContainer/Items"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 5.0
-offset_top = 5.0
+offset_top = 50.0
 offset_right = -5.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Control/TabContainer/Items/Panel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainControl/TabContainer/Items/ItemsListPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.01
@@ -119,95 +140,96 @@ grow_vertical = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/TabContainer/Items/Panel/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ItemListElement" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement2" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement2" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement3" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement3" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement4" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement4" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement5" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement5" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement6" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement6" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement7" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement7" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement8" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement8" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement9" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement9" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement10" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement10" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement11" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement11" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement12" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement12" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement13" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement13" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement14" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement14" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement15" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement15" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement16" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement16" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement17" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement17" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement18" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement18" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement19" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement19" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement20" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement20" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement21" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement21" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement22" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement22" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement23" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement23" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="ItemListElement24" parent="Control/TabContainer/Items/Panel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
+[node name="ItemListElement24" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
 
-[node name="Locations" type="Control" parent="Control/TabContainer"]
+[node name="Locations" type="Control" parent="MainControl/TabContainer"]
 visible = false
 layout_mode = 2
 
-[node name="Categories" type="Control" parent="Control/TabContainer"]
+[node name="Categories" type="Control" parent="MainControl/TabContainer"]
 visible = false
 layout_mode = 2
 
-[node name="Tags" type="Control" parent="Control/TabContainer"]
+[node name="Tags" type="Control" parent="MainControl/TabContainer"]
 visible = false
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="Control"]
+[node name="Panel" type="Panel" parent="MainControl"]
+visible = false
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
 anchors_preset = 12
@@ -216,56 +238,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
-
-[node name="ItemsListDialogue" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="P" type="Panel" parent="ItemsListDialogue"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.05
-anchor_right = 1.0
-anchor_bottom = 0.95
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_e1gvr")
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="ItemsListDialogue"]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.12
-grow_horizontal = 2
-grow_vertical = 2
-ratio = 6.0
-
-[node name="TextureRect" type="TextureRect" parent="ItemsListDialogue/AspectRatioContainer"]
-self_modulate = Color(0.168536, 0.168536, 0.168536, 1)
-layout_mode = 2
-texture = ExtResource("4_ms148")
-expand_mode = 1
-
-[node name="Title" type="Label" parent="ItemsListDialogue/AspectRatioContainer/TextureRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.951
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 43
-text = "Items"
-horizontal_alignment = 1
-vertical_alignment = 2
-script = ExtResource("4_clukf")
-aspect = 0.4
 
 [node name="LocationCreationDialogue" type="Control" parent="." node_paths=PackedStringArray("parent_button")]
 visible = false
@@ -277,6 +249,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_cw6ng")
 parent_button = NodePath("VBoxContainer/LocationParentCont/ParentSelectionButton")
+
+[node name="ColorRect" type="ColorRect" parent="LocationCreationDialogue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.168627, 0.168627, 0.168627, 1)
 
 [node name="P" type="Panel" parent="LocationCreationDialogue"]
 layout_mode = 1
@@ -493,6 +474,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_b23bh")
 
+[connection signal="item_data_loaded" from="Database" to="." method="_on_database_item_data_loaded"]
 [connection signal="pressed" from="LocationCreationDialogue/VBoxContainer/LocationParentCont/ParentSelectionButton" to="." method="_on_parent_selection_button_pressed"]
 [connection signal="pressed" from="TreeSelectionDialogue/CancelTreeSelection" to="." method="_on_cancel_tree_selection_pressed"]
 [connection signal="item_selected" from="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" to="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" method="_on_item_selected"]

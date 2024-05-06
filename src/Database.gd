@@ -1,5 +1,7 @@
 extends Node
 
+signal item_data_loaded
+
 var db : SQLite = null
 @export var name_text : TextEdit
 @export var score_text : TextEdit
@@ -10,6 +12,18 @@ var database_path = "user://data.db"
 var location_data = {
 }
 
+var items_data = {
+	
+}
+
+
+func get_image_by_id(image_id):
+	db.select_rows("images", "id = '" + str(image_id) + "'", ["*"])
+	for res in db.query_result:
+		var image = Image.new()
+		image.load_jpg_from_buffer(res.image)
+		return image
+
 
 func get_location_name_by_id(location_id):
 	if location_id in location_data.keys():
@@ -17,10 +31,9 @@ func get_location_name_by_id(location_id):
 	return ""
 
 
-func get_locations_data():
-	#location_data.clear()
+func pull_locations_data():
+	location_data.clear()
 	var localion_db_data = db.select_rows("locations", "", ["*"])
-	print(localion_db_data)
 	for i in range(localion_db_data.size()):
 		location_data[localion_db_data[i].id] = [
 			localion_db_data[i].name, 
@@ -28,13 +41,22 @@ func get_locations_data():
 			localion_db_data[i].description]
 
 
+func pull_items_data():
+	items_data.clear()
+	var items_db_data = db.select_rows("items", "", ["*"])
+	for i in range(items_db_data.size()):
+		items_data[items_db_data[i].id] = items_db_data[i]
+		#print(items_db_data[i])
+	item_data_loaded.emit()
+	
+
 func _ready():
 	db = SQLite.new()
 	db.path = database_path
 	db.open_db()
 	create_tables()
-	get_locations_data()
-
+	pull_locations_data()
+	pull_items_data()
 
 func get_tables():
 	db.query("SELECT name FROM sqlite_schema WHERE type = 'table' AND name NOT LIKE 'sqlite_%';")

@@ -2,7 +2,7 @@ extends Control
 @export var tree_selector_dialogue : Control
 @export var location_creation_dialogue : Control
 @export var tree_element : Tree
-
+@export var items_tab : Control
 
 var selected_value : int = -1
 var tree_selection_index : int = -1
@@ -10,6 +10,11 @@ var tree_selection_index : int = -1
 
 func _ready():
 	pass
+
+
+func get_image_by_id(image_id):
+	var image = $Database.get_image_by_id(image_id)
+	return image
 
 
 func hide_tree_selector():
@@ -37,3 +42,12 @@ func _on_parent_selection_button_pressed():
 
 func _on_cancel_tree_selection_pressed():
 	hide_tree_selector()
+
+
+func refrash_items_list():
+	items_tab.refrash_items_list($Database.items_data)
+
+
+func _on_database_item_data_loaded():
+	refrash_items_list()
+	print("item data loaded")
