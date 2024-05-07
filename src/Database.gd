@@ -61,6 +61,7 @@ func _ready():
 	pull_locations_data()
 	pull_items_data()
 
+
 func get_tables():
 	db.query("SELECT name FROM sqlite_schema WHERE type = 'table' AND name NOT LIKE 'sqlite_%';")
 	var tables = []
@@ -109,6 +110,14 @@ func update_value(action_data_type, for_id, with_value):
 	if action_data_type == Global.ActionDataType.Location:
 		db.update_rows("items", "id = '" + str(for_id) + "'", {"location_id" : with_value})
 
+
+func save_item(new_item_data):
+	if new_item_data.id in items_data.keys():
+		db.update_rows("items", "id = '" + str(new_item_data.id) + "'", new_item_data)
+#TODO add the rest of the data
+	else:
+		db.insert_row("items", new_item_data)
+	
 
 func _on_create_table_pressed():
 	var table = {

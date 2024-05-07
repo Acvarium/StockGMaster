@@ -16,6 +16,7 @@ enum ActionDataType {
 	None,
 	Location,
 	ParentLocation,
+	Item,
 	Category,
 	Tag
 }

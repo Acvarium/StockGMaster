@@ -264,7 +264,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 offset_left = 65.0
-offset_right = -50.0
+offset_right = -80.0
 offset_bottom = 55.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -291,6 +291,25 @@ texture_hover = ExtResource("4_kumjt")
 ignore_texture_size = true
 stretch_mode = 5
 
+[node name="EditButton" type="TextureButton" parent="."]
+self_modulate = Color(1, 0.623529, 0.705882, 1)
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -81.74
+offset_top = 12.5
+offset_right = -46.74
+offset_bottom = 42.5
+grow_horizontal = 0
+texture_normal = ExtResource("2_yju0t")
+texture_pressed = ExtResource("3_43pt1")
+texture_hover = ExtResource("4_kumjt")
+ignore_texture_size = true
+stretch_mode = 5
+flip_v = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_klpny")
@@ -316,3 +335,4 @@ stretch_mode = 4
 
 [connection signal="pressed" from="LPanel/ChangeLocationButton" to="." method="_on_change_location_button_pressed"]
 [connection signal="pressed" from="UnfoldButton" to="." method="_on_unfold_button_pressed"]
+[connection signal="pressed" from="EditButton" to="." method="_on_edit_button_pressed"]

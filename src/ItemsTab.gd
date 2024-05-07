@@ -27,17 +27,20 @@ func refrash_items_list(items_data):
 			item.queue_free()
 			continue
 		temp_items[item.item_id] = item
+		items_holder.remove_child(item)
 		temp_items_holder.add_child(item)
 	
 	for i in range(items_data.keys().size()):
 		var current_key = items_data.keys()[i]
 		var next_item_data = items_data[current_key]
 		if current_key in temp_items.keys():
+			temp_items_holder.remove_child(temp_items[current_key])
 			items_holder.add_child(temp_items[current_key])
 			update_item(next_item_data, temp_items[current_key])
 		else:
 			add_item(next_item_data)
-		
+	for c in temp_items_holder.get_children():
+		c.queue_free()
 
 func update_item(item_data, item):
 	item.item_tab = self

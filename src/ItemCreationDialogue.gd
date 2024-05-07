@@ -14,17 +14,25 @@ func set_data(item_data):
 	if "id" in item_data.keys():
 		item_index = item_data.id
 	name_edit.text = ""
-	if "name" in item_data.keys():
+	if "name" in item_data.keys() and item_data.name:
 		name_edit.text = item_data.name
-	
+	description_edit.text = ""
+	if "description" in item_data.keys() and item_data.description:
+		description_edit.text = item_data.description
+		
 
 func _ready():
 	pass # Replace with function body.
 
 
 func _on_cancel_button_pressed():
-	pass # Replace with function body.
+	hide()
 
 
 func _on_save_item_button_pressed():
-	pass # Replace with function body.
+	var new_item_data = {}
+	new_item_data.id = item_index
+	new_item_data.name = name_edit.text
+	new_item_data.description = description_edit.text
+	main_node.save_item(new_item_data)
+	hide()

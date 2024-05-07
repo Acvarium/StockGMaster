@@ -3,6 +3,7 @@ extends Control
 @export var location_creation_dialogue : Control
 @export var tree_element : Tree
 @export var items_tab : Control
+@export var item_creation_dialogue : Control
 
 var selected_value : int = -1
 var tree_selection_index : int = -1
@@ -45,6 +46,12 @@ func exec_action_popup(what_to_do, action_data_type, for_id):
 			current_action_data_type == Global.ActionDataType.ParentLocation:
 		tree_element.build_tree($Database.location_data)
 		tree_selector_dialogue.visible = true
+	if current_action_data_type == Global.ActionDataType.Item:
+		if not current_action_id in $Database.items_data.keys():
+			return
+		if current_what_to_do == Global.WhatToDo.Change:
+			item_creation_dialogue.set_data($Database.items_data[current_action_id])
+			item_creation_dialogue.show()
 
 
 func value_selected(value):
@@ -60,9 +67,9 @@ func value_selected(value):
 			location_creation_dialogue.set_parent_name(parent_name)
 
 
-func item_saved(item_data):
-	if item_data.id in $Database.items_data.keys():
-		pass
+func save_item(item_data):
+	$Database.save_item(item_data)
+	$Database.pull_items_data()
 
 
 func _on_parent_selection_button_pressed():

@@ -64,3 +64,8 @@ func _on_unfold_button_pressed():
 
 func _on_change_location_button_pressed():
 	main_node.exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.Location, item_id)
+
+
+func _on_edit_button_pressed():
+	main_node.exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.Item, item_id)
+
