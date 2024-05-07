@@ -113,11 +113,23 @@ grow_horizontal = 2
 
 [node name="ItemsSearchLineEdit" type="LineEdit" parent="MainControl/TabContainer/Items/ItemsToolPanel"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -85.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CreateItemButton" type="Button" parent="MainControl/TabContainer/Items/ItemsToolPanel"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Create"
 
 [node name="ItemsListPanel" type="Panel" parent="MainControl/TabContainer/Items"]
 layout_mode = 1
@@ -249,7 +261,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ItemCreationDialogue" type="Control" parent="." node_paths=PackedStringArray("name_edit", "description_edit", "location_button")]
+[node name="ItemCreationDialogue" type="Control" parent="." node_paths=PackedStringArray("name_edit", "description_edit", "location_button", "title_label")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -261,6 +273,7 @@ script = ExtResource("5_83lbr")
 name_edit = NodePath("VBoxContainer/NameCont/NameEdit")
 description_edit = NodePath("VBoxContainer/DescrCont/DescriptionEdit")
 location_button = NodePath("VBoxContainer/LocationParentCont/LocationSelectionButton")
+title_label = NodePath("AspectRatioContainer/TextureRect/Title")
 
 [node name="ColorRect" type="ColorRect" parent="ItemCreationDialogue"]
 layout_mode = 1
@@ -321,6 +334,7 @@ theme_override_constants/caret_width = 6
 theme_override_font_sizes/font_size = 25
 text = "pokasdflkjsadlkfj dlsakfj ldsakjf lsadkjf laskdjf lsakdj flsadkjf lksadjf "
 placeholder_text = "Enter an Item Name"
+context_menu_enabled = false
 wrap_mode = 1
 caret_blink = true
 
@@ -353,6 +367,7 @@ theme_override_constants/caret_width = 6
 theme_override_font_sizes/font_size = 20
 text = "asdasdasdasd asd asd asd asd asd asd asdasdasdasd"
 placeholder_text = "Enter a Location Name"
+context_menu_enabled = false
 wrap_mode = 1
 caret_blink = true
 
@@ -515,6 +530,7 @@ theme_override_constants/caret_width = 6
 theme_override_font_sizes/font_size = 36
 placeholder_text = "Enter a Location Name"
 alignment = 1
+context_menu_enabled = false
 caret_blink = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="LocationCreationDialogue/VBoxContainer/LocationNameCont"]
@@ -680,6 +696,7 @@ grow_vertical = 2
 script = ExtResource("3_b23bh")
 
 [connection signal="item_data_loaded" from="Database" to="." method="_on_database_item_data_loaded"]
+[connection signal="pressed" from="MainControl/TabContainer/Items/ItemsToolPanel/CreateItemButton" to="." method="_on_create_item_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/VBoxContainer/LocationSaveCont/HBoxContainer/SaveItemButton" to="ItemCreationDialogue" method="_on_save_item_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/VBoxContainer/LocationSaveCont/HBoxContainer/CancelButton" to="ItemCreationDialogue" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="LocationCreationDialogue/VBoxContainer/LocationParentCont/ParentSelectionButton" to="." method="_on_parent_selection_button_pressed"]

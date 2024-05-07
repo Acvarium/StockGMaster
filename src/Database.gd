@@ -116,6 +116,7 @@ func save_item(new_item_data):
 		db.update_rows("items", "id = '" + str(new_item_data.id) + "'", new_item_data)
 #TODO add the rest of the data
 	else:
+		new_item_data.erase('id')
 		db.insert_row("items", new_item_data)
 	
 
