@@ -105,6 +105,11 @@ func create_tables():
 		db.create_table("images", images_table)
 
 
+func update_value(action_data_type, for_id, with_value):
+	if action_data_type == Global.ActionDataType.Location:
+		db.update_rows("items", "id = '" + str(for_id) + "'", {"location_id" : with_value})
+
+
 func _on_create_table_pressed():
 	var table = {
 		"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},

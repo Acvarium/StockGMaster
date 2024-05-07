@@ -1,7 +1,22 @@
 extends Node
 
-enum TreeSelection {
+#enum TreeSelection {
+	#ParentLocation,
+	#ParentCategory
+#}
+
+enum WhatToDo {
+	None,
+	Change,
+	Create,
+	Delete
+}
+
+enum ActionDataType {
+	None,
+	Location,
 	ParentLocation,
-	ParentCategory
+	Category,
+	Tag
 }
 

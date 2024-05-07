@@ -60,3 +60,7 @@ func _ready():
 
 func _on_unfold_button_pressed():
 	toggle_unfold()
+
+
+func _on_change_location_button_pressed():
+	main_node.exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.Location, item_id)

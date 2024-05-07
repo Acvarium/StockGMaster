@@ -229,13 +229,29 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_pswmr")
 
+[node name="ChangeLocationButton" type="TextureButton" parent="LPanel"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("2_yju0t")
+texture_pressed = ExtResource("3_43pt1")
+texture_hover = ExtResource("4_kumjt")
+ignore_texture_size = true
+stretch_mode = 5
+flip_v = true
+
 [node name="LocationAddr" type="Label" parent="LPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
-offset_right = 8.0
+offset_right = -50.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "asdasda sad as das das d "
@@ -298,4 +314,5 @@ texture = ExtResource("1_5sw8e")
 expand_mode = 2
 stretch_mode = 4
 
+[connection signal="pressed" from="LPanel/ChangeLocationButton" to="." method="_on_change_location_button_pressed"]
 [connection signal="pressed" from="UnfoldButton" to="." method="_on_unfold_button_pressed"]
