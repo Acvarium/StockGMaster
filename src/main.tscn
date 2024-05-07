@@ -398,6 +398,22 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 36
 
+[node name="LocationEdit" type="TextEdit" parent="ItemCreationDialogue/VBoxContainer/LocationParentCont/LocationSelectionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/caret_width = 6
+theme_override_font_sizes/font_size = 20
+text = "asdasdasdasd asd asd asd asd asd asd asdasdasdasd"
+placeholder_text = "Enter a Location Name"
+context_menu_enabled = false
+wrap_mode = 1
+caret_blink = true
+
 [node name="LocationSaveCont" type="Panel" parent="ItemCreationDialogue/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -697,6 +713,7 @@ script = ExtResource("3_b23bh")
 
 [connection signal="item_data_loaded" from="Database" to="." method="_on_database_item_data_loaded"]
 [connection signal="pressed" from="MainControl/TabContainer/Items/ItemsToolPanel/CreateItemButton" to="." method="_on_create_item_button_pressed"]
+[connection signal="pressed" from="ItemCreationDialogue/VBoxContainer/LocationParentCont/LocationSelectionButton" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/VBoxContainer/LocationSaveCont/HBoxContainer/SaveItemButton" to="ItemCreationDialogue" method="_on_save_item_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/VBoxContainer/LocationSaveCont/HBoxContainer/CancelButton" to="ItemCreationDialogue" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="LocationCreationDialogue/VBoxContainer/LocationParentCont/ParentSelectionButton" to="." method="_on_parent_selection_button_pressed"]

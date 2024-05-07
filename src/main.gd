@@ -64,7 +64,8 @@ func value_selected(value):
 		if current_action_data_type == Global.ActionDataType.Location:
 			$Database.update_value(Global.ActionDataType.Location, current_action_id, value)
 			$Database.pull_items_data()
-			
+			if item_creation_dialogue.visible:
+				item_creation_dialogue.update_location_text(get_location_address(selected_value))
 		elif current_action_data_type == Global.ActionDataType.ParentLocation:
 			var parent_name = $Database.get_location_name_by_id(selected_value)
 			location_creation_dialogue.set_parent_name(parent_name)
