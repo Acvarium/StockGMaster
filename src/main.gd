@@ -57,18 +57,25 @@ func edit_item(item_id):
 		item_creation_dialogue.show()
 
 
-func value_selected(value):
-	hide_tree_selector()
-	selected_value = value
-	if current_what_to_do == Global.WhatToDo.Change:
-		if current_action_data_type == Global.ActionDataType.Location:
-			$Database.update_value(Global.ActionDataType.Location, current_action_id, value)
-			$Database.pull_items_data()
-			if item_creation_dialogue.visible:
-				item_creation_dialogue.update_location_text(get_location_address(selected_value))
-		elif current_action_data_type == Global.ActionDataType.ParentLocation:
-			var parent_name = $Database.get_location_name_by_id(selected_value)
-			location_creation_dialogue.set_parent_name(parent_name)
+func tree_value_selected(value, action_data_type):
+	if action_data_type == Global.ActionDataType.ParentLocation:
+		hide_tree_selector()
+		selected_value = value
+		if current_what_to_do == Global.WhatToDo.Change:
+			if current_action_data_type == Global.ActionDataType.Location:
+				$Database.update_value(Global.ActionDataType.Location, current_action_id, value)
+				$Database.pull_items_data()
+				if item_creation_dialogue.visible:
+					item_creation_dialogue.update_location_text(get_location_address(selected_value))
+			elif current_action_data_type == Global.ActionDataType.ParentLocation:
+				var parent_name = $Database.get_location_name_by_id(selected_value)
+				location_creation_dialogue.set_parent_name(parent_name)
+
+
+func delete_item(item_index):
+	if item_index in $Database.items_data.keys():
+		$Database.delete_item(item_index)
+		$Database.pull_items_data()
 
 
 func save_item(item_data):

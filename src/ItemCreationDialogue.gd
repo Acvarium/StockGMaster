@@ -51,3 +51,8 @@ func _on_save_item_button_pressed():
 
 func _on_location_selection_button_pressed():
 	main_node.exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.Location, item_index)
+
+
+func _on_delete_button_pressed():
+	main_node.delete_item(item_index)
+	hide()

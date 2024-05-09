@@ -1,6 +1,9 @@
 extends Tree
 
+@export var parent_id_key = "parent_id"
+@export var name_key = "name"
 @onready var main_node = get_tree().get_root().get_node("Main")
+@export var item_selection_action_type = Global.ActionDataType.None
 
 func build_tree(tree_data : Dictionary):
 	clear()
@@ -14,28 +17,22 @@ func build_tree(tree_data : Dictionary):
 			var current_key = tree_data.keys()[i]
 			if current_key in item_dict.keys():
 				continue
-			if tree_data[current_key].parent_id == index_list[0] or \
-					index_list[0] == 0 and tree_data[current_key].parent_id == null:
+			if tree_data[current_key][parent_id_key] == index_list[0] or \
+					index_list[0] == 0 and tree_data[current_key][parent_id_key] == null:
 				var current_parent_item = root
 				if index_list[0] != 0:
 					current_parent_item = item_dict[index_list[0]]
 				item_dict[current_key] = create_item(current_parent_item)
 				index_list.append(current_key)
-				item_dict[current_key].set_text(0, tree_data[current_key].name)
+				item_dict[current_key].set_text(0, tree_data[current_key][name_key])
 				item_dict[current_key].set_metadata(0, current_key)
 		index_list.remove_at(0)
 
 
-func select_value(value):
-	print(value)
-	main_node.value_selected(value)
-
-
-func _ready():
-	pass
-	#build_tree(fake_data)
+func tree_value_selected(value):
+	main_node.tree_value_selected(value, item_selection_action_type)
 
 
 func _on_item_selected():
-	select_value(get_selected().get_metadata(0))
+	tree_value_selected(get_selected().get_metadata(0))
 	

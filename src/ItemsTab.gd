@@ -3,6 +3,7 @@ extends Control
 @export var temp_items_holder : Control
 var item_prefab = preload("res://objects/item_list_element.tscn")
 
+
 func _ready():
 	pass
 	#clear_list()

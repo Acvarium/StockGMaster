@@ -17,6 +17,11 @@ var items_data = {
 }
 
 
+func delete_item(item_index):
+	db.delete_rows("items", "id = '" + str(item_index) + "'")
+	
+
+
 func get_image_by_id(image_id):
 	db.select_rows("images", "id = '" + str(image_id) + "'", ["*"])
 	for res in db.query_result:
@@ -154,10 +159,10 @@ func _on_custom_select_pressed():
 
 
 func store_image_example():
-	var image := preload("res://addons/y.png")
-	var pba = image.get_image().save_jpg_to_buffer()
-	var data = {"image" : pba}
-	db.insert_row("images", data)
+	pass
+	#var pba = image.get_image().save_jpg_to_buffer()
+	#var data = {"image" : pba}
+	#db.insert_row("images", data)
 
 
 func build_location_address(location_id):
