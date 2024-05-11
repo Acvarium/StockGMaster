@@ -9,7 +9,7 @@ signal location_button_pressed
 
 enum ListItemModes {
 	Text,
-	LocationButton,
+	tButton,
 	Icon
 }
 @export var list_item_mode = ListItemModes.Text
@@ -18,7 +18,8 @@ func _ready():
 	$TitleControl/Label.text = title_text
 	$DataControl/Edit.placeholder_text = placeholder_text
 	$DataControl/Edit.visible = list_item_mode == ListItemModes.Text
-	$DataControl/Button.visible = list_item_mode == ListItemModes.LocationButton
+	$DataControl/Button.visible = list_item_mode == ListItemModes.tButton
+	$IconControl.visible = list_item_mode == ListItemModes.Icon
 
 
 func unfold(to_unfold = true):
@@ -33,7 +34,6 @@ func unfold(to_unfold = true):
 			$AnimationPlayer.play("unfold")
 		else:
 			$AnimationPlayer.play_backwards("unfold")
-			
 	is_unfolded = to_unfold
 	unfold_button.flip_v = is_unfolded
 

@@ -32,7 +32,7 @@ func update_location_text(new_location_text):
 
 
 func _ready():
-	pass # Replace with function body.
+	hide()
 
 
 func _on_cancel_button_pressed():

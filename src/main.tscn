@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=26 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" path="res://Database.gd" id="1_ie8y7"]
 [ext_resource type="Script" path="res://main.gd" id="1_nvv5i"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://objects/UnoldControl.gd" id="6_xuihe"]
 [ext_resource type="PackedScene" uid="uid://l7og0lhat66" path="res://objects/item_list_element.tscn" id="6_yowbf"]
 [ext_resource type="PackedScene" uid="uid://ymef651v1yws" path="res://objects/item_list_element2.tscn" id="7_lb4if"]
+[ext_resource type="FontVariation" uid="uid://bhyikp6mmffmg" path="res://fonts/resources/menu_font01.tres" id="10_tohcm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1gvr"]
 bg_color = Color(0.605274, 0.605274, 0.605274, 1)
@@ -338,7 +339,7 @@ script = ExtResource("5_83lbr")
 name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
 description_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Description")
 location_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Location")
-title_label = NodePath("TitleAR/TextureRect/Title")
+title_label = NodePath("TextureRect/Title")
 
 [node name="ColorRect" type="ColorRect" parent="ItemCreationDialogue"]
 layout_mode = 1
@@ -347,7 +348,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.168627, 0.168627, 0.168627, 1)
+color = Color(0.215686, 0.215686, 0.215686, 1)
 
 [node name="GPanel" type="Panel" parent="ItemCreationDialogue"]
 visible = false
@@ -392,18 +393,33 @@ unfold_item_list = Array[NodePath]([NodePath("Name"), NodePath("Description")])
 
 [node name="Name" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("7_lb4if")]
 layout_mode = 2
-title_text = "Item Name"
+title_text = "Name"
 placeholder_text = "Enter an Item Name"
 
 [node name="Description" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("7_lb4if")]
 layout_mode = 2
-title_text = "Item Description"
+title_text = "Description"
 placeholder_text = "Enter an Item Description"
 
 [node name="Location" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("7_lb4if")]
 layout_mode = 2
-title_text = "Item Location"
+title_text = "Location"
 list_item_mode = 1
+
+[node name="Image" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("7_lb4if")]
+layout_mode = 2
+title_text = "Image"
+list_item_mode = 2
+
+[node name="Category" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("7_lb4if")]
+layout_mode = 2
+title_text = "Category"
+list_item_mode = 1
+
+[node name="Tags" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("7_lb4if")]
+layout_mode = 2
+title_text = "Tags"
+placeholder_text = "Enter tags separated by comma"
 
 [node name="SDCButtons" type="Panel" parent="ItemCreationDialogue"]
 self_modulate = Color(1, 1, 1, 0)
@@ -458,22 +474,20 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_4n64a")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_us7rp")
 text = "Cancel"
 
-[node name="TitleAR" type="AspectRatioContainer" parent="ItemCreationDialogue"]
+[node name="TextureRect" type="NinePatchRect" parent="ItemCreationDialogue"]
+self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.1
 grow_horizontal = 2
 grow_vertical = 2
-ratio = 6.0
-
-[node name="TextureRect" type="TextureRect" parent="ItemCreationDialogue/TitleAR"]
-self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
-layout_mode = 2
 texture = ExtResource("4_ms148")
-expand_mode = 1
+patch_margin_left = 100
+patch_margin_right = 100
 
-[node name="Title" type="Label" parent="ItemCreationDialogue/TitleAR/TextureRect"]
+[node name="Title" type="Label" parent="ItemCreationDialogue/TextureRect"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -481,12 +495,24 @@ anchor_bottom = 0.951
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("10_tohcm")
 theme_override_font_sizes/font_size = 43
 text = "Create Item"
 horizontal_alignment = 1
 vertical_alignment = 2
+uppercase = true
 script = ExtResource("4_clukf")
 aspect = 0.4
+
+[node name="TitleAR" type="AspectRatioContainer" parent="ItemCreationDialogue"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.1
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 6.0
 
 [node name="LocationCreationDialogue" type="Control" parent="." node_paths=PackedStringArray("parent_button", "title_label")]
 visible = false
@@ -729,6 +755,8 @@ item_selection_action_type = 2
 [connection signal="item_data_loaded" from="Database" to="." method="_on_database_item_data_loaded"]
 [connection signal="pressed" from="MainControl/TabContainer/Items/ItemsToolPanel/CreateItemButton" to="." method="_on_create_item_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Location" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
+[connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Image" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
+[connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Category" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ItemCreationDialogue" method="_on_save_item_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/DeleteButton" to="ItemCreationDialogue" method="_on_delete_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/CancelButton" to="ItemCreationDialogue" method="_on_cancel_button_pressed"]

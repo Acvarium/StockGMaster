@@ -6,7 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://cg2o8xgo1gb5w" path="res://textures/unfoldButton_pressed.png" id="4_l4xdh"]
 [ext_resource type="Texture2D" uid="uid://db60i04y7fo6a" path="res://textures/unfoldButton_hl.png" id="5_y15y4"]
 [ext_resource type="Texture2D" uid="uid://dn1q6s8e7t55l" path="res://w_rect.png" id="6_1mdqn"]
-[ext_resource type="StyleBox" uid="uid://balcxf82udj3t" path="res://styles/EditTextStyle.tres" id="6_4msoi"]
+[ext_resource type="StyleBox" uid="uid://c5i134ur1to60" path="res://styles/edittext_base_style.tres" id="6_bg6ey"]
+[ext_resource type="StyleBox" uid="uid://ydrmcbb64npw" path="res://styles/framed_button_normal.tres" id="7_b7ah0"]
+[ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/framed_button_hover.tres" id="8_bgha2"]
+[ext_resource type="StyleBox" uid="uid://chknldgol0rwk" path="res://styles/framed_button_pressed.tres" id="9_llh3k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13dqw"]
 bg_color = Color(0.172549, 0.172549, 0.172549, 1)
@@ -14,45 +17,6 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxvbi"]
-bg_color = Color(0.231373, 0.247059, 0.258824, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-shadow_color = Color(0, 0, 0, 0.298039)
-shadow_size = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oxfb7"]
-bg_color = Color(0.278431, 0.294118, 0.309804, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-shadow_color = Color(0, 0, 0, 0.298039)
-shadow_size = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qg2ke"]
-bg_color = Color(0.176471, 0.188235, 0.2, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-shadow_color = Color(0, 0, 0, 0.298039)
-shadow_size = 10
 
 [sub_resource type="Animation" id="Animation_afqj2"]
 length = 0.001
@@ -131,7 +95,8 @@ anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -5.0
+offset_top = 5.0
+offset_right = -10.0
 grow_horizontal = 0
 grow_vertical = 2
 texture_normal = ExtResource("3_ssqxq")
@@ -160,7 +125,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/caret_width = 6
 theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = ExtResource("6_4msoi")
+theme_override_styles/normal = ExtResource("6_bg6ey")
+theme_override_styles/focus = ExtResource("6_bg6ey")
 placeholder_text = "Enter an Item Name"
 context_menu_enabled = false
 wrap_mode = 1
@@ -172,17 +138,15 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 15.0
 offset_top = 15.0
-offset_right = -15.0
 offset_bottom = -15.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_nxvbi")
-theme_override_styles/hover = SubResource("StyleBoxFlat_oxfb7")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_qg2ke")
+theme_override_styles/normal = ExtResource("7_b7ah0")
+theme_override_styles/hover = ExtResource("8_bgha2")
+theme_override_styles/pressed = ExtResource("9_llh3k")
 text_overrun_behavior = 1
 
 [node name="Label" type="Label" parent="DataControl/Button"]
@@ -227,12 +191,15 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 30.0
+offset_top = 65.0
 offset_right = -140.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = ExtResource("7_b7ah0")
+theme_override_styles/hover = ExtResource("8_bgha2")
+theme_override_styles/pressed = ExtResource("9_llh3k")
 text = "Select Image
 "
 text_overrun_behavior = 1
