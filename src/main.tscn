@@ -317,6 +317,14 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="Projects" type="Control" parent="MainControl/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Builds" type="Control" parent="MainControl/TabContainer"]
+visible = false
+layout_mode = 2
+
 [node name="Panel" type="Panel" parent="MainControl"]
 visible = false
 custom_minimum_size = Vector2(0, 40)
@@ -329,6 +337,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="ItemCreationDialogue" type="Control" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "location_list_item", "title_label")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
