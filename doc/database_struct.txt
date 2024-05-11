@@ -1,0 +1,79 @@
+[items] table
+id
+name
+description
+category_id
+image_id
+mark
+variant_of_id
+unit_name_id
+
+
+[item_stock] table
+id
+item_id
+location_id
+quantity
+amount
+mark
+
+
+[unit_names] table
+id
+name
+
+
+[locations] table
+id
+name
+description
+parent_id
+mark
+is_virtual
+
+
+[images] table
+id
+image (or)
+image_path (or)
+
+
+[categories] table
+id
+name
+parent_id
+
+
+[tags_names] table
+id
+name
+
+
+[item_tags] table
+id
+item_id
+tag_id
+
+
+[project] table
+id
+name
+description
+final_item_id
+
+
+[project_items] table
+id
+project_id
+item_id
+quantity
+amount
+
+
+[project_build] table
+id 
+project_id
+quantity
+location_id
+
+

@@ -2,16 +2,10 @@
 
 [ext_resource type="Script" path="res://objects/item_list_element.gd" id="1_4l0wv"]
 [ext_resource type="Texture2D" uid="uid://dn1q6s8e7t55l" path="res://w_rect.png" id="1_5sw8e"]
+[ext_resource type="StyleBox" uid="uid://balcxf82udj3t" path="res://styles/EditTextStyle.tres" id="1_15yfp"]
 [ext_resource type="Texture2D" uid="uid://bdhl7lo2ybw66" path="res://textures/unfoldButton.png" id="2_yju0t"]
-[ext_resource type="Texture2D" uid="uid://db60i04y7fo6a" path="res://textures/unfoldButton_pressed.png" id="3_43pt1"]
-[ext_resource type="Texture2D" uid="uid://cg2o8xgo1gb5w" path="res://textures/unfoldButton_hl.png" id="4_kumjt"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wsddx"]
-bg_color = Color(0.141176, 0.141176, 0.141176, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 5
+[ext_resource type="Texture2D" uid="uid://cg2o8xgo1gb5w" path="res://textures/unfoldButton_pressed.png" id="3_43pt1"]
+[ext_resource type="Texture2D" uid="uid://db60i04y7fo6a" path="res://textures/unfoldButton_hl.png" id="4_kumjt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pswmr"]
 bg_color = Color(0.117235, 0.117235, 0.117235, 1)
@@ -182,7 +176,7 @@ _data = {
 custom_minimum_size = Vector2(0, 55)
 offset_right = 600.0
 offset_bottom = 55.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_wsddx")
+theme_override_styles/panel = ExtResource("1_15yfp")
 script = ExtResource("1_4l0wv")
 
 [node name="DPanel" type="Panel" parent="."]
@@ -212,7 +206,10 @@ offset_right = -8.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Name of the item"
+text = "Description"
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 4
 
 [node name="LPanel" type="Panel" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -239,8 +236,8 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
 texture_normal = ExtResource("2_yju0t")
-texture_pressed = ExtResource("3_43pt1")
-texture_hover = ExtResource("4_kumjt")
+texture_pressed = ExtResource("4_kumjt")
+texture_hover = ExtResource("3_43pt1")
 ignore_texture_size = true
 stretch_mode = 5
 flip_v = true

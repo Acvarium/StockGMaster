@@ -86,7 +86,9 @@ func create_tables():
 			"category_id" : {"data_type" : "int"},
 			"location_id" : {"data_type" : "int"},
 			"values_id" : {"data_type" : "int"},
-			"image_id" : {"data_type" : "int"}
+			"image_id" : {"data_type" : "int",
+			"tags_id" : {"data_type" : "int"}
+			}
 		}
 		db.create_table("items", items_table)
 		var locations_table = {
