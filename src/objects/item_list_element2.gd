@@ -1,6 +1,22 @@
+@tool
 extends Panel
-@export var title_text = ""
-@export var placeholder_text = ""
+@export var title_text = "" :
+	set(new_value):
+		title_text = new_value
+		$TitleControl/Label.text = new_value
+		
+@export var placeholder_text = "" :
+	set(new_value):
+		placeholder_text = new_value
+		$DataControl/Edit.placeholder_text = new_value
+
+@export var list_item_mode = ListItemModes.Text :
+	set(new_value):
+		list_item_mode = new_value
+		$DataControl/Edit.visible = list_item_mode == ListItemModes.Text
+		$DataControl/Button.visible = list_item_mode == ListItemModes.tButton
+		$IconControl.visible = list_item_mode == ListItemModes.Icon
+		$DataControl/SpinBox.visible = list_item_mode == ListItemModes.Quantity
 
 @onready var unfold_button = get_node("TitleControl/UnfoldButton")
 var unfold_control = null
@@ -10,16 +26,16 @@ signal location_button_pressed
 enum ListItemModes {
 	Text,
 	tButton,
-	Icon
+	Icon,
+	Quantity
 }
-@export var list_item_mode = ListItemModes.Text
 
 func _ready():
-	$TitleControl/Label.text = title_text
-	$DataControl/Edit.placeholder_text = placeholder_text
-	$DataControl/Edit.visible = list_item_mode == ListItemModes.Text
-	$DataControl/Button.visible = list_item_mode == ListItemModes.tButton
-	$IconControl.visible = list_item_mode == ListItemModes.Icon
+	if Engine.is_editor_hint():
+		return
+	#$TitleControl/Label.text = title_text
+	#$DataControl/Edit.placeholder_text = placeholder_text
+
 
 
 func unfold(to_unfold = true):

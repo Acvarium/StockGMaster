@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://ymef651v1yws"]
+[gd_scene load_steps=18 format=3 uid="uid://ymef651v1yws"]
 
 [ext_resource type="Script" path="res://objects/item_list_element2.gd" id="1_80c12"]
+[ext_resource type="StyleBox" uid="uid://bwo64t2nmfot" path="res://styles/ItemList2PanelStyle.tres" id="1_a1fgo"]
 [ext_resource type="Script" path="res://FitLabel.gd" id="2_plgqh"]
 [ext_resource type="Texture2D" uid="uid://bdhl7lo2ybw66" path="res://textures/unfoldButton.png" id="3_ssqxq"]
 [ext_resource type="Texture2D" uid="uid://cg2o8xgo1gb5w" path="res://textures/unfoldButton_pressed.png" id="4_l4xdh"]
@@ -8,15 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://dn1q6s8e7t55l" path="res://w_rect.png" id="6_1mdqn"]
 [ext_resource type="StyleBox" uid="uid://c5i134ur1to60" path="res://styles/edittext_base_style.tres" id="6_bg6ey"]
 [ext_resource type="StyleBox" uid="uid://ydrmcbb64npw" path="res://styles/framed_button_normal.tres" id="7_b7ah0"]
+[ext_resource type="Texture2D" uid="uid://belhmi6u74jhi" path="res://textures/updown.png" id="7_kuv32"]
 [ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/framed_button_hover.tres" id="8_bgha2"]
 [ext_resource type="StyleBox" uid="uid://chknldgol0rwk" path="res://styles/framed_button_pressed.tres" id="9_llh3k"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13dqw"]
-bg_color = Color(0.172549, 0.172549, 0.172549, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[sub_resource type="Theme" id="Theme_xicdx"]
+default_font_size = 45
 
 [sub_resource type="Animation" id="Animation_afqj2"]
 length = 0.001
@@ -64,7 +62,7 @@ corner_radius_bottom_left = 10
 
 [node name="ItemListComponent" type="Panel"]
 custom_minimum_size = Vector2(500, 150)
-theme_override_styles/panel = SubResource("StyleBoxFlat_13dqw")
+theme_override_styles/panel = ExtResource("1_a1fgo")
 script = ExtResource("1_80c12")
 
 [node name="TitleControl" type="Control" parent="."]
@@ -131,6 +129,21 @@ placeholder_text = "Enter an Item Name"
 context_menu_enabled = false
 wrap_mode = 1
 caret_blink = true
+
+[node name="SpinBox" type="SpinBox" parent="DataControl"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_xicdx")
+theme_override_icons/updown = ExtResource("7_kuv32")
+max_value = 1e+11
+allow_greater = true
+alignment = 1
+update_on_text_changed = true
 
 [node name="Button" type="Button" parent="DataControl"]
 visible = false

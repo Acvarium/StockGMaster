@@ -1,6 +1,7 @@
 extends Node
 
 signal item_data_loaded
+signal locations_data_loaded
 
 var db : SQLite = null
 @export var name_text : TextEdit
@@ -9,7 +10,7 @@ var db : SQLite = null
 const verbosity_level : int = SQLite.VERBOSE
 var database_path = "user://data.db"
 
-var location_data = {
+var locations_data = {
 }
 
 var items_data = {
@@ -31,22 +32,23 @@ func get_image_by_id(image_id):
 
 
 func get_location_name_by_id(location_id):
-	if location_id in location_data.keys():
-		return location_data[location_id].name
+	if location_id in locations_data.keys():
+		return locations_data[location_id].name
 	return ""
 
 
-func get_location_data_by_id(location_id):
-	if location_id in location_data.keys():
-		return location_data[location_id]
+func get_locations_data_by_id(location_id):
+	if location_id in locations_data.keys():
+		return locations_data[location_id]
 	return null
 
 
 func pull_locations_data():
-	location_data.clear()
+	locations_data.clear()
 	var localion_db_data = db.select_rows("locations", "", ["*"])
 	for i in range(localion_db_data.size()):
-		location_data[localion_db_data[i].id] = localion_db_data[i]
+		locations_data[localion_db_data[i].id] = localion_db_data[i]
+	locations_data_loaded.emit()
 
 
 func pull_items_data():
@@ -110,11 +112,10 @@ func create_tables():
 		var locations_table = {
 			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
 			"name" : {"data_type" : "TEXT"},
-			"parent_id" : {"data_type" : "int",
+			"parent_id" : {"data_type" : "int"},
 			"description" : {"data_type" : "TEXT"},
 			"mark" : {"data_type" : "int"},
 			"is_virtual" : {"data_type" : "int"},
-			}
 		}
 		db.create_table("locations", locations_table)
 		
@@ -235,13 +236,13 @@ func store_image_example():
 
 func build_location_address(location_id):
 	var addr = "/"
-	var current_location_data = get_location_data_by_id(location_id)
-	while current_location_data != null:
-		addr = current_location_data.name + "/" + addr
-		if "parent_id" in current_location_data.keys() and current_location_data.parent_id:
-			current_location_data = get_location_data_by_id(current_location_data.parent_id)
+	var current_locations_data = get_locations_data_by_id(location_id)
+	while current_locations_data != null:
+		addr = current_locations_data.name + "/" + addr
+		if "parent_id" in current_locations_data.keys() and current_locations_data.parent_id:
+			current_locations_data = get_locations_data_by_id(current_locations_data.parent_id)
 		else:
-			current_location_data = null
+			current_locations_data = null
 	addr = "/" + addr.left(addr.length() - 1)
 	return addr
 

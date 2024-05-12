@@ -1,0 +1,221 @@
+[gd_scene load_steps=15 format=3 uid="uid://buhtxvdgnu0ki"]
+
+[ext_resource type="StyleBox" uid="uid://balcxf82udj3t" path="res://styles/EditTextStyle.tres" id="1_w7hvy"]
+[ext_resource type="Script" path="res://objects/UnoldControl.gd" id="2_d34r8"]
+[ext_resource type="Texture2D" uid="uid://b82gyeyblxd5l" path="res://textures/title.png" id="3_gmiva"]
+[ext_resource type="FontVariation" uid="uid://bhyikp6mmffmg" path="res://fonts/resources/menu_font01.tres" id="4_n8g7y"]
+[ext_resource type="Script" path="res://FitLabel.gd" id="5_rlvqw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnmwu"]
+bg_color = Color(0.105882, 0.478431, 0.403922, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color(0.133333, 0.133333, 0.133333, 1)
+corner_radius_top_left = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0uqsx"]
+bg_color = Color(0.12549, 0.54902, 0.462745, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color(0.133333, 0.133333, 0.133333, 1)
+corner_radius_top_left = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5o2a"]
+bg_color = Color(0.0983006, 0.451795, 0.38104, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 1
+border_width_bottom = 3
+border_color = Color(0.133333, 0.133333, 0.133333, 1)
+corner_radius_top_left = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jg18v"]
+bg_color = Color(0.72549, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_11yk0"]
+bg_color = Color(0.929412, 0.231373, 0.231373, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4fr5f"]
+bg_color = Color(0.618933, 2.34637e-06, 1.44392e-07, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h135y"]
+bg_color = Color(0.854902, 0.45098, 0, 1)
+border_width_left = 2
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.133333, 0.133333, 0.133333, 1)
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4n64a"]
+bg_color = Color(0.972549, 0.517647, 0, 1)
+border_width_left = 2
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.133333, 0.133333, 0.133333, 1)
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_us7rp"]
+bg_color = Color(0.900485, 0.477486, 0, 1)
+border_width_left = 1
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.133333, 0.133333, 0.133333, 1)
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+
+[node name="DataEditDialogueBase" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Color" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[node name="ItemsPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.11
+anchor_right = 0.95
+anchor_bottom = 0.89
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_w7hvy")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ItemsPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ItemsPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+script = ExtResource("2_d34r8")
+unfold_item_list = Array[NodePath]([NodePath(""), NodePath("")])
+
+[node name="SDCButtons" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.9
+anchor_right = 0.95
+anchor_bottom = 0.97
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SDCButtons"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="SaveItemButton" type="Button" parent="SDCButtons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnmwu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0uqsx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f5o2a")
+text = "Save"
+
+[node name="DeleteButton" type="Button" parent="SDCButtons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_jg18v")
+theme_override_styles/hover = SubResource("StyleBoxFlat_11yk0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4fr5f")
+text = "DEL"
+
+[node name="CancelButton" type="Button" parent="SDCButtons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_h135y")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4n64a")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_us7rp")
+text = "Cancel"
+
+[node name="TextureRect" type="NinePatchRect" parent="."]
+self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.1
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_gmiva")
+patch_margin_left = 100
+patch_margin_right = 100
+
+[node name="Title" type="Label" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.951
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("4_n8g7y")
+theme_override_font_sizes/font_size = 43
+text = "Create Item"
+horizontal_alignment = 1
+vertical_alignment = 2
+uppercase = true
+script = ExtResource("5_rlvqw")
+aspect = 0.4

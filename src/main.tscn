@@ -1,110 +1,14 @@
-[gd_scene load_steps=26 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=11 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" path="res://Database.gd" id="1_ie8y7"]
 [ext_resource type="Script" path="res://main.gd" id="1_nvv5i"]
 [ext_resource type="Script" path="res://StructTree.gd" id="3_b23bh"]
-[ext_resource type="Script" path="res://LocationCreationDialogue.gd" id="3_cw6ng"]
 [ext_resource type="Script" path="res://ItemsTab.gd" id="3_vserw"]
-[ext_resource type="Script" path="res://FitLabel.gd" id="4_clukf"]
-[ext_resource type="Texture2D" uid="uid://b82gyeyblxd5l" path="res://textures/title.png" id="4_ms148"]
 [ext_resource type="Script" path="res://ItemCreationDialogue.gd" id="5_83lbr"]
-[ext_resource type="Script" path="res://FitRichTextLabel.gd" id="5_a7r6l"]
-[ext_resource type="StyleBox" uid="uid://balcxf82udj3t" path="res://styles/EditTextStyle.tres" id="6_qrdtw"]
-[ext_resource type="Script" path="res://objects/UnoldControl.gd" id="6_xuihe"]
 [ext_resource type="PackedScene" uid="uid://l7og0lhat66" path="res://objects/item_list_element.tscn" id="6_yowbf"]
 [ext_resource type="PackedScene" uid="uid://ymef651v1yws" path="res://objects/item_list_element2.tscn" id="7_lb4if"]
-[ext_resource type="FontVariation" uid="uid://bhyikp6mmffmg" path="res://fonts/resources/menu_font01.tres" id="10_tohcm"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1gvr"]
-bg_color = Color(0.605274, 0.605274, 0.605274, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnmwu"]
-bg_color = Color(0.105882, 0.478431, 0.403922, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 2
-border_width_bottom = 4
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_left = 15
-corner_radius_bottom_left = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0uqsx"]
-bg_color = Color(0.12549, 0.54902, 0.462745, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 2
-border_width_bottom = 4
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_left = 15
-corner_radius_bottom_left = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5o2a"]
-bg_color = Color(0.0983006, 0.451795, 0.38104, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 1
-border_width_bottom = 3
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_left = 15
-corner_radius_bottom_left = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jg18v"]
-bg_color = Color(0.72549, 0, 0, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_11yk0"]
-bg_color = Color(0.929412, 0.231373, 0.231373, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4fr5f"]
-bg_color = Color(0.618933, 2.34637e-06, 1.44392e-07, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h135y"]
-bg_color = Color(0.854902, 0.45098, 0, 1)
-border_width_left = 2
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4n64a"]
-bg_color = Color(0.972549, 0.517647, 0, 1)
-border_width_left = 2
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_us7rp"]
-bg_color = Color(0.900485, 0.477486, 0, 1)
-border_width_left = 1
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
+[ext_resource type="PackedScene" uid="uid://d1c4lov8epmmv" path="res://objects/item_list_separator.tscn" id="8_tmgro"]
+[ext_resource type="PackedScene" uid="uid://buhtxvdgnu0ki" path="res://objects/data_edit_dialogue_base.tscn" id="13_2uggw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blt5x"]
 bg_color = Color(0.168627, 0.168627, 0.168627, 1)
@@ -120,7 +24,7 @@ shadow_color = Color(0, 0, 0, 0.403922)
 shadow_size = 10
 shadow_offset = Vector2(10, 10)
 
-[node name="Main" type="Control" node_paths=PackedStringArray("tree_selector_dialogue", "location_creation_dialogue", "tree_element", "items_tab", "item_creation_dialogue")]
+[node name="Main" type="Control" node_paths=PackedStringArray("tree_selector_dialogue", "tree_element", "locations_tab_tree", "items_tab", "item_creation_dialogue")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -129,8 +33,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nvv5i")
 tree_selector_dialogue = NodePath("TreeSelectionDialogue")
-location_creation_dialogue = NodePath("LocationCreationDialogue")
 tree_element = NodePath("TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree")
+locations_tab_tree = NodePath("MainControl/TabContainer/Locations/StructTree")
 items_tab = NodePath("MainControl/TabContainer/Items")
 item_creation_dialogue = NodePath("ItemCreationDialogue")
 
@@ -305,9 +209,25 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 
+[node name="Stock" type="Control" parent="MainControl/TabContainer"]
+visible = false
+layout_mode = 2
+
 [node name="Locations" type="Control" parent="MainControl/TabContainer"]
 visible = false
 layout_mode = 2
+
+[node name="StructTree" type="Tree" parent="MainControl/TabContainer/Locations"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.03
+anchor_right = 0.97
+anchor_bottom = 0.97
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_b23bh")
+item_selection_action_type = 2
 
 [node name="Categories" type="Control" parent="MainControl/TabContainer"]
 visible = false
@@ -340,368 +260,80 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ItemCreationDialogue" type="Control" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "location_list_item", "title_label")]
-visible = false
+[node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "location_list_item", "title_label") instance=ExtResource("13_2uggw")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("5_83lbr")
 name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
 description_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Description")
 location_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Location")
 title_label = NodePath("TextureRect/Title")
 
-[node name="ColorRect" type="ColorRect" parent="ItemCreationDialogue"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.215686, 0.215686, 0.215686, 1)
-
-[node name="GPanel" type="Panel" parent="ItemCreationDialogue"]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.05
-anchor_right = 1.0
-anchor_bottom = 0.98
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_e1gvr")
-
-[node name="ItemsPanel" type="Panel" parent="ItemCreationDialogue"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.05
-anchor_top = 0.11
-anchor_right = 0.95
-anchor_bottom = 0.89
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = ExtResource("6_qrdtw")
-
-[node name="ScrollContainer" type="ScrollContainer" parent="ItemCreationDialogue/ItemsPanel"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = 5.0
-offset_right = -5.0
-offset_bottom = -5.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer"]
+[node name="ItemDataSeparator" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("8_tmgro")]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 5
-script = ExtResource("6_xuihe")
-unfold_item_list = Array[NodePath]([NodePath("Name"), NodePath("Description")])
+separator_text = "Item Data"
 
-[node name="Name" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("7_lb4if")]
+[node name="Name" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="1" instance=ExtResource("7_lb4if")]
 layout_mode = 2
 title_text = "Name"
 placeholder_text = "Enter an Item Name"
 
-[node name="Description" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("7_lb4if")]
+[node name="Description" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="2" instance=ExtResource("7_lb4if")]
 layout_mode = 2
 title_text = "Description"
 placeholder_text = "Enter an Item Description"
 
-[node name="Location" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("7_lb4if")]
-layout_mode = 2
-title_text = "Location"
-list_item_mode = 1
-
-[node name="Image" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("7_lb4if")]
+[node name="Image" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="3" instance=ExtResource("7_lb4if")]
 layout_mode = 2
 title_text = "Image"
 list_item_mode = 2
 
-[node name="Category" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("7_lb4if")]
+[node name="Category" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="4" instance=ExtResource("7_lb4if")]
 layout_mode = 2
 title_text = "Category"
 list_item_mode = 1
 
-[node name="Tags" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("7_lb4if")]
+[node name="Tags" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="5" instance=ExtResource("7_lb4if")]
 layout_mode = 2
 title_text = "Tags"
 placeholder_text = "Enter tags separated by comma"
 
-[node name="SDCButtons" type="Panel" parent="ItemCreationDialogue"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.05
-anchor_top = 0.9
-anchor_right = 0.95
-anchor_bottom = 0.97
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ItemCreationDialogue/SDCButtons"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 0
-
-[node name="SaveItemButton" type="Button" parent="ItemCreationDialogue/SDCButtons/HBoxContainer"]
+[node name="StockDataSeparator" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="6" instance=ExtResource("8_tmgro")]
 layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 0
-theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_rnmwu")
-theme_override_styles/hover = SubResource("StyleBoxFlat_0uqsx")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_f5o2a")
-text = "Save"
+separator_text = "Initial Stock"
 
-[node name="DeleteButton" type="Button" parent="ItemCreationDialogue/SDCButtons/HBoxContainer"]
+[node name="Location" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="7" instance=ExtResource("7_lb4if")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
-focus_mode = 0
-theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_jg18v")
-theme_override_styles/hover = SubResource("StyleBoxFlat_11yk0")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_4fr5f")
-text = "DEL"
+title_text = "Location"
+list_item_mode = 1
 
-[node name="CancelButton" type="Button" parent="ItemCreationDialogue/SDCButtons/HBoxContainer"]
+[node name="Quantity" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="8" instance=ExtResource("7_lb4if")]
 layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 0
-theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_h135y")
-theme_override_styles/hover = SubResource("StyleBoxFlat_4n64a")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_us7rp")
-text = "Cancel"
+title_text = "Quantity"
+list_item_mode = 3
 
-[node name="TextureRect" type="NinePatchRect" parent="ItemCreationDialogue"]
-self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.1
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_ms148")
-patch_margin_left = 100
-patch_margin_right = 100
-
-[node name="Title" type="Label" parent="ItemCreationDialogue/TextureRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.951
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("10_tohcm")
-theme_override_font_sizes/font_size = 43
-text = "Create Item"
-horizontal_alignment = 1
-vertical_alignment = 2
-uppercase = true
-script = ExtResource("4_clukf")
-aspect = 0.4
-
-[node name="TitleAR" type="AspectRatioContainer" parent="ItemCreationDialogue"]
+[node name="LocationCreationDialogue" parent="." instance=ExtResource("13_2uggw")]
 visible = false
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.1
-grow_horizontal = 2
-grow_vertical = 2
-ratio = 6.0
 
-[node name="LocationCreationDialogue" type="Control" parent="." node_paths=PackedStringArray("parent_button", "title_label")]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("3_cw6ng")
-parent_button = NodePath("VBoxContainer/LocationParentCont/ParentSelectionButton")
-title_label = NodePath("AspectRatioContainer/TextureRect/Title")
-
-[node name="ColorRect" type="ColorRect" parent="LocationCreationDialogue"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.168627, 0.168627, 0.168627, 1)
-
-[node name="P" type="Panel" parent="LocationCreationDialogue"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.05
-anchor_right = 1.0
-anchor_bottom = 0.95
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_e1gvr")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="LocationCreationDialogue"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.1
-anchor_top = 0.2
-anchor_right = 0.9
-anchor_bottom = 0.85
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 11
-
-[node name="LocationNameCont" type="Panel" parent="LocationCreationDialogue/VBoxContainer"]
+[node name="Name" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("7_lb4if")]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="LocationCreationDialogue/VBoxContainer/LocationNameCont"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.3
-offset_left = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 0
-text = "Location Name"
-vertical_alignment = 1
-script = ExtResource("4_clukf")
-
-[node name="LocationNameLineEdit" type="LineEdit" parent="LocationCreationDialogue/VBoxContainer/LocationNameCont"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.3
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-theme_override_constants/caret_width = 6
-theme_override_font_sizes/font_size = 36
+title_text = "Name"
 placeholder_text = "Enter a Location Name"
-alignment = 1
-context_menu_enabled = false
-caret_blink = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="LocationCreationDialogue/VBoxContainer/LocationNameCont"]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.3
-grow_horizontal = 2
-grow_vertical = 2
-text = "Location Name"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-script = ExtResource("5_a7r6l")
-
-[node name="LocationParentCont" type="Panel" parent="LocationCreationDialogue/VBoxContainer"]
+[node name="Description" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="1" instance=ExtResource("7_lb4if")]
 layout_mode = 2
-size_flags_vertical = 3
+title_text = "Description"
+placeholder_text = "Enter a Location Description"
 
-[node name="Label" type="Label" parent="LocationCreationDialogue/VBoxContainer/LocationParentCont"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.3
-offset_left = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 0
-text = "Parent Location"
-vertical_alignment = 1
-script = ExtResource("4_clukf")
-
-[node name="ParentSelectionButton" type="Button" parent="LocationCreationDialogue/VBoxContainer/LocationParentCont"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.3
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 36
-
-[node name="LocationSaveCont" type="Panel" parent="LocationCreationDialogue/VBoxContainer"]
+[node name="Parent" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="2" instance=ExtResource("7_lb4if")]
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
+title_text = "Parent"
+placeholder_text = "Enter a Location Name"
+list_item_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="LocationCreationDialogue/VBoxContainer/LocationSaveCont"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SaveLocationButton" type="Button" parent="LocationCreationDialogue/VBoxContainer/LocationSaveCont/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 8.0
-theme_override_font_sizes/font_size = 36
-text = "Save"
-
-[node name="CancelLocationButton" type="Button" parent="LocationCreationDialogue/VBoxContainer/LocationSaveCont/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 8.0
-theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_h135y")
-theme_override_styles/hover = SubResource("StyleBoxFlat_4n64a")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_us7rp")
-text = "Cancel"
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="LocationCreationDialogue"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.1
-grow_horizontal = 2
-grow_vertical = 2
-ratio = 6.0
-
-[node name="TextureRect" type="TextureRect" parent="LocationCreationDialogue/AspectRatioContainer"]
-self_modulate = Color(0.168536, 0.168536, 0.168536, 1)
-layout_mode = 2
-texture = ExtResource("4_ms148")
-expand_mode = 1
-
-[node name="Title" type="Label" parent="LocationCreationDialogue/AspectRatioContainer/TextureRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.951
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 43
+[node name="Title" parent="LocationCreationDialogue/TextureRect" index="0"]
+theme_override_font_sizes/font_size = 32
 text = "Create Location"
-horizontal_alignment = 1
-vertical_alignment = 2
-script = ExtResource("4_clukf")
-aspect = 0.4
 
 [node name="TreeSelectionDialogue" type="Control" parent="."]
 visible = false
@@ -766,13 +398,15 @@ script = ExtResource("3_b23bh")
 item_selection_action_type = 2
 
 [connection signal="item_data_loaded" from="Database" to="." method="_on_database_item_data_loaded"]
+[connection signal="locations_data_loaded" from="Database" to="." method="_on_database_locations_data_loaded"]
 [connection signal="pressed" from="MainControl/TabContainer/Items/ItemsToolPanel/CreateItemButton" to="." method="_on_create_item_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Location" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
-[connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Image" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
-[connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Category" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
+[connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Quantity" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ItemCreationDialogue" method="_on_save_item_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/DeleteButton" to="ItemCreationDialogue" method="_on_delete_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/CancelButton" to="ItemCreationDialogue" method="_on_cancel_button_pressed"]
-[connection signal="pressed" from="LocationCreationDialogue/VBoxContainer/LocationParentCont/ParentSelectionButton" to="." method="_on_parent_selection_button_pressed"]
 [connection signal="pressed" from="TreeSelectionDialogue/CancelTreeSelection" to="." method="_on_cancel_tree_selection_pressed"]
 [connection signal="item_selected" from="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" to="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" method="_on_item_selected"]
+
+[editable path="ItemCreationDialogue"]
+[editable path="LocationCreationDialogue"]

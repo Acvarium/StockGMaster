@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1c4lov8epmmv"]
+
+[ext_resource type="Script" path="res://objects/item_list_separator.gd" id="1_7invs"]
+[ext_resource type="StyleBox" uid="uid://bbplm1e5vppsh" path="res://styles/BasePanelStyle.tres" id="1_b4nv7"]
+[ext_resource type="Script" path="res://FitLabel.gd" id="2_vyaxn"]
+[ext_resource type="StyleBox" uid="uid://bwo64t2nmfot" path="res://styles/ItemList2PanelStyle.tres" id="3_6yytm"]
+
+[node name="ItemListSeparator" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(500, 60)
+theme_override_styles/panel = ExtResource("1_b4nv7")
+script = ExtResource("1_7invs")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = -20.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("3_6yytm")
+
+[node name="TitleControl" type="Control" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/TitleControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_right = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+text = "Separator"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_vyaxn")

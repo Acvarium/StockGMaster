@@ -5,6 +5,7 @@ extends Tree
 @onready var main_node = get_tree().get_root().get_node("Main")
 @export var item_selection_action_type = Global.ActionDataType.None
 
+
 func build_tree(tree_data : Dictionary):
 	clear()
 	var root = create_item()

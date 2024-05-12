@@ -2,15 +2,17 @@ extends Control
 @export var tree_selector_dialogue : Control
 @export var location_creation_dialogue : Control
 @export var tree_element : Tree
+@export var locations_tab_tree : Tree
 @export var items_tab : Control
 @export var item_creation_dialogue : Control
+
+
 var selected_value : int = -1
 var tree_selection_index : int = -1
 
 @onready var current_what_to_do = Global.WhatToDo.None
 @onready var current_action_data_type = Global.ActionDataType.None
 var current_action_id = -1
-
 
 
 func _ready():
@@ -30,13 +32,6 @@ func get_location_address(location_id):
 	return $Database.build_location_address(location_id)
 
 
-#func show_tree_selector_dialogue(tree_index):
-	#tree_selection_index = tree_index
-	#if tree_index == Global.TreeSelection.ParentLocation:
-		#tree_element.build_tree($Database.location_data)
-	#tree_selector_dialogue.visible = true
-
-
 #what_to_do can be global.WhatToDo.Change, Delete or create 
 #action_data_type can be global.ActionDataType.Location, Category, Tag
 func exec_action_popup(what_to_do, action_data_type, for_id):
@@ -45,7 +40,7 @@ func exec_action_popup(what_to_do, action_data_type, for_id):
 	current_action_id = for_id
 	if current_action_data_type == Global.ActionDataType.Location or \
 			current_action_data_type == Global.ActionDataType.ParentLocation:
-		tree_element.build_tree($Database.location_data)
+		tree_element.build_tree($Database.locations_data)
 		tree_selector_dialogue.visible = true
 
 
@@ -104,3 +99,7 @@ func _on_database_item_data_loaded():
 
 func _on_create_item_button_pressed():
 	edit_item(-1)
+
+
+func _on_database_locations_data_loaded():
+	locations_tab_tree.build_tree($Database.locations_data)
