@@ -1,18 +1,27 @@
 extends VBoxContainer
 @export var unfold_item_list : Array[NodePath]
+@export var control_children = false
 var unfold_items = []
 
-
 func _ready():
-	for i in range(unfold_item_list.size()):
-		if has_node(unfold_item_list[i]) and get_node(unfold_item_list[i]).has_method("set_unfold_control"):
-			unfold_items.append(get_node(unfold_item_list[i]))
-			get_node(unfold_item_list[i]).set_unfold_control(self)
+	if !control_children:
+		for i in range(unfold_item_list.size()):
+			if has_node(unfold_item_list[i]) and get_node(unfold_item_list[i]).has_method("set_unfold_control"):
+				unfold_items.append(get_node(unfold_item_list[i]))
+				get_node(unfold_item_list[i]).set_unfold_control(self)
 
 
 func unfold(item, to_unfold):
-	if !to_unfold:
+	if item and !to_unfold:
 		item.unfold(false)
 	else:
-		for i in unfold_items:
-			i.unfold(i == item)
+		if !control_children:
+			for i in unfold_items:
+				i.unfold(i == item)
+		else:
+			for c in get_children():
+				c.unfold(c == item)
+
+
+func fold_all():
+	unfold(null, false)

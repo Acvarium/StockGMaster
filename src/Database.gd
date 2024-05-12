@@ -81,38 +81,104 @@ func create_tables():
 	if not "items" in tables:
 		var items_table = {
 			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
-			"name" : {"data_type" : "text"},
-			"description" : {"data_type" : "text"},
+			"name" : {"data_type" : "TEXT"},
+			"description" : {"data_type" : "TEXT"},
 			"category_id" : {"data_type" : "int"},
-			"location_id" : {"data_type" : "int"},
-			"values_id" : {"data_type" : "int"},
-			"image_id" : {"data_type" : "int",
-			"tags_id" : {"data_type" : "int"}
-			}
+			"image_id" : {"data_type" : "int"},
+			"mark" : {"data_type" : "int"},
+			"variant_of_id" : {"data_type" : "int"},
+			"unit_name_id" : {"data_type" : "int"},
 		}
 		db.create_table("items", items_table)
+		
+		var item_stock_table = {
+			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
+			"item_id" : {"data_type" : "int"},
+			"location_id" : {"data_type" : "int"},
+			"quantity" : {"data_type" : "int"},
+			"amount" : {"data_type" : "REAL"},
+			"mark" : {"data_type" : "int"},
+		}
+		db.create_table("item_stock", item_stock_table)
+		
+		var units_table = {
+			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
+			"name" : {"data_type" : "TEXT"},
+		}
+		db.create_table("unit_names", units_table)
+		
 		var locations_table = {
 			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
-			"name" : {"data_type" : "text"},
-			"parent_id" : {"data_type" : "id",
-			"description" : {"data_type" : "text"}
+			"name" : {"data_type" : "TEXT"},
+			"parent_id" : {"data_type" : "int",
+			"description" : {"data_type" : "TEXT"},
+			"mark" : {"data_type" : "int"},
+			"is_virtual" : {"data_type" : "int"},
 			}
 		}
 		db.create_table("locations", locations_table)
-		var category_table = {
-			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
-			"name" : {"data_type" : "text"},
-			"description" : {"data_type" : "text"},
-			"parent_id" : {"data_type" : "id"}
-		}
-		db.create_table("categories", category_table)
+		
 		var images_table = {
 			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
-			"image" : {"data_type" : "blob"},
+			"image" : {"data_type" : "BLOB"},
+			"image_path" : {"data_type" : "TEXT"},
 		}
 		db.create_table("images", images_table)
-
-
+		
+		var category_table = {
+			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
+			"name" : {"data_type" : "TEXT"},
+			"description" : {"data_type" : "TEXT"},
+			"parent_id" : {"data_type" : "int"}
+		}
+		db.create_table("categories", category_table)
+		
+		var tags_table = {
+			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
+			"name" : {"data_type" : "TEXT"},
+		}
+		db.create_table("tags", tags_table)
+		
+		var item_tags_table = {
+			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
+			"item_id" : {"data_type" : "int"},
+			"tag_id" : {"data_type" : "int"},
+		}
+		db.create_table("item_tags", item_tags_table)
+		
+		var projects_table = {
+			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
+			"name" : {"data_type" : "TEXT"},
+			"description" : {"data_type" : "TEXT"},
+			"final_item_id" : {"data_type" : "int"},
+		}
+		db.create_table("projects", projects_table)
+		
+		var project_items_table = {
+			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
+			"project_id" : {"data_type" : "int"},
+			"item_id" : {"data_type" : "int"},
+			"quantiry" : {"data_type" : "int"},
+			"amount" : {"data_type" : "REAL"},
+		}
+		db.create_table("project_items", project_items_table)
+		
+		var project_build_table = {
+			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
+			"project_id" : {"data_type" : "int"},
+			"quantiry" : {"data_type" : "int"},
+			"location_id" : {"data_type" : "int"},
+		}
+		db.create_table("projeect_build", project_build_table)
+		
+		var meta_table = {
+			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
+			"name" : {"data_type" : "TEXT"},
+			"data" : {"data_type" : "TEXT"},
+		}
+		db.create_table("stock_g_master_meta", meta_table)
+		
+		
 func update_value(action_data_type, for_id, with_value):
 	if action_data_type == Global.ActionDataType.Location:
 		db.update_rows("items", "id = '" + str(for_id) + "'", {"location_id" : with_value})

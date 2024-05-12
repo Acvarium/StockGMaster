@@ -55,7 +55,7 @@ item_id
 tag_id
 
 
-[project] table
+[projects] table
 id
 name
 description
@@ -76,4 +76,8 @@ project_id
 quantity
 location_id
 
+[stock_g_master_meta]
+id
+name
+data
 

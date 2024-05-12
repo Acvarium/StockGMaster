@@ -4,13 +4,14 @@ extends Control
 @export var tree_element : Tree
 @export var items_tab : Control
 @export var item_creation_dialogue : Control
-
 var selected_value : int = -1
 var tree_selection_index : int = -1
 
 @onready var current_what_to_do = Global.WhatToDo.None
 @onready var current_action_data_type = Global.ActionDataType.None
 var current_action_id = -1
+
+
 
 func _ready():
 	pass

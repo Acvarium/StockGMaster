@@ -325,6 +325,10 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="Settings" type="Control" parent="MainControl/TabContainer"]
+visible = false
+layout_mode = 2
+
 [node name="Panel" type="Panel" parent="MainControl"]
 visible = false
 custom_minimum_size = Vector2(0, 40)
