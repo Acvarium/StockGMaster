@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://bakv7sbbowm6o"]
+
+[ext_resource type="StyleBox" uid="uid://c5i134ur1to60" path="res://styles/edittext_base_style.tres" id="1_5j6rf"]
+[ext_resource type="Texture2D" uid="uid://b4156qpi54clp" path="res://textures/edit_button.png" id="2_yrjmg"]
+[ext_resource type="Texture2D" uid="uid://0dla7un4qfm6" path="res://textures/edit_button_hl.png" id="3_dp7dh"]
+[ext_resource type="Texture2D" uid="uid://bb4ie2hamo708" path="res://textures/edit_button_pressed.png" id="4_kudf8"]
+
+[node name="StockInfoLine" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(400, 40)
+
+[node name="AddressLine" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -130.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "/lasdasdl/asdlasd/asdlasdlaskdoqwdalsd/asdasd/ asd /asasd asd as dasd asd asd asddasd asd asd asd  /"
+theme_override_styles/normal = ExtResource("1_5j6rf")
+theme_override_styles/focus = ExtResource("1_5j6rf")
+theme_override_styles/read_only = ExtResource("1_5j6rf")
+text = "/lasdasdl/asdlasd/asdlasdlaskdoqwdalsd/asdasd/ asd /asasd asd as dasd asd asd asddasd asd asd asd  /"
+editable = false
+
+[node name="QuantityLine" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -123.0
+offset_right = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.666667, 0.584314, 0.396078, 1)
+theme_override_styles/normal = ExtResource("1_5j6rf")
+theme_override_styles/focus = ExtResource("1_5j6rf")
+theme_override_styles/read_only = ExtResource("1_5j6rf")
+text = "1111 кг"
+alignment = 1
+editable = false
+
+[node name="EditButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -30.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("2_yrjmg")
+texture_pressed = ExtResource("3_dp7dh")
+texture_hover = ExtResource("4_kudf8")
+ignore_texture_size = true
+stretch_mode = 5

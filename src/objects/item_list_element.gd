@@ -61,7 +61,7 @@ func _process(delta):
 	AnimationPlayer
 	if !$UnfoldTimer.is_stopped():
 		var time_left_normalized = $UnfoldTimer.time_left / unfold_wait_time
-		var new_unfolded_height = unfolded_height
+		var new_unfolded_height = unfolded_height + 45
 		if is_unfolded:
 			custom_minimum_size.y = remap(time_left_normalized, 0.0, 1.0, new_unfolded_height, folded_height)
 			$AnimationPlayer.seek((1.0 - time_left_normalized), true)
