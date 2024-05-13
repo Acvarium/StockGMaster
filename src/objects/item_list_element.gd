@@ -46,23 +46,29 @@ func unfold(to_unfold = true):
 		return
 	if to_unfold != is_unfolded:
 		set_process(true)
+		$AnimationPlayer.play("unfold")
+		
 		$UnfoldTimer.start()
-		if to_unfold:
-			$AnimationPlayer.play("unfold")
-		else:
-			$AnimationPlayer.play_backwards("unfold")
+		#if to_unfold:
+			#$AnimationPlayer.play("unfold")
+		#else:
+			#$AnimationPlayer.play_backwards("unfold")
 	is_unfolded = to_unfold
 	$UnfoldButton.flip_v = is_unfolded
 
 
 func _process(delta):
+	AnimationPlayer
 	if !$UnfoldTimer.is_stopped():
 		var time_left_normalized = $UnfoldTimer.time_left / unfold_wait_time
 		var new_unfolded_height = unfolded_height
 		if is_unfolded:
 			custom_minimum_size.y = remap(time_left_normalized, 0.0, 1.0, new_unfolded_height, folded_height)
+			$AnimationPlayer.seek((1.0 - time_left_normalized), true)
 		else:
 			custom_minimum_size.y = remap(time_left_normalized, 0.0, 1.0, folded_height, new_unfolded_height)
+			$AnimationPlayer.seek(time_left_normalized, true)
+			
 	else:
 		set_process(false)
 
