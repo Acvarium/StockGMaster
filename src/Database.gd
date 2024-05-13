@@ -8,7 +8,7 @@ var db : SQLite = null
 @export var score_text : TextEdit
 
 const verbosity_level : int = SQLite.VERBOSE
-var database_path = "user://data.db"
+var database_path = "res://data/data.db"
 
 var locations_data = {
 }
