@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=12 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" path="res://Database.gd" id="1_ie8y7"]
 [ext_resource type="Script" path="res://main.gd" id="1_nvv5i"]
 [ext_resource type="Script" path="res://StructTree.gd" id="3_b23bh"]
 [ext_resource type="Script" path="res://ItemsTab.gd" id="3_vserw"]
+[ext_resource type="Script" path="res://objects/unfold_control.gd" id="4_o78sg"]
 [ext_resource type="Script" path="res://ItemCreationDialogue.gd" id="5_83lbr"]
 [ext_resource type="PackedScene" uid="uid://l7og0lhat66" path="res://objects/item_list_element.tscn" id="6_yowbf"]
 [ext_resource type="PackedScene" uid="uid://ymef651v1yws" path="res://objects/item_list_element2.tscn" id="7_lb4if"]
@@ -129,6 +130,8 @@ vertical_scroll_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("4_o78sg")
+control_children = true
 
 [node name="ItemListElement" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer/VBoxContainer" instance=ExtResource("6_yowbf")]
 layout_mode = 2
@@ -261,12 +264,16 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "location_list_item", "title_label") instance=ExtResource("13_2uggw")]
+visible = false
 layout_mode = 1
 script = ExtResource("5_83lbr")
 name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
 description_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Description")
 location_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Location")
 title_label = NodePath("TextureRect/Title")
+
+[node name="VBoxContainer" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer" index="0"]
+unfold_item_list = Array[NodePath]([NodePath("Name"), NodePath("Description")])
 
 [node name="ItemDataSeparator" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("8_tmgro")]
 layout_mode = 2

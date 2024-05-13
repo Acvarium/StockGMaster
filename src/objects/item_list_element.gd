@@ -5,10 +5,9 @@ var item_name = ""
 var item_description = ""
 var item_icon_name = ""
 var is_unfolded = false
-
-
 @onready var main_node = get_tree().get_root().get_node("Main")
 
+var unfold_control
 
 func set_data(new_data):
 	if !main_node:
@@ -37,25 +36,26 @@ func set_data(new_data):
 	$IPanel/ItemIcon.visible = image_loaded
 	$IPanel.self_modulate.a = 1.0 if image_loaded else 0.5
 
-
+		
 func unfold(to_unfold = true):
-	if is_unfolded == to_unfold:
+	if to_unfold == is_unfolded:
 		return
+	if to_unfold != is_unfolded:
+		if to_unfold:
+			$AnimationPlayer.play("unfold")
+		else:
+			$AnimationPlayer.play_backwards("unfold")
 	is_unfolded = to_unfold
-	if to_unfold:
-		if item_tab:
-			item_tab.fold_all_but_one(self)
-		$AnimationPlayer.play("unfold")
-	else:
-		$AnimationPlayer.play_backwards("unfold")
+	$UnfoldButton.flip_v = is_unfolded
 
 
 func toggle_unfold():
-	unfold(!is_unfolded)
+	if unfold_control:
+		unfold_control.unfold(self, !is_unfolded)
 
 
 func _ready():
-	pass # Replace with function body.
+	unfold_control = get_parent()
 
 
 func _on_unfold_button_pressed():

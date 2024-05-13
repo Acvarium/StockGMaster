@@ -9,12 +9,6 @@ func _ready():
 	#clear_list()
 
 
-func fold_all_but_one(the_one):
-	for c in items_holder.get_children():
-		if c != the_one:
-			c.unfold(false)
-
-
 func clear_list():
 	for c in items_holder.get_children():
 		c.queue_free()

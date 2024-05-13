@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://buhtxvdgnu0ki"]
 
 [ext_resource type="StyleBox" uid="uid://balcxf82udj3t" path="res://styles/EditTextStyle.tres" id="1_w7hvy"]
-[ext_resource type="Script" path="res://objects/UnoldControl.gd" id="2_d34r8"]
+[ext_resource type="Script" path="res://objects/unfold_control.gd" id="2_jtdlm"]
 [ext_resource type="Texture2D" uid="uid://b82gyeyblxd5l" path="res://textures/title.png" id="3_gmiva"]
 [ext_resource type="FontVariation" uid="uid://bhyikp6mmffmg" path="res://fonts/resources/menu_font01.tres" id="4_n8g7y"]
 [ext_resource type="Script" path="res://FitLabel.gd" id="5_rlvqw"]
@@ -134,7 +134,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
-script = ExtResource("2_d34r8")
+script = ExtResource("2_jtdlm")
 unfold_item_list = Array[NodePath]([NodePath(""), NodePath("")])
 
 [node name="SDCButtons" type="Panel" parent="."]

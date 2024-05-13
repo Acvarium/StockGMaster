@@ -37,23 +37,6 @@ func _ready():
 	#$DataControl/Edit.placeholder_text = placeholder_text
 
 
-
-func unfold(to_unfold = true):
-	if to_unfold == is_unfolded:
-		return
-	if to_unfold:
-		pass
-	else:
-		pass
-	if to_unfold != is_unfolded:
-		if to_unfold:
-			$AnimationPlayer.play("unfold")
-		else:
-			$AnimationPlayer.play_backwards("unfold")
-	is_unfolded = to_unfold
-	unfold_button.flip_v = is_unfolded
-
-
 func set_unfold_control(value):
 	unfold_control = value
 	print(name + "  " + str(unfold_control != null))
@@ -70,6 +53,18 @@ func set_edit_text(_text):
 
 func get_edit_text():
 	return $DataControl/Edit.text
+
+
+func unfold(to_unfold = true):
+	if to_unfold == is_unfolded:
+		return
+	if to_unfold != is_unfolded:
+		if to_unfold:
+			$AnimationPlayer.play("unfold")
+		else:
+			$AnimationPlayer.play_backwards("unfold")
+	is_unfolded = to_unfold
+	unfold_button.flip_v = is_unfolded
 
 
 func toggle_unfold():
