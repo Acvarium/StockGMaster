@@ -6,8 +6,12 @@ var item_description = ""
 var item_icon_name = ""
 var is_unfolded = false
 @onready var main_node = get_tree().get_root().get_node("Main")
+@onready var unfold_wait_time = $UnfoldTimer.wait_time
 
+var folded_height = 55.0
+var unfolded_height = 250.0
 var unfold_control
+
 
 func set_data(new_data):
 	if !main_node:
@@ -36,17 +40,31 @@ func set_data(new_data):
 	$IPanel/ItemIcon.visible = image_loaded
 	$IPanel.self_modulate.a = 1.0 if image_loaded else 0.5
 
-		
+
 func unfold(to_unfold = true):
 	if to_unfold == is_unfolded:
 		return
 	if to_unfold != is_unfolded:
+		set_process(true)
+		$UnfoldTimer.start()
 		if to_unfold:
 			$AnimationPlayer.play("unfold")
 		else:
 			$AnimationPlayer.play_backwards("unfold")
 	is_unfolded = to_unfold
 	$UnfoldButton.flip_v = is_unfolded
+
+
+func _process(delta):
+	if !$UnfoldTimer.is_stopped():
+		var time_left_normalized = $UnfoldTimer.time_left / unfold_wait_time
+		var new_unfolded_height = unfolded_height
+		if is_unfolded:
+			custom_minimum_size.y = remap(time_left_normalized, 0.0, 1.0, new_unfolded_height, folded_height)
+		else:
+			custom_minimum_size.y = remap(time_left_normalized, 0.0, 1.0, folded_height, new_unfolded_height)
+	else:
+		set_process(false)
 
 
 func toggle_unfold():
@@ -56,6 +74,7 @@ func toggle_unfold():
 
 func _ready():
 	unfold_control = get_parent()
+	set_process(false)
 
 
 func _on_unfold_button_pressed():
