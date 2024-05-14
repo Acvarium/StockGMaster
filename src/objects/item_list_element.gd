@@ -7,11 +7,12 @@ var item_icon_name = ""
 var is_unfolded = false
 @onready var main_node = get_tree().get_root().get_node("Main")
 @onready var unfold_wait_time = $UnfoldTimer.wait_time
-
+var stock_line_prefab = preload("res://objects/stock_info_line.tscn")
 var folded_height = 55.0
 var unfolded_height = 250.0
+var unfold_offset_for_stocks = 0.0
 var unfold_control
-
+const BASE_STOCK_OFFSET = 55
 
 func set_data(new_data):
 	if !main_node:
@@ -39,6 +40,15 @@ func set_data(new_data):
 			$ItemName.tooltip_text = location_addr
 	$IPanel/ItemIcon.visible = image_loaded
 	$IPanel.self_modulate.a = 1.0 if image_loaded else 0.5
+	if "stocks" in new_data.keys():
+		unfold_offset_for_stocks = (new_data.stocks.size() - 1) * BASE_STOCK_OFFSET
+		for s in new_data.stocks:
+			var current_stock_line = stock_line_prefab.instantiate()
+			var stock_location = main_node.get_location_address(s.location_id)
+			var quantity = 0 if s.quantity == null else s.quantity
+			var amount = 0.0 if s.amount == null else s.amount
+			$StocksHolder.add_child(current_stock_line)
+			current_stock_line.set_data(stock_location, quantity, amount, "m")
 
 
 func unfold(to_unfold = true):
@@ -61,7 +71,7 @@ func _process(delta):
 	AnimationPlayer
 	if !$UnfoldTimer.is_stopped():
 		var time_left_normalized = $UnfoldTimer.time_left / unfold_wait_time
-		var new_unfolded_height = unfolded_height + 45
+		var new_unfolded_height = unfolded_height + unfold_offset_for_stocks
 		if is_unfolded:
 			custom_minimum_size.y = remap(time_left_normalized, 0.0, 1.0, new_unfolded_height, folded_height)
 			$AnimationPlayer.seek((1.0 - time_left_normalized), true)

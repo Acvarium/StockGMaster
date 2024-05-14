@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://l7og0lhat66"]
+[gd_scene load_steps=15 format=3 uid="uid://l7og0lhat66"]
 
 [ext_resource type="Script" path="res://objects/item_list_element.gd" id="1_4l0wv"]
 [ext_resource type="Texture2D" uid="uid://dn1q6s8e7t55l" path="res://w_rect.png" id="1_5sw8e"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://b4156qpi54clp" path="res://textures/edit_button.png" id="7_twvn0"]
 [ext_resource type="Texture2D" uid="uid://0dla7un4qfm6" path="res://textures/edit_button_hl.png" id="8_qfrte"]
 [ext_resource type="Texture2D" uid="uid://bb4ie2hamo708" path="res://textures/edit_button_pressed.png" id="9_g6twn"]
-[ext_resource type="PackedScene" uid="uid://bakv7sbbowm6o" path="res://objects/stock_info_line.tscn" id="11_8tlar"]
 
 [sub_resource type="Animation" id="Animation_g3yh7"]
 length = 0.001
@@ -65,7 +64,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("VBoxContainer:visible")
+tracks/4/path = NodePath("StocksHolder:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -116,7 +115,7 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/path = NodePath(".:custom_minimum_size")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
@@ -129,7 +128,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("VBoxContainer:visible")
+tracks/4/path = NodePath("StocksHolder:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -310,7 +309,7 @@ stretch_mode = 4
 wait_time = 0.2
 one_shot = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="StocksHolder" type="VBoxContainer" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -321,9 +320,6 @@ offset_top = 205.0
 offset_right = -15.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="StockInfoLine" parent="VBoxContainer" instance=ExtResource("11_8tlar")]
-layout_mode = 2
 
 [connection signal="pressed" from="LPanel/ChangeLocationButton" to="." method="_on_change_location_button_pressed"]
 [connection signal="pressed" from="UnfoldButton" to="." method="_on_unfold_button_pressed"]
