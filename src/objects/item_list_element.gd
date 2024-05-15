@@ -51,10 +51,10 @@ func set_data(new_data):
 			$StocksHolder.add_child(current_stock_line)
 			current_stock_line.set_data(stock_location, quantity, amount, unit_name)
 		$NoStockMessage/Label.hide()
-		self_modulate = Color.WHITE_SMOKE
+		self_modulate = Color.LIGHT_GRAY
 	else:
 		$NoStockMessage/Label.show()
-		self_modulate = Color.BISQUE
+		self_modulate = Color.MISTY_ROSE
 		
 
 func unfold(to_unfold = true):
