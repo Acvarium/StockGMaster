@@ -32,6 +32,11 @@ func get_location_address(location_id):
 	return $Database.build_location_address(location_id)
 
 
+func get_unit_name_by_id(_id):
+	if _id == null:
+		return ""
+	return $Database.get_unit_name_by_id(_id)
+
 #what_to_do can be global.WhatToDo.Change, Delete or create 
 #action_data_type can be global.ActionDataType.Location, Category, Tag
 func exec_action_popup(what_to_do, action_data_type, for_id):

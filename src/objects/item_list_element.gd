@@ -12,7 +12,7 @@ var folded_height = 55.0
 var unfolded_height = 250.0
 var unfold_offset_for_stocks = 0.0
 var unfold_control
-const BASE_STOCK_OFFSET = 55
+const BASE_STOCK_OFFSET = 45
 
 func set_data(new_data):
 	if !main_node:
@@ -47,9 +47,15 @@ func set_data(new_data):
 			var stock_location = main_node.get_location_address(s.location_id)
 			var quantity = 0 if s.quantity == null else s.quantity
 			var amount = 0.0 if s.amount == null else s.amount
+			var unit_name = main_node.get_unit_name_by_id(new_data.unit_name_id)
 			$StocksHolder.add_child(current_stock_line)
-			current_stock_line.set_data(stock_location, quantity, amount, "m")
-
+			current_stock_line.set_data(stock_location, quantity, amount, unit_name)
+		$NoStockMessage/Label.hide()
+		self_modulate = Color.WHITE_SMOKE
+	else:
+		$NoStockMessage/Label.show()
+		self_modulate = Color.BISQUE
+		
 
 func unfold(to_unfold = true):
 	if to_unfold == is_unfolded:
@@ -57,30 +63,28 @@ func unfold(to_unfold = true):
 	if to_unfold != is_unfolded:
 		set_process(true)
 		$AnimationPlayer.play("unfold")
-		
 		$UnfoldTimer.start()
-		#if to_unfold:
-			#$AnimationPlayer.play("unfold")
-		#else:
-			#$AnimationPlayer.play_backwards("unfold")
 	is_unfolded = to_unfold
 	$UnfoldButton.flip_v = is_unfolded
 
 
 func _process(delta):
-	AnimationPlayer
+	var new_unfolded_height = unfolded_height + unfold_offset_for_stocks
 	if !$UnfoldTimer.is_stopped():
 		var time_left_normalized = $UnfoldTimer.time_left / unfold_wait_time
-		var new_unfolded_height = unfolded_height + unfold_offset_for_stocks
 		if is_unfolded:
 			custom_minimum_size.y = remap(time_left_normalized, 0.0, 1.0, new_unfolded_height, folded_height)
 			$AnimationPlayer.seek((1.0 - time_left_normalized), true)
 		else:
 			custom_minimum_size.y = remap(time_left_normalized, 0.0, 1.0, folded_height, new_unfolded_height)
 			$AnimationPlayer.seek(time_left_normalized, true)
-			
 	else:
+		if is_unfolded:
+			custom_minimum_size.y = new_unfolded_height
+		else:
+			custom_minimum_size.y = folded_height
 		set_process(false)
+
 
 
 func toggle_unfold():

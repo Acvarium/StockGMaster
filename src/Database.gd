@@ -12,12 +12,17 @@ var database_path = "res://data/data.db"
 
 var locations_data = {}
 var items_data = {}
-var stocks_data = {}
 
 
 func delete_item(item_index):
 	db.delete_rows("items", "id = '" + str(item_index) + "'")
-	
+
+
+func get_unit_name_by_id(_id):
+	var unit_name_data = db.select_rows("unit_names", "id = " + str(_id), ["name"])
+	if unit_name_data.size() > 0 and "name" in unit_name_data[0].keys():
+		return unit_name_data[0].name
+	return ""
 
 
 func get_image_by_id(image_id):
@@ -50,13 +55,10 @@ func pull_locations_data():
 
 func pull_items_data():
 	items_data.clear()
-	#stocks_data.clear()
 	var stock_db_data = db.select_rows("item_stocks", "", ["*"])
-	#print(stock_db_data)
 	var items_db_data = db.select_rows("items", "", ["*"])
 	for i in range(items_db_data.size()):
 		items_data[items_db_data[i].id] = items_db_data[i]
-		#print(items_db_data[i])
 	for i in range(stock_db_data.size()):
 		var current_stock = stock_db_data[i]
 		if "item_id" in current_stock.keys() and current_stock["item_id"] in items_data.keys():
@@ -64,7 +66,6 @@ func pull_items_data():
 				items_data[current_stock["item_id"]].stocks = [current_stock]
 			else:
 				items_data[current_stock["item_id"]].stocks.append(current_stock)
-	print(items_data)
 	item_data_loaded.emit()
 	
 
