@@ -16,6 +16,7 @@ var items_data = {}
 
 func delete_item(item_index):
 	db.delete_rows("items", "id = '" + str(item_index) + "'")
+	db.delete_rows("item_stocks", "item_id = '" + str(item_index) + "'")
 
 
 func get_unit_name_by_id(_id):

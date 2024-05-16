@@ -75,6 +75,7 @@ func tree_value_selected(value, action_data_type):
 func delete_item(item_index):
 	if item_index in $Database.items_data.keys():
 		$Database.delete_item(item_index)
+		
 		$Database.pull_items_data()
 
 
