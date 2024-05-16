@@ -1,16 +1,57 @@
 extends Control
 @export var name_list_item : Panel
 @export var description_list_item : Panel
-@export var location_list_item : Panel
 @export var title_label : Label
+@export var location_list_stock : Panel
+@export var quantity_list_stock : Panel
 
 @onready var main_node = get_tree().get_root().get_node("Main")
+
+@export var item_data_components : Array[Control]
+@export var stock_data_components : Array[Control]
+
 var item_index = -1
+var current_item_data
+var current_mode = Global.WhatToDo.None
+var current_stock_data = {}
+var is_stock_mode = false
 
 
-func set_data(item_data):
+func show_item_data_components(to_show = true):
+	for i in item_data_components:
+		i.visible = to_show
+
+
+func show_stock_data_components(to_show = true):
+	for s in stock_data_components:
+		s.visible = to_show
+
+
+func _show():
+	current_stock_data.clear()
+	if current_item_data.size() == 0:
+		current_mode = Global.WhatToDo.Change
+		title_label.text = "create item" 
+	else:
+		title_label.text = "edit item"
+		current_mode = Global.WhatToDo.Change
+	show_item_data_components(true)
+	show_stock_data_components(current_item_data.size() == 0)
+	show()
+
+#TODO implement the mode for editing the stock data
+func set_stock_data(item_data, stock_data):
+	current_item_data.clear()
+	current_item_data = item_data
+	if "name" in item_data.keys() and item_data.name:
+		name_list_item.set_edit_text(item_data.name)
+	
+
+func set_item_data(item_data):
 	if !main_node:
 		main_node = get_tree().get_root().get_node("Main")
+	is_stock_mode = false
+	current_item_data = item_data
 	item_index = -1 
 	if "id" in item_data.keys():
 		title_label.text = "Edit Item"
@@ -23,12 +64,12 @@ func set_data(item_data):
 	description_list_item.set_edit_text("")
 	if "description" in item_data.keys() and item_data.description:
 		description_list_item.set_edit_text(item_data.description)
-	if "location_id" in item_data.keys() and item_data.location_id:
-		update_location_text(main_node.get_location_address(item_data.location_id))
-
+	#if "location_id" in item_data.keys() and item_data.location_id:
+		#update_location_text(main_node.get_location_address(item_data.location_id))
+	
 
 func update_location_text(new_location_text):
-	location_list_item.set_location_button_text(new_location_text)
+	location_list_stock.set_location_button_text(new_location_text)
 
 
 func _ready():
@@ -44,12 +85,27 @@ func _on_save_item_button_pressed():
 	new_item_data.id = item_index
 	new_item_data.name = name_list_item.get_edit_text()
 	new_item_data.description = description_list_item.get_edit_text()
-	main_node.save_item(new_item_data)
+	var quantity = quantity_list_stock.get_quantiry()
+	item_index = main_node.save_item(new_item_data, quantity != 0)
+	if quantity != 0:
+		if not "location_id" in current_stock_data:
+			current_stock_data.location_id = 0
+		if not "item_id" in current_stock_data:
+			current_stock_data.item_id = item_index
+		current_stock_data.quantity = quantity
+		main_node.save_stock(current_stock_data)
 	hide()
 
 
+func tree_value_selected(value, item_selection_action_type):
+	#if item_selection_action_type == Global.ActionDataType.Location:
+		#current_stock_data.item_id = item_index
+	current_stock_data.location_id = value
+	update_location_text(main_node.get_location_address(current_stock_data.location_id))
+
 func _on_location_selection_button_pressed():
-	main_node.exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.Location, item_index)
+	main_node.select_location_popup(item_index, self)
+	#main_node.exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.Location, item_index)
 
 
 func _on_delete_button_pressed():

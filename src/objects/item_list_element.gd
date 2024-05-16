@@ -55,7 +55,12 @@ func set_data(new_data):
 	else:
 		$NoStockMessage/Label.show()
 		self_modulate = Color.MISTY_ROSE
-		
+
+
+func clear_stocks():
+	for s in $StocksHolder.get_children():
+		s.queue_free()
+
 
 func unfold(to_unfold = true):
 	if to_unfold == is_unfolded:

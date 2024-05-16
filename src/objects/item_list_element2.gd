@@ -67,6 +67,14 @@ func unfold(to_unfold = true):
 	unfold_button.flip_v = is_unfolded
 
 
+func set_quantity(quantity):
+	$DataControl/SpinBox.value = quantity
+
+
+func get_quantiry():
+	return $DataControl/SpinBox.value
+
+
 func toggle_unfold():
 	if unfold_control:
 		unfold_control.unfold(self, !is_unfolded)

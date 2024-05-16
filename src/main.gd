@@ -1,11 +1,10 @@
 extends Control
-@export var tree_selector_dialogue : Control
-@export var location_creation_dialogue : Control
 @export var tree_element : Tree
-@export var locations_tab_tree : Tree
 @export var items_tab : Control
 @export var item_creation_dialogue : Control
-
+@export var locations_tab_tree : Tree
+@export var location_creation_dialogue : Control
+@export var tree_selection_dialogue : Control
 
 var selected_value : int = -1
 var tree_selection_index : int = -1
@@ -25,7 +24,7 @@ func get_image_by_id(image_id):
 
 
 func hide_tree_selector():
-	tree_selector_dialogue.visible = false
+	tree_selection_dialogue.visible = false
 
 
 func get_location_address(location_id):
@@ -39,23 +38,23 @@ func get_unit_name_by_id(_id):
 
 #what_to_do can be global.WhatToDo.Change, Delete or create 
 #action_data_type can be global.ActionDataType.Location, Category, Tag
-func exec_action_popup(what_to_do, action_data_type, for_id):
+func exec_action_popup(what_to_do, action_data_type, for_id, for_dialogue = null):
 	current_what_to_do = what_to_do
 	current_action_data_type = action_data_type
 	current_action_id = for_id
 	if current_action_data_type == Global.ActionDataType.Location or \
 			current_action_data_type == Global.ActionDataType.ParentLocation:
 		tree_element.build_tree($Database.locations_data)
-		tree_selector_dialogue.visible = true
-
+		tree_selection_dialogue.data_recever_dialogue = for_dialogue
+		tree_selection_dialogue.visible = true
+		
 
 func edit_item(item_id):
 	if item_id in $Database.items_data.keys() and item_id > 0:
-		item_creation_dialogue.set_data($Database.items_data[item_id])
-		item_creation_dialogue.show()
+		item_creation_dialogue.set_item_data($Database.items_data[item_id])
 	else:
-		item_creation_dialogue.set_data({})
-		item_creation_dialogue.show()
+		item_creation_dialogue.set_item_data({})
+	item_creation_dialogue._show()
 
 
 func tree_value_selected(value, action_data_type):
@@ -79,10 +78,19 @@ func delete_item(item_index):
 		$Database.pull_items_data()
 
 
-func save_item(item_data):
+func save_item(item_data, to_pull = true):
 	$Database.save_item(item_data)
-	$Database.pull_items_data()
+	if to_pull:
+		$Database.pull_items_data()
+	return $Database.get_new_item_id()
+	
 
+
+func save_stock(stock_data, to_pull = true):
+	$Database.save_stock(stock_data)
+	if to_pull:
+		$Database.pull_items_data()
+	
 
 func _on_parent_selection_button_pressed():
 	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.ParentLocation, -1)
@@ -108,3 +116,7 @@ func _on_create_item_button_pressed():
 
 func _on_database_locations_data_loaded():
 	locations_tab_tree.build_tree($Database.locations_data)
+
+
+func select_location_popup(item_index, for_dialogue):
+	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.Location, item_index, for_dialogue)

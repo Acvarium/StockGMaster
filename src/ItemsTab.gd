@@ -18,6 +18,7 @@ func refrash_items_list(items_data):
 	#clear_list()
 	var existing_items = {}
 	for item in items_holder.get_children():
+		item.clear_stocks()
 		if item.item_id < 0 or not item.item_id in items_data.keys():
 			item.queue_free()
 			continue

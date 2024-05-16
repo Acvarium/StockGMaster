@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=12 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" path="res://Database.gd" id="1_ie8y7"]
 [ext_resource type="Script" path="res://main.gd" id="1_nvv5i"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://ItemCreationDialogue.gd" id="5_83lbr"]
 [ext_resource type="PackedScene" uid="uid://ymef651v1yws" path="res://objects/item_list_element2.tscn" id="7_lb4if"]
 [ext_resource type="PackedScene" uid="uid://d1c4lov8epmmv" path="res://objects/item_list_separator.tscn" id="8_tmgro"]
+[ext_resource type="Script" path="res://TreeSelectionDialogue.gd" id="10_6boxs"]
 [ext_resource type="PackedScene" uid="uid://buhtxvdgnu0ki" path="res://objects/data_edit_dialogue_base.tscn" id="13_2uggw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blt5x"]
@@ -24,7 +25,7 @@ shadow_color = Color(0, 0, 0, 0.403922)
 shadow_size = 10
 shadow_offset = Vector2(10, 10)
 
-[node name="Main" type="Control" node_paths=PackedStringArray("tree_selector_dialogue", "tree_element", "locations_tab_tree", "items_tab", "item_creation_dialogue")]
+[node name="Main" type="Control" node_paths=PackedStringArray("tree_element", "items_tab", "item_creation_dialogue", "locations_tab_tree", "location_creation_dialogue", "tree_selection_dialogue")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,11 +33,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nvv5i")
-tree_selector_dialogue = NodePath("TreeSelectionDialogue")
 tree_element = NodePath("TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree")
-locations_tab_tree = NodePath("MainControl/TabContainer/Locations/StructTree")
 items_tab = NodePath("MainControl/TabContainer/Items")
 item_creation_dialogue = NodePath("ItemCreationDialogue")
+locations_tab_tree = NodePath("MainControl/TabContainer/Locations/StructTree")
+location_creation_dialogue = NodePath("LocationCreationDialogue")
+tree_selection_dialogue = NodePath("TreeSelectionDialogue")
 
 [node name="Database" type="Node" parent="."]
 script = ExtResource("1_ie8y7")
@@ -187,14 +189,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "location_list_item", "title_label") instance=ExtResource("13_2uggw")]
-visible = false
+[node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_list_stock", "quantity_list_stock") instance=ExtResource("13_2uggw")]
 layout_mode = 1
 script = ExtResource("5_83lbr")
 name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
 description_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Description")
-location_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Location")
 title_label = NodePath("TextureRect/Title")
+location_list_stock = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Location")
+quantity_list_stock = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Quantity")
 
 [node name="VBoxContainer" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer" index="0"]
 unfold_item_list = Array[NodePath]([NodePath("Name"), NodePath("Description")])
@@ -274,6 +276,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("10_6boxs")
 
 [node name="CancelTreeSelection" type="Button" parent="TreeSelectionDialogue"]
 layout_mode = 1
@@ -316,7 +319,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="StructTree" type="Tree" parent="TreeSelectionDialogue/TSL/AspectRatioContainer/Control"]
+[node name="StructTree" type="Tree" parent="TreeSelectionDialogue/TSL/AspectRatioContainer/Control" node_paths=PackedStringArray("tree_selection_dialogue")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.03
@@ -327,6 +330,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_b23bh")
 item_selection_action_type = 2
+tree_selection_dialogue = NodePath("../../../..")
 
 [connection signal="item_data_loaded" from="Database" to="." method="_on_database_item_data_loaded"]
 [connection signal="locations_data_loaded" from="Database" to="." method="_on_database_locations_data_loaded"]

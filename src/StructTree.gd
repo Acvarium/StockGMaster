@@ -4,6 +4,7 @@ extends Tree
 @export var name_key = "name"
 @onready var main_node = get_tree().get_root().get_node("Main")
 @export var item_selection_action_type = Global.ActionDataType.None
+@export var tree_selection_dialogue : Control
 
 
 func build_tree(tree_data : Dictionary):
@@ -31,7 +32,10 @@ func build_tree(tree_data : Dictionary):
 
 
 func tree_value_selected(value):
-	main_node.tree_value_selected(value, item_selection_action_type)
+	if tree_selection_dialogue:
+		tree_selection_dialogue.tree_value_selected(value, item_selection_action_type)
+	else:
+		main_node.tree_value_selected(value, item_selection_action_type)
 
 
 func _on_item_selected():

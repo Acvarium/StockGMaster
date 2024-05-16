@@ -53,6 +53,12 @@ func pull_locations_data():
 	locations_data_loaded.emit()
 
 
+func get_new_item_id():
+	db.query("SELECT * FROM 'items' ORDER BY id DESC LIMIT 1;")
+	print(db.query_result)
+	return db.query_result[0].id
+
+
 func pull_items_data():
 	items_data.clear()
 	var stock_db_data = db.select_rows("item_stocks", "", ["*"])
@@ -201,6 +207,15 @@ func save_item(new_item_data):
 	else:
 		new_item_data.erase('id')
 		db.insert_row("items", new_item_data)
+	
+
+func save_stock(new_stock_data):
+	if "id" in new_stock_data:
+		pass
+#TODO implement edit stock data
+		#db.update_rows("items", "id = '" + str(new_item_data.id) + "'", new_item_data)
+	else:
+		db.insert_row("item_stocks", new_stock_data)
 	
 
 func _on_create_table_pressed():
