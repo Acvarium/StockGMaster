@@ -128,7 +128,6 @@ theme_override_styles/normal = ExtResource("6_bg6ey")
 theme_override_styles/focus = ExtResource("6_bg6ey")
 theme_override_styles/read_only = ExtResource("6_bg6ey")
 placeholder_text = "Enter an Item Name"
-editable = false
 context_menu_enabled = false
 wrap_mode = 1
 caret_blink = true
