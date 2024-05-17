@@ -9,3 +9,7 @@ func tree_value_selected(value, item_selection_action_type):
 	else:
 		main_node.tree_value_selected(value, item_selection_action_type)
 	hide()
+
+
+func _on_cancel_tree_selection_pressed():
+	hide()

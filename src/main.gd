@@ -1,10 +1,11 @@
 extends Control
 @export var tree_element : Tree
-@export var items_tab : Control
-@export var item_creation_dialogue : Control
 @export var locations_tab_tree : Tree
-@export var location_creation_dialogue : Control
-@export var tree_selection_dialogue : Control
+@onready var items_tab : Control = $MainControl/TabContainer/Items
+@onready var item_creation_dialogue : Control = $ItemCreationDialogue
+@onready var location_creation_dialogue : Control = $LocationCreationDialogue
+@onready var tree_selection_dialogue : Control = $TreeSelectionDialogue
+@onready var action_confirm_dialogue : Control = $ActionConfirmDialogue
 
 var selected_value : int = -1
 var tree_selection_index : int = -1
@@ -17,6 +18,10 @@ var current_action_id = -1
 func _ready():
 	pass
 
+
+func confirme_action(recever, conf_what_to_do):
+	action_confirm_dialogue.confirme_action(recever, conf_what_to_do)
+	
 
 func get_image_by_id(image_id):
 	var image = $Database.get_image_by_id(image_id)
@@ -98,11 +103,9 @@ func _on_parent_selection_button_pressed():
 	#show_tree_selector_dialogue(Global.TreeSelection.ParentLocation)
 
 
-func _on_cancel_tree_selection_pressed():
-	hide_tree_selector()
-
-
 func refrash_items_list():
+	if !items_tab:
+		items_tab = $MainControl/TabContainer/Items
 	items_tab.refrash_items_list($Database.items_data)
 
 

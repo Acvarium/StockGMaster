@@ -9,6 +9,7 @@ extends Control
 
 @export var item_data_components : Array[Control]
 @export var stock_data_components : Array[Control]
+@export var delete_button : Button
 
 var item_index = -1
 var current_item_data
@@ -30,14 +31,17 @@ func show_stock_data_components(to_show = true):
 func _show():
 	current_stock_data.clear()
 	if current_item_data.size() == 0:
-		current_mode = Global.WhatToDo.Change
-		title_label.text = "create item" 
+		title_label.text = "create item"
+		delete_button.visible = false 
+		current_mode = Global.WhatToDo.Create
 	else:
 		title_label.text = "edit item"
+		delete_button.visible = true 
 		current_mode = Global.WhatToDo.Change
 	show_item_data_components(true)
-	show_stock_data_components(current_item_data.size() == 0)
+	show_stock_data_components(current_mode == Global.WhatToDo.Create)
 	show()
+
 
 #TODO implement the mode for editing the stock data
 func set_stock_data(item_data, stock_data):
@@ -45,7 +49,7 @@ func set_stock_data(item_data, stock_data):
 	current_item_data = item_data
 	if "name" in item_data.keys() and item_data.name:
 		name_list_item.set_edit_text(item_data.name)
-	
+
 
 func set_item_data(item_data):
 	if !main_node:
@@ -73,10 +77,17 @@ func update_location_text(new_location_text):
 
 
 func _ready():
-	hide()
+	reset_and_hide()
 
 
 func _on_cancel_button_pressed():
+	reset_and_hide()
+
+
+func reset_and_hide():
+	quantity_list_stock.set_quantity(0)
+	current_item_data = null
+	current_stock_data.clear()
 	hide()
 
 
@@ -87,14 +98,14 @@ func _on_save_item_button_pressed():
 	new_item_data.description = description_list_item.get_edit_text()
 	var quantity = quantity_list_stock.get_quantiry()
 	item_index = main_node.save_item(new_item_data, quantity != 0)
-	if quantity != 0:
+	if quantity != 0 and current_mode == Global.WhatToDo.Create:
 		if not "location_id" in current_stock_data:
 			current_stock_data.location_id = 0
 		if not "item_id" in current_stock_data:
 			current_stock_data.item_id = item_index
 		current_stock_data.quantity = quantity
 		main_node.save_stock(current_stock_data)
-	hide()
+	reset_and_hide()
 
 
 func tree_value_selected(value, item_selection_action_type):
@@ -109,5 +120,10 @@ func _on_location_selection_button_pressed():
 
 
 func _on_delete_button_pressed():
-	main_node.delete_item(item_index)
-	hide()
+	main_node.confirme_action(self, Global.WhatToDo.Delete)
+	
+	
+func confirme_action(conf_what_to_do):
+	if conf_what_to_do == Global.WhatToDo.Delete:
+		main_node.delete_item(item_index)
+		reset_and_hide()

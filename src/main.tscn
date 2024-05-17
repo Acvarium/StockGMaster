@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=21 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" path="res://Database.gd" id="1_ie8y7"]
 [ext_resource type="Script" path="res://main.gd" id="1_nvv5i"]
@@ -9,7 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://ymef651v1yws" path="res://objects/item_list_element2.tscn" id="7_lb4if"]
 [ext_resource type="PackedScene" uid="uid://d1c4lov8epmmv" path="res://objects/item_list_separator.tscn" id="8_tmgro"]
 [ext_resource type="Script" path="res://TreeSelectionDialogue.gd" id="10_6boxs"]
+[ext_resource type="StyleBox" uid="uid://bx3wv2qghdpe8" path="res://styles/BGButtonStyle.tres" id="11_iq504"]
+[ext_resource type="StyleBox" uid="uid://4cmibv0a8kf2" path="res://styles/BGButtonHoverStyle.tres" id="12_p5rmn"]
 [ext_resource type="PackedScene" uid="uid://buhtxvdgnu0ki" path="res://objects/data_edit_dialogue_base.tscn" id="13_2uggw"]
+[ext_resource type="Script" path="res://objects/ActionConfirmDialogue.gd" id="13_fc1a5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blt5x"]
 bg_color = Color(0.168627, 0.168627, 0.168627, 1)
@@ -25,7 +28,67 @@ shadow_color = Color(0, 0, 0, 0.403922)
 shadow_size = 10
 shadow_offset = Vector2(10, 10)
 
-[node name="Main" type="Control" node_paths=PackedStringArray("tree_element", "items_tab", "item_creation_dialogue", "locations_tab_tree", "location_creation_dialogue", "tree_selection_dialogue")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnmwu"]
+bg_color = Color(0.105882, 0.478431, 0.403922, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color(0.133333, 0.133333, 0.133333, 1)
+corner_radius_top_left = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0uqsx"]
+bg_color = Color(0.12549, 0.54902, 0.462745, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color(0.133333, 0.133333, 0.133333, 1)
+corner_radius_top_left = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5o2a"]
+bg_color = Color(0.0983006, 0.451795, 0.38104, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 1
+border_width_bottom = 3
+border_color = Color(0.133333, 0.133333, 0.133333, 1)
+corner_radius_top_left = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h135y"]
+bg_color = Color(0.854902, 0.45098, 0, 1)
+border_width_left = 2
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.133333, 0.133333, 0.133333, 1)
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4n64a"]
+bg_color = Color(0.972549, 0.517647, 0, 1)
+border_width_left = 2
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.133333, 0.133333, 0.133333, 1)
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_us7rp"]
+bg_color = Color(0.900485, 0.477486, 0, 1)
+border_width_left = 1
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.133333, 0.133333, 0.133333, 1)
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+
+[node name="Main" type="Control" node_paths=PackedStringArray("tree_element", "locations_tab_tree")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,11 +97,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nvv5i")
 tree_element = NodePath("TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree")
-items_tab = NodePath("MainControl/TabContainer/Items")
-item_creation_dialogue = NodePath("ItemCreationDialogue")
 locations_tab_tree = NodePath("MainControl/TabContainer/Locations/StructTree")
-location_creation_dialogue = NodePath("LocationCreationDialogue")
-tree_selection_dialogue = NodePath("TreeSelectionDialogue")
 
 [node name="Database" type="Node" parent="."]
 script = ExtResource("1_ie8y7")
@@ -189,7 +248,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_list_stock", "quantity_list_stock") instance=ExtResource("13_2uggw")]
+[node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_list_stock", "quantity_list_stock", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("13_2uggw")]
 layout_mode = 1
 script = ExtResource("5_83lbr")
 name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
@@ -197,6 +256,9 @@ description_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Descr
 title_label = NodePath("TextureRect/Title")
 location_list_stock = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Location")
 quantity_list_stock = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Quantity")
+item_data_components = [NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Description"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Image"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Category"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Tags")]
+stock_data_components = [NodePath("ItemsPanel/ScrollContainer/VBoxContainer/StockDataSeparator"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Location"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Quantity")]
+delete_button = NodePath("SDCButtons/HBoxContainer/DeleteButton")
 
 [node name="VBoxContainer" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer" index="0"]
 unfold_item_list = Array[NodePath]([NodePath("Name"), NodePath("Description")])
@@ -285,6 +347,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/normal = ExtResource("11_iq504")
+theme_override_styles/hover = ExtResource("12_p5rmn")
+theme_override_styles/pressed = ExtResource("11_iq504")
 
 [node name="TSL" type="Control" parent="TreeSelectionDialogue"]
 layout_mode = 1
@@ -332,6 +397,101 @@ script = ExtResource("3_b23bh")
 item_selection_action_type = 2
 tree_selection_dialogue = NodePath("../../../..")
 
+[node name="ActionConfirmDialogue" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_fc1a5")
+
+[node name="CancelTreeSelection" type="Button" parent="ActionConfirmDialogue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = ExtResource("11_iq504")
+theme_override_styles/hover = ExtResource("12_p5rmn")
+theme_override_styles/pressed = ExtResource("11_iq504")
+
+[node name="TSL" type="Control" parent="ActionConfirmDialogue"]
+layout_mode = 1
+anchor_top = 0.3
+anchor_right = 1.0
+anchor_bottom = 0.7
+offset_left = 15.0
+offset_right = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AR" type="AspectRatioContainer" parent="ActionConfirmDialogue/TSL"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+ratio = 2.25
+
+[node name="Control" type="Panel" parent="ActionConfirmDialogue/TSL/AR"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_blt5x")
+
+[node name="Label" type="Label" parent="ActionConfirmDialogue/TSL/AR/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 15.0
+offset_top = 15.0
+offset_right = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 51
+text = "Are you sure?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ActionConfirmDialogue/TSL/AR/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.55
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 15.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="ConfirmButton" type="Button" parent="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_rnmwu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0uqsx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f5o2a")
+text = "Confirm"
+
+[node name="CancelButton" type="Button" parent="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_h135y")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4n64a")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_us7rp")
+text = "Cancel"
+
 [connection signal="item_data_loaded" from="Database" to="." method="_on_database_item_data_loaded"]
 [connection signal="locations_data_loaded" from="Database" to="." method="_on_database_locations_data_loaded"]
 [connection signal="pressed" from="MainControl/TabContainer/Items/ItemsToolPanel/CreateItemButton" to="." method="_on_create_item_button_pressed"]
@@ -340,8 +500,11 @@ tree_selection_dialogue = NodePath("../../../..")
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ItemCreationDialogue" method="_on_save_item_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/DeleteButton" to="ItemCreationDialogue" method="_on_delete_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/CancelButton" to="ItemCreationDialogue" method="_on_cancel_button_pressed"]
-[connection signal="pressed" from="TreeSelectionDialogue/CancelTreeSelection" to="." method="_on_cancel_tree_selection_pressed"]
+[connection signal="pressed" from="TreeSelectionDialogue/CancelTreeSelection" to="TreeSelectionDialogue" method="_on_cancel_tree_selection_pressed"]
 [connection signal="item_selected" from="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" to="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" method="_on_item_selected"]
+[connection signal="pressed" from="ActionConfirmDialogue/CancelTreeSelection" to="ActionConfirmDialogue" method="_on_cancel_tree_selection_pressed"]
+[connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/ConfirmButton" to="ActionConfirmDialogue" method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/CancelButton" to="ActionConfirmDialogue" method="_on_cancel_button_pressed"]
 
 [editable path="ItemCreationDialogue"]
 [editable path="LocationCreationDialogue"]
