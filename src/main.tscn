@@ -249,6 +249,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_list_stock", "quantity_list_stock", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("13_2uggw")]
+visible = false
 layout_mode = 1
 script = ExtResource("5_83lbr")
 name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")

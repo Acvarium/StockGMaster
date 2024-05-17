@@ -52,14 +52,20 @@ func exec_action_popup(what_to_do, action_data_type, for_id, for_dialogue = null
 		tree_element.build_tree($Database.locations_data)
 		tree_selection_dialogue.data_recever_dialogue = for_dialogue
 		tree_selection_dialogue.visible = true
-		
+
 
 func edit_item(item_id):
 	if item_id in $Database.items_data.keys() and item_id > 0:
 		item_creation_dialogue.set_item_data($Database.items_data[item_id])
+		item_creation_dialogue._show(Global.WhatToDo.Change, Global.ActionDataType.Item)
 	else:
 		item_creation_dialogue.set_item_data({})
-	item_creation_dialogue._show()
+		item_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Item)
+		
+
+func create_stock(item_id):
+	item_creation_dialogue.set_item_data($Database.items_data[item_id])
+	item_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Stock)
 
 
 func tree_value_selected(value, action_data_type):

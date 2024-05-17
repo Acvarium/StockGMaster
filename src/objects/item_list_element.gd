@@ -41,7 +41,7 @@ func set_data(new_data):
 	$IPanel/ItemIcon.visible = image_loaded
 	$IPanel.self_modulate.a = 1.0 if image_loaded else 0.5
 	if "stocks" in new_data.keys():
-		unfold_offset_for_stocks = (new_data.stocks.size() - 1) * BASE_STOCK_OFFSET
+		unfold_offset_for_stocks = (new_data.stocks.size()) * BASE_STOCK_OFFSET
 		for s in new_data.stocks:
 			var current_stock_line = stock_line_prefab.instantiate()
 			var stock_location = main_node.get_location_address(s.location_id)
@@ -50,10 +50,8 @@ func set_data(new_data):
 			var unit_name = main_node.get_unit_name_by_id(new_data.unit_name_id)
 			$StocksHolder.add_child(current_stock_line)
 			current_stock_line.set_data(stock_location, quantity, amount, unit_name)
-		$NoStockMessage/Label.hide()
 		self_modulate = Color.LIGHT_GRAY
 	else:
-		$NoStockMessage/Label.show()
 		self_modulate = Color.MISTY_ROSE
 
 
@@ -62,10 +60,10 @@ func clear_stocks():
 		s.queue_free()
 
 
-func unfold(to_unfold = true):
-	if to_unfold == is_unfolded:
+func unfold(to_unfold = true, to_force = false):
+	if to_unfold == is_unfolded and !to_force:
 		return
-	if to_unfold != is_unfolded:
+	if to_unfold != is_unfolded or to_force:
 		set_process(true)
 		$AnimationPlayer.play("unfold")
 		$UnfoldTimer.start()
@@ -91,6 +89,9 @@ func _process(delta):
 		set_process(false)
 
 
+func get_unfolded():
+	return is_unfolded
+	
 
 func toggle_unfold():
 	if unfold_control:
@@ -113,3 +114,6 @@ func _on_change_location_button_pressed():
 func _on_edit_button_pressed():
 	main_node.edit_item(item_id)
 
+
+func _on_add_stock_button_pressed():
+	main_node.create_stock(item_id)

@@ -16,7 +16,7 @@ var current_item_data
 var current_mode = Global.WhatToDo.None
 var current_stock_data = {}
 var is_stock_mode = false
-
+var current_action_data_type = Global.ActionDataType.None
 
 func show_item_data_components(to_show = true):
 	for i in item_data_components:
@@ -28,18 +28,28 @@ func show_stock_data_components(to_show = true):
 		s.visible = to_show
 
 
-func _show():
-	current_stock_data.clear()
-	if current_item_data.size() == 0:
-		title_label.text = "create item"
-		delete_button.visible = false 
-		current_mode = Global.WhatToDo.Create
-	else:
-		title_label.text = "edit item"
-		delete_button.visible = true 
-		current_mode = Global.WhatToDo.Change
-	show_item_data_components(true)
-	show_stock_data_components(current_mode == Global.WhatToDo.Create)
+func _show(what_to_do, action_data_type):
+	_reset()
+	current_mode = what_to_do
+	current_action_data_type = action_data_type
+	if action_data_type == Global.ActionDataType.Item:
+		name_list_item.set_editable(true)
+		if what_to_do == Global.WhatToDo.Create:
+			title_label.text = "create item"
+			delete_button.visible = false 
+		else:
+			title_label.text = "edit item"
+			delete_button.visible = true 
+		show_item_data_components(true)
+		show_stock_data_components(current_mode == Global.WhatToDo.Create)
+	elif action_data_type == Global.ActionDataType.Stock:
+		name_list_item.set_editable(false)
+		if what_to_do == Global.WhatToDo.Create:
+			pass
+		else:
+			pass
+		show_item_data_components(false)
+		show_stock_data_components(true)
 	show()
 
 
@@ -83,21 +93,26 @@ func _ready():
 func _on_cancel_button_pressed():
 	reset_and_hide()
 
-
-func reset_and_hide():
+func _reset():
 	quantity_list_stock.set_quantity(0)
 	current_item_data = null
 	current_stock_data.clear()
+	update_location_text("/")
+	
+
+func reset_and_hide():
+	_reset()
 	hide()
 
 
 func _on_save_item_button_pressed():
-	var new_item_data = {}
-	new_item_data.id = item_index
-	new_item_data.name = name_list_item.get_edit_text()
-	new_item_data.description = description_list_item.get_edit_text()
 	var quantity = quantity_list_stock.get_quantiry()
-	item_index = main_node.save_item(new_item_data, quantity != 0)
+	if current_action_data_type == Global.ActionDataType.Item:
+		var new_item_data = {}
+		new_item_data.id = item_index
+		new_item_data.name = name_list_item.get_edit_text()
+		new_item_data.description = description_list_item.get_edit_text()
+		item_index = main_node.save_item(new_item_data, quantity != 0)
 	if quantity != 0 and current_mode == Global.WhatToDo.Create:
 		if not "location_id" in current_stock_data:
 			current_stock_data.location_id = 0

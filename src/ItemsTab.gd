@@ -31,6 +31,7 @@ func refrash_items_list(items_data):
 			update_item(next_item_data, existing_items[current_key])
 		else:
 			add_item(next_item_data)
+	items_holder.refresh_unfold()
 
 
 func update_item(item_data, item):

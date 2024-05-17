@@ -20,8 +20,20 @@ func unfold(item, to_unfold):
 				i.unfold(i == item)
 		else:
 			for c in get_children():
-				c.unfold(c == item)
+				if c.has_method("unfold"):
+					c.unfold(c == item)
 
+
+func refresh_unfold():
+	if !control_children:
+		for i in unfold_items:
+			if i.get_unfolded():
+				i.unfold(true, true)
+	else:
+		for c in get_children():
+			if c.has_method("get_unfolded") and c.get_unfolded():
+				c.unfold(true, true)
+					
 
 func fold_all():
 	unfold(null, false)

@@ -30,6 +30,11 @@ enum ListItemModes {
 	Quantity
 }
 
+
+func set_editable(value):
+	$DataControl/Edit.editable = value
+
+
 func _ready():
 	if Engine.is_editor_hint():
 		return
@@ -55,16 +60,21 @@ func get_edit_text():
 	return $DataControl/Edit.text
 
 
-func unfold(to_unfold = true):
-	if to_unfold == is_unfolded:
+func get_unfolded():
+	return is_unfolded
+	
+
+func unfold(to_unfold = true, to_force = false):
+	if to_unfold == is_unfolded and !to_force:
 		return
-	if to_unfold != is_unfolded:
+	if to_unfold != is_unfolded or to_force:
 		if to_unfold:
 			$AnimationPlayer.play("unfold")
 		else:
 			$AnimationPlayer.play_backwards("unfold")
 	is_unfolded = to_unfold
 	unfold_button.flip_v = is_unfolded
+
 
 
 func set_quantity(quantity):
