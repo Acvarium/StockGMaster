@@ -257,7 +257,7 @@ description_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Descr
 title_label = NodePath("TextureRect/Title")
 location_list_stock = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Location")
 quantity_list_stock = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Quantity")
-item_data_components = [NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Description"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Image"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Category"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Tags")]
+item_data_components = [NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Description"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Image"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Category"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Tags"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/ItemDataSeparator")]
 stock_data_components = [NodePath("ItemsPanel/ScrollContainer/VBoxContainer/StockDataSeparator"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Location"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Quantity")]
 delete_button = NodePath("SDCButtons/HBoxContainer/DeleteButton")
 
