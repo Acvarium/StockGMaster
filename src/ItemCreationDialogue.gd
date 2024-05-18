@@ -121,6 +121,8 @@ func _on_save_item_button_pressed():
 			current_mode != Global.WhatToDo.Create:
 		to_save_stock = false
 	if to_save_stock:
+		if !current_stock_data:
+			current_stock_data = {}
 		if not "location_id" in current_stock_data:
 			current_stock_data.location_id = 0
 		if not "item_id" in current_stock_data:
