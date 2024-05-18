@@ -114,7 +114,7 @@ func _on_save_item_button_pressed():
 		new_item_data.id = item_index
 		new_item_data.name = name_list_item.get_edit_text()
 		new_item_data.description = description_list_item.get_edit_text()
-		item_index = main_node.save_item(new_item_data, quantity != 0)
+		item_index = main_node.save_item(new_item_data, quantity == 0)
 	var to_save_stock = quantity != 0
 	if current_action_data_type == Global.ActionDataType.Item and \
 			current_mode != Global.WhatToDo.Create:
