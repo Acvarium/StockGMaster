@@ -93,10 +93,11 @@ func _ready():
 func _on_cancel_button_pressed():
 	reset_and_hide()
 
+
 func _reset(reset_stock_data = true, reset_item_data = true):
 	if reset_stock_data:
 		quantity_list_stock.set_quantity(0)
-		current_stock_data.clear()
+		current_stock_data = null
 		update_location_text("/")
 	if reset_item_data:
 		current_item_data = null
@@ -135,6 +136,7 @@ func tree_value_selected(value, item_selection_action_type):
 	current_stock_data.location_id = value
 	update_location_text(main_node.get_location_address(current_stock_data.location_id))
 
+
 func _on_location_selection_button_pressed():
 	main_node.select_location_popup(item_index, self)
 	#main_node.exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.Location, item_index)
@@ -146,5 +148,8 @@ func _on_delete_button_pressed():
 	
 func confirme_action(conf_what_to_do):
 	if conf_what_to_do == Global.WhatToDo.Delete:
-		main_node.delete_item(item_index)
+		if current_action_data_type == Global.ActionDataType.Item:
+			main_node.delete_item(item_index)
+		elif current_action_data_type == Global.ActionDataType.Stock:
+			main_node.delete_stock(current_stock_data.id)
 		reset_and_hide()

@@ -19,6 +19,10 @@ func delete_item(item_index):
 	db.delete_rows("item_stocks", "item_id = '" + str(item_index) + "'")
 
 
+func delete_stock(stock_id):
+	db.delete_rows("item_stocks", "id = '" + str(stock_id) + "'")
+
+
 func get_unit_name_by_id(_id):
 	var unit_name_data = db.select_rows("unit_names", "id = " + str(_id), ["name"])
 	if unit_name_data.size() > 0 and "name" in unit_name_data[0].keys():

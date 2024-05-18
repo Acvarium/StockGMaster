@@ -6,7 +6,10 @@ var current_unit_name = ""
 func set_data(stock_data, unit_name):#location_path, quantity, amount, unit_name):
 	if !main_node:
 		main_node = get_tree().get_root().get_node("Main")
+	#current_stock_data = {}
 	current_stock_data = stock_data
+	#for k in stock_data.keys():
+		#current_stock_data[k] = stock_data[k]
 	current_unit_name = unit_name
 	var location_path = main_node.get_location_address(stock_data.location_id)
 	var quantity = 0 if stock_data.quantity == null else stock_data.quantity
