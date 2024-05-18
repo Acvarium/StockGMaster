@@ -44,12 +44,9 @@ func set_data(new_data):
 		unfold_offset_for_stocks = (new_data.stocks.size()) * BASE_STOCK_OFFSET
 		for s in new_data.stocks:
 			var current_stock_line = stock_line_prefab.instantiate()
-			var stock_location = main_node.get_location_address(s.location_id)
-			var quantity = 0 if s.quantity == null else s.quantity
-			var amount = 0.0 if s.amount == null else s.amount
 			var unit_name = main_node.get_unit_name_by_id(new_data.unit_name_id)
 			$StocksHolder.add_child(current_stock_line)
-			current_stock_line.set_data(stock_location, quantity, amount, unit_name)
+			current_stock_line.set_data(s, unit_name)
 		self_modulate = Color.LIGHT_GRAY
 	else:
 		self_modulate = Color.MISTY_ROSE

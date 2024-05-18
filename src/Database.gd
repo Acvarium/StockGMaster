@@ -212,7 +212,7 @@ func save_item(new_item_data):
 
 func save_stock(new_stock_data):
 	if "id" in new_stock_data:
-		pass
+		db.update_rows("item_stocks", "id = '" + str(new_stock_data.id) + "'", new_stock_data)
 #TODO implement edit stock data
 		#db.update_rows("items", "id = '" + str(new_item_data.id) + "'", new_item_data)
 	else:

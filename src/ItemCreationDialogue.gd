@@ -15,7 +15,6 @@ var item_index = -1
 var current_item_data
 var current_mode = Global.WhatToDo.None
 var current_stock_data = {}
-var is_stock_mode = false
 var current_action_data_type = Global.ActionDataType.None
 
 func show_item_data_components(to_show = true):
@@ -29,7 +28,7 @@ func show_stock_data_components(to_show = true):
 
 
 func _show(what_to_do, action_data_type):
-	_reset()
+	#_reset()
 	current_mode = what_to_do
 	current_action_data_type = action_data_type
 	if action_data_type == Global.ActionDataType.Item:
@@ -55,16 +54,19 @@ func _show(what_to_do, action_data_type):
 
 #TODO implement the mode for editing the stock data
 func set_stock_data(item_data, stock_data):
-	current_item_data.clear()
 	current_item_data = item_data
+	current_stock_data = stock_data
 	if "name" in item_data.keys() and item_data.name:
 		name_list_item.set_edit_text(item_data.name)
+	if "location_id" in stock_data.keys():
+		update_location_text(main_node.get_location_address(stock_data.location_id))
+	if "quantity" in stock_data.keys():
+		quantity_list_stock.set_quantity(stock_data.quantity)
 
 
 func set_item_data(item_data):
 	if !main_node:
 		main_node = get_tree().get_root().get_node("Main")
-	is_stock_mode = false
 	current_item_data = item_data
 	item_index = -1 
 	if "id" in item_data.keys():
@@ -78,8 +80,6 @@ func set_item_data(item_data):
 	description_list_item.set_edit_text("")
 	if "description" in item_data.keys() and item_data.description:
 		description_list_item.set_edit_text(item_data.description)
-	#if "location_id" in item_data.keys() and item_data.location_id:
-		#update_location_text(main_node.get_location_address(item_data.location_id))
 	
 
 func update_location_text(new_location_text):
@@ -93,11 +93,13 @@ func _ready():
 func _on_cancel_button_pressed():
 	reset_and_hide()
 
-func _reset():
-	quantity_list_stock.set_quantity(0)
-	current_item_data = null
-	current_stock_data.clear()
-	update_location_text("/")
+func _reset(reset_stock_data = true, reset_item_data = true):
+	if reset_stock_data:
+		quantity_list_stock.set_quantity(0)
+		current_stock_data.clear()
+		update_location_text("/")
+	if reset_item_data:
+		current_item_data = null
 	
 
 func reset_and_hide():
@@ -113,7 +115,11 @@ func _on_save_item_button_pressed():
 		new_item_data.name = name_list_item.get_edit_text()
 		new_item_data.description = description_list_item.get_edit_text()
 		item_index = main_node.save_item(new_item_data, quantity != 0)
-	if quantity != 0 and current_mode == Global.WhatToDo.Create:
+	var to_save_stock = quantity != 0
+	if current_action_data_type == Global.ActionDataType.Item and \
+			current_mode != Global.WhatToDo.Create:
+		to_save_stock = false
+	if to_save_stock:
 		if not "location_id" in current_stock_data:
 			current_stock_data.location_id = 0
 		if not "item_id" in current_stock_data:

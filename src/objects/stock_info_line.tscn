@@ -59,3 +59,5 @@ texture_pressed = ExtResource("3_dp7dh")
 texture_hover = ExtResource("4_kudf8")
 ignore_texture_size = true
 stretch_mode = 5
+
+[connection signal="pressed" from="EditButton" to="." method="_on_edit_button_pressed"]

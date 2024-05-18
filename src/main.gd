@@ -57,14 +57,22 @@ func exec_action_popup(what_to_do, action_data_type, for_id, for_dialogue = null
 func edit_item(item_id):
 	if item_id in $Database.items_data.keys() and item_id > 0:
 		item_creation_dialogue.set_item_data($Database.items_data[item_id])
+		item_creation_dialogue._reset(true, false)
 		item_creation_dialogue._show(Global.WhatToDo.Change, Global.ActionDataType.Item)
 	else:
 		item_creation_dialogue.set_item_data({})
+		item_creation_dialogue._reset()
 		item_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Item)
-		
+
+
+func edit_stock(stock_data):
+	item_creation_dialogue.set_stock_data($Database.items_data[stock_data.item_id], stock_data)
+	item_creation_dialogue._show(Global.WhatToDo.Change, Global.ActionDataType.Stock)
+
 
 func create_stock(item_id):
 	item_creation_dialogue.set_item_data($Database.items_data[item_id])
+	item_creation_dialogue._reset(true, false)
 	item_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Stock)
 
 
