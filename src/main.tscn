@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=22 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" path="res://Database.gd" id="1_ie8y7"]
 [ext_resource type="Script" path="res://main.gd" id="1_nvv5i"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://ymef651v1yws" path="res://objects/item_list_element2.tscn" id="7_lb4if"]
 [ext_resource type="PackedScene" uid="uid://d1c4lov8epmmv" path="res://objects/item_list_separator.tscn" id="8_tmgro"]
 [ext_resource type="Script" path="res://TreeSelectionDialogue.gd" id="10_6boxs"]
+[ext_resource type="Script" path="res://LocationCreationDialogue.gd" id="10_j64go"]
 [ext_resource type="StyleBox" uid="uid://bx3wv2qghdpe8" path="res://styles/BGButtonStyle.tres" id="11_iq504"]
 [ext_resource type="StyleBox" uid="uid://4cmibv0a8kf2" path="res://styles/BGButtonHoverStyle.tres" id="12_p5rmn"]
 [ext_resource type="PackedScene" uid="uid://buhtxvdgnu0ki" path="res://objects/data_edit_dialogue_base.tscn" id="13_2uggw"]
@@ -203,14 +204,44 @@ mouse_filter = 2
 visible = false
 layout_mode = 2
 
+[node name="LocationToolPanel" type="Panel" parent="MainControl/TabContainer/Locations"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 5.0
+offset_top = 8.0
+offset_right = -5.0
+offset_bottom = 45.0
+grow_horizontal = 2
+
+[node name="ItemsSearchLineEdit" type="LineEdit" parent="MainControl/TabContainer/Locations/LocationToolPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -85.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreateLocationButton" type="Button" parent="MainControl/TabContainer/Locations/LocationToolPanel"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Create"
+
 [node name="StructTree" type="Tree" parent="MainControl/TabContainer/Locations"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = -10.0
+offset_left = 5.0
+offset_top = 50.0
+offset_right = -5.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -307,9 +338,15 @@ layout_mode = 2
 title_text = "Quantity"
 list_item_mode = 3
 
-[node name="LocationCreationDialogue" parent="." instance=ExtResource("13_2uggw")]
+[node name="LocationCreationDialogue" parent="." node_paths=PackedStringArray("title_label", "name_list_item", "description_list_item", "parent_list_item", "delete_button") instance=ExtResource("13_2uggw")]
 visible = false
 layout_mode = 1
+script = ExtResource("10_j64go")
+title_label = NodePath("TextureRect/Title")
+name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
+description_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Description")
+parent_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Parent")
+delete_button = NodePath("SDCButtons/HBoxContainer/DeleteButton")
 
 [node name="Name" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("7_lb4if")]
 layout_mode = 2
@@ -496,11 +533,15 @@ text = "Cancel"
 [connection signal="item_data_loaded" from="Database" to="." method="_on_database_item_data_loaded"]
 [connection signal="locations_data_loaded" from="Database" to="." method="_on_database_locations_data_loaded"]
 [connection signal="pressed" from="MainControl/TabContainer/Items/ItemsToolPanel/CreateItemButton" to="." method="_on_create_item_button_pressed"]
+[connection signal="pressed" from="MainControl/TabContainer/Locations/LocationToolPanel/CreateLocationButton" to="." method="_on_create_location_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Location" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Quantity" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ItemCreationDialogue" method="_on_save_item_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/DeleteButton" to="ItemCreationDialogue" method="_on_delete_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/CancelButton" to="ItemCreationDialogue" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="LocationCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="LocationCreationDialogue" method="_on_save_item_button_pressed"]
+[connection signal="pressed" from="LocationCreationDialogue/SDCButtons/HBoxContainer/DeleteButton" to="LocationCreationDialogue" method="_on_delete_button_pressed"]
+[connection signal="pressed" from="LocationCreationDialogue/SDCButtons/HBoxContainer/CancelButton" to="LocationCreationDialogue" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="TreeSelectionDialogue/CancelTreeSelection" to="TreeSelectionDialogue" method="_on_cancel_tree_selection_pressed"]
 [connection signal="item_selected" from="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" to="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" method="_on_item_selected"]
 [connection signal="pressed" from="ActionConfirmDialogue/CancelTreeSelection" to="ActionConfirmDialogue" method="_on_cancel_tree_selection_pressed"]

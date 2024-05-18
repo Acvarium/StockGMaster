@@ -14,8 +14,8 @@ extends Control
 var item_index = -1
 var current_item_data
 var current_mode = Global.WhatToDo.None
-var current_stock_data = {}
 var current_action_data_type = Global.ActionDataType.None
+var current_stock_data = {}
 
 func show_item_data_components(to_show = true):
 	for i in item_data_components:

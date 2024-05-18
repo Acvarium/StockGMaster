@@ -142,3 +142,19 @@ func _on_database_locations_data_loaded():
 
 func select_location_popup(item_index, for_dialogue):
 	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.Location, item_index, for_dialogue)
+
+
+
+func edit_location(location_id):
+	if location_id in $Database.locations_data.keys() and location_id > 0:
+		#editing
+		location_creation_dialogue.set_location_data($Database.locations_data[location_id])
+		location_creation_dialogue._show(Global.WhatToDo.Change, Global.ActionDataType.Location)
+	else:
+		#creating
+		location_creation_dialogue.set_location_data({})
+		location_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Location)
+
+
+func _on_create_location_button_pressed():
+	edit_location(-1)
