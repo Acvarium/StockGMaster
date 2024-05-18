@@ -64,7 +64,7 @@ func get_unfolded():
 	return is_unfolded
 	
 
-func unfold(to_unfold = true, to_force = false):
+func unfold(to_unfold = true, to_force = false, immediate = false):
 	if to_unfold == is_unfolded and !to_force:
 		return
 	if to_unfold != is_unfolded or to_force:

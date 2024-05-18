@@ -28,11 +28,11 @@ func refresh_unfold():
 	if !control_children:
 		for i in unfold_items:
 			if i.get_unfolded():
-				i.unfold(true, true)
+				i.unfold(true, true, true)
 	else:
 		for c in get_children():
 			if c.has_method("get_unfolded") and c.get_unfolded():
-				c.unfold(true, true)
+				c.unfold(true, true, true)
 					
 
 func fold_all():

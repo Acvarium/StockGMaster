@@ -135,6 +135,8 @@ func _on_save_item_button_pressed():
 func tree_value_selected(value, item_selection_action_type):
 	#if item_selection_action_type == Global.ActionDataType.Location:
 		#current_stock_data.item_id = item_index
+	if !current_stock_data:
+		current_stock_data = {}
 	current_stock_data.location_id = value
 	update_location_text(main_node.get_location_address(current_stock_data.location_id))
 

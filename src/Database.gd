@@ -9,6 +9,8 @@ var db : SQLite = null
 
 const verbosity_level : int = SQLite.VERBOSE
 var database_path = "res://data/data.db"
+#var database_path = "user://data.db"
+
 
 var locations_data = {}
 var items_data = {}
@@ -81,6 +83,8 @@ func pull_items_data():
 	
 
 func _ready():
+	if OS.get_name() == "Android":
+		database_path = "user://data.db"
 	db = SQLite.new()
 	db.path = database_path
 	db.open_db()

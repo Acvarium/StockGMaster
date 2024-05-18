@@ -57,7 +57,11 @@ func clear_stocks():
 		s.queue_free()
 
 
-func unfold(to_unfold = true, to_force = false):
+func unfold(to_unfold = true, to_force = false, immediate = false):
+	if to_force and immediate and is_unfolded and to_unfold:
+		var new_unfolded_height = unfolded_height + unfold_offset_for_stocks
+		custom_minimum_size.y = new_unfolded_height
+		return
 	if to_unfold == is_unfolded and !to_force:
 		return
 	if to_unfold != is_unfolded or to_force:
