@@ -12,7 +12,7 @@ var tree_selection_index : int = -1
 
 @onready var current_what_to_do = Global.WhatToDo.None
 @onready var current_action_data_type = Global.ActionDataType.None
-var current_action_id = -1
+#var current_action_id = -1
 
 
 func _ready():
@@ -43,12 +43,12 @@ func get_unit_name_by_id(_id):
 
 #what_to_do can be global.WhatToDo.Change, Delete or create 
 #action_data_type can be global.ActionDataType.Location, Category, Tag
-func exec_action_popup(what_to_do, action_data_type, for_id, for_dialogue = null):
-	current_what_to_do = what_to_do
-	current_action_data_type = action_data_type
-	current_action_id = for_id
-	if current_action_data_type == Global.ActionDataType.Location or \
-			current_action_data_type == Global.ActionDataType.ParentLocation:
+func exec_action_popup(what_to_do, action_data_type, for_dialogue = null):
+	#current_what_to_do = what_to_do
+	#current_action_data_type = action_data_type
+	#current_action_id = for_id
+	if action_data_type == Global.ActionDataType.Location or \
+			action_data_type == Global.ActionDataType.ParentLocation:
 		tree_element.build_tree($Database.locations_data)
 		tree_selection_dialogue.data_recever_dialogue = for_dialogue
 		tree_selection_dialogue.visible = true
@@ -76,19 +76,19 @@ func create_stock(item_id):
 	item_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Stock)
 
 
-func tree_value_selected(value, action_data_type):
-	if action_data_type == Global.ActionDataType.ParentLocation:
-		hide_tree_selector()
-		selected_value = value
-		if current_what_to_do == Global.WhatToDo.Change:
-			if current_action_data_type == Global.ActionDataType.Location:
-				$Database.update_value(Global.ActionDataType.Location, current_action_id, value)
-				$Database.pull_items_data()
-				if item_creation_dialogue.visible:
-					item_creation_dialogue.update_location_text(get_location_address(selected_value))
-			elif current_action_data_type == Global.ActionDataType.ParentLocation:
-				var parent_name = $Database.get_location_name_by_id(selected_value)
-				location_creation_dialogue.set_parent_name(parent_name)
+#func tree_value_selected(value, action_data_type):
+	#if action_data_type == Global.ActionDataType.ParentLocation:
+		#hide_tree_selector()
+		#selected_value = value
+		#if current_what_to_do == Global.WhatToDo.Change:
+			#if current_action_data_type == Global.ActionDataType.Location:
+				#$Database.update_value(Global.ActionDataType.Location, current_action_id, value)
+				#$Database.pull_items_data()
+				#if item_creation_dialogue.visible:
+					#item_creation_dialogue.update_location_text(get_location_address(selected_value))
+			#elif current_action_data_type == Global.ActionDataType.ParentLocation:
+				#var parent_name = $Database.get_location_name_by_id(selected_value)
+				#location_creation_dialogue.set_parent_name(parent_name)
 
 
 func delete_item(item_index):
@@ -116,6 +116,11 @@ func save_stock(stock_data, to_pull = true):
 		$Database.pull_items_data()
 	
 
+func save_location(location_data):
+	$Database.save_location(location_data)
+	$Database.pull_locations_data()
+
+
 func _on_parent_selection_button_pressed():
 	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.ParentLocation, -1)
 	#show_tree_selector_dialogue(Global.TreeSelection.ParentLocation)
@@ -140,9 +145,13 @@ func _on_database_locations_data_loaded():
 	locations_tab_tree.build_tree($Database.locations_data)
 
 
-func select_location_popup(item_index, for_dialogue):
-	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.Location, item_index, for_dialogue)
 
+func select_parent_location_popup(for_dialogue):
+	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.Location, for_dialogue)
+
+
+func select_location_popup(for_dialogue):
+	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.ParentLocation, for_dialogue)
 
 
 func edit_location(location_id):

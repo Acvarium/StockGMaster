@@ -216,7 +216,16 @@ func save_item(new_item_data):
 	else:
 		new_item_data.erase('id')
 		db.insert_row("items", new_item_data)
-	
+
+
+func save_location(new_location_data):
+	if "id" in new_location_data and new_location_data.id in items_data.keys():
+		db.update_rows("locations", "id = '" + str(new_location_data.id) + "'", new_location_data)
+	else:
+		new_location_data.erase('id')
+		db.insert_row("locations", new_location_data)
+
+
 
 func save_stock(new_stock_data):
 	if "id" in new_stock_data:

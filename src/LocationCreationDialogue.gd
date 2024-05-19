@@ -8,23 +8,21 @@ extends Control
 
 
 var current_location_data
-var location_index = -1
+#var location_index = -1
 var current_mode = Global.WhatToDo.None
 var current_action_data_type = Global.ActionDataType.None
 
 
 func _ready():
-	pass # Replace with function body.
+	hide()
 
 
 func set_location_data(location_data):
 	if !main_node:
 		main_node = get_tree().get_root().get_node("Main")
 	current_location_data = location_data
-	location_index = -1 
 	if "id" in location_data.keys():
 		title_label.text = "Edit Location"
-		location_index = location_data.id
 		delete_button.visible = true
 	else:
 		title_label.text = "Create Location"
@@ -57,4 +55,31 @@ func _on_delete_button_pressed():
 
 
 func _on_save_item_button_pressed():
-	pass # Replace with function body.
+	if !current_location_data:
+		current_location_data = {}
+	current_location_data.name = name_list_item.get_edit_text()
+	if current_location_data.name.is_empty():
+		hide()
+		return
+	current_location_data.description = description_list_item.get_edit_text()
+	main_node.save_location(current_location_data)
+	hide()
+
+
+func update_parent_location_text(new_location_text):
+	parent_list_item.set_location_button_text(new_location_text)
+
+
+func tree_value_selected(value, item_selection_action_type):
+	#if item_selection_action_type == Global.ActionDataType.Location:
+		#current_stock_data.item_id = item_index
+	if item_selection_action_type == Global.ActionDataType.ParentLocation:
+		if !current_location_data:
+			current_location_data = {}
+		
+		current_location_data.parent_id = value
+		update_parent_location_text(main_node.get_location_address(current_location_data.parent_id))
+
+
+func _on_parent_selection_button_pressed():
+	main_node.select_location_popup(self)

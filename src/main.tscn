@@ -339,7 +339,6 @@ title_text = "Quantity"
 list_item_mode = 3
 
 [node name="LocationCreationDialogue" parent="." node_paths=PackedStringArray("title_label", "name_list_item", "description_list_item", "parent_list_item", "delete_button") instance=ExtResource("13_2uggw")]
-visible = false
 layout_mode = 1
 script = ExtResource("10_j64go")
 title_label = NodePath("TextureRect/Title")
@@ -539,6 +538,7 @@ text = "Cancel"
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ItemCreationDialogue" method="_on_save_item_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/DeleteButton" to="ItemCreationDialogue" method="_on_delete_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/CancelButton" to="ItemCreationDialogue" method="_on_cancel_button_pressed"]
+[connection signal="location_button_pressed" from="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Parent" to="LocationCreationDialogue" method="_on_parent_selection_button_pressed"]
 [connection signal="pressed" from="LocationCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="LocationCreationDialogue" method="_on_save_item_button_pressed"]
 [connection signal="pressed" from="LocationCreationDialogue/SDCButtons/HBoxContainer/DeleteButton" to="LocationCreationDialogue" method="_on_delete_button_pressed"]
 [connection signal="pressed" from="LocationCreationDialogue/SDCButtons/HBoxContainer/CancelButton" to="LocationCreationDialogue" method="_on_cancel_button_pressed"]

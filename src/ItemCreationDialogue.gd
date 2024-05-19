@@ -142,7 +142,7 @@ func tree_value_selected(value, item_selection_action_type):
 
 
 func _on_location_selection_button_pressed():
-	main_node.select_location_popup(item_index, self)
+	main_node.select_location_popup(self)
 	#main_node.exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.Location, item_index)
 
 
