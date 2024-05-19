@@ -12,9 +12,10 @@ func set_data(stock_data, unit_name):#location_path, quantity, amount, unit_name
 		#current_stock_data[k] = stock_data[k]
 	current_unit_name = unit_name
 	var location_path = main_node.get_location_address(stock_data.location_id)
+	var location_name = main_node.get_location_name_by_id(stock_data.location_id)
 	var quantity = 0 if stock_data.quantity == null else stock_data.quantity
 	var amount = 0.0 if stock_data.amount == null else stock_data.amount
-	$AddressLine.text = location_path
+	$AddressLine.text = location_name
 	$AddressLine.set_tooltip_text(location_path)
 	if amount != 0:
 		$QuantityLine.text = str(snapped(amount, 0.01)) + " " + unit_name
