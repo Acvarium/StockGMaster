@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bakv7sbbowm6o"]
+[gd_scene load_steps=7 format=3 uid="uid://bakv7sbbowm6o"]
 
 [ext_resource type="Script" path="res://objects/stock_info_line.gd" id="1_240q7"]
+[ext_resource type="StyleBox" uid="uid://bbplm1e5vppsh" path="res://styles/BasePanelStyle.tres" id="1_pa6ej"]
 [ext_resource type="Texture2D" uid="uid://b4156qpi54clp" path="res://textures/edit_button.png" id="2_yrjmg"]
 [ext_resource type="Texture2D" uid="uid://0dla7un4qfm6" path="res://textures/edit_button_hl.png" id="3_dp7dh"]
 [ext_resource type="Texture2D" uid="uid://bb4ie2hamo708" path="res://textures/edit_button_pressed.png" id="4_kudf8"]
@@ -19,8 +20,8 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="StockInfoLine" type="Panel"]
-self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(400, 40)
+theme_override_styles/panel = ExtResource("1_pa6ej")
 script = ExtResource("1_240q7")
 
 [node name="AddressLine" type="LineEdit" parent="."]
@@ -64,6 +65,7 @@ anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -30.0
+offset_right = -5.0
 grow_horizontal = 0
 grow_vertical = 2
 texture_normal = ExtResource("2_yrjmg")
