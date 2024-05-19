@@ -7,11 +7,23 @@
 [ext_resource type="Texture2D" uid="uid://cg2o8xgo1gb5w" path="res://textures/unfoldButton_pressed.png" id="4_l4xdh"]
 [ext_resource type="Texture2D" uid="uid://db60i04y7fo6a" path="res://textures/unfoldButton_hl.png" id="5_y15y4"]
 [ext_resource type="Texture2D" uid="uid://dn1q6s8e7t55l" path="res://w_rect.png" id="6_1mdqn"]
-[ext_resource type="StyleBox" uid="uid://c5i134ur1to60" path="res://styles/edittext_base_style.tres" id="6_bg6ey"]
 [ext_resource type="StyleBox" uid="uid://ydrmcbb64npw" path="res://styles/framed_button_normal.tres" id="7_b7ah0"]
 [ext_resource type="Texture2D" uid="uid://belhmi6u74jhi" path="res://textures/updown.png" id="7_kuv32"]
 [ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/framed_button_hover.tres" id="8_bgha2"]
 [ext_resource type="StyleBox" uid="uid://chknldgol0rwk" path="res://styles/framed_button_pressed.tres" id="9_llh3k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wy16"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0.129412, 0.129412, 0.129412, 0)
+draw_center = false
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="Theme" id="Theme_xicdx"]
 default_font_size = 45
@@ -124,9 +136,9 @@ grow_vertical = 2
 theme_override_colors/font_readonly_color = Color(0.254902, 0.368627, 0.219608, 1)
 theme_override_constants/caret_width = 6
 theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = ExtResource("6_bg6ey")
-theme_override_styles/focus = ExtResource("6_bg6ey")
-theme_override_styles/read_only = ExtResource("6_bg6ey")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4wy16")
+theme_override_styles/focus = SubResource("StyleBoxFlat_4wy16")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_4wy16")
 placeholder_text = "Enter an Item Name"
 context_menu_enabled = false
 wrap_mode = 1

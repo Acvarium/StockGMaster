@@ -147,7 +147,7 @@ func _on_location_selection_button_pressed():
 
 
 func _on_delete_button_pressed():
-	main_node.confirme_action(self, Global.WhatToDo.Delete)
+	main_node.confirme_action_dialogue(self, Global.WhatToDo.Delete, "Do you want to delete this item?")
 	
 	
 func confirme_action(conf_what_to_do):

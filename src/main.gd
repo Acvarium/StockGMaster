@@ -19,8 +19,24 @@ func _ready():
 	pass
 
 
-func confirme_action(recever, conf_what_to_do):
-	action_confirm_dialogue.confirme_action(recever, conf_what_to_do)
+func get_number_of_items_in_location(location_id):
+	return $Database.get_number_of_items_in_location(location_id)
+
+
+func delete_location(location_id):
+	var location_parent_id = 0
+	if location_id in $Database.locations_data.keys():
+		if "parent_id" in $Database.locations_data[location_id]:
+			location_parent_id = $Database.locations_data[location_id]["parent_id"]
+		$Database.move_all_stocks_from_to(location_id, location_parent_id)
+		$Database.move_all_locations_from_parent_up(location_id)
+		$Database.delete_location(location_id)
+		$Database.pull_items_data()
+		$Database.pull_locations_data()
+
+
+func confirme_action_dialogue(recever, conf_what_to_do, message = ""):
+	action_confirm_dialogue.confirme_action_dialogue(recever, conf_what_to_do, message)
 	
 
 func get_image_by_id(image_id):
@@ -43,14 +59,12 @@ func get_unit_name_by_id(_id):
 
 #what_to_do can be global.WhatToDo.Change, Delete or create 
 #action_data_type can be global.ActionDataType.Location, Category, Tag
-func exec_action_popup(what_to_do, action_data_type, for_dialogue = null):
-	#current_what_to_do = what_to_do
-	#current_action_data_type = action_data_type
-	#current_action_id = for_id
+func exec_action_popup(what_to_do, action_data_type, for_dialogue = null, item_id = -1):
 	if action_data_type == Global.ActionDataType.Location or \
 			action_data_type == Global.ActionDataType.ParentLocation:
-		tree_element.build_tree($Database.locations_data)
+		tree_element.build_tree($Database.locations_data, item_id)
 		tree_selection_dialogue.data_recever_dialogue = for_dialogue
+		tree_selection_dialogue.item_id = item_id
 		tree_selection_dialogue.visible = true
 
 
@@ -150,8 +164,8 @@ func select_parent_location_popup(for_dialogue):
 	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.Location, for_dialogue)
 
 
-func select_location_popup(for_dialogue):
-	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.ParentLocation, for_dialogue)
+func select_location_popup(for_dialogue, item_id = -1):
+	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.ParentLocation, for_dialogue, item_id)
 
 
 func edit_location(location_id):
@@ -167,3 +181,8 @@ func edit_location(location_id):
 
 func _on_create_location_button_pressed():
 	edit_location(-1)
+
+
+func _on_location_struct_tree_button_clicked(item, column, id, mouse_button_index):
+	print(id)
+	edit_location(id)

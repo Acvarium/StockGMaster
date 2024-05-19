@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=23 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" path="res://Database.gd" id="1_ie8y7"]
 [ext_resource type="Script" path="res://main.gd" id="1_nvv5i"]
@@ -14,6 +14,7 @@
 [ext_resource type="StyleBox" uid="uid://4cmibv0a8kf2" path="res://styles/BGButtonHoverStyle.tres" id="12_p5rmn"]
 [ext_resource type="PackedScene" uid="uid://buhtxvdgnu0ki" path="res://objects/data_edit_dialogue_base.tscn" id="13_2uggw"]
 [ext_resource type="Script" path="res://objects/ActionConfirmDialogue.gd" id="13_fc1a5"]
+[ext_resource type="StyleBox" uid="uid://c5i134ur1to60" path="res://styles/edittext_base_style.tres" id="15_xmn5x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blt5x"]
 bg_color = Color(0.168627, 0.168627, 0.168627, 1)
@@ -98,7 +99,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nvv5i")
 tree_element = NodePath("TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree")
-locations_tab_tree = NodePath("MainControl/TabContainer/Locations/StructTree")
+locations_tab_tree = NodePath("MainControl/TabContainer/Locations/LocationStructTree")
 
 [node name="Database" type="Node" parent="."]
 script = ExtResource("1_ie8y7")
@@ -127,8 +128,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+current_tab = 1
 
 [node name="Items" type="Control" parent="MainControl/TabContainer" node_paths=PackedStringArray("items_holder", "temp_items_holder")]
+visible = false
 layout_mode = 2
 script = ExtResource("3_vserw")
 items_holder = NodePath("ItemsListPanel/ScrollContainer/VBoxContainer")
@@ -201,7 +204,6 @@ offset_bottom = 40.0
 mouse_filter = 2
 
 [node name="Locations" type="Control" parent="MainControl/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="LocationToolPanel" type="Panel" parent="MainControl/TabContainer/Locations"]
@@ -234,7 +236,7 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "Create"
 
-[node name="StructTree" type="Tree" parent="MainControl/TabContainer/Locations"]
+[node name="LocationStructTree" type="Tree" parent="MainControl/TabContainer/Locations"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -247,6 +249,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_b23bh")
 item_selection_action_type = 2
+has_edit_buttons = true
 
 [node name="Categories" type="Control" parent="MainControl/TabContainer"]
 visible = false
@@ -434,7 +437,7 @@ script = ExtResource("3_b23bh")
 item_selection_action_type = 2
 tree_selection_dialogue = NodePath("../../../..")
 
-[node name="ActionConfirmDialogue" type="Control" parent="."]
+[node name="ActionConfirmDialogue" type="Control" parent="." node_paths=PackedStringArray("warning_label")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -443,6 +446,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("13_fc1a5")
+warning_label = NodePath("TSL/AR/Control/WarningLabel")
 
 [node name="CancelTreeSelection" type="Button" parent="ActionConfirmDialogue"]
 layout_mode = 1
@@ -474,17 +478,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-ratio = 2.25
+ratio = 1.7
 
 [node name="Control" type="Panel" parent="ActionConfirmDialogue/TSL/AR"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_blt5x")
 
-[node name="Label" type="Label" parent="ActionConfirmDialogue/TSL/AR/Control"]
+[node name="TitleLabel" type="Label" parent="ActionConfirmDialogue/TSL/AR/Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 0.5
+anchor_bottom = 0.273
 offset_left = 15.0
 offset_top = 15.0
 offset_right = -15.0
@@ -498,7 +502,7 @@ vertical_alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="ActionConfirmDialogue/TSL/AR/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.55
+anchor_top = 0.647
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
@@ -529,10 +533,29 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_4n64a")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_us7rp")
 text = "Cancel"
 
+[node name="WarningLabel" type="Label" parent="ActionConfirmDialogue/TSL/AR/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.3
+anchor_right = 1.0
+anchor_bottom = 0.65
+offset_left = 15.0
+offset_right = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.396078, 0.329412, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = ExtResource("15_xmn5x")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 3
+
 [connection signal="item_data_loaded" from="Database" to="." method="_on_database_item_data_loaded"]
 [connection signal="locations_data_loaded" from="Database" to="." method="_on_database_locations_data_loaded"]
 [connection signal="pressed" from="MainControl/TabContainer/Items/ItemsToolPanel/CreateItemButton" to="." method="_on_create_item_button_pressed"]
 [connection signal="pressed" from="MainControl/TabContainer/Locations/LocationToolPanel/CreateLocationButton" to="." method="_on_create_location_button_pressed"]
+[connection signal="button_clicked" from="MainControl/TabContainer/Locations/LocationStructTree" to="." method="_on_location_struct_tree_button_clicked"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Location" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Quantity" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ItemCreationDialogue" method="_on_save_item_button_pressed"]

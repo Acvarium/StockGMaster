@@ -5,9 +5,10 @@ extends Tree
 @onready var main_node = get_tree().get_root().get_node("Main")
 @export var item_selection_action_type = Global.ActionDataType.None
 @export var tree_selection_dialogue : Control
+@export var has_edit_buttons = false
+var a_texture: Texture = preload("res://textures/edit_button_sm.png")
 
-
-func build_tree(tree_data : Dictionary):
+func build_tree(tree_data : Dictionary, item_id = -1):
 	clear()
 	var root = create_item()
 	root.set_metadata(0, 0)
@@ -28,6 +29,10 @@ func build_tree(tree_data : Dictionary):
 				index_list.append(current_key)
 				item_dict[current_key].set_text(0, tree_data[current_key][name_key])
 				item_dict[current_key].set_metadata(0, current_key)
+				if current_key == item_id:
+					item_dict[current_key].visible = false
+				if has_edit_buttons:
+					item_dict[current_key].add_button(0, a_texture, current_key)
 		index_list.remove_at(0)
 
 

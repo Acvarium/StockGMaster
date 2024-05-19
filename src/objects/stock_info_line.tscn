@@ -1,10 +1,22 @@
 [gd_scene load_steps=6 format=3 uid="uid://bakv7sbbowm6o"]
 
-[ext_resource type="StyleBox" uid="uid://c5i134ur1to60" path="res://styles/edittext_base_style.tres" id="1_5j6rf"]
 [ext_resource type="Script" path="res://objects/stock_info_line.gd" id="1_240q7"]
 [ext_resource type="Texture2D" uid="uid://b4156qpi54clp" path="res://textures/edit_button.png" id="2_yrjmg"]
 [ext_resource type="Texture2D" uid="uid://0dla7un4qfm6" path="res://textures/edit_button_hl.png" id="3_dp7dh"]
 [ext_resource type="Texture2D" uid="uid://bb4ie2hamo708" path="res://textures/edit_button_pressed.png" id="4_kudf8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wy16"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0.129412, 0.129412, 0.129412, 0)
+draw_center = false
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="StockInfoLine" type="Panel"]
 self_modulate = Color(1, 1, 1, 0)
@@ -20,9 +32,9 @@ offset_right = -130.0
 grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "/lasdasdl/asdlasd/asdlasdlaskdoqwdalsd/asdasd/ asd /asasd asd as dasd asd asd asddasd asd asd asd  /"
-theme_override_styles/normal = ExtResource("1_5j6rf")
-theme_override_styles/focus = ExtResource("1_5j6rf")
-theme_override_styles/read_only = ExtResource("1_5j6rf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4wy16")
+theme_override_styles/focus = SubResource("StyleBoxFlat_4wy16")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_4wy16")
 text = "/lasdasdl/asdlasd/asdlasdlaskdoqwdalsd/asdasd/ asd /asasd asd as dasd asd asd asddasd asd asd asd  /"
 editable = false
 
@@ -37,9 +49,9 @@ offset_right = -38.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.666667, 0.584314, 0.396078, 1)
-theme_override_styles/normal = ExtResource("1_5j6rf")
-theme_override_styles/focus = ExtResource("1_5j6rf")
-theme_override_styles/read_only = ExtResource("1_5j6rf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4wy16")
+theme_override_styles/focus = SubResource("StyleBoxFlat_4wy16")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_4wy16")
 text = "1111 кг"
 alignment = 1
 editable = false

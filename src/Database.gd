@@ -16,6 +16,22 @@ var locations_data = {}
 var items_data = {}
 
 
+func move_all_stocks_from_to(from_location_id, to_location_id):
+	db.update_rows("item_stocks", "location_id = '" + str(from_location_id) + "'", {"location_id" : to_location_id})
+
+
+func move_all_locations_from_parent_up(from_location):
+	var parent_id = 0
+	if from_location in locations_data.keys() and "parent_id" in locations_data[from_location] and \
+			locations_data[from_location]["parent_id"] != null:
+		parent_id = locations_data[from_location]["parent_id"]
+	db.update_rows("locations", "parent_id = '" + str(from_location) + "'", {"parent_id" : parent_id})
+
+
+func delete_location(location_id):
+	db.delete_rows("locations", "id = '" + str(location_id) + "'")
+
+
 func delete_item(item_index):
 	db.delete_rows("items", "id = '" + str(item_index) + "'")
 	db.delete_rows("item_stocks", "item_id = '" + str(item_index) + "'")
@@ -100,6 +116,13 @@ func get_tables():
 		for k in res.keys():
 			tables.append(res[k])
 	return tables
+
+
+func get_number_of_items_in_location(location_id):
+	if location_id in locations_data.keys():
+		db.select_rows("item_stocks", "location_id = '" + str(location_id) + "'", ["*"])
+		return db.query_result.size()
+	return 0
 
 
 func create_tables():
@@ -219,7 +242,7 @@ func save_item(new_item_data):
 
 
 func save_location(new_location_data):
-	if "id" in new_location_data and new_location_data.id in items_data.keys():
+	if "id" in new_location_data:
 		db.update_rows("locations", "id = '" + str(new_location_data.id) + "'", new_location_data)
 	else:
 		new_location_data.erase('id')

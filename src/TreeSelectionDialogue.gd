@@ -1,5 +1,6 @@
 extends Control
 var data_recever_dialogue = null
+var item_id = -1
 @onready var main_node = get_tree().get_root().get_node("Main")
 
 
