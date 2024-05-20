@@ -90,7 +90,7 @@ border_color = Color(0.133333, 0.133333, 0.133333, 1)
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 
-[node name="Main" type="Control" node_paths=PackedStringArray("tree_element", "locations_tab_tree")]
+[node name="Main" type="Control" node_paths=PackedStringArray("tree_element", "locations_tab_tree", "category_tab_tree")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,6 +100,7 @@ grow_vertical = 2
 script = ExtResource("1_nvv5i")
 tree_element = NodePath("TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree")
 locations_tab_tree = NodePath("MainControl/TabContainer/Locations/LocationStructTree")
+category_tab_tree = NodePath("MainControl/TabContainer/Categories/CategoryStructTree")
 
 [node name="Database" type="Node" parent="."]
 script = ExtResource("1_ie8y7")
@@ -126,9 +127,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 50.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 1
+current_tab = 2
 
 [node name="Items" type="Control" parent="MainControl/TabContainer" node_paths=PackedStringArray("items_holder", "temp_items_holder")]
 visible = false
@@ -204,6 +206,7 @@ offset_bottom = 40.0
 mouse_filter = 2
 
 [node name="Locations" type="Control" parent="MainControl/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="LocationToolPanel" type="Panel" parent="MainControl/TabContainer/Locations"]
@@ -252,8 +255,52 @@ item_selection_action_type = 2
 has_edit_buttons = true
 
 [node name="Categories" type="Control" parent="MainControl/TabContainer"]
-visible = false
 layout_mode = 2
+
+[node name="CategoryToolPanel" type="Panel" parent="MainControl/TabContainer/Categories"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 5.0
+offset_top = 8.0
+offset_right = -5.0
+offset_bottom = 45.0
+grow_horizontal = 2
+
+[node name="CategorySearchLineEdit" type="LineEdit" parent="MainControl/TabContainer/Categories/CategoryToolPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -85.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreateCategoryButton" type="Button" parent="MainControl/TabContainer/Categories/CategoryToolPanel"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Create"
+
+[node name="CategoryStructTree" type="Tree" parent="MainControl/TabContainer/Categories"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 50.0
+offset_right = -5.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_b23bh")
+item_selection_action_type = 2
+has_edit_buttons = true
 
 [node name="Tags" type="Control" parent="MainControl/TabContainer"]
 visible = false
@@ -342,6 +389,7 @@ title_text = "Quantity"
 list_item_mode = 3
 
 [node name="LocationCreationDialogue" parent="." node_paths=PackedStringArray("title_label", "name_list_item", "description_list_item", "parent_list_item", "delete_button") instance=ExtResource("13_2uggw")]
+visible = false
 layout_mode = 1
 script = ExtResource("10_j64go")
 title_label = NodePath("TextureRect/Title")
@@ -551,11 +599,14 @@ vertical_alignment = 1
 autowrap_mode = 3
 text_overrun_behavior = 3
 
+[connection signal="categories_data_loaded" from="Database" to="." method="_on_database_categories_data_loaded"]
 [connection signal="item_data_loaded" from="Database" to="." method="_on_database_item_data_loaded"]
 [connection signal="locations_data_loaded" from="Database" to="." method="_on_database_locations_data_loaded"]
 [connection signal="pressed" from="MainControl/TabContainer/Items/ItemsToolPanel/CreateItemButton" to="." method="_on_create_item_button_pressed"]
 [connection signal="pressed" from="MainControl/TabContainer/Locations/LocationToolPanel/CreateLocationButton" to="." method="_on_create_location_button_pressed"]
 [connection signal="button_clicked" from="MainControl/TabContainer/Locations/LocationStructTree" to="." method="_on_location_struct_tree_button_clicked"]
+[connection signal="pressed" from="MainControl/TabContainer/Categories/CategoryToolPanel/CreateCategoryButton" to="." method="_on_create_category_button_pressed"]
+[connection signal="button_clicked" from="MainControl/TabContainer/Categories/CategoryStructTree" to="." method="_on_category_struct_tree_button_clicked"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Location" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Quantity" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ItemCreationDialogue" method="_on_save_item_button_pressed"]

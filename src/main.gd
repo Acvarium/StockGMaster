@@ -1,6 +1,7 @@
 extends Control
 @export var tree_element : Tree
 @export var locations_tab_tree : Tree
+@export var category_tab_tree : Tree
 @onready var items_tab : Control = $MainControl/TabContainer/Items
 @onready var item_creation_dialogue : Control = $ItemCreationDialogue
 @onready var location_creation_dialogue : Control = $LocationCreationDialogue
@@ -50,6 +51,10 @@ func hide_tree_selector():
 
 func get_location_address(location_id):
 	return $Database.build_location_address(location_id)
+
+
+func get_category_address(category_id):
+	return $Database.build_category_address(category_id)
 
 
 func get_location_name_by_id(location_id):
@@ -138,6 +143,9 @@ func save_location(location_data):
 	$Database.save_location(location_data)
 	$Database.pull_locations_data()
 
+func save_category(category_data):
+	$Database.save_category(category_data)
+	$Database.pull_categories_data()
 
 func _on_parent_selection_button_pressed():
 	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.ParentLocation, -1)
@@ -163,6 +171,9 @@ func _on_database_locations_data_loaded():
 	locations_tab_tree.build_tree($Database.locations_data)
 
 
+func _on_database_categories_data_loaded():
+	category_tab_tree.build_tree($Database.categories_data)
+
 
 func select_parent_location_popup(for_dialogue):
 	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.Location, for_dialogue)
@@ -175,12 +186,23 @@ func select_location_popup(for_dialogue, item_id = -1):
 func edit_location(location_id):
 	if location_id in $Database.locations_data.keys() and location_id > 0:
 		#editing
-		location_creation_dialogue.set_location_data($Database.locations_data[location_id])
+		location_creation_dialogue.set_data($Database.locations_data[location_id])
 		location_creation_dialogue._show(Global.WhatToDo.Change, Global.ActionDataType.Location)
 	else:
 		#creating
-		location_creation_dialogue.set_location_data({})
+		location_creation_dialogue.set_data({})
 		location_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Location)
+
+
+func edit_category(category_id):
+	if category_id in $Database.categories_data.keys() and category_id > 0:
+		#editing
+		location_creation_dialogue.set_data($Database.categories_data[category_id])
+		location_creation_dialogue._show(Global.WhatToDo.Change, Global.ActionDataType.Category)
+	else:
+		#creating
+		location_creation_dialogue.set_data({})
+		location_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Category)
 
 
 func _on_create_location_button_pressed():
@@ -188,5 +210,12 @@ func _on_create_location_button_pressed():
 
 
 func _on_location_struct_tree_button_clicked(item, column, id, mouse_button_index):
-	print(id)
 	edit_location(id)
+
+
+func _on_create_category_button_pressed():
+	edit_category(-1)
+
+
+func _on_category_struct_tree_button_clicked(item, column, id, mouse_button_index):
+	edit_category(id)

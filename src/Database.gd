@@ -2,6 +2,8 @@ extends Node
 
 signal item_data_loaded
 signal locations_data_loaded
+signal categories_data_loaded
+
 
 var db : SQLite = null
 @export var name_text : TextEdit
@@ -14,7 +16,7 @@ var database_path = "res://data/data.db"
 
 var locations_data = {}
 var items_data = {}
-
+var categories_data = {}
 
 func move_all_stocks_from_to(from_location_id, to_location_id):
 	db.update_rows("item_stocks", "location_id = '" + str(from_location_id) + "'", {"location_id" : to_location_id})
@@ -68,12 +70,26 @@ func get_locations_data_by_id(location_id):
 	return null
 
 
+func get_category_data_by_id(category_id):
+	if category_id in categories_data.keys():
+		return categories_data[category_id]
+	return null
+
+
 func pull_locations_data():
 	locations_data.clear()
 	var localion_db_data = db.select_rows("locations", "", ["*"])
 	for i in range(localion_db_data.size()):
 		locations_data[localion_db_data[i].id] = localion_db_data[i]
 	locations_data_loaded.emit()
+
+
+func pull_categories_data():
+	categories_data.clear()
+	var categories_db_data = db.select_rows("categories", "", ["*"])
+	for i in range(categories_db_data.size()):
+		categories_data[categories_db_data[i].id] = categories_db_data[i]
+	categories_data_loaded.emit()
 
 
 func get_new_item_id():
@@ -107,6 +123,7 @@ func _ready():
 	create_tables()
 	pull_locations_data()
 	pull_items_data()
+	pull_categories_data()
 
 
 func get_tables():
@@ -249,6 +266,13 @@ func save_location(new_location_data):
 		db.insert_row("locations", new_location_data)
 
 
+func save_category(new_category_data):
+	if "id" in new_category_data:
+		db.update_rows("categories", "id = '" + str(new_category_data.id) + "'", new_category_data)
+	else:
+		new_category_data.erase('id')
+		db.insert_row("categories", new_category_data)
+
 
 func save_stock(new_stock_data):
 	if "id" in new_stock_data:
@@ -306,6 +330,19 @@ func build_location_address(location_id):
 			current_locations_data = get_locations_data_by_id(current_locations_data.parent_id)
 		else:
 			current_locations_data = null
+	addr = "/" + addr.left(addr.length() - 1)
+	return addr
+
+
+func build_category_address(category_id):
+	var addr = "/"
+	var current_category_data = get_category_data_by_id(category_id)
+	while current_category_data != null:
+		addr = current_category_data.name + "/" + addr
+		if "parent_id" in current_category_data.keys() and current_category_data.parent_id:
+			current_category_data = get_category_data_by_id(current_category_data.parent_id)
+		else:
+			current_category_data = null
 	addr = "/" + addr.left(addr.length() - 1)
 	return addr
 
