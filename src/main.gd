@@ -2,12 +2,12 @@ extends Control
 @export var tree_element : Tree
 @export var locations_tab_tree : Tree
 @export var category_tab_tree : Tree
+@export  var tag_tab : Control 
 @onready var items_tab : Control = $MainControl/TabContainer/Items
 @onready var item_creation_dialogue : Control = $ItemCreationDialogue
 @onready var location_creation_dialogue : Control = $LocationCreationDialogue
 @onready var tree_selection_dialogue : Control = $TreeSelectionDialogue
 @onready var action_confirm_dialogue : Control = $ActionConfirmDialogue
-
 var selected_value : int = -1
 var tree_selection_index : int = -1
 
@@ -237,3 +237,7 @@ func _on_create_category_button_pressed():
 
 func _on_category_struct_tree_button_clicked(item, column, id, mouse_button_index):
 	edit_category(id)
+
+
+func _on_database_tags_data_loaded():
+	tag_tab.refrash_items_list($Database.tags_data)

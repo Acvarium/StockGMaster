@@ -3,7 +3,7 @@ extends Node
 signal item_data_loaded
 signal locations_data_loaded
 signal categories_data_loaded
-
+signal tags_data_loaded
 
 var db : SQLite = null
 @export var name_text : TextEdit
@@ -17,6 +17,7 @@ var database_path = "res://data/data.db"
 var locations_data = {}
 var items_data = {}
 var categories_data = {}
+var tags_data = {}
 
 func move_all_stocks_from_to(from_location_id, to_location_id):
 	db.update_rows("item_stocks", "location_id = '" + str(from_location_id) + "'", {"location_id" : to_location_id})
@@ -92,6 +93,14 @@ func pull_categories_data():
 	categories_data_loaded.emit()
 
 
+func pull_tags_data():
+	tags_data.clear()
+	var tags_db_data = db.select_rows("tags", "", ["*"])
+	for i in range(tags_db_data.size()):
+		tags_data[tags_db_data[i].id] = tags_db_data[i]
+	tags_data_loaded.emit()
+
+
 func get_new_item_id():
 	db.query("SELECT * FROM 'items' ORDER BY id DESC LIMIT 1;")
 	print(db.query_result)
@@ -124,7 +133,8 @@ func _ready():
 	pull_locations_data()
 	pull_items_data()
 	pull_categories_data()
-
+	pull_tags_data()
+	
 
 func get_tables():
 	db.query("SELECT name FROM sqlite_schema WHERE type = 'table' AND name NOT LIKE 'sqlite_%';")
