@@ -44,9 +44,11 @@ func _show(what_to_do, action_data_type):
 	elif action_data_type == Global.ActionDataType.Stock:
 		name_list_item.set_editable(false)
 		if what_to_do == Global.WhatToDo.Create:
-			pass
+			title_label.text = "create stock"
+			delete_button.visible = false 
 		else:
-			pass
+			title_label.text = "edit stock"
+			delete_button.visible = true 
 		show_item_data_components(false)
 		show_stock_data_components(true)
 	show()

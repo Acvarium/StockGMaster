@@ -17,6 +17,8 @@ var tree_selection_index : int = -1
 
 
 func _ready():
+	if OS.get_name() == "Android":
+		$MainControl/AnimationPlayer.play("mobile_offset")
 	pass
 
 
@@ -71,11 +73,19 @@ func get_unit_name_by_id(_id):
 func exec_action_popup(what_to_do, action_data_type, for_dialogue = null, item_id = -1):
 	if action_data_type == Global.ActionDataType.Location or \
 			action_data_type == Global.ActionDataType.ParentLocation:
+		tree_element.item_selection_action_type = Global.ActionDataType.ParentLocation
 		tree_element.build_tree($Database.locations_data, item_id)
 		tree_selection_dialogue.data_recever_dialogue = for_dialogue
 		tree_selection_dialogue.item_id = item_id
 		tree_selection_dialogue.visible = true
-
+	if action_data_type == Global.ActionDataType.Category or \
+			action_data_type == Global.ActionDataType.ParentCategory:
+		tree_element.item_selection_action_type = Global.ActionDataType.ParentCategory
+		tree_element.build_tree($Database.categories_data, item_id)
+		tree_selection_dialogue.data_recever_dialogue = for_dialogue
+		tree_selection_dialogue.item_id = item_id
+		tree_selection_dialogue.visible = true
+		
 
 func edit_item(item_id):
 	if item_id in $Database.items_data.keys() and item_id > 0:
@@ -181,6 +191,10 @@ func select_parent_location_popup(for_dialogue):
 
 func select_location_popup(for_dialogue, item_id = -1):
 	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.ParentLocation, for_dialogue, item_id)
+
+
+func select_category_popup(for_dialogue, item_id = -1):
+	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.ParentCategory, for_dialogue, item_id)
 
 
 func edit_location(location_id):

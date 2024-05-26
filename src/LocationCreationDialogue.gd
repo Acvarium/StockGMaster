@@ -94,9 +94,9 @@ func _on_save_item_button_pressed():
 		main_node.save_category(current_data)
 	hide()
 
-
-func update_parent_location_text(new_location_text):
-	parent_list_item.set_location_button_text(new_location_text)
+#
+#func update_parent_location_text(new_location_text):
+	#parent_list_item.set_location_button_text(new_location_text)
 
 
 func tree_value_selected(value, item_selection_action_type):
@@ -105,13 +105,22 @@ func tree_value_selected(value, item_selection_action_type):
 	if item_selection_action_type == Global.ActionDataType.ParentLocation:
 		if !current_data:
 			current_data = {}
-		
 		current_data.parent_id = value
-		update_parent_location_text(main_node.get_location_address(current_data.parent_id))
+		update_parent_text(main_node.get_location_address(current_data.parent_id))
+	if item_selection_action_type == Global.ActionDataType.ParentCategory:
+		if !current_data:
+			current_data = {}
+		current_data.parent_id = value
+		update_parent_text(main_node.get_category_address(current_data.parent_id))
 
 
 func _on_parent_selection_button_pressed():
-	var current_item_id = -1
-	if current_data and "id" in current_data.keys() and  current_data.id:
-		current_item_id = current_data.id
-	main_node.select_location_popup(self, current_item_id)
+	var current_id = -1
+	if current_action_data_type == Global.ActionDataType.Location:
+		if current_data and "id" in current_data.keys() and current_data.id:
+			current_id = current_data.id
+		main_node.select_location_popup(self, current_id)
+	elif current_action_data_type == Global.ActionDataType.Category:
+		if current_data and "id" in current_data.keys() and current_data.id:
+			current_id = current_data.id
+		main_node.select_category_popup(self, current_id)

@@ -3,10 +3,11 @@ extends Tree
 @export var parent_id_key = "parent_id"
 @export var name_key = "name"
 @onready var main_node = get_tree().get_root().get_node("Main")
-@export var item_selection_action_type = Global.ActionDataType.None
+var item_selection_action_type = Global.ActionDataType.None
 @export var tree_selection_dialogue : Control
 @export var has_edit_buttons = false
 var a_texture: Texture = preload("res://textures/edit_button_sm.png")
+
 
 func build_tree(tree_data : Dictionary, item_id = -1):
 	clear()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=26 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" path="res://Database.gd" id="1_ie8y7"]
 [ext_resource type="Script" path="res://main.gd" id="1_nvv5i"]
@@ -15,6 +15,43 @@
 [ext_resource type="PackedScene" uid="uid://buhtxvdgnu0ki" path="res://objects/data_edit_dialogue_base.tscn" id="13_2uggw"]
 [ext_resource type="Script" path="res://objects/ActionConfirmDialogue.gd" id="13_fc1a5"]
 [ext_resource type="StyleBox" uid="uid://c5i134ur1to60" path="res://styles/edittext_base_style.tres" id="15_xmn5x"]
+
+[sub_resource type="Animation" id="Animation_sniqe"]
+resource_name = "mobile_offset"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TabContainer:offset_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 60.0]
+}
+
+[sub_resource type="Animation" id="Animation_uywld"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TabContainer:offset_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6lyv6"]
+_data = {
+"RESET": SubResource("Animation_uywld"),
+"mobile_offset": SubResource("Animation_sniqe")
+}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blt5x"]
 bg_color = Color(0.168627, 0.168627, 0.168627, 1)
@@ -122,12 +159,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainControl"]
+libraries = {
+"": SubResource("AnimationLibrary_6lyv6")
+}
+
 [node name="TabContainer" type="TabContainer" parent="MainControl"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 current_tab = 2
@@ -251,7 +292,6 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_b23bh")
-item_selection_action_type = 2
 has_edit_buttons = true
 
 [node name="Categories" type="Control" parent="MainControl/TabContainer"]
@@ -299,7 +339,6 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_b23bh")
-item_selection_action_type = 2
 has_edit_buttons = true
 
 [node name="Tags" type="Control" parent="MainControl/TabContainer"]
@@ -389,7 +428,6 @@ title_text = "Quantity"
 list_item_mode = 3
 
 [node name="LocationCreationDialogue" parent="." node_paths=PackedStringArray("title_label", "name_list_item", "description_list_item", "parent_list_item", "delete_button") instance=ExtResource("13_2uggw")]
-visible = false
 layout_mode = 1
 script = ExtResource("10_j64go")
 title_label = NodePath("TextureRect/Title")
@@ -482,7 +520,6 @@ anchor_bottom = 0.97
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_b23bh")
-item_selection_action_type = 2
 tree_selection_dialogue = NodePath("../../../..")
 
 [node name="ActionConfirmDialogue" type="Control" parent="." node_paths=PackedStringArray("warning_label")]
