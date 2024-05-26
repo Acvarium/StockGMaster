@@ -2,11 +2,11 @@ extends Control
 @export var name_list_item : Panel
 @export var description_list_item : Panel
 @export var title_label : Label
-@export var location_list_stock : Panel
-@export var quantity_list_stock : Panel
+@export var location_element : Panel
+@export var quantity_element : Panel
+@export var category_element : Panel
 
 @onready var main_node = get_tree().get_root().get_node("Main")
-
 @export var item_data_components : Array[Control]
 @export var stock_data_components : Array[Control]
 @export var delete_button : Button
@@ -63,7 +63,7 @@ func set_stock_data(item_data, stock_data):
 	if "location_id" in stock_data.keys():
 		update_location_text(main_node.get_location_address(stock_data.location_id))
 	if "quantity" in stock_data.keys():
-		quantity_list_stock.set_quantity(stock_data.quantity)
+		quantity_element.set_quantity(stock_data.quantity)
 
 
 func set_item_data(item_data):
@@ -82,10 +82,16 @@ func set_item_data(item_data):
 	description_list_item.set_edit_text("")
 	if "description" in item_data.keys() and item_data.description:
 		description_list_item.set_edit_text(item_data.description)
-	
+	if "category_id" in item_data.keys():
+		update_category_text(main_node.get_category_address(item_data.category_id))	
+
 
 func update_location_text(new_location_text):
-	location_list_stock.set_location_button_text(new_location_text)
+	location_element.set_location_button_text(new_location_text)
+
+
+func update_category_text(new_location_text):
+	category_element.set_location_button_text(new_location_text)
 
 
 func _ready():
@@ -98,11 +104,12 @@ func _on_cancel_button_pressed():
 
 func _reset(reset_stock_data = true, reset_item_data = true):
 	if reset_stock_data:
-		quantity_list_stock.set_quantity(0)
+		quantity_element.set_quantity(0)
 		current_stock_data = null
 		update_location_text("/")
 	if reset_item_data:
 		current_item_data = null
+		update_category_text("/")
 	
 
 func reset_and_hide():
@@ -111,12 +118,14 @@ func reset_and_hide():
 
 
 func _on_save_item_button_pressed():
-	var quantity = quantity_list_stock.get_quantiry()
+	var quantity = quantity_element.get_quantiry()
 	if current_action_data_type == Global.ActionDataType.Item:
 		var new_item_data = {}
 		new_item_data.id = item_index
 		new_item_data.name = name_list_item.get_edit_text()
 		new_item_data.description = description_list_item.get_edit_text()
+		if current_item_data and "category_id" in current_item_data:
+			new_item_data.category_id = current_item_data.category_id
 		item_index = main_node.save_item(new_item_data, quantity == 0)
 	var to_save_stock = quantity != 0
 	if current_action_data_type == Global.ActionDataType.Item and \
@@ -135,17 +144,25 @@ func _on_save_item_button_pressed():
 
 
 func tree_value_selected(value, item_selection_action_type):
-	#if item_selection_action_type == Global.ActionDataType.Location:
-		#current_stock_data.item_id = item_index
-	if !current_stock_data:
-		current_stock_data = {}
-	current_stock_data.location_id = value
-	update_location_text(main_node.get_location_address(current_stock_data.location_id))
+	if item_selection_action_type == Global.ActionDataType.Location:
+		if !current_stock_data:
+			current_stock_data = {}
+		current_stock_data.location_id = value
+		update_location_text(main_node.get_location_address(current_stock_data.location_id))
+	if item_selection_action_type == Global.ActionDataType.Category:
+		if !current_item_data:
+			current_item_data = {}
+		current_item_data.category_id = value
+		update_category_text(main_node.get_category_address(current_item_data.category_id))
 
 
 func _on_location_selection_button_pressed():
 	main_node.select_location_popup(self)
 	#main_node.exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.Location, item_index)
+
+
+func _on_category_selection_button_pressed():
+	main_node.select_category_popup(self)
 
 
 func _on_delete_button_pressed():

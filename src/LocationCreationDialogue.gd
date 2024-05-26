@@ -119,8 +119,8 @@ func _on_parent_selection_button_pressed():
 	if current_action_data_type == Global.ActionDataType.Location:
 		if current_data and "id" in current_data.keys() and current_data.id:
 			current_id = current_data.id
-		main_node.select_location_popup(self, current_id)
+		main_node.select_parent_location_popup(self, current_id)
 	elif current_action_data_type == Global.ActionDataType.Category:
 		if current_data and "id" in current_data.keys() and current_data.id:
 			current_id = current_data.id
-		main_node.select_category_popup(self, current_id)
+		main_node.select_parent_category_popup(self, current_id)

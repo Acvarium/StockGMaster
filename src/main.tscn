@@ -368,15 +368,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_list_stock", "quantity_list_stock", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("13_2uggw")]
-visible = false
+[node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("13_2uggw")]
 layout_mode = 1
 script = ExtResource("5_83lbr")
 name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
 description_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Description")
 title_label = NodePath("TextureRect/Title")
-location_list_stock = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Location")
-quantity_list_stock = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Quantity")
+location_element = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Location")
+quantity_element = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Quantity")
+category_element = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Category")
 item_data_components = [NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Description"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Image"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Category"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Tags"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/ItemDataSeparator")]
 stock_data_components = [NodePath("ItemsPanel/ScrollContainer/VBoxContainer/StockDataSeparator"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Location"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Quantity")]
 delete_button = NodePath("SDCButtons/HBoxContainer/DeleteButton")
@@ -428,6 +428,7 @@ title_text = "Quantity"
 list_item_mode = 3
 
 [node name="LocationCreationDialogue" parent="." node_paths=PackedStringArray("title_label", "name_list_item", "description_list_item", "parent_list_item", "delete_button") instance=ExtResource("13_2uggw")]
+visible = false
 layout_mode = 1
 script = ExtResource("10_j64go")
 title_label = NodePath("TextureRect/Title")
@@ -644,6 +645,7 @@ text_overrun_behavior = 3
 [connection signal="button_clicked" from="MainControl/TabContainer/Locations/LocationStructTree" to="." method="_on_location_struct_tree_button_clicked"]
 [connection signal="pressed" from="MainControl/TabContainer/Categories/CategoryToolPanel/CreateCategoryButton" to="." method="_on_create_category_button_pressed"]
 [connection signal="button_clicked" from="MainControl/TabContainer/Categories/CategoryStructTree" to="." method="_on_category_struct_tree_button_clicked"]
+[connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Category" to="ItemCreationDialogue" method="_on_category_selection_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Location" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Quantity" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ItemCreationDialogue" method="_on_save_item_button_pressed"]
