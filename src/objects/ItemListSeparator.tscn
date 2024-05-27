@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://d1c4lov8epmmv"]
 
-[ext_resource type="Script" path="res://objects/item_list_separator.gd" id="1_7invs"]
+[ext_resource type="Script" path="res://objects/ItemListSeparator.gd" id="1_7invs"]
 [ext_resource type="StyleBox" uid="uid://bbplm1e5vppsh" path="res://styles/BasePanelStyle.tres" id="1_b4nv7"]
-[ext_resource type="Script" path="res://FitLabel.gd" id="2_vyaxn"]
+[ext_resource type="Script" path="res://objects/FitLabel.gd" id="2_vyaxn"]
 [ext_resource type="StyleBox" uid="uid://bwo64t2nmfot" path="res://styles/ItemList2PanelStyle.tres" id="3_6yytm"]
 
 [node name="ItemListSeparator" type="Panel"]

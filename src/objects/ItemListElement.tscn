@@ -1,18 +1,18 @@
 [gd_scene load_steps=18 format=3 uid="uid://l7og0lhat66"]
 
-[ext_resource type="Script" path="res://objects/item_list_element.gd" id="1_4l0wv"]
-[ext_resource type="Texture2D" uid="uid://dn1q6s8e7t55l" path="res://w_rect.png" id="1_5sw8e"]
-[ext_resource type="StyleBox" uid="uid://balcxf82udj3t" path="res://styles/EditTextStyle.tres" id="1_15yfp"]
-[ext_resource type="StyleBox" uid="uid://c285i81pa11sx" path="res://styles/ItemListPanelStyle.tres" id="1_j463u"]
-[ext_resource type="Texture2D" uid="uid://bdhl7lo2ybw66" path="res://textures/unfoldButton.png" id="2_yju0t"]
-[ext_resource type="Texture2D" uid="uid://cg2o8xgo1gb5w" path="res://textures/unfoldButton_pressed.png" id="3_43pt1"]
-[ext_resource type="Texture2D" uid="uid://db60i04y7fo6a" path="res://textures/unfoldButton_hl.png" id="4_kumjt"]
-[ext_resource type="Texture2D" uid="uid://b4156qpi54clp" path="res://textures/edit_button.png" id="7_twvn0"]
-[ext_resource type="Texture2D" uid="uid://0dla7un4qfm6" path="res://textures/edit_button_hl.png" id="8_qfrte"]
-[ext_resource type="Texture2D" uid="uid://bb4ie2hamo708" path="res://textures/edit_button_pressed.png" id="9_g6twn"]
-[ext_resource type="StyleBox" uid="uid://ydrmcbb64npw" path="res://styles/framed_button_normal.tres" id="11_obfqs"]
-[ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/framed_button_hover.tres" id="12_s6r58"]
-[ext_resource type="StyleBox" uid="uid://chknldgol0rwk" path="res://styles/framed_button_pressed.tres" id="13_j73ds"]
+[ext_resource type="StyleBox" uid="uid://c285i81pa11sx" path="res://styles/ItemListPanelStyle.tres" id="1_3ptxo"]
+[ext_resource type="Script" path="res://objects/ItemListElement.gd" id="2_7hixr"]
+[ext_resource type="StyleBox" uid="uid://balcxf82udj3t" path="res://styles/EditTextStyle.tres" id="3_i048p"]
+[ext_resource type="Texture2D" uid="uid://bdhl7lo2ybw66" path="res://textures/unfoldButton.png" id="4_eegrw"]
+[ext_resource type="Texture2D" uid="uid://db60i04y7fo6a" path="res://textures/unfoldButton_hl.png" id="5_mevon"]
+[ext_resource type="Texture2D" uid="uid://cg2o8xgo1gb5w" path="res://textures/unfoldButton_pressed.png" id="6_c5fi6"]
+[ext_resource type="Texture2D" uid="uid://b4156qpi54clp" path="res://textures/edit_button.png" id="7_mfdci"]
+[ext_resource type="Texture2D" uid="uid://0dla7un4qfm6" path="res://textures/edit_button_hl.png" id="8_o48cu"]
+[ext_resource type="Texture2D" uid="uid://bb4ie2hamo708" path="res://textures/edit_button_pressed.png" id="9_fvw1m"]
+[ext_resource type="Texture2D" uid="uid://dn1q6s8e7t55l" path="res://w_rect.png" id="10_q0yka"]
+[ext_resource type="StyleBox" uid="uid://ydrmcbb64npw" path="res://styles/FramedButtonNormal.tres" id="11_5e1i3"]
+[ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/FramedButtonHover.tres" id="12_j0lc1"]
+[ext_resource type="StyleBox" uid="uid://chknldgol0rwk" path="res://styles/FramedButtonPressed.tres" id="13_edbsu"]
 
 [sub_resource type="Animation" id="Animation_g3yh7"]
 length = 0.001
@@ -182,8 +182,8 @@ corner_radius_bottom_left = 6
 custom_minimum_size = Vector2(0, 55)
 offset_right = 600.0
 offset_bottom = 55.0
-theme_override_styles/panel = ExtResource("1_j463u")
-script = ExtResource("1_4l0wv")
+theme_override_styles/panel = ExtResource("1_3ptxo")
+script = ExtResource("2_7hixr")
 
 [node name="DPanel" type="Panel" parent="."]
 self_modulate = Color(1, 1, 1, 0)
@@ -196,7 +196,7 @@ offset_right = -15.0
 offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = ExtResource("1_15yfp")
+theme_override_styles/panel = ExtResource("3_i048p")
 
 [node name="ItemDescription" type="Label" parent="DPanel"]
 visible = false
@@ -208,7 +208,7 @@ offset_top = 60.0
 offset_bottom = 195.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = ExtResource("1_15yfp")
+theme_override_styles/normal = ExtResource("3_i048p")
 text = "Description"
 autowrap_mode = 3
 clip_text = true
@@ -228,7 +228,7 @@ offset_right = -15.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_styles/panel = ExtResource("1_15yfp")
+theme_override_styles/panel = ExtResource("3_i048p")
 
 [node name="ChangeLocationButton" type="TextureButton" parent="LPanel"]
 custom_minimum_size = Vector2(30, 30)
@@ -239,9 +239,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
-texture_normal = ExtResource("2_yju0t")
-texture_pressed = ExtResource("4_kumjt")
-texture_hover = ExtResource("3_43pt1")
+texture_normal = ExtResource("4_eegrw")
+texture_pressed = ExtResource("5_mevon")
+texture_hover = ExtResource("6_c5fi6")
 ignore_texture_size = true
 stretch_mode = 5
 flip_v = true
@@ -286,9 +286,9 @@ offset_top = 12.5
 offset_right = -8.0
 offset_bottom = 42.5
 grow_horizontal = 0
-texture_normal = ExtResource("2_yju0t")
-texture_pressed = ExtResource("3_43pt1")
-texture_hover = ExtResource("4_kumjt")
+texture_normal = ExtResource("4_eegrw")
+texture_pressed = ExtResource("6_c5fi6")
+texture_hover = ExtResource("5_mevon")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -303,9 +303,9 @@ offset_top = 12.5
 offset_right = -46.74
 offset_bottom = 42.5
 grow_horizontal = 0
-texture_normal = ExtResource("7_twvn0")
-texture_pressed = ExtResource("8_qfrte")
-texture_hover = ExtResource("9_g6twn")
+texture_normal = ExtResource("7_mfdci")
+texture_pressed = ExtResource("8_o48cu")
+texture_hover = ExtResource("9_fvw1m")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -328,7 +328,7 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 1
 offset_right = 50.0
 offset_bottom = 50.0
-texture = ExtResource("1_5sw8e")
+texture = ExtResource("10_q0yka")
 expand_mode = 2
 stretch_mode = 4
 
@@ -363,7 +363,7 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("1_15yfp")
+theme_override_styles/panel = ExtResource("3_i048p")
 
 [node name="Label" type="Label" parent="CreateStock"]
 visible = false
@@ -385,9 +385,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
-theme_override_styles/normal = ExtResource("11_obfqs")
-theme_override_styles/hover = ExtResource("12_s6r58")
-theme_override_styles/pressed = ExtResource("13_j73ds")
+theme_override_styles/normal = ExtResource("11_5e1i3")
+theme_override_styles/hover = ExtResource("12_j0lc1")
+theme_override_styles/pressed = ExtResource("13_edbsu")
 text = "Add Stock"
 
 [connection signal="pressed" from="LPanel/ChangeLocationButton" to="." method="_on_change_location_button_pressed"]

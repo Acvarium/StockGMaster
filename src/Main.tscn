@@ -1,22 +1,23 @@
-[gd_scene load_steps=28 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=29 format=3 uid="uid://bjythu8jrsr5o"]
 
-[ext_resource type="Script" path="res://Database.gd" id="1_ie8y7"]
-[ext_resource type="Script" path="res://main.gd" id="1_nvv5i"]
-[ext_resource type="Script" path="res://StructTree.gd" id="3_b23bh"]
-[ext_resource type="Script" path="res://ItemsTab.gd" id="3_vserw"]
-[ext_resource type="Script" path="res://objects/unfold_control.gd" id="4_o78sg"]
-[ext_resource type="Script" path="res://ItemCreationDialogue.gd" id="5_83lbr"]
-[ext_resource type="Script" path="res://TagsTab.gd" id="6_cu4x1"]
-[ext_resource type="PackedScene" uid="uid://ymef651v1yws" path="res://objects/item_list_element2.tscn" id="7_lb4if"]
-[ext_resource type="PackedScene" uid="uid://dqd1q2l2xuc2y" path="res://objects/tag_element.tscn" id="7_rk6mh"]
-[ext_resource type="PackedScene" uid="uid://d1c4lov8epmmv" path="res://objects/item_list_separator.tscn" id="8_tmgro"]
-[ext_resource type="Script" path="res://TreeSelectionDialogue.gd" id="10_6boxs"]
-[ext_resource type="Script" path="res://LocationCreationDialogue.gd" id="10_j64go"]
-[ext_resource type="StyleBox" uid="uid://bx3wv2qghdpe8" path="res://styles/BGButtonStyle.tres" id="11_iq504"]
-[ext_resource type="StyleBox" uid="uid://4cmibv0a8kf2" path="res://styles/BGButtonHoverStyle.tres" id="12_p5rmn"]
-[ext_resource type="PackedScene" uid="uid://buhtxvdgnu0ki" path="res://objects/data_edit_dialogue_base.tscn" id="13_2uggw"]
-[ext_resource type="Script" path="res://objects/ActionConfirmDialogue.gd" id="13_fc1a5"]
-[ext_resource type="StyleBox" uid="uid://c5i134ur1to60" path="res://styles/edittext_base_style.tres" id="15_xmn5x"]
+[ext_resource type="Script" path="res://Main.gd" id="1_5mhyi"]
+[ext_resource type="Script" path="res://Database.gd" id="2_x8r34"]
+[ext_resource type="Script" path="res://objects/ItemsTab.gd" id="3_wxfjw"]
+[ext_resource type="Script" path="res://objects/UnfoldControl.gd" id="4_a2pk0"]
+[ext_resource type="Script" path="res://objects/StructTree.gd" id="5_ar113"]
+[ext_resource type="Script" path="res://objects/TagsTab.gd" id="6_2kqfq"]
+[ext_resource type="Script" path="res://objects/TagViewer.gd" id="7_k3n6w"]
+[ext_resource type="PackedScene" uid="uid://dqd1q2l2xuc2y" path="res://objects/TagElement.tscn" id="8_dhsfd"]
+[ext_resource type="PackedScene" uid="uid://buhtxvdgnu0ki" path="res://objects/DataEditDialogueBase.tscn" id="9_p6ieq"]
+[ext_resource type="Script" path="res://objects/ItemCreationDialogue.gd" id="10_06y8t"]
+[ext_resource type="PackedScene" uid="uid://d1c4lov8epmmv" path="res://objects/ItemListSeparator.tscn" id="11_6eucy"]
+[ext_resource type="PackedScene" uid="uid://ymef651v1yws" path="res://objects/ItemListElement2.tscn" id="12_ubi7w"]
+[ext_resource type="Script" path="res://objects/LocationCreationDialogue.gd" id="13_c6tp3"]
+[ext_resource type="Script" path="res://objects/TreeSelectionDialogue.gd" id="14_qpi1g"]
+[ext_resource type="StyleBox" uid="uid://bx3wv2qghdpe8" path="res://styles/BGButtonStyle.tres" id="15_e2j01"]
+[ext_resource type="StyleBox" uid="uid://4cmibv0a8kf2" path="res://styles/BGButtonHoverStyle.tres" id="16_uvvjq"]
+[ext_resource type="Script" path="res://objects/ActionConfirmDialogue.gd" id="17_36kog"]
+[ext_resource type="StyleBox" uid="uid://c5i134ur1to60" path="res://styles/EdittextBaseStyle.tres" id="18_luhyk"]
 
 [sub_resource type="Animation" id="Animation_uywld"]
 length = 0.001
@@ -136,14 +137,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_nvv5i")
+script = ExtResource("1_5mhyi")
 tree_element = NodePath("TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree")
 locations_tab_tree = NodePath("MainControl/TabContainer/Locations/LocationStructTree")
 category_tab_tree = NodePath("MainControl/TabContainer/Categories/CategoryStructTree")
 tag_tab = NodePath("MainControl/TabContainer/Tags")
 
 [node name="Database" type="Node" parent="."]
-script = ExtResource("1_ie8y7")
+script = ExtResource("2_x8r34")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -179,7 +180,7 @@ current_tab = 3
 [node name="Items" type="Control" parent="MainControl/TabContainer" node_paths=PackedStringArray("items_holder", "temp_items_holder")]
 visible = false
 layout_mode = 2
-script = ExtResource("3_vserw")
+script = ExtResource("3_wxfjw")
 items_holder = NodePath("ItemsListPanel/ScrollContainer/VBoxContainer")
 temp_items_holder = NodePath("ItemsListPanel/TempItemHolder")
 
@@ -239,7 +240,7 @@ horizontal_scroll_mode = 0
 [node name="VBoxContainer" type="VBoxContainer" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-script = ExtResource("4_o78sg")
+script = ExtResource("4_a2pk0")
 control_children = true
 
 [node name="TempItemHolder" type="Control" parent="MainControl/TabContainer/Items/ItemsListPanel"]
@@ -294,7 +295,7 @@ offset_right = -5.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_b23bh")
+script = ExtResource("5_ar113")
 has_edit_buttons = true
 
 [node name="Categories" type="Control" parent="MainControl/TabContainer"]
@@ -342,20 +343,21 @@ offset_right = -5.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_b23bh")
+script = ExtResource("5_ar113")
 has_edit_buttons = true
 
-[node name="Tags" type="Control" parent="MainControl/TabContainer" node_paths=PackedStringArray("tag_space")]
+[node name="Tags" type="Control" parent="MainControl/TabContainer" node_paths=PackedStringArray("tag_viewer")]
 layout_mode = 2
-script = ExtResource("6_cu4x1")
-tag_space = NodePath("Control/ScrollContainer/HFlowContainer")
+script = ExtResource("6_2kqfq")
+tag_viewer = NodePath("Control/ScrollContainer/TagViewer")
 
 [node name="Control" type="Control" parent="MainControl/TabContainer/Tags"]
 layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 5.0
-offset_top = 20.0
+offset_top = 55.0
 offset_right = -5.0
 offset_bottom = -20.0
 grow_horizontal = 2
@@ -369,13 +371,35 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HFlowContainer" type="HFlowContainer" parent="MainControl/TabContainer/Tags/Control/ScrollContainer"]
+[node name="TagViewer" type="HFlowContainer" parent="MainControl/TabContainer/Tags/Control/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
+script = ExtResource("7_k3n6w")
 
-[node name="TagElement" parent="MainControl/TabContainer/Tags/Control/ScrollContainer/HFlowContainer" instance=ExtResource("7_rk6mh")]
+[node name="TagElement" parent="MainControl/TabContainer/Tags/Control/ScrollContainer/TagViewer" instance=ExtResource("8_dhsfd")]
 layout_mode = 2
+
+[node name="TagToolPanel" type="Panel" parent="MainControl/TabContainer/Tags"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 5.0
+offset_top = 8.0
+offset_right = -5.0
+offset_bottom = 45.0
+grow_horizontal = 2
+
+[node name="CreateTagButton" type="Button" parent="MainControl/TabContainer/Tags/TagToolPanel"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Create"
 
 [node name="Projects" type="Control" parent="MainControl/TabContainer"]
 visible = false
@@ -400,10 +424,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("13_2uggw")]
+[node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("9_p6ieq")]
 visible = false
 layout_mode = 1
-script = ExtResource("5_83lbr")
+script = ExtResource("10_06y8t")
 name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
 description_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Description")
 title_label = NodePath("TextureRect/Title")
@@ -417,70 +441,70 @@ delete_button = NodePath("SDCButtons/HBoxContainer/DeleteButton")
 [node name="VBoxContainer" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer" index="0"]
 unfold_item_list = Array[NodePath]([NodePath("Name"), NodePath("Description")])
 
-[node name="ItemDataSeparator" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("8_tmgro")]
+[node name="ItemDataSeparator" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("11_6eucy")]
 layout_mode = 2
 separator_text = "Item Data"
 
-[node name="Name" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="1" instance=ExtResource("7_lb4if")]
+[node name="Name" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="1" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Name"
 placeholder_text = "Enter an Item Name"
 
-[node name="Description" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="2" instance=ExtResource("7_lb4if")]
+[node name="Description" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="2" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Description"
 placeholder_text = "Enter an Item Description"
 
-[node name="Image" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="3" instance=ExtResource("7_lb4if")]
+[node name="Image" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="3" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Image"
 list_item_mode = 2
 
-[node name="Category" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="4" instance=ExtResource("7_lb4if")]
+[node name="Category" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="4" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Category"
 list_item_mode = 1
 
-[node name="Tags" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="5" instance=ExtResource("7_lb4if")]
+[node name="Tags" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="5" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Tags"
 placeholder_text = "Enter tags separated by comma"
 
-[node name="StockDataSeparator" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="6" instance=ExtResource("8_tmgro")]
+[node name="StockDataSeparator" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="6" instance=ExtResource("11_6eucy")]
 layout_mode = 2
 separator_text = "Initial Stock"
 
-[node name="Location" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="7" instance=ExtResource("7_lb4if")]
+[node name="Location" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="7" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Location"
 list_item_mode = 1
 
-[node name="Quantity" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="8" instance=ExtResource("7_lb4if")]
+[node name="Quantity" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="8" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Quantity"
 list_item_mode = 3
 
-[node name="LocationCreationDialogue" parent="." node_paths=PackedStringArray("title_label", "name_list_item", "description_list_item", "parent_list_item", "delete_button") instance=ExtResource("13_2uggw")]
+[node name="LocationCreationDialogue" parent="." node_paths=PackedStringArray("title_label", "name_list_item", "description_list_item", "parent_list_item", "delete_button") instance=ExtResource("9_p6ieq")]
 visible = false
 layout_mode = 1
-script = ExtResource("10_j64go")
+script = ExtResource("13_c6tp3")
 title_label = NodePath("TextureRect/Title")
 name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
 description_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Description")
 parent_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Parent")
 delete_button = NodePath("SDCButtons/HBoxContainer/DeleteButton")
 
-[node name="Name" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("7_lb4if")]
+[node name="Name" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Name"
 placeholder_text = "Enter a Location Name"
 
-[node name="Description" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="1" instance=ExtResource("7_lb4if")]
+[node name="Description" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="1" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Description"
 placeholder_text = "Enter a Location Description"
 
-[node name="Parent" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="2" instance=ExtResource("7_lb4if")]
+[node name="Parent" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="2" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Parent"
 placeholder_text = "Enter a Location Name"
@@ -498,7 +522,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("10_6boxs")
+script = ExtResource("14_qpi1g")
 
 [node name="CancelTreeSelection" type="Button" parent="TreeSelectionDialogue"]
 layout_mode = 1
@@ -507,9 +531,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = ExtResource("11_iq504")
-theme_override_styles/hover = ExtResource("12_p5rmn")
-theme_override_styles/pressed = ExtResource("11_iq504")
+theme_override_styles/normal = ExtResource("15_e2j01")
+theme_override_styles/hover = ExtResource("16_uvvjq")
+theme_override_styles/pressed = ExtResource("15_e2j01")
 
 [node name="TSL" type="Control" parent="TreeSelectionDialogue"]
 layout_mode = 1
@@ -553,7 +577,7 @@ anchor_right = 0.97
 anchor_bottom = 0.97
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_b23bh")
+script = ExtResource("5_ar113")
 tree_selection_dialogue = NodePath("../../../..")
 
 [node name="ActionConfirmDialogue" type="Control" parent="." node_paths=PackedStringArray("warning_label")]
@@ -564,7 +588,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("13_fc1a5")
+script = ExtResource("17_36kog")
 warning_label = NodePath("TSL/AR/Control/WarningLabel")
 
 [node name="CancelTreeSelection" type="Button" parent="ActionConfirmDialogue"]
@@ -574,9 +598,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = ExtResource("11_iq504")
-theme_override_styles/hover = ExtResource("12_p5rmn")
-theme_override_styles/pressed = ExtResource("11_iq504")
+theme_override_styles/normal = ExtResource("15_e2j01")
+theme_override_styles/hover = ExtResource("16_uvvjq")
+theme_override_styles/pressed = ExtResource("15_e2j01")
 
 [node name="TSL" type="Control" parent="ActionConfirmDialogue"]
 layout_mode = 1
@@ -664,7 +688,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 0.396078, 0.329412, 1)
 theme_override_font_sizes/font_size = 31
-theme_override_styles/normal = ExtResource("15_xmn5x")
+theme_override_styles/normal = ExtResource("18_luhyk")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -679,6 +703,7 @@ text_overrun_behavior = 3
 [connection signal="button_clicked" from="MainControl/TabContainer/Locations/LocationStructTree" to="." method="_on_location_struct_tree_button_clicked"]
 [connection signal="pressed" from="MainControl/TabContainer/Categories/CategoryToolPanel/CreateCategoryButton" to="." method="_on_create_category_button_pressed"]
 [connection signal="button_clicked" from="MainControl/TabContainer/Categories/CategoryStructTree" to="." method="_on_category_struct_tree_button_clicked"]
+[connection signal="pressed" from="MainControl/TabContainer/Tags/TagToolPanel/CreateTagButton" to="MainControl/TabContainer/Tags" method="_on_create_tag_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Category" to="ItemCreationDialogue" method="_on_category_selection_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Location" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Quantity" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]

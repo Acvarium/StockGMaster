@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqd1q2l2xuc2y"]
 
-[ext_resource type="Script" path="res://objects/tag_element.gd" id="1_0farn"]
-[ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/framed_button_hover.tres" id="1_tf51o"]
+[ext_resource type="Script" path="res://objects/TagElement.gd" id="1_bhp6w"]
+[ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/FramedButtonHover.tres" id="2_5kf8k"]
 
 [node name="TagElement" type="PanelContainer"]
 custom_minimum_size = Vector2(0, 40)
-script = ExtResource("1_0farn")
+script = ExtResource("1_bhp6w")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = ExtResource("1_tf51o")
+theme_override_styles/panel = ExtResource("2_5kf8k")
 
 [node name="HB" type="HBoxContainer" parent="."]
 layout_mode = 2

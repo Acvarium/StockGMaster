@@ -1,6 +1,5 @@
-extends Control
-@export var tag_space : HFlowContainer
-var tag_element_prefab = preload("res://objects/tag_element.tscn")
+extends HFlowContainer
+var tag_element_prefab = preload("res://objects/TagElement.tscn")
 
 
 func _ready():
@@ -8,7 +7,7 @@ func _ready():
 
 
 func clear_tags():
-	for t in tag_space.get_children():
+	for t in get_children():
 		t.queue_free()
 
 
@@ -18,5 +17,4 @@ func refrash_items_list(tag_data):
 		var new_tag = tag_element_prefab.instantiate()
 		new_tag.set_text(tag_data[t].name)
 		new_tag.tag_id = t
-		tag_space.add_child(new_tag)
-		
+		add_child(new_tag)

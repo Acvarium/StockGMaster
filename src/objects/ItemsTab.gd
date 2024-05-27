@@ -1,7 +1,7 @@
 extends Control
 @export var items_holder : VBoxContainer
 @export var temp_items_holder : Control
-var item_prefab = preload("res://objects/item_list_element.tscn")
+var item_prefab = preload("res://objects/ItemListElement.tscn")
 
 
 func _ready():
