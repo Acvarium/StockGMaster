@@ -44,6 +44,12 @@ func delete_stock(stock_id):
 	db.delete_rows("item_stocks", "id = '" + str(stock_id) + "'")
 
 
+func delete_tags(tag_ids):
+	for i in tag_ids:
+		db.delete_rows("item_tags", "tag_id = '" + str(i) + "'")
+		db.delete_rows("tags", "id = '" + str(i) + "'")
+
+
 func get_unit_name_by_id(_id):
 	var unit_name_data = db.select_rows("unit_names", "id = " + str(_id), ["name"])
 	if unit_name_data.size() > 0 and "name" in unit_name_data[0].keys():
@@ -105,6 +111,13 @@ func get_new_item_id():
 	db.query("SELECT * FROM 'items' ORDER BY id DESC LIMIT 1;")
 	print(db.query_result)
 	return db.query_result[0].id
+
+
+func get_new_tag_id():
+	db.query("SELECT * FROM 'tags' ORDER BY id DESC LIMIT 1;")
+	print(db.query_result)
+	return db.query_result[0].id
+
 
 
 func pull_items_data():
@@ -266,6 +279,17 @@ func save_item(new_item_data):
 	else:
 		new_item_data.erase('id')
 		db.insert_row("items", new_item_data)
+
+
+func save_tag(new_tag_data):
+	if "name" in new_tag_data:
+		new_tag_data.name = new_tag_data.name.to_lower()
+	if "id" in new_tag_data and new_tag_data.id in items_data.keys():
+		db.update_rows("tags", "id = '" + str(new_tag_data.id) + "'", new_tag_data)
+	else:
+		new_tag_data.erase('id')
+		db.insert_row("tags", new_tag_data)
+
 
 
 func save_location(new_location_data):

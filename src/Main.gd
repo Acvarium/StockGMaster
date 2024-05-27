@@ -6,6 +6,7 @@ extends Control
 @onready var items_tab : Control = $MainControl/TabContainer/Items
 @onready var item_creation_dialogue : Control = $ItemCreationDialogue
 @onready var location_creation_dialogue : Control = $LocationCreationDialogue
+@onready var tag_creation_dialogue : Control = $TagCreationDialogue
 @onready var tree_selection_dialogue : Control = $TreeSelectionDialogue
 @onready var action_confirm_dialogue : Control = $ActionConfirmDialogue
 var selected_value : int = -1
@@ -38,8 +39,22 @@ func delete_location(location_id):
 		$Database.pull_locations_data()
 
 
+func tag_exists(tag_name):
+	tag_name = tag_name.to_lower()
+	var db_tags_data = $Database.tags_data
+	for t in $Database.tags_data:
+		var current_tag_name = $Database.tags_data[t]
+		if "name" in $Database.tags_data[t] and $Database.tags_data[t].name == tag_name:
+			return true
+	return false
+
+
 func confirme_action_dialogue(recever, conf_what_to_do, message = ""):
 	action_confirm_dialogue.confirme_action_dialogue(recever, conf_what_to_do, message)
+	
+
+func warning_dialogue(warning_message, title : String = ""):
+	action_confirm_dialogue.warning_dialogue(warning_message, title)
 	
 
 func get_image_by_id(image_id):
@@ -133,13 +148,25 @@ func delete_item(item_index):
 func delete_stock(stock_id):
 	$Database.delete_stock(stock_id)
 	$Database.pull_items_data()
-	
+
+
+func delete_tags(tag_ids):
+	$Database.delete_tags(tag_ids)
+	$Database.pull_tags_data()
+
 
 func save_item(item_data, to_pull = true):
 	$Database.save_item(item_data)
 	if to_pull:
 		$Database.pull_items_data()
 	return $Database.get_new_item_id()
+
+
+func save_tag(tag_data, to_pull = true):
+	$Database.save_tag(tag_data)
+	if to_pull:
+		$Database.pull_tags_data()
+	return $Database.get_new_tag_id()
 
 
 func save_stock(stock_data, to_pull = true):
@@ -221,6 +248,17 @@ func edit_category(category_id):
 		#creating
 		location_creation_dialogue.set_data({})
 		location_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Category)
+
+
+func edit_tag(tag_id):
+	if tag_id in $Database.tags_data.keys() and tag_id > 0:
+		#edit
+		tag_creation_dialogue.set_data($Database.tags_data[tag_id])
+		tag_creation_dialogue._show()
+	else:
+		#createe
+		tag_creation_dialogue.set_data({})
+		tag_creation_dialogue._show()
 
 
 func _on_create_location_button_pressed():

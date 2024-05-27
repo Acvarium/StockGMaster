@@ -1,94 +1,18 @@
-[gd_scene load_steps=15 format=3 uid="uid://buhtxvdgnu0ki"]
+[gd_scene load_steps=14 format=3 uid="uid://buhtxvdgnu0ki"]
 
 [ext_resource type="StyleBox" uid="uid://balcxf82udj3t" path="res://styles/EditTextStyle.tres" id="1_w7hvy"]
 [ext_resource type="Script" path="res://objects/UnfoldControl.gd" id="2_jtdlm"]
+[ext_resource type="StyleBox" uid="uid://3ap7fyegca8y" path="res://styles/ColorButtons/ConfNormal.tres" id="3_ceq0j"]
 [ext_resource type="Texture2D" uid="uid://b82gyeyblxd5l" path="res://textures/title.png" id="3_gmiva"]
+[ext_resource type="StyleBox" uid="uid://cgfpael8bobl2" path="res://styles/ColorButtons/DelNormal.tres" id="3_ljphr"]
+[ext_resource type="StyleBox" uid="uid://b7fau3jxc43mk" path="res://styles/ColorButtons/ConfHover.tres" id="4_jav2k"]
 [ext_resource type="FontVariation" uid="uid://bhyikp6mmffmg" path="res://fonts/resources/menu_font01.tres" id="4_n8g7y"]
+[ext_resource type="StyleBox" uid="uid://3yancno0l5rn" path="res://objects/DelHover.tres" id="4_ro2g8"]
+[ext_resource type="StyleBox" uid="uid://bgi7mr6mfmnnl" path="res://objects/DelPressed.tres" id="5_ivdkn"]
 [ext_resource type="Script" path="res://objects/FitLabel.gd" id="5_rlvqw"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnmwu"]
-bg_color = Color(0.105882, 0.478431, 0.403922, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 2
-border_width_bottom = 4
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_left = 15
-corner_radius_bottom_left = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0uqsx"]
-bg_color = Color(0.12549, 0.54902, 0.462745, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 2
-border_width_bottom = 4
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_left = 15
-corner_radius_bottom_left = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5o2a"]
-bg_color = Color(0.0983006, 0.451795, 0.38104, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 1
-border_width_bottom = 3
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_left = 15
-corner_radius_bottom_left = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jg18v"]
-bg_color = Color(0.72549, 0, 0, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_11yk0"]
-bg_color = Color(0.929412, 0.231373, 0.231373, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4fr5f"]
-bg_color = Color(0.618933, 2.34637e-06, 1.44392e-07, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h135y"]
-bg_color = Color(0.854902, 0.45098, 0, 1)
-border_width_left = 2
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4n64a"]
-bg_color = Color(0.972549, 0.517647, 0, 1)
-border_width_left = 2
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_us7rp"]
-bg_color = Color(0.900485, 0.477486, 0, 1)
-border_width_left = 1
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
+[ext_resource type="StyleBox" uid="uid://c8vhwnw1k36py" path="res://styles/ColorButtons/CancNormal.tres" id="9_3amq6"]
+[ext_resource type="StyleBox" uid="uid://b42fcqui5l51q" path="res://styles/ColorButtons/CancHover.tres" id="10_bb2qc"]
+[ext_resource type="StyleBox" uid="uid://bptny03prtwm7" path="res://styles/ColorButtons/CancPressed.tres" id="11_kcv2f"]
 
 [node name="DataEditDialogueBase" type="Control"]
 layout_mode = 3
@@ -164,9 +88,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_rnmwu")
-theme_override_styles/hover = SubResource("StyleBoxFlat_0uqsx")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_f5o2a")
+theme_override_styles/normal = ExtResource("3_ceq0j")
+theme_override_styles/hover = ExtResource("4_jav2k")
+theme_override_styles/pressed = ExtResource("11_kcv2f")
 text = "Save"
 
 [node name="DeleteButton" type="Button" parent="SDCButtons/HBoxContainer"]
@@ -175,9 +99,9 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_jg18v")
-theme_override_styles/hover = SubResource("StyleBoxFlat_11yk0")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_4fr5f")
+theme_override_styles/normal = ExtResource("3_ljphr")
+theme_override_styles/hover = ExtResource("4_ro2g8")
+theme_override_styles/pressed = ExtResource("5_ivdkn")
 text = "DEL"
 
 [node name="CancelButton" type="Button" parent="SDCButtons/HBoxContainer"]
@@ -185,9 +109,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_h135y")
-theme_override_styles/hover = SubResource("StyleBoxFlat_4n64a")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_us7rp")
+theme_override_styles/normal = ExtResource("9_3amq6")
+theme_override_styles/hover = ExtResource("10_bb2qc")
+theme_override_styles/pressed = ExtResource("11_kcv2f")
 text = "Cancel"
 
 [node name="TextureRect" type="NinePatchRect" parent="."]

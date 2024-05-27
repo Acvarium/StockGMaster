@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=37 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_5mhyi"]
 [ext_resource type="Script" path="res://Database.gd" id="2_x8r34"]
@@ -7,17 +7,31 @@
 [ext_resource type="Script" path="res://objects/StructTree.gd" id="5_ar113"]
 [ext_resource type="Script" path="res://objects/TagsTab.gd" id="6_2kqfq"]
 [ext_resource type="Script" path="res://objects/TagViewer.gd" id="7_k3n6w"]
-[ext_resource type="PackedScene" uid="uid://dqd1q2l2xuc2y" path="res://objects/TagElement.tscn" id="8_dhsfd"]
 [ext_resource type="PackedScene" uid="uid://buhtxvdgnu0ki" path="res://objects/DataEditDialogueBase.tscn" id="9_p6ieq"]
 [ext_resource type="Script" path="res://objects/ItemCreationDialogue.gd" id="10_06y8t"]
+[ext_resource type="StyleBox" uid="uid://bqcd2rx70v1t2" path="res://styles/InputStyle.tres" id="10_djmps"]
+[ext_resource type="StyleBox" uid="uid://djjketxv43ctu" path="res://styles/FramedButtonTool.tres" id="10_ev2os"]
 [ext_resource type="PackedScene" uid="uid://d1c4lov8epmmv" path="res://objects/ItemListSeparator.tscn" id="11_6eucy"]
+[ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/FramedButtonHover.tres" id="11_wqlnj"]
+[ext_resource type="StyleBox" uid="uid://chknldgol0rwk" path="res://styles/FramedButtonPressed.tres" id="12_tclj0"]
 [ext_resource type="PackedScene" uid="uid://ymef651v1yws" path="res://objects/ItemListElement2.tscn" id="12_ubi7w"]
 [ext_resource type="Script" path="res://objects/LocationCreationDialogue.gd" id="13_c6tp3"]
+[ext_resource type="StyleBox" uid="uid://l5llgxy5lg0o" path="res://styles/FramedButtonDisabled.tres" id="14_celwd"]
 [ext_resource type="Script" path="res://objects/TreeSelectionDialogue.gd" id="14_qpi1g"]
 [ext_resource type="StyleBox" uid="uid://bx3wv2qghdpe8" path="res://styles/BGButtonStyle.tres" id="15_e2j01"]
 [ext_resource type="StyleBox" uid="uid://4cmibv0a8kf2" path="res://styles/BGButtonHoverStyle.tres" id="16_uvvjq"]
 [ext_resource type="Script" path="res://objects/ActionConfirmDialogue.gd" id="17_36kog"]
 [ext_resource type="StyleBox" uid="uid://c5i134ur1to60" path="res://styles/EdittextBaseStyle.tres" id="18_luhyk"]
+[ext_resource type="Script" path="res://objects/TagCreationDialogue.gd" id="19_p1s4p"]
+[ext_resource type="StyleBox" uid="uid://bknj8ahf7w78" path="res://styles/ColorButtons/AccNormal.tres" id="23_cyhx8"]
+[ext_resource type="StyleBox" uid="uid://3ap7fyegca8y" path="res://styles/ColorButtons/ConfNormal.tres" id="23_rqglp"]
+[ext_resource type="StyleBox" uid="uid://b7fau3jxc43mk" path="res://styles/ColorButtons/ConfHover.tres" id="24_0srk0"]
+[ext_resource type="StyleBox" uid="uid://bt1svmg5awgeg" path="res://styles/ColorButtons/AccHover.tres" id="24_un7m8"]
+[ext_resource type="StyleBox" uid="uid://w4mn1gjpyxfm" path="res://styles/ColorButtons/AccPressed.tres" id="25_vbo60"]
+[ext_resource type="StyleBox" uid="uid://rr274hhkcvol" path="res://styles/ColorButtons/ConfPressed.tres" id="25_veepo"]
+[ext_resource type="StyleBox" uid="uid://c8vhwnw1k36py" path="res://styles/ColorButtons/CancNormal.tres" id="26_dgnrv"]
+[ext_resource type="StyleBox" uid="uid://b42fcqui5l51q" path="res://styles/ColorButtons/CancHover.tres" id="27_xau5b"]
+[ext_resource type="StyleBox" uid="uid://bptny03prtwm7" path="res://styles/ColorButtons/CancPressed.tres" id="28_vl2i0"]
 
 [sub_resource type="Animation" id="Animation_uywld"]
 length = 0.001
@@ -69,66 +83,6 @@ corner_radius_bottom_left = 10
 shadow_color = Color(0, 0, 0, 0.403922)
 shadow_size = 10
 shadow_offset = Vector2(10, 10)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnmwu"]
-bg_color = Color(0.105882, 0.478431, 0.403922, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 2
-border_width_bottom = 4
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_left = 15
-corner_radius_bottom_left = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0uqsx"]
-bg_color = Color(0.12549, 0.54902, 0.462745, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 2
-border_width_bottom = 4
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_left = 15
-corner_radius_bottom_left = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5o2a"]
-bg_color = Color(0.0983006, 0.451795, 0.38104, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 1
-border_width_bottom = 3
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_left = 15
-corner_radius_bottom_left = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h135y"]
-bg_color = Color(0.854902, 0.45098, 0, 1)
-border_width_left = 2
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4n64a"]
-bg_color = Color(0.972549, 0.517647, 0, 1)
-border_width_left = 2
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_us7rp"]
-bg_color = Color(0.900485, 0.477486, 0, 1)
-border_width_left = 1
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.133333, 0.133333, 0.133333, 1)
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
 
 [node name="Main" type="Control" node_paths=PackedStringArray("tree_element", "locations_tab_tree", "category_tab_tree", "tag_tab")]
 layout_mode = 3
@@ -193,6 +147,7 @@ offset_top = 8.0
 offset_right = -5.0
 offset_bottom = 45.0
 grow_horizontal = 2
+theme_override_styles/panel = ExtResource("16_uvvjq")
 
 [node name="ItemsSearchLineEdit" type="LineEdit" parent="MainControl/TabContainer/Items/ItemsToolPanel"]
 layout_mode = 1
@@ -202,8 +157,12 @@ anchor_bottom = 1.0
 offset_right = -85.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/normal = ExtResource("10_djmps")
+theme_override_styles/focus = ExtResource("10_djmps")
+clear_button_enabled = true
 
 [node name="CreateItemButton" type="Button" parent="MainControl/TabContainer/Items/ItemsToolPanel"]
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -212,6 +171,9 @@ anchor_bottom = 1.0
 offset_left = -8.0
 grow_horizontal = 0
 grow_vertical = 2
+theme_override_styles/normal = ExtResource("10_ev2os")
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/pressed = ExtResource("12_tclj0")
 text = "Create"
 
 [node name="ItemsListPanel" type="Panel" parent="MainControl/TabContainer/Items"]
@@ -263,6 +225,7 @@ offset_top = 8.0
 offset_right = -5.0
 offset_bottom = 45.0
 grow_horizontal = 2
+theme_override_styles/panel = ExtResource("16_uvvjq")
 
 [node name="ItemsSearchLineEdit" type="LineEdit" parent="MainControl/TabContainer/Locations/LocationToolPanel"]
 layout_mode = 1
@@ -272,8 +235,12 @@ anchor_bottom = 1.0
 offset_right = -85.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/normal = ExtResource("10_djmps")
+theme_override_styles/focus = ExtResource("10_djmps")
+clear_button_enabled = true
 
 [node name="CreateLocationButton" type="Button" parent="MainControl/TabContainer/Locations/LocationToolPanel"]
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -282,6 +249,9 @@ anchor_bottom = 1.0
 offset_left = -8.0
 grow_horizontal = 0
 grow_vertical = 2
+theme_override_styles/normal = ExtResource("10_ev2os")
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/pressed = ExtResource("12_tclj0")
 text = "Create"
 
 [node name="LocationStructTree" type="Tree" parent="MainControl/TabContainer/Locations"]
@@ -311,6 +281,7 @@ offset_top = 8.0
 offset_right = -5.0
 offset_bottom = 45.0
 grow_horizontal = 2
+theme_override_styles/panel = ExtResource("16_uvvjq")
 
 [node name="CategorySearchLineEdit" type="LineEdit" parent="MainControl/TabContainer/Categories/CategoryToolPanel"]
 layout_mode = 1
@@ -320,8 +291,12 @@ anchor_bottom = 1.0
 offset_right = -85.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/normal = ExtResource("10_djmps")
+theme_override_styles/focus = ExtResource("10_djmps")
+clear_button_enabled = true
 
 [node name="CreateCategoryButton" type="Button" parent="MainControl/TabContainer/Categories/CategoryToolPanel"]
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -330,6 +305,9 @@ anchor_bottom = 1.0
 offset_left = -8.0
 grow_horizontal = 0
 grow_vertical = 2
+theme_override_styles/normal = ExtResource("10_ev2os")
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/pressed = ExtResource("12_tclj0")
 text = "Create"
 
 [node name="CategoryStructTree" type="Tree" parent="MainControl/TabContainer/Categories"]
@@ -346,10 +324,11 @@ grow_vertical = 2
 script = ExtResource("5_ar113")
 has_edit_buttons = true
 
-[node name="Tags" type="Control" parent="MainControl/TabContainer" node_paths=PackedStringArray("tag_viewer")]
+[node name="Tags" type="Control" parent="MainControl/TabContainer" node_paths=PackedStringArray("tag_viewer", "edit_button")]
 layout_mode = 2
 script = ExtResource("6_2kqfq")
 tag_viewer = NodePath("Control/ScrollContainer/TagViewer")
+edit_button = NodePath("TagToolPanel2/HBoxContainer/EditTagsButton")
 
 [node name="Control" type="Control" parent="MainControl/TabContainer/Tags"]
 layout_mode = 1
@@ -357,7 +336,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 5.0
-offset_top = 55.0
+offset_top = 115.0
 offset_right = -5.0
 offset_bottom = -20.0
 grow_horizontal = 2
@@ -374,11 +353,9 @@ grow_vertical = 2
 [node name="TagViewer" type="HFlowContainer" parent="MainControl/TabContainer/Tags/Control/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 alignment = 1
 script = ExtResource("7_k3n6w")
-
-[node name="TagElement" parent="MainControl/TabContainer/Tags/Control/ScrollContainer/TagViewer" instance=ExtResource("8_dhsfd")]
-layout_mode = 2
 
 [node name="TagToolPanel" type="Panel" parent="MainControl/TabContainer/Tags"]
 layout_mode = 1
@@ -389,16 +366,87 @@ offset_top = 8.0
 offset_right = -5.0
 offset_bottom = 45.0
 grow_horizontal = 2
+theme_override_styles/panel = ExtResource("16_uvvjq")
 
-[node name="CreateTagButton" type="Button" parent="MainControl/TabContainer/Tags/TagToolPanel"]
+[node name="CategorySearchLineEdit" type="LineEdit" parent="MainControl/TabContainer/Tags/TagToolPanel"]
 layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -8.0
-grow_horizontal = 0
+grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/normal = ExtResource("10_djmps")
+theme_override_styles/focus = ExtResource("10_djmps")
+clear_button_enabled = true
+
+[node name="TagToolPanel2" type="Panel" parent="MainControl/TabContainer/Tags"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 5.0
+offset_top = 52.0
+offset_right = -5.0
+offset_bottom = 89.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("16_uvvjq")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/TabContainer/Tags/TagToolPanel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SelectAllTagsButton" type="Button" parent="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/normal = ExtResource("10_ev2os")
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+text = "Sel.All"
+
+[node name="DeselectAllTagsButton" type="Button" parent="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/normal = ExtResource("10_ev2os")
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+text = "Deselect"
+
+[node name="Control" type="Control" parent="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="EditTagsButton" type="Button" parent="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/normal = ExtResource("10_ev2os")
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/disabled = ExtResource("14_celwd")
+disabled = true
+text = "Edit"
+
+[node name="DeleteSelectedTagsButton" type="Button" parent="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/normal = ExtResource("10_ev2os")
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+text = "Delete"
+
+[node name="CreateTagButton" type="Button" parent="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/normal = ExtResource("10_ev2os")
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/pressed = ExtResource("12_tclj0")
 text = "Create"
 
 [node name="Projects" type="Control" parent="MainControl/TabContainer"]
@@ -484,6 +532,9 @@ layout_mode = 2
 title_text = "Quantity"
 list_item_mode = 3
 
+[node name="SaveItemButton" parent="ItemCreationDialogue/SDCButtons/HBoxContainer" index="0"]
+theme_override_styles/pressed = ExtResource("25_veepo")
+
 [node name="LocationCreationDialogue" parent="." node_paths=PackedStringArray("title_label", "name_list_item", "description_list_item", "parent_list_item", "delete_button") instance=ExtResource("9_p6ieq")]
 visible = false
 layout_mode = 1
@@ -513,6 +564,27 @@ list_item_mode = 1
 [node name="Title" parent="LocationCreationDialogue/TextureRect" index="0"]
 theme_override_font_sizes/font_size = 32
 text = "Create Location"
+
+[node name="TagCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item") instance=ExtResource("9_p6ieq")]
+visible = false
+layout_mode = 1
+script = ExtResource("19_p1s4p")
+name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
+
+[node name="Name" parent="TagCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("12_ubi7w")]
+layout_mode = 2
+title_text = "Name"
+placeholder_text = "Enter a Location Name"
+
+[node name="SaveItemButton" parent="TagCreationDialogue/SDCButtons/HBoxContainer" index="0"]
+theme_override_styles/pressed = ExtResource("25_veepo")
+
+[node name="DeleteButton" parent="TagCreationDialogue/SDCButtons/HBoxContainer" index="1"]
+visible = false
+
+[node name="Title" parent="TagCreationDialogue/TextureRect" index="0"]
+theme_override_font_sizes/font_size = 32
+text = "Create Tag"
 
 [node name="TreeSelectionDialogue" type="Control" parent="."]
 visible = false
@@ -580,7 +652,7 @@ grow_vertical = 2
 script = ExtResource("5_ar113")
 tree_selection_dialogue = NodePath("../../../..")
 
-[node name="ActionConfirmDialogue" type="Control" parent="." node_paths=PackedStringArray("warning_label")]
+[node name="ActionConfirmDialogue" type="Control" parent="." node_paths=PackedStringArray("warning_label", "title_label", "conf_button", "canc_button", "acc_button")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -590,6 +662,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("17_36kog")
 warning_label = NodePath("TSL/AR/Control/WarningLabel")
+title_label = NodePath("TSL/AR/Control/TitleLabel")
+conf_button = NodePath("TSL/AR/Control/HBoxContainer/ConfirmButton")
+canc_button = NodePath("TSL/AR/Control/HBoxContainer/CancelButton")
+acc_button = NodePath("TSL/AR/Control/HBoxContainer/AcceptButton")
 
 [node name="CancelTreeSelection" type="Button" parent="ActionConfirmDialogue"]
 layout_mode = 1
@@ -656,14 +732,25 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
+[node name="AcceptButton" type="Button" parent="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = ExtResource("23_cyhx8")
+theme_override_styles/hover = ExtResource("24_un7m8")
+theme_override_styles/pressed = ExtResource("25_vbo60")
+text = "Accept"
+
 [node name="ConfirmButton" type="Button" parent="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_rnmwu")
-theme_override_styles/hover = SubResource("StyleBoxFlat_0uqsx")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_f5o2a")
+theme_override_styles/normal = ExtResource("23_rqglp")
+theme_override_styles/hover = ExtResource("24_0srk0")
+theme_override_styles/pressed = ExtResource("25_veepo")
 text = "Confirm"
 
 [node name="CancelButton" type="Button" parent="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer"]
@@ -671,9 +758,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_h135y")
-theme_override_styles/hover = SubResource("StyleBoxFlat_4n64a")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_us7rp")
+theme_override_styles/normal = ExtResource("26_dgnrv")
+theme_override_styles/hover = ExtResource("27_xau5b")
+theme_override_styles/pressed = ExtResource("28_vl2i0")
 text = "Cancel"
 
 [node name="WarningLabel" type="Label" parent="ActionConfirmDialogue/TSL/AR/Control"]
@@ -703,7 +790,12 @@ text_overrun_behavior = 3
 [connection signal="button_clicked" from="MainControl/TabContainer/Locations/LocationStructTree" to="." method="_on_location_struct_tree_button_clicked"]
 [connection signal="pressed" from="MainControl/TabContainer/Categories/CategoryToolPanel/CreateCategoryButton" to="." method="_on_create_category_button_pressed"]
 [connection signal="button_clicked" from="MainControl/TabContainer/Categories/CategoryStructTree" to="." method="_on_category_struct_tree_button_clicked"]
-[connection signal="pressed" from="MainControl/TabContainer/Tags/TagToolPanel/CreateTagButton" to="MainControl/TabContainer/Tags" method="_on_create_tag_button_pressed"]
+[connection signal="tag_pressed_sig" from="MainControl/TabContainer/Tags/Control/ScrollContainer/TagViewer" to="MainControl/TabContainer/Tags" method="_on_tag_viewer_tag_pressed_sig"]
+[connection signal="pressed" from="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer/SelectAllTagsButton" to="MainControl/TabContainer/Tags/Control/ScrollContainer/TagViewer" method="select_all" binds= [true]]
+[connection signal="pressed" from="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer/DeselectAllTagsButton" to="MainControl/TabContainer/Tags/Control/ScrollContainer/TagViewer" method="select_all" binds= [false]]
+[connection signal="pressed" from="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer/EditTagsButton" to="MainControl/TabContainer/Tags" method="_on_edit_tags_button_pressed"]
+[connection signal="pressed" from="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer/DeleteSelectedTagsButton" to="MainControl/TabContainer/Tags" method="_on_delete_selected_tags_button_pressed"]
+[connection signal="pressed" from="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer/CreateTagButton" to="MainControl/TabContainer/Tags" method="_on_create_tag_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Category" to="ItemCreationDialogue" method="_on_category_selection_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Location" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Quantity" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
@@ -714,11 +806,16 @@ text_overrun_behavior = 3
 [connection signal="pressed" from="LocationCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="LocationCreationDialogue" method="_on_save_item_button_pressed"]
 [connection signal="pressed" from="LocationCreationDialogue/SDCButtons/HBoxContainer/DeleteButton" to="LocationCreationDialogue" method="_on_delete_button_pressed"]
 [connection signal="pressed" from="LocationCreationDialogue/SDCButtons/HBoxContainer/CancelButton" to="LocationCreationDialogue" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="TagCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="TagCreationDialogue" method="_on_save_item_button_pressed"]
+[connection signal="pressed" from="TagCreationDialogue/SDCButtons/HBoxContainer/DeleteButton" to="TagCreationDialogue" method="_on_delete_button_pressed"]
+[connection signal="pressed" from="TagCreationDialogue/SDCButtons/HBoxContainer/CancelButton" to="TagCreationDialogue" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="TreeSelectionDialogue/CancelTreeSelection" to="TreeSelectionDialogue" method="_on_cancel_tree_selection_pressed"]
 [connection signal="item_selected" from="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" to="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" method="_on_item_selected"]
 [connection signal="pressed" from="ActionConfirmDialogue/CancelTreeSelection" to="ActionConfirmDialogue" method="_on_cancel_tree_selection_pressed"]
+[connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/AcceptButton" to="ActionConfirmDialogue" method="_on_accept_button_pressed"]
 [connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/ConfirmButton" to="ActionConfirmDialogue" method="_on_confirm_button_pressed"]
 [connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/CancelButton" to="ActionConfirmDialogue" method="_on_cancel_button_pressed"]
 
 [editable path="ItemCreationDialogue"]
 [editable path="LocationCreationDialogue"]
+[editable path="TagCreationDialogue"]
