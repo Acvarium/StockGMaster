@@ -4,7 +4,7 @@ extends Panel
 	set(new_value):
 		title_text = new_value
 		$TitleControl/Label.text = new_value
-		
+
 @export var placeholder_text = "" :
 	set(new_value):
 		placeholder_text = new_value
@@ -17,17 +17,22 @@ extends Panel
 		$DataControl/Button.visible = list_item_mode == ListItemModes.tButton
 		$IconControl.visible = list_item_mode == ListItemModes.Icon
 		$DataControl/SpinBox.visible = list_item_mode == ListItemModes.Quantity
+		$DataControl/Tags.visible = list_item_mode == ListItemModes.Tags
+		$TitleControl/EditTagsButton.visible = list_item_mode == ListItemModes.Tags
 
 @onready var unfold_button = get_node("TitleControl/UnfoldButton")
 var unfold_control = null
 var is_unfolded = false
 signal location_button_pressed
+signal edit_tags_button_pressed
+
 
 enum ListItemModes {
 	Text,
 	tButton,
 	Icon,
-	Quantity
+	Quantity,
+	Tags
 }
 
 
@@ -38,6 +43,7 @@ func set_editable(value):
 func _ready():
 	if Engine.is_editor_hint():
 		return
+	list_item_mode = list_item_mode
 	#$TitleControl/Label.text = title_text
 	#$DataControl/Edit.placeholder_text = placeholder_text
 
@@ -46,6 +52,10 @@ func set_unfold_control(value):
 	unfold_control = value
 	print(name + "  " + str(unfold_control != null))
 	unfold_button.visible = unfold_control != null
+
+
+func set_tags(tags_data):
+	$DataControl/Tags/TagViewer.refrash_tags_list(tags_data)
 
 
 func set_location_button_text(_text):
@@ -92,3 +102,8 @@ func toggle_unfold():
 
 func _on_location_button_pressed():
 	location_button_pressed.emit()
+
+
+
+func _on_edit_tags_button_pressed():
+	edit_tags_button_pressed.emit()

@@ -19,6 +19,7 @@ var items_data = {}
 var categories_data = {}
 var tags_data = {}
 
+
 func move_all_stocks_from_to(from_location_id, to_location_id):
 	db.update_rows("item_stocks", "location_id = '" + str(from_location_id) + "'", {"location_id" : to_location_id})
 
@@ -31,6 +32,23 @@ func move_all_locations_from_parent_up(from_location):
 	db.update_rows("locations", "parent_id = '" + str(from_location) + "'", {"parent_id" : parent_id})
 
 
+func get_number_of_items_with_tags(tag_ids):
+	var items_counted = 0
+	for i in range(tag_ids.size()):
+		items_counted += \
+			db.select_rows("item_tags", "tag_id = '" + str(tag_ids[i]) + "'", ["*"]).size()
+	return items_counted
+	
+
+func get_tags_for_item(id):
+	var current_item_tags_db = db.select_rows("item_tags", "item_id = '" + str(id) + "'", ["*"])
+	var current_item_tags = {}
+	for i in range(current_item_tags_db.size()):
+		var current_item_tag_data = current_item_tags_db[i]
+		current_item_tags[current_item_tag_data.id] = {"id": current_item_tag_data.tag_id, "name": tags_data[current_item_tag_data.tag_id].name}
+	return current_item_tags
+		
+
 func delete_location(location_id):
 	db.delete_rows("locations", "id = '" + str(location_id) + "'")
 
@@ -42,6 +60,19 @@ func delete_item(item_index):
 
 func delete_stock(stock_id):
 	db.delete_rows("item_stocks", "id = '" + str(stock_id) + "'")
+
+
+func save_item_tags(item_index, current_tag_ids):
+	var current_item_tags_db = db.select_rows("item_tags", "item_id = '" + str(item_index) + "'", ["*"])
+	var tag_id_exists = []
+	for i in range(current_item_tags_db.size()):
+		if not current_item_tags_db[i].tag_id in current_tag_ids:
+			db.delete_rows("item_tags", "id = '" + str(current_item_tags_db[i].id) + "'")
+		else:
+			tag_id_exists.append(current_item_tags_db[i].tag_id)
+	for t in current_tag_ids:
+		if not t in tag_id_exists:
+			db.insert_row("item_tags", {"item_id": item_index, "tag_id": t})
 
 
 func delete_tags(tag_ids):
@@ -109,13 +140,11 @@ func pull_tags_data():
 
 func get_new_item_id():
 	db.query("SELECT * FROM 'items' ORDER BY id DESC LIMIT 1;")
-	print(db.query_result)
 	return db.query_result[0].id
 
 
 func get_new_tag_id():
 	db.query("SELECT * FROM 'tags' ORDER BY id DESC LIMIT 1;")
-	print(db.query_result)
 	return db.query_result[0].id
 
 

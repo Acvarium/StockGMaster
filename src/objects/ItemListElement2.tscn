@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ymef651v1yws"]
+[gd_scene load_steps=19 format=3 uid="uid://ymef651v1yws"]
 
 [ext_resource type="Script" path="res://objects/ItemListElement2.gd" id="1_80c12"]
 [ext_resource type="StyleBox" uid="uid://bwo64t2nmfot" path="res://styles/ItemList2PanelStyle.tres" id="1_a1fgo"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://belhmi6u74jhi" path="res://textures/updown.png" id="7_kuv32"]
 [ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/FramedButtonHover.tres" id="8_bgha2"]
 [ext_resource type="StyleBox" uid="uid://chknldgol0rwk" path="res://styles/FramedButtonPressed.tres" id="9_llh3k"]
+[ext_resource type="Script" path="res://objects/TagViewer.gd" id="11_kkqct"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wy16"]
 content_margin_left = 10.0
@@ -114,6 +115,23 @@ texture_pressed = ExtResource("4_l4xdh")
 texture_hover = ExtResource("5_y15y4")
 stretch_mode = 3
 
+[node name="EditTagsButton" type="Button" parent="TitleControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -140.0
+offset_top = 5.0
+offset_right = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/normal = ExtResource("7_b7ah0")
+theme_override_styles/hover = ExtResource("8_bgha2")
+theme_override_styles/pressed = ExtResource("9_llh3k")
+text = "Edit Tags"
+
 [node name="DataControl" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -194,6 +212,20 @@ autowrap_mode = 3
 clip_text = true
 text_overrun_behavior = 1
 
+[node name="Tags" type="ScrollContainer" parent="DataControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TagViewer" type="HFlowContainer" parent="DataControl/Tags"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("11_kkqct")
+selectable_tags = false
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_am56h")
@@ -256,4 +288,5 @@ texture = ExtResource("6_1mdqn")
 expand_mode = 2
 
 [connection signal="pressed" from="TitleControl/UnfoldButton" to="." method="toggle_unfold"]
+[connection signal="pressed" from="TitleControl/EditTagsButton" to="." method="_on_edit_tags_button_pressed"]
 [connection signal="pressed" from="DataControl/Button" to="." method="_on_location_button_pressed"]

@@ -1,6 +1,7 @@
 extends HFlowContainer
 var tag_element_prefab = preload("res://objects/TagElement.tscn")
 signal tag_pressed_sig
+@export var selectable_tags = true
 
 func _ready():
 	pass # Replace with function body.
@@ -15,15 +16,16 @@ func tag_pressed():
 	tag_pressed_sig.emit()
 
 
-func refrash_items_list(tag_data):
+func refrash_tags_list(tag_data, current_selected_tags = []):
 	clear_tags()
 	for t in tag_data:
 		var new_tag = tag_element_prefab.instantiate()
 		new_tag.set_text(tag_data[t].name)
 		new_tag.get_button().pressed.connect(tag_pressed)
 		new_tag.tag_id = t
+		new_tag.set_selectable(selectable_tags)
+		new_tag.set_pressed(t in current_selected_tags)
 		add_child(new_tag)
-	select_all(false)
 
 
 func get_selected_ids():

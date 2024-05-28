@@ -2,7 +2,8 @@ extends Control
 @export var tree_element : Tree
 @export var locations_tab_tree : Tree
 @export var category_tab_tree : Tree
-@export  var tag_tab : Control 
+@export var tag_tab : Control 
+@export var tag_selection_viewer : Control
 @onready var items_tab : Control = $MainControl/TabContainer/Items
 @onready var item_creation_dialogue : Control = $ItemCreationDialogue
 @onready var location_creation_dialogue : Control = $LocationCreationDialogue
@@ -20,7 +21,7 @@ var tree_selection_index : int = -1
 func _ready():
 	if OS.get_name() == "Android":
 		$MainControl/AnimationPlayer.play("mobile_offset")
-	pass
+	$MainControl/TabContainer.current_tab = 0
 
 
 func get_number_of_items_in_location(location_id):
@@ -48,6 +49,9 @@ func tag_exists(tag_name):
 			return true
 	return false
 
+
+func get_number_of_items_with_tags(tag_ids):
+	return $Database.get_number_of_items_with_tags(tag_ids)
 
 func confirme_action_dialogue(recever, conf_what_to_do, message = ""):
 	action_confirm_dialogue.confirme_action_dialogue(recever, conf_what_to_do, message)
@@ -100,7 +104,28 @@ func exec_action_popup(what_to_do, action_data_type, for_dialogue = null, item_i
 		tree_selection_dialogue.data_recever_dialogue = for_dialogue
 		tree_selection_dialogue.item_id = item_id
 		tree_selection_dialogue.visible = true
-		
+
+
+func save_item_tags(item_index, current_tag_ids):
+	$Database.save_item_tags(item_index, current_tag_ids)
+
+
+func get_tags_data_by_ids(tag_ids):
+	var current_tags_data = {}
+	for t in tag_ids:
+		if t in $Database.tags_data:
+			current_tags_data[t] = $Database.tags_data[t]
+	return current_tags_data
+
+
+func get_all_tags_data():
+	return $Database.tags_data
+
+
+func select_tags_with_dialogue(recever, selected_tags = []):
+	$TagSelectionDialogue.select_tags_with_dialogue(recever, selected_tags)
+	$TagSelectionDialogue.show()
+
 
 func edit_item(item_id):
 	if item_id in $Database.items_data.keys() and item_id > 0:
@@ -261,6 +286,10 @@ func edit_tag(tag_id):
 		tag_creation_dialogue._show()
 
 
+func get_tags_for_item(id):
+	return $Database.get_tags_for_item(id)
+	
+
 func _on_create_location_button_pressed():
 	edit_location(-1)
 
@@ -278,4 +307,4 @@ func _on_category_struct_tree_button_clicked(item, column, id, mouse_button_inde
 
 
 func _on_database_tags_data_loaded():
-	tag_tab.refrash_items_list($Database.tags_data)
+	tag_tab.refrash_tags_list($Database.tags_data)

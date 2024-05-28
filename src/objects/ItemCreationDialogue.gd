@@ -5,6 +5,7 @@ extends Control
 @export var location_element : Panel
 @export var quantity_element : Panel
 @export var category_element : Panel
+@export var tags_element : Panel
 
 @onready var main_node = get_tree().get_root().get_node("Main")
 @export var item_data_components : Array[Control]
@@ -16,6 +17,7 @@ var current_item_data
 var current_mode = Global.WhatToDo.None
 var current_action_data_type = Global.ActionDataType.None
 var current_stock_data = {}
+var current_item_tags_data = {}
 
 func show_item_data_components(to_show = true):
 	for i in item_data_components:
@@ -36,9 +38,12 @@ func _show(what_to_do, action_data_type):
 		if what_to_do == Global.WhatToDo.Create:
 			title_label.text = "create item"
 			delete_button.visible = false 
+			current_item_tags_data = {}
 		else:
 			title_label.text = "edit item"
-			delete_button.visible = true 
+			delete_button.visible = true
+			current_item_tags_data = main_node.get_tags_for_item(current_item_data.id)
+		tags_element.set_tags(current_item_tags_data)
 		show_item_data_components(true)
 		show_stock_data_components(current_mode == Global.WhatToDo.Create)
 	elif action_data_type == Global.ActionDataType.Stock:
@@ -127,6 +132,10 @@ func _on_save_item_button_pressed():
 		if current_item_data and "category_id" in current_item_data:
 			new_item_data.category_id = current_item_data.category_id
 		item_index = main_node.save_item(new_item_data, quantity == 0)
+		if current_mode == Global.WhatToDo.Create:
+			main_node.save_item_tags(item_index, current_item_tags_data.keys())
+		else:
+			main_node.save_item_tags(new_item_data.id, current_item_tags_data.keys())
 	var to_save_stock = quantity != 0
 	if current_action_data_type == Global.ActionDataType.Item and \
 			current_mode != Global.WhatToDo.Create:
@@ -156,6 +165,11 @@ func tree_value_selected(value, item_selection_action_type):
 		update_category_text(main_node.get_category_address(current_item_data.category_id))
 
 
+func update_tags(tag_ids):
+	current_item_tags_data = main_node.get_tags_data_by_ids(tag_ids)
+	tags_element.set_tags(current_item_tags_data)
+	
+
 func _on_location_selection_button_pressed():
 	main_node.select_location_popup(self)
 	#main_node.exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.Location, item_index)
@@ -167,8 +181,8 @@ func _on_category_selection_button_pressed():
 
 func _on_delete_button_pressed():
 	main_node.confirme_action_dialogue(self, Global.WhatToDo.Delete, "Do you want to delete this item?")
-	
-	
+
+
 func confirme_action(conf_what_to_do):
 	if conf_what_to_do == Global.WhatToDo.Delete:
 		if current_action_data_type == Global.ActionDataType.Item:
@@ -176,3 +190,10 @@ func confirme_action(conf_what_to_do):
 		elif current_action_data_type == Global.ActionDataType.Stock:
 			main_node.delete_stock(current_stock_data.id)
 		reset_and_hide()
+
+
+func _on_tags_edit_tags_button_pressed():
+	var selected_tags = []
+	for t in current_item_tags_data:
+		selected_tags.append(current_item_tags_data[t].id)
+	main_node.select_tags_with_dialogue(self, selected_tags)

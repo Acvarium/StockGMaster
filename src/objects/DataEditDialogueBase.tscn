@@ -7,9 +7,9 @@
 [ext_resource type="StyleBox" uid="uid://cgfpael8bobl2" path="res://styles/ColorButtons/DelNormal.tres" id="3_ljphr"]
 [ext_resource type="StyleBox" uid="uid://b7fau3jxc43mk" path="res://styles/ColorButtons/ConfHover.tres" id="4_jav2k"]
 [ext_resource type="FontVariation" uid="uid://bhyikp6mmffmg" path="res://fonts/resources/menu_font01.tres" id="4_n8g7y"]
-[ext_resource type="StyleBox" uid="uid://3yancno0l5rn" path="res://objects/DelHover.tres" id="4_ro2g8"]
-[ext_resource type="StyleBox" uid="uid://bgi7mr6mfmnnl" path="res://objects/DelPressed.tres" id="5_ivdkn"]
 [ext_resource type="Script" path="res://objects/FitLabel.gd" id="5_rlvqw"]
+[ext_resource type="StyleBox" uid="uid://3yancno0l5rn" path="res://styles/DelHover.tres" id="7_sr0bl"]
+[ext_resource type="StyleBox" uid="uid://bgi7mr6mfmnnl" path="res://styles/DelPressed.tres" id="8_h72ik"]
 [ext_resource type="StyleBox" uid="uid://c8vhwnw1k36py" path="res://styles/ColorButtons/CancNormal.tres" id="9_3amq6"]
 [ext_resource type="StyleBox" uid="uid://b42fcqui5l51q" path="res://styles/ColorButtons/CancHover.tres" id="10_bb2qc"]
 [ext_resource type="StyleBox" uid="uid://bptny03prtwm7" path="res://styles/ColorButtons/CancPressed.tres" id="11_kcv2f"]
@@ -100,8 +100,8 @@ size_flags_stretch_ratio = 0.5
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = ExtResource("3_ljphr")
-theme_override_styles/hover = ExtResource("4_ro2g8")
-theme_override_styles/pressed = ExtResource("5_ivdkn")
+theme_override_styles/hover = ExtResource("7_sr0bl")
+theme_override_styles/pressed = ExtResource("8_h72ik")
 text = "DEL"
 
 [node name="CancelButton" type="Button" parent="SDCButtons/HBoxContainer"]

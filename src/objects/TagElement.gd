@@ -7,6 +7,11 @@ func _ready():
 func get_button():
 	return $Button
 
+
+func set_selectable(value):
+	$Button.disabled = !value
+
+
 func set_text(text):
 	$HB/Label.text = text
 
