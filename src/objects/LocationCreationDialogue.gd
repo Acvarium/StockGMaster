@@ -64,12 +64,19 @@ func _on_cancel_button_pressed():
 
 
 func _on_delete_button_pressed():
-	var number_of_items_in_location = main_node.get_number_of_items_in_location(current_data.id)
 	var message = ""
-	if number_of_items_in_location == 1:
-		message = str(number_of_items_in_location) + " item stock will be moved to the ROOT location."
-	elif number_of_items_in_location > 1:
-		message = str(number_of_items_in_location) + " item stocks will be moved to the ROOT location."
+	if current_action_data_type == Global.ActionDataType.Location:
+		var number_of_items_in_location = main_node.get_number_of_items_in_location(current_data.id)
+		if number_of_items_in_location == 1:
+			message = str(number_of_items_in_location) + " item stock will be moved to the ROOT location."
+		elif number_of_items_in_location > 1:
+			message = str(number_of_items_in_location) + " item stocks will be moved to the ROOT location."
+	elif current_action_data_type == Global.ActionDataType.Category:
+		var number_of_items_with_category = main_node.get_number_of_items_with_category(current_data.id)
+		if number_of_items_with_category == 1:
+			message = str(number_of_items_with_category) + " item is in this category."
+		elif number_of_items_with_category > 1:
+			message = str(number_of_items_with_category) + " items are in this category."
 	main_node.confirme_action_dialogue(self, Global.WhatToDo.Delete, message)
 
 
@@ -77,7 +84,10 @@ func confirme_action(conf_what_to_do):
 	if conf_what_to_do == Global.WhatToDo.Delete:
 		if current_action_data_type == Global.ActionDataType.Location:
 			main_node.delete_location(current_data.id)
+		elif current_action_data_type == Global.ActionDataType.Category:
+			main_node.delete_category(current_data.id)
 		hide()
+		
 
 
 func _on_save_item_button_pressed():

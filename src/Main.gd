@@ -28,16 +28,32 @@ func get_number_of_items_in_location(location_id):
 	return $Database.get_number_of_items_in_location(location_id)
 
 
+func get_number_of_items_with_category(category_id):
+	return $Database.get_number_of_items_with_category(category_id)
+	
+
 func delete_location(location_id):
 	var location_parent_id = 0
 	if location_id in $Database.locations_data.keys():
 		if "parent_id" in $Database.locations_data[location_id]:
 			location_parent_id = $Database.locations_data[location_id]["parent_id"]
-		$Database.move_all_stocks_from_to(location_id, location_parent_id)
+		$Database.move_all_stocks_from_loc_to(location_id, location_parent_id)
 		$Database.move_all_locations_from_parent_up(location_id)
 		$Database.delete_location(location_id)
 		$Database.pull_items_data()
 		$Database.pull_locations_data()
+
+
+func delete_category(category_id):
+	var cat_parent_id = 0
+	if category_id in $Database.categories_data.keys():
+		if "parent_id" in $Database.categories_data[category_id]:
+			cat_parent_id = $Database.categories_data[category_id]["parent_id"]
+		$Database.move_all_items_from_cat_to(category_id, cat_parent_id)
+		$Database.move_all_categories_from_parent_up(category_id)
+		$Database.delete_category(category_id)
+		$Database.pull_items_data()
+		$Database.pull_categories_data()
 
 
 func tag_exists(tag_name):
@@ -52,6 +68,7 @@ func tag_exists(tag_name):
 
 func get_number_of_items_with_tags(tag_ids):
 	return $Database.get_number_of_items_with_tags(tag_ids)
+
 
 func confirme_action_dialogue(recever, conf_what_to_do, message = ""):
 	action_confirm_dialogue.confirme_action_dialogue(recever, conf_what_to_do, message)

@@ -59,7 +59,6 @@ func _show(what_to_do, action_data_type):
 	show()
 
 
-#TODO implement the mode for editing the stock data
 func set_stock_data(item_data, stock_data):
 	current_item_data = item_data
 	current_stock_data = stock_data

@@ -20,8 +20,12 @@ var categories_data = {}
 var tags_data = {}
 
 
-func move_all_stocks_from_to(from_location_id, to_location_id):
+func move_all_stocks_from_loc_to(from_location_id, to_location_id):
 	db.update_rows("item_stocks", "location_id = '" + str(from_location_id) + "'", {"location_id" : to_location_id})
+
+
+func move_all_items_from_cat_to(from_cat_id, to_cat_id):
+	db.update_rows("items", "category_id = '" + str(from_cat_id) + "'", {"category_id" : to_cat_id})
 
 
 func move_all_locations_from_parent_up(from_location):
@@ -32,12 +36,24 @@ func move_all_locations_from_parent_up(from_location):
 	db.update_rows("locations", "parent_id = '" + str(from_location) + "'", {"parent_id" : parent_id})
 
 
+func move_all_categories_from_parent_up(from_cat):
+	var parent_id = 0
+	if from_cat in categories_data.keys() and "parent_id" in categories_data[from_cat] and \
+			categories_data[from_cat]["parent_id"] != null:
+		parent_id = categories_data[from_cat]["parent_id"]
+	db.update_rows("categories", "parent_id = '" + str(from_cat) + "'", {"parent_id" : parent_id})
+
+
 func get_number_of_items_with_tags(tag_ids):
 	var items_counted = 0
 	for i in range(tag_ids.size()):
 		items_counted += \
 			db.select_rows("item_tags", "tag_id = '" + str(tag_ids[i]) + "'", ["*"]).size()
 	return items_counted
+
+
+func get_number_of_items_with_category(category_id):
+	return db.select_rows("items", "category_id = '" + str(category_id) + "'", ["*"]).size()
 	
 
 func get_tags_for_item(id):
@@ -51,6 +67,10 @@ func get_tags_for_item(id):
 
 func delete_location(location_id):
 	db.delete_rows("locations", "id = '" + str(location_id) + "'")
+
+
+func delete_category(cat_id):
+	db.delete_rows("categories", "id = '" + str(cat_id) + "'")
 
 
 func delete_item(item_index):
