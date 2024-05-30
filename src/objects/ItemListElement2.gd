@@ -9,6 +9,7 @@ extends Panel
 	set(new_value):
 		placeholder_text = new_value
 		$DataControl/Edit.placeholder_text = new_value
+		$CheckControl/CheckBox.text = new_value
 
 @export var list_item_mode = ListItemModes.Text :
 	set(new_value):

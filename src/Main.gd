@@ -4,12 +4,14 @@ extends Control
 @export var category_tab_tree : Tree
 @export var tag_tab : Control 
 @export var tag_selection_viewer : Control
+@export var item_search_bar : LineEdit
 @onready var items_tab : Control = $MainControl/TabContainer/Items
 @onready var item_creation_dialogue : Control = $ItemCreationDialogue
 @onready var location_creation_dialogue : Control = $LocationCreationDialogue
 @onready var tag_creation_dialogue : Control = $TagCreationDialogue
 @onready var tree_selection_dialogue : Control = $TreeSelectionDialogue
 @onready var action_confirm_dialogue : Control = $ActionConfirmDialogue
+
 var selected_value : int = -1
 var tree_selection_index : int = -1
 
@@ -42,6 +44,32 @@ func delete_location(location_id):
 		$Database.delete_location(location_id)
 		$Database.pull_items_data()
 		$Database.pull_locations_data()
+
+
+func search_items_with_text(search_text):
+	if search_text.is_empty():
+		return null
+	var found_item_ids = []
+	var search_text_split = search_text.to_lower().split(" ")
+	for i in $Database.items_data:
+		var current_item_data = $Database.items_data[i]
+		var item_name = current_item_data.name
+		
+		var item_descr = "" 
+		if "description" in current_item_data and current_item_data.description:
+			item_descr = current_item_data.description
+			
+		var current_text = (item_name + item_descr).to_lower()
+		var to_add_item = true
+		for s in search_text_split:
+			if s.is_empty():
+				continue
+			if not s in current_text:
+				to_add_item = false
+				continue
+		if to_add_item:
+			found_item_ids.append(i)
+	return found_item_ids
 
 
 func delete_category(category_id):
@@ -325,3 +353,12 @@ func _on_category_struct_tree_button_clicked(item, column, id, mouse_button_inde
 
 func _on_database_tags_data_loaded():
 	tag_tab.refrash_tags_list($Database.tags_data)
+
+
+func search_item(search_text):
+	print(search_text)
+
+
+func _on_items_search_line_edit_text_changed(new_text):
+	search_item(new_text)
+

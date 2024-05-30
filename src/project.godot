@@ -35,6 +35,13 @@ window/vsync/vsync_mode=0
 
 enabled=PackedStringArray("res://addons/AutoExportVersion/plugin.cfg", "res://addons/SimpleTODO/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/godot-sqlite/plugin.cfg")
 
+[input]
+
+ui_menu={
+"deadzone": 0.5,
+"events": []
+}
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

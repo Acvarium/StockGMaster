@@ -85,7 +85,7 @@ shadow_color = Color(0, 0, 0, 0.403922)
 shadow_size = 10
 shadow_offset = Vector2(10, 10)
 
-[node name="Main" type="Control" node_paths=PackedStringArray("tree_element", "locations_tab_tree", "category_tab_tree", "tag_tab", "tag_selection_viewer")]
+[node name="Main" type="Control" node_paths=PackedStringArray("tree_element", "locations_tab_tree", "category_tab_tree", "tag_tab", "tag_selection_viewer", "item_search_bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -98,6 +98,7 @@ locations_tab_tree = NodePath("MainControl/TabContainer/Locations/LocationStruct
 category_tab_tree = NodePath("MainControl/TabContainer/Categories/CategoryStructTree")
 tag_tab = NodePath("MainControl/TabContainer/Tags")
 tag_selection_viewer = NodePath("TagSelectionDialogue/TSL/AspectRatioContainer/Control/SC/TagViewer")
+item_search_bar = NodePath("MainControl/TabContainer/Items/ItemsToolPanel/ItemsSearchLineEdit")
 
 [node name="Database" type="Node" parent="."]
 script = ExtResource("2_x8r34")
@@ -541,6 +542,34 @@ list_item_mode = 3
 [node name="SaveItemButton" parent="ItemCreationDialogue/SDCButtons/HBoxContainer" index="0"]
 theme_override_styles/pressed = ExtResource("25_veepo")
 
+[node name="ItemFilteringDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "tags_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("9_p6ieq")]
+layout_mode = 1
+script = ExtResource("10_06y8t")
+name_list_item = NodePath("../ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Name")
+description_list_item = NodePath("../ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Description")
+title_label = NodePath("../ItemCreationDialogue/TextureRect/Title")
+location_element = NodePath("../ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Location")
+quantity_element = NodePath("../ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Quantity")
+category_element = NodePath("../ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Category")
+tags_element = NodePath("../ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Tags")
+item_data_components = [NodePath("../ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Description"), NodePath("../ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Image"), NodePath("../ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Category"), NodePath("../ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Tags"), NodePath("../ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/ItemDataSeparator")]
+stock_data_components = [NodePath("../ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/StockDataSeparator"), NodePath("../ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Location"), NodePath("../ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Quantity")]
+delete_button = NodePath("../ItemCreationDialogue/SDCButtons/HBoxContainer/DeleteButton")
+
+[node name="VBoxContainer" parent="ItemFilteringDialogue/ItemsPanel/ScrollContainer" index="0"]
+unfold_item_list = Array[NodePath]([NodePath("ShowEmpty"), NodePath("")])
+
+[node name="ShowEmpty" parent="ItemFilteringDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("12_ubi7w")]
+layout_mode = 2
+title_text = "Show Empty"
+placeholder_text = "Enter an Item Name"
+
+[node name="SaveItemButton" parent="ItemFilteringDialogue/SDCButtons/HBoxContainer" index="0"]
+theme_override_styles/pressed = ExtResource("25_veepo")
+
+[node name="Title" parent="ItemFilteringDialogue/TextureRect" index="0"]
+text = "Filter Items"
+
 [node name="LocationCreationDialogue" parent="." node_paths=PackedStringArray("title_label", "name_list_item", "description_list_item", "parent_list_item", "delete_button") instance=ExtResource("9_p6ieq")]
 visible = false
 layout_mode = 1
@@ -892,6 +921,7 @@ text_overrun_behavior = 3
 [connection signal="item_data_loaded" from="Database" to="." method="_on_database_item_data_loaded"]
 [connection signal="locations_data_loaded" from="Database" to="." method="_on_database_locations_data_loaded"]
 [connection signal="tags_data_loaded" from="Database" to="." method="_on_database_tags_data_loaded"]
+[connection signal="text_changed" from="MainControl/TabContainer/Items/ItemsToolPanel/ItemsSearchLineEdit" to="MainControl/TabContainer/Items" method="_on_items_search_line_edit_text_changed"]
 [connection signal="pressed" from="MainControl/TabContainer/Items/ItemsToolPanel/CreateItemButton" to="." method="_on_create_item_button_pressed"]
 [connection signal="pressed" from="MainControl/TabContainer/Locations/LocationToolPanel/CreateLocationButton" to="." method="_on_create_location_button_pressed"]
 [connection signal="button_clicked" from="MainControl/TabContainer/Locations/LocationStructTree" to="." method="_on_location_struct_tree_button_clicked"]
@@ -910,6 +940,9 @@ text_overrun_behavior = 3
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ItemCreationDialogue" method="_on_save_item_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/DeleteButton" to="ItemCreationDialogue" method="_on_delete_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/CancelButton" to="ItemCreationDialogue" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="ItemFilteringDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ItemFilteringDialogue" method="_on_save_item_button_pressed"]
+[connection signal="pressed" from="ItemFilteringDialogue/SDCButtons/HBoxContainer/DeleteButton" to="ItemFilteringDialogue" method="_on_delete_button_pressed"]
+[connection signal="pressed" from="ItemFilteringDialogue/SDCButtons/HBoxContainer/CancelButton" to="ItemFilteringDialogue" method="_on_cancel_button_pressed"]
 [connection signal="location_button_pressed" from="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Parent" to="LocationCreationDialogue" method="_on_parent_selection_button_pressed"]
 [connection signal="pressed" from="LocationCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="LocationCreationDialogue" method="_on_save_item_button_pressed"]
 [connection signal="pressed" from="LocationCreationDialogue/SDCButtons/HBoxContainer/DeleteButton" to="LocationCreationDialogue" method="_on_delete_button_pressed"]
@@ -929,5 +962,6 @@ text_overrun_behavior = 3
 [connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/CancelButton" to="ActionConfirmDialogue" method="_on_cancel_button_pressed"]
 
 [editable path="ItemCreationDialogue"]
+[editable path="ItemFilteringDialogue"]
 [editable path="LocationCreationDialogue"]
 [editable path="TagCreationDialogue"]

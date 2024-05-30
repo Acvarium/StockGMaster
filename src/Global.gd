@@ -1,10 +1,5 @@
 extends Node
 
-#enum TreeSelection {
-	#ParentLocation,
-	#ParentCategory
-#}
-
 enum WhatToDo {
 	None,
 	Change,
