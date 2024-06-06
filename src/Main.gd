@@ -331,6 +331,9 @@ func edit_tag(tag_id):
 		tag_creation_dialogue._show()
 
 
+func show_item_filtering_dialogue():
+	$ItemFilteringDialogue.show()
+
 func get_tags_for_item(id):
 	return $Database.get_tags_for_item(id)
 	
@@ -362,3 +365,6 @@ func search_item(search_text):
 func _on_items_search_line_edit_text_changed(new_text):
 	search_item(new_text)
 
+
+func _on_filter_items_button_pressed():
+	show_item_filtering_dialogue()
