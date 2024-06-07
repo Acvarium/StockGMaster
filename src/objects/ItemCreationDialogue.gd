@@ -149,6 +149,7 @@ func _on_save_item_button_pressed():
 		current_stock_data.quantity = quantity
 		main_node.save_stock(current_stock_data)
 	reset_and_hide()
+	main_node.refresh_item_list()
 
 
 func tree_value_selected(value, item_selection_action_type):
