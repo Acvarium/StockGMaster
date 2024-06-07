@@ -20,10 +20,38 @@ var tree_selection_index : int = -1
 #var current_action_id = -1
 
 
+var filter_tag_ids = []
+
+
 func _ready():
 	if OS.get_name() == "Android":
 		$MainControl/AnimationPlayer.play("mobile_offset")
 	$MainControl/TabContainer.current_tab = 0
+
+
+func refresh_item_list():
+	items_tab.refresh_list()
+
+
+func is_item_passes_filter(item_id):
+	if filter_tag_ids and filter_tag_ids.size() > 0:
+		var has_selected_tags = false
+		var tag_ids_for_item = $Database.get_tag_ids_for_item(item_id)
+		for t in tag_ids_for_item:
+			if t in filter_tag_ids:
+				has_selected_tags = true
+				break
+		return has_selected_tags
+		#for t in $Database.get_tags_for_item(item_id)
+	return true
+
+
+func set_fillter_tag_ids(values):
+	filter_tag_ids = values.duplicate()
+
+
+func get_filter_tag_ids():
+	return filter_tag_ids
 
 
 func get_number_of_items_in_location(location_id):

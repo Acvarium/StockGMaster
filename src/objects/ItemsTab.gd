@@ -5,6 +5,7 @@ var item_prefab = preload("res://objects/ItemListElement.tscn")
 @onready var main_node = get_tree().get_root().get_node("Main")
 var item_elements = {}
 
+
 func _ready():
 	pass
 	#clear_list()
@@ -48,13 +49,18 @@ func add_item(item_data):
 	item_elements[item_data.id] = item_element
 
 
+func refresh_list():
+	var search_text = $ItemsToolPanel/ItemsSearchLineEdit.text
+	_on_items_search_line_edit_text_changed(search_text)
+	
+
 func show_selection(selection_ids):
-	if selection_ids == null:
-		for k in item_elements.keys():
-			item_elements[k].visible = true
-		return
 	for k in item_elements.keys():
-		item_elements[k].visible = k in selection_ids
+		var in_selection = selection_ids == null or k in selection_ids
+		if in_selection:
+			item_elements[k].visible = main_node.is_item_passes_filter(k)
+		else:
+			item_elements[k].visible = false
 
 
 func _on_items_search_line_edit_text_changed(new_text):

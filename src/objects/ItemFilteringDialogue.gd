@@ -12,8 +12,9 @@ func _on_cancel_button_pressed():
 
 
 func _on_save_item_button_pressed():
-	pass # Replace with function body.
-
+	main_node.set_fillter_tag_ids(current_item_tags_data)
+	main_node.refresh_item_list()
+	hide()
 
 
 func update_tags(tag_ids):

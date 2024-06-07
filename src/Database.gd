@@ -63,7 +63,16 @@ func get_tags_for_item(id):
 		var current_item_tag_data = current_item_tags_db[i]
 		current_item_tags[current_item_tag_data.id] = {"id": current_item_tag_data.tag_id, "name": tags_data[current_item_tag_data.tag_id].name}
 	return current_item_tags
-		
+
+
+func get_tag_ids_for_item(item_id):
+	var current_item_tags_db = db.select_rows("item_tags", "item_id = '" + str(item_id) + "'", ["tag_id"])
+	var current_item_tag_ids = []
+	for data in current_item_tags_db:
+		current_item_tag_ids.append(data.tag_id)
+	return current_item_tag_ids
+
+
 
 func delete_location(location_id):
 	db.delete_rows("locations", "id = '" + str(location_id) + "'")
