@@ -1,6 +1,6 @@
 extends Node
 var save_file = "user://StockGMaster.conf.json"
-var profile_names = ['default']
+var profile_names = ['In Game Folder', 'Default']
 var current_profile_id = 0
 
 enum WhatToDo {
