@@ -626,6 +626,7 @@ visible = false
 text = "Filter Items"
 
 [node name="ProfileSelectionDialogue" parent="." node_paths=PackedStringArray("profiles_holder") instance=ExtResource("9_p6ieq")]
+visible = false
 layout_mode = 1
 script = ExtResource("21_nm3mm")
 profiles_holder = NodePath("ItemsPanel/ScrollContainer/VBoxContainer")

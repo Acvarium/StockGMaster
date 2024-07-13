@@ -10,14 +10,23 @@ var db : SQLite = null
 @export var score_text : TextEdit
 
 const verbosity_level : int = SQLite.VERBOSE
-var database_path = "res://data/data.db"
-#var database_path = "user://data.db"
+#var database_path = "res://data/data.db"
+
+const db_file_name = "data.db"
+var base_data_paths = ["res://data/", "user://default/"]
 
 
 var locations_data = {}
 var items_data = {}
 var categories_data = {}
 var tags_data = {}
+
+
+func get_db_path():
+	if OS.get_name() == "Android":
+		return base_data_paths[0] + db_file_name
+	if Global.current_profile_id <= 1:
+		return base_data_paths[Global.current_profile_id] + db_file_name
 
 
 func move_all_stocks_from_loc_to(from_location_id, to_location_id):
@@ -71,7 +80,6 @@ func get_tag_ids_for_item(item_id):
 	for data in current_item_tags_db:
 		current_item_tag_ids.append(data.tag_id)
 	return current_item_tag_ids
-
 
 
 func delete_location(location_id):
@@ -195,10 +203,11 @@ func pull_items_data():
 	
 
 func _ready():
-	if OS.get_name() == "Android":
-		database_path = "user://data.db"
+	var d = DirAccess.open(base_data_paths[1])
+	if d == null:
+		DirAccess.make_dir_absolute(base_data_paths[1])
 	db = SQLite.new()
-	db.path = database_path
+	db.path = get_db_path()
 	db.open_db()
 	create_tables()
 	pull_locations_data()
