@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=45 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_5mhyi"]
 [ext_resource type="Script" path="res://Database.gd" id="2_x8r34"]
@@ -22,7 +22,10 @@
 [ext_resource type="StyleBox" uid="uid://bx3wv2qghdpe8" path="res://styles/BGButtonStyle.tres" id="15_e2j01"]
 [ext_resource type="StyleBox" uid="uid://4cmibv0a8kf2" path="res://styles/BGButtonHoverStyle.tres" id="16_uvvjq"]
 [ext_resource type="Script" path="res://objects/ActionConfirmDialogue.gd" id="17_36kog"]
+[ext_resource type="StyleBox" uid="uid://bwo64t2nmfot" path="res://styles/ItemList2PanelStyle.tres" id="17_jivgq"]
+[ext_resource type="Script" path="res://objects/ListOfProfilesDialogue.gd" id="18_1v4fy"]
 [ext_resource type="StyleBox" uid="uid://c5i134ur1to60" path="res://styles/EdittextBaseStyle.tres" id="18_luhyk"]
+[ext_resource type="Script" path="res://objects/FitLabel.gd" id="19_1jh3j"]
 [ext_resource type="Script" path="res://objects/ItemFilteringDialogue.gd" id="19_8mkwf"]
 [ext_resource type="Script" path="res://objects/TagCreationDialogue.gd" id="19_p1s4p"]
 [ext_resource type="Script" path="res://objects/ProfileSelectionDialogue.gd" id="21_nm3mm"]
@@ -144,6 +147,7 @@ layout_mode = 2
 script = ExtResource("3_wxfjw")
 items_holder = NodePath("ItemsListPanel/ScrollContainer/VBoxContainer")
 temp_items_holder = NodePath("ItemsListPanel/TempItemHolder")
+metadata/_tab_index = 0
 
 [node name="ItemsToolPanel" type="Panel" parent="MainControl/TabContainer/Items"]
 layout_mode = 1
@@ -164,8 +168,8 @@ anchor_bottom = 1.0
 offset_right = -112.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = ExtResource("10_djmps")
 theme_override_styles/focus = ExtResource("10_djmps")
+theme_override_styles/normal = ExtResource("10_djmps")
 clear_button_enabled = true
 
 [node name="FilterItemsButton" type="Button" parent="MainControl/TabContainer/Items/ItemsToolPanel"]
@@ -179,9 +183,9 @@ offset_left = -106.0
 offset_right = -76.0
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_styles/normal = ExtResource("10_ev2os")
 theme_override_styles/hover = ExtResource("11_wqlnj")
 theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/normal = ExtResource("10_ev2os")
 text = "F"
 
 [node name="CreateItemButton" type="Button" parent="MainControl/TabContainer/Items/ItemsToolPanel"]
@@ -194,9 +198,9 @@ anchor_bottom = 1.0
 offset_left = -8.0
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_styles/normal = ExtResource("10_ev2os")
 theme_override_styles/hover = ExtResource("11_wqlnj")
 theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/normal = ExtResource("10_ev2os")
 text = "Create"
 
 [node name="ItemsListPanel" type="Panel" parent="MainControl/TabContainer/Items"]
@@ -238,6 +242,7 @@ mouse_filter = 2
 [node name="Locations" type="Control" parent="MainControl/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="LocationToolPanel" type="Panel" parent="MainControl/TabContainer/Locations"]
 layout_mode = 1
@@ -258,8 +263,8 @@ anchor_bottom = 1.0
 offset_right = -85.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = ExtResource("10_djmps")
 theme_override_styles/focus = ExtResource("10_djmps")
+theme_override_styles/normal = ExtResource("10_djmps")
 clear_button_enabled = true
 
 [node name="CreateLocationButton" type="Button" parent="MainControl/TabContainer/Locations/LocationToolPanel"]
@@ -272,9 +277,9 @@ anchor_bottom = 1.0
 offset_left = -8.0
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_styles/normal = ExtResource("10_ev2os")
 theme_override_styles/hover = ExtResource("11_wqlnj")
 theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/normal = ExtResource("10_ev2os")
 text = "Create"
 
 [node name="LocationStructTree" type="Tree" parent="MainControl/TabContainer/Locations"]
@@ -294,6 +299,7 @@ has_edit_buttons = true
 [node name="Categories" type="Control" parent="MainControl/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="CategoryToolPanel" type="Panel" parent="MainControl/TabContainer/Categories"]
 layout_mode = 1
@@ -314,8 +320,8 @@ anchor_bottom = 1.0
 offset_right = -85.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = ExtResource("10_djmps")
 theme_override_styles/focus = ExtResource("10_djmps")
+theme_override_styles/normal = ExtResource("10_djmps")
 clear_button_enabled = true
 
 [node name="CreateCategoryButton" type="Button" parent="MainControl/TabContainer/Categories/CategoryToolPanel"]
@@ -328,9 +334,9 @@ anchor_bottom = 1.0
 offset_left = -8.0
 grow_horizontal = 0
 grow_vertical = 2
-theme_override_styles/normal = ExtResource("10_ev2os")
 theme_override_styles/hover = ExtResource("11_wqlnj")
 theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/normal = ExtResource("10_ev2os")
 text = "Create"
 
 [node name="CategoryStructTree" type="Tree" parent="MainControl/TabContainer/Categories"]
@@ -354,6 +360,7 @@ script = ExtResource("6_2kqfq")
 tag_viewer = NodePath("Control/ScrollContainer/TagViewer")
 edit_button = NodePath("TagToolPanel2/HBoxContainer/EditTagsButton")
 delete_button = NodePath("TagToolPanel2/HBoxContainer/DeleteSelectedTagsButton")
+metadata/_tab_index = 3
 
 [node name="Control" type="Control" parent="MainControl/TabContainer/Tags"]
 layout_mode = 1
@@ -400,8 +407,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = ExtResource("10_djmps")
 theme_override_styles/focus = ExtResource("10_djmps")
+theme_override_styles/normal = ExtResource("10_djmps")
 clear_button_enabled = true
 
 [node name="TagToolPanel2" type="Panel" parent="MainControl/TabContainer/Tags"]
@@ -427,18 +434,18 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-theme_override_styles/normal = ExtResource("10_ev2os")
 theme_override_styles/hover = ExtResource("11_wqlnj")
 theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/normal = ExtResource("10_ev2os")
 text = "Sel.All"
 
 [node name="DeselectAllTagsButton" type="Button" parent="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-theme_override_styles/normal = ExtResource("10_ev2os")
 theme_override_styles/hover = ExtResource("11_wqlnj")
 theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/normal = ExtResource("10_ev2os")
 text = "Deselect"
 
 [node name="Control" type="Control" parent="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
@@ -449,10 +456,10 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-theme_override_styles/normal = ExtResource("10_ev2os")
+theme_override_styles/disabled = ExtResource("14_celwd")
 theme_override_styles/hover = ExtResource("11_wqlnj")
 theme_override_styles/pressed = ExtResource("12_tclj0")
-theme_override_styles/disabled = ExtResource("14_celwd")
+theme_override_styles/normal = ExtResource("10_ev2os")
 disabled = true
 text = "Edit"
 
@@ -460,10 +467,10 @@ text = "Edit"
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-theme_override_styles/normal = ExtResource("10_ev2os")
+theme_override_styles/disabled = ExtResource("14_celwd")
 theme_override_styles/hover = ExtResource("11_wqlnj")
 theme_override_styles/pressed = ExtResource("12_tclj0")
-theme_override_styles/disabled = ExtResource("14_celwd")
+theme_override_styles/normal = ExtResource("10_ev2os")
 disabled = true
 text = "Delete"
 
@@ -471,21 +478,24 @@ text = "Delete"
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-theme_override_styles/normal = ExtResource("10_ev2os")
 theme_override_styles/hover = ExtResource("11_wqlnj")
 theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/normal = ExtResource("10_ev2os")
 text = "Create"
 
 [node name="Projects" type="Control" parent="MainControl/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 4
 
 [node name="Builds" type="Control" parent="MainControl/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 5
 
 [node name="Settings" type="Control" parent="MainControl/TabContainer"]
 layout_mode = 2
+metadata/_tab_index = 6
 
 [node name="ItemsPanel" type="Panel" parent="MainControl/TabContainer/Settings"]
 layout_mode = 1
@@ -518,11 +528,49 @@ script = ExtResource("4_a2pk0")
 layout_mode = 2
 separator_text = "Profile"
 
-[node name="Name" parent="MainControl/TabContainer/Settings/ItemsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("12_ubi7w")]
+[node name="CurrentProfileSelector" parent="MainControl/TabContainer/Settings/ItemsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Current Profile"
 placeholder_text = "Enter an Item Name"
 list_item_mode = 1
+
+[node name="Profiles" type="Panel" parent="MainControl/TabContainer/Settings/ItemsPanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 150)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("17_jivgq")
+script = ExtResource("18_1v4fy")
+
+[node name="TitleControl" type="Control" parent="MainControl/TabContainer/Settings/ItemsPanel/ScrollContainer/VBoxContainer/Profiles"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MainControl/TabContainer/Settings/ItemsPanel/ScrollContainer/VBoxContainer/Profiles/TitleControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.84
+anchor_bottom = 1.0
+offset_left = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+text = "Existing Profiles"
+vertical_alignment = 1
+script = ExtResource("19_1jh3j")
+
+[node name="ProfileListHolder" type="Control" parent="MainControl/TabContainer/Settings/ItemsPanel/ScrollContainer/VBoxContainer/Profiles"]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 40.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="MainControl"]
 visible = false
@@ -715,9 +763,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = ExtResource("15_e2j01")
 theme_override_styles/hover = ExtResource("16_uvvjq")
 theme_override_styles/pressed = ExtResource("15_e2j01")
+theme_override_styles/normal = ExtResource("15_e2j01")
 
 [node name="TSL" type="Control" parent="TreeSelectionDialogue"]
 layout_mode = 1
@@ -782,9 +830,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = ExtResource("15_e2j01")
 theme_override_styles/hover = ExtResource("16_uvvjq")
 theme_override_styles/pressed = ExtResource("15_e2j01")
+theme_override_styles/normal = ExtResource("15_e2j01")
 
 [node name="TSL" type="Control" parent="TagSelectionDialogue"]
 layout_mode = 1
@@ -850,9 +898,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = ExtResource("23_rqglp")
 theme_override_styles/hover = ExtResource("24_0srk0")
 theme_override_styles/pressed = ExtResource("25_veepo")
+theme_override_styles/normal = ExtResource("23_rqglp")
 text = "Confirm"
 
 [node name="CancelButton" type="Button" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
@@ -860,9 +908,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = ExtResource("26_dgnrv")
 theme_override_styles/hover = ExtResource("27_xau5b")
 theme_override_styles/pressed = ExtResource("28_vl2i0")
+theme_override_styles/normal = ExtResource("26_dgnrv")
 text = "Cancel"
 
 [node name="ActionConfirmDialogue" type="Control" parent="." node_paths=PackedStringArray("warning_label", "title_label", "conf_button", "canc_button", "acc_button")]
@@ -887,9 +935,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = ExtResource("15_e2j01")
 theme_override_styles/hover = ExtResource("16_uvvjq")
 theme_override_styles/pressed = ExtResource("15_e2j01")
+theme_override_styles/normal = ExtResource("15_e2j01")
 
 [node name="TSL" type="Control" parent="ActionConfirmDialogue"]
 layout_mode = 1
@@ -951,9 +999,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = ExtResource("23_cyhx8")
 theme_override_styles/hover = ExtResource("24_un7m8")
 theme_override_styles/pressed = ExtResource("25_vbo60")
+theme_override_styles/normal = ExtResource("23_cyhx8")
 text = "Accept"
 
 [node name="ConfirmButton" type="Button" parent="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer"]
@@ -961,9 +1009,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = ExtResource("23_rqglp")
 theme_override_styles/hover = ExtResource("24_0srk0")
 theme_override_styles/pressed = ExtResource("25_veepo")
+theme_override_styles/normal = ExtResource("23_rqglp")
 text = "Confirm"
 
 [node name="CancelButton" type="Button" parent="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer"]
@@ -971,9 +1019,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = ExtResource("26_dgnrv")
 theme_override_styles/hover = ExtResource("27_xau5b")
 theme_override_styles/pressed = ExtResource("28_vl2i0")
+theme_override_styles/normal = ExtResource("26_dgnrv")
 text = "Cancel"
 
 [node name="WarningLabel" type="Label" parent="ActionConfirmDialogue/TSL/AR/Control"]
