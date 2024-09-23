@@ -2,6 +2,7 @@ extends Control
 var profile_selection_elements = []
 var profile_elem_prefab = preload("res://objects/profile_selection_element.tscn")
 @export var profiles_holder : Control
+@onready var main_node = get_tree().get_root().get_node("Main")
 
 func _ready():
 	refrash_profile_list()
@@ -29,3 +30,6 @@ func add_profile_list_element(profile_id):
 func select_profile(profile_id):
 	Global.current_profile_id = profile_id
 	
+
+func _on_cancel_button_pressed():
+		main_node.shoe_profile_selection_dialogue(false)

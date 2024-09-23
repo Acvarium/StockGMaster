@@ -22,6 +22,10 @@ enum ActionDataType {
 }
 
 
+func get_current_profile_name():
+	return profile_names[current_profile_id]
+
+
 func load_game():
 	var file = FileAccess.open(save_file, FileAccess.READ)
 	if is_instance_valid(file):

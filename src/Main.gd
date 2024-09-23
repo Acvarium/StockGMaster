@@ -336,6 +336,22 @@ func edit_location(location_id):
 		location_creation_dialogue.set_data({})
 		location_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Location)
 
+#TODO create location from selected
+func create_location_from_selected():
+	pass
+
+func create_location_from(selected_location_id):
+	pass
+	#if location_id in $Database.locations_data.keys() and location_id > 0:
+		##editing
+		#location_creation_dialogue.set_data($Database.locations_data[location_id])
+		#location_creation_dialogue._show(Global.WhatToDo.Change, Global.ActionDataType.Location)
+	#else:
+		##creating
+		#location_creation_dialogue.set_data({})
+		#location_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Location)
+
+
 
 func edit_category(category_id):
 	if category_id in $Database.categories_data.keys() and category_id > 0:
@@ -396,3 +412,7 @@ func _on_items_search_line_edit_text_changed(new_text):
 
 func _on_filter_items_button_pressed():
 	show_item_filtering_dialogue()
+
+
+func shoe_profile_selection_dialogue(to_show = true):
+	$ProfileSelectionDialogue.visible = to_show

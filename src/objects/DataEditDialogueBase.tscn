@@ -88,9 +88,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = ExtResource("3_ceq0j")
 theme_override_styles/hover = ExtResource("4_jav2k")
 theme_override_styles/pressed = ExtResource("11_kcv2f")
+theme_override_styles/normal = ExtResource("3_ceq0j")
 text = "Save"
 
 [node name="DeleteButton" type="Button" parent="SDCButtons/HBoxContainer"]
@@ -99,9 +99,9 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = ExtResource("3_ljphr")
 theme_override_styles/hover = ExtResource("7_sr0bl")
 theme_override_styles/pressed = ExtResource("8_h72ik")
+theme_override_styles/normal = ExtResource("3_ljphr")
 text = "DEL"
 
 [node name="CancelButton" type="Button" parent="SDCButtons/HBoxContainer"]
@@ -109,9 +109,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = ExtResource("9_3amq6")
 theme_override_styles/hover = ExtResource("10_bb2qc")
 theme_override_styles/pressed = ExtResource("11_kcv2f")
+theme_override_styles/normal = ExtResource("9_3amq6")
 text = "Cancel"
 
 [node name="TextureRect" type="NinePatchRect" parent="."]
