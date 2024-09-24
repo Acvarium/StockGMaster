@@ -11,6 +11,7 @@ extends Control
 @onready var tag_creation_dialogue : Control = $TagCreationDialogue
 @onready var tree_selection_dialogue : Control = $TreeSelectionDialogue
 @onready var action_confirm_dialogue : Control = $ActionConfirmDialogue
+@onready var location_selection_tree : Tree = $MainControl/TabContainer/Locations/LocationStructTree
 
 var selected_value : int = -1
 var tree_selection_index : int = -1
@@ -325,7 +326,6 @@ func select_parent_category_popup(for_dialogue, item_id = -1):
 	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.ParentCategory, for_dialogue, item_id)
 
 
-
 func edit_location(location_id):
 	if location_id in $Database.locations_data.keys() and location_id > 0:
 		#editing
@@ -338,14 +338,22 @@ func edit_location(location_id):
 
 #TODO create location from selected
 func create_location_from_selected():
-	pass
+	var selected_id = location_selection_tree.get_selected_id()
+	if selected_id >= 0:
+		create_location_from(selected_id)
+	else:
+		edit_location(-1)
+
 
 func create_location_from(selected_location_id):
 	pass
-	#if location_id in $Database.locations_data.keys() and location_id > 0:
+	if selected_location_id in $Database.locations_data.keys() and selected_location_id >= 0:
 		##editing
-		#location_creation_dialogue.set_data($Database.locations_data[location_id])
-		#location_creation_dialogue._show(Global.WhatToDo.Change, Global.ActionDataType.Location)
+		var _data = $Database.locations_data[selected_location_id]
+		_data.erase("id")
+		location_creation_dialogue.set_data(_data)
+		
+		location_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Location)
 	#else:
 		##creating
 		#location_creation_dialogue.set_data({})

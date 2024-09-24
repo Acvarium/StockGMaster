@@ -9,6 +9,12 @@ var item_selection_action_type = Global.ActionDataType.None
 var a_texture: Texture = preload("res://textures/edit_button_sm.png")
 
 
+func get_selected_id():
+	var selected = get_selected()
+	if selected:
+		return selected.get_metadata(0)
+	return -1
+
 func build_tree(tree_data : Dictionary, item_id = -1):
 	clear()
 	var root = create_item()
