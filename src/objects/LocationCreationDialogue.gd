@@ -38,10 +38,10 @@ func _show(what_to_do, action_data_type):
 			title_label.text = "Create Location"
 			delete_button.visible = false
 		else:
-			if "parent_id" in current_data.keys() and current_data.parent_id:
-				update_parent_text(main_node.get_location_address(current_data.parent_id))
 			title_label.text = "Edit Location"
 			delete_button.visible = true
+		if "parent_id" in current_data.keys() and current_data.parent_id:
+			update_parent_text(main_node.get_location_address(current_data.parent_id))
 	elif action_data_type == Global.ActionDataType.Category:
 		update_parent_text("/")
 		if what_to_do == Global.WhatToDo.Create:
