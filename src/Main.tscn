@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=43 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_5mhyi"]
 [ext_resource type="Script" path="res://Database.gd" id="2_x8r34"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://objects/StructTree.gd" id="5_ar113"]
 [ext_resource type="Script" path="res://objects/TagsTab.gd" id="6_2kqfq"]
 [ext_resource type="Script" path="res://objects/TagViewer.gd" id="7_k3n6w"]
-[ext_resource type="Script" path="res://objects/LocationTab.gd" id="9_guc4x"]
 [ext_resource type="PackedScene" uid="uid://buhtxvdgnu0ki" path="res://objects/DataEditDialogueBase.tscn" id="9_p6ieq"]
 [ext_resource type="Script" path="res://objects/ItemCreationDialogue.gd" id="10_06y8t"]
 [ext_resource type="StyleBox" uid="uid://bqcd2rx70v1t2" path="res://styles/InputStyle.tres" id="10_djmps"]
@@ -91,7 +90,7 @@ shadow_color = Color(0, 0, 0, 0.403922)
 shadow_size = 10
 shadow_offset = Vector2(10, 10)
 
-[node name="Main" type="Control" node_paths=PackedStringArray("tree_element", "locations_tab_tree", "category_tab_tree", "tag_tab", "tag_selection_viewer", "item_search_bar")]
+[node name="Main" type="Control" node_paths=PackedStringArray("tree_element", "locations_tab_tree", "category_tab_tree", "tag_tab", "tag_selection_viewer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -104,7 +103,6 @@ locations_tab_tree = NodePath("MainControl/TabContainer/Locations/LocationStruct
 category_tab_tree = NodePath("MainControl/TabContainer/Categories/CategoryStructTree")
 tag_tab = NodePath("MainControl/TabContainer/Tags")
 tag_selection_viewer = NodePath("TagSelectionDialogue/TSL/AspectRatioContainer/Control/SC/TagViewer")
-item_search_bar = NodePath("")
 
 [node name="Database" type="Node" parent="."]
 script = ExtResource("2_x8r34")
@@ -224,7 +222,6 @@ mouse_filter = 2
 [node name="Locations" type="Control" parent="MainControl/TabContainer"]
 visible = false
 layout_mode = 2
-script = ExtResource("9_guc4x")
 metadata/_tab_index = 1
 
 [node name="LocationToolPanel" type="Panel" parent="MainControl/TabContainer/Locations"]

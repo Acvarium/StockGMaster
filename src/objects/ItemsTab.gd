@@ -3,7 +3,7 @@ extends Control
 @export var temp_items_holder : Control
 var item_prefab = preload("res://objects/ItemListElement.tscn")
 @onready var main_node = get_tree().get_root().get_node("Main")
-var item_elements = {}
+var elements = {}
 
 
 func _ready():
@@ -14,7 +14,7 @@ func _ready():
 func clear_list():
 	for c in items_holder.get_children():
 		c.queue_free()
-	item_elements = {}
+	elements = {}
 	
 
 func refrash_items_list(items_data):
@@ -22,15 +22,16 @@ func refrash_items_list(items_data):
 	for item in items_holder.get_children():
 		item.clear_stocks()
 		if item.item_id < 0 or not item.item_id in items_data.keys():
-			item_elements.erase(item.item_id)
+			elements.erase(item.item_id)
 			item.queue_free()
 			continue
+	
 	
 	for i in range(items_data.keys().size()):
 		var current_key = items_data.keys()[i]
 		var next_item_data = items_data[current_key]
-		if current_key in item_elements.keys():
-			update_item(next_item_data, item_elements[current_key])
+		if current_key in elements.keys():
+			update_item(next_item_data, elements[current_key])
 		else:
 			add_item(next_item_data)
 	items_holder.refresh_unfold()
@@ -46,7 +47,7 @@ func add_item(item_data):
 	items_holder.add_child(item_element)
 	item_element.item_tab = self
 	item_element.set_data(item_data)
-	item_elements[item_data.id] = item_element
+	elements[item_data.id] = item_element
 
 
 func refresh_list():
@@ -55,12 +56,12 @@ func refresh_list():
 	
 
 func show_selection(selection_ids):
-	for k in item_elements.keys():
+	for k in elements.keys():
 		var in_selection = selection_ids == null or k in selection_ids
 		if in_selection:
-			item_elements[k].visible = main_node.is_item_passes_filter(k)
+			elements[k].visible = main_node.is_item_passes_filter(k)
 		else:
-			item_elements[k].visible = false
+			elements[k].visible = false
 
 
 func _on_items_search_line_edit_text_changed(new_text):

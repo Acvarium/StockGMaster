@@ -4,10 +4,8 @@ extends Control
 @export var category_tab_tree : Tree
 @export var tag_tab : Control 
 @export var tag_selection_viewer : Control
-@export var item_search_bar : LineEdit
 @onready var tab_control : TabContainer = $MainControl/TabContainer
 @onready var items_tab : Control = $MainControl/TabContainer/Items
-@onready var location_tab : Control = $MainControl/TabContainer/Locations
 @onready var item_creation_dialogue : Control = $ItemCreationDialogue
 @onready var location_creation_dialogue : Control = $LocationCreationDialogue
 @onready var tag_creation_dialogue : Control = $TagCreationDialogue
@@ -95,21 +93,21 @@ func search_items_with_text(search_text):
 	return found_item_ids
 
 
-func search_location_with_text(search_text):
+func search_tree_data_with_text(search_text : String, tree_data : Dictionary):
 	if search_text.is_empty():
 		return null
-	var found_loc_ids = []
+	var found_ids = []
 	var search_text_split = search_text.to_lower().split(" ")
-	for i in $Database.locations_data:
-		var current_loc_data = $Database.locations_data[i]
-		var loc_name = current_loc_data.name
-		var loc_descr = "" 
-		if "description" in current_loc_data and current_loc_data.description:
-			loc_descr = current_loc_data.description
-		var current_text = (loc_name + loc_descr).to_lower()
+	for i in tree_data:
+		var current_data = tree_data[i]
+		var data_name = current_data.name
+		var data_descr = "" 
+		if "description" in current_data and current_data.description:
+			data_descr = current_data.description
+		var current_text = (data_name + data_descr).to_lower()
 		if does_text_contain_words(search_text_split, current_text):
-			found_loc_ids.append(i)
-	return found_loc_ids
+			found_ids.append(i)
+	return found_ids
 
 
 func does_text_contain_words(words, text):
@@ -456,5 +454,8 @@ func _on_tab_container_tab_changed(tab):
 		var found_items = search_items_with_text(new_text)
 		items_tab.show_selection(found_items)
 	elif tab == 1:
-		var found_locations = search_location_with_text(new_text)
-#TODO impletemt show selected for location tab
+		var found_locations = search_tree_data_with_text(new_text, $Database.locations_data)
+		locations_tab_tree.show_selection(found_locations)
+	elif tab == 2:
+		var found_categories = search_tree_data_with_text(new_text, $Database.categories_data)
+		category_tab_tree.show_selection(found_categories)
