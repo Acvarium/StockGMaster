@@ -5,13 +5,16 @@ extends Control
 @export var tag_tab : Control 
 @export var tag_selection_viewer : Control
 @export var item_search_bar : LineEdit
+@onready var tab_control : TabContainer = $MainControl/TabContainer
 @onready var items_tab : Control = $MainControl/TabContainer/Items
+@onready var location_tab : Control = $MainControl/TabContainer/Locations
 @onready var item_creation_dialogue : Control = $ItemCreationDialogue
 @onready var location_creation_dialogue : Control = $LocationCreationDialogue
 @onready var tag_creation_dialogue : Control = $TagCreationDialogue
 @onready var tree_selection_dialogue : Control = $TreeSelectionDialogue
 @onready var action_confirm_dialogue : Control = $ActionConfirmDialogue
 @onready var location_selection_tree : Tree = $MainControl/TabContainer/Locations/LocationStructTree
+@onready var search_line_edit : LineEdit = $MainControl/SearchLine/SearchLineEdit
 
 var selected_value : int = -1
 var tree_selection_index : int = -1
@@ -83,24 +86,41 @@ func search_items_with_text(search_text):
 	for i in $Database.items_data:
 		var current_item_data = $Database.items_data[i]
 		var item_name = current_item_data.name
-		
 		var item_descr = "" 
 		if "description" in current_item_data and current_item_data.description:
 			item_descr = current_item_data.description
-			
 		var current_text = (item_name + item_descr).to_lower()
-		var to_add_item = true
-		for s in search_text_split:
-			if s.is_empty():
-				continue
-			if not s in current_text:
-				to_add_item = false
-				continue
-		if to_add_item:
+		if does_text_contain_words(search_text_split, current_text):
 			found_item_ids.append(i)
 	return found_item_ids
 
 
+func search_location_with_text(search_text):
+	if search_text.is_empty():
+		return null
+	var found_loc_ids = []
+	var search_text_split = search_text.to_lower().split(" ")
+	for i in $Database.locations_data:
+		var current_loc_data = $Database.locations_data[i]
+		var loc_name = current_loc_data.name
+		var loc_descr = "" 
+		if "description" in current_loc_data and current_loc_data.description:
+			loc_descr = current_loc_data.description
+		var current_text = (loc_name + loc_descr).to_lower()
+		if does_text_contain_words(search_text_split, current_text):
+			found_loc_ids.append(i)
+	return found_loc_ids
+
+
+func does_text_contain_words(words, text):
+	for word in words:
+		if word.is_empty():
+			continue
+		if not word in text:
+			return false
+	return true
+	
+	
 func delete_category(category_id):
 	var cat_parent_id = 0
 	if category_id in $Database.categories_data.keys():
@@ -346,19 +366,22 @@ func create_location_from_selected():
 
 
 func create_location_from(selected_location_id):
-	pass
 	if selected_location_id in $Database.locations_data.keys() and selected_location_id >= 0:
-		##editing
 		var _data = $Database.locations_data[selected_location_id]
 		_data.erase("id")
 		location_creation_dialogue.set_data(_data)
 		
 		location_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Location)
-	#else:
-		##creating
-		#location_creation_dialogue.set_data({})
-		#location_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Location)
 
+
+func create_location_with_parent(parent_location_id):
+	if parent_location_id in $Database.locations_data.keys() and parent_location_id >= 0:
+		var _data = {}
+		_data.parent_id = parent_location_id
+		location_creation_dialogue.set_data(_data)
+		location_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Location)
+	else:
+		edit_location(-1)
 
 
 func edit_category(category_id):
@@ -391,7 +414,9 @@ func get_tags_for_item(id):
 	
 
 func _on_create_location_button_pressed():
-	edit_location(-1)
+	var selected_id = location_selection_tree.get_selected_id()
+	if selected_id > 0:
+		create_location_with_parent(selected_id)
 
 
 func _on_location_struct_tree_button_clicked(item, column, id, mouse_button_index):
@@ -410,17 +435,26 @@ func _on_database_tags_data_loaded():
 	tag_tab.refrash_tags_list($Database.tags_data)
 
 
-func search_item(search_text):
-	print(search_text)
-
-
-func _on_items_search_line_edit_text_changed(new_text):
-	search_item(new_text)
-
-
 func _on_filter_items_button_pressed():
 	show_item_filtering_dialogue()
 
 
 func shoe_profile_selection_dialogue(to_show = true):
 	$ProfileSelectionDialogue.visible = to_show
+
+
+func _on_search_line_edit_text_changed(new_text):
+	var current_tab = tab_control.current_tab
+	_on_tab_container_tab_changed(current_tab)
+
+
+func _on_tab_container_tab_changed(tab):
+	if search_line_edit == null:
+		return
+	var new_text = search_line_edit.text
+	if tab == 0:
+		var found_items = search_items_with_text(new_text)
+		items_tab.show_selection(found_items)
+	elif tab == 1:
+		var found_locations = search_location_with_text(new_text)
+#TODO impletemt show selected for location tab

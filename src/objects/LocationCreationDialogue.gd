@@ -48,10 +48,10 @@ func _show(what_to_do, action_data_type):
 			title_label.text = "Create Category"
 			delete_button.visible = false
 		else:
-			if "parent_id" in current_data.keys() and current_data.parent_id:
-				update_parent_text(main_node.get_category_address(current_data.parent_id))
 			title_label.text = "Edit Category"
 			delete_button.visible = true
+		if "parent_id" in current_data.keys() and current_data.parent_id:
+			update_parent_text(main_node.get_category_address(current_data.parent_id))
 	show()
 
 
@@ -87,7 +87,6 @@ func confirme_action(conf_what_to_do):
 		elif current_action_data_type == Global.ActionDataType.Category:
 			main_node.delete_category(current_data.id)
 		hide()
-		
 
 
 func _on_save_item_button_pressed():
