@@ -10,7 +10,11 @@ func clear_images():
 
 func load_images(image_paths):
 	clear_images()
-	
+	for im in image_paths:
+		var new_image_holder = image_holder_prefab.instantiate()
+		image_grid.add_child(new_image_holder)
+		new_image_holder.load_image(im)
+
 
 func _ready() -> void:
 	clear_images()

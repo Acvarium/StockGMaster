@@ -29,7 +29,7 @@ func get_db_path():
 		return get_data_path() + db_file_name
 
 
-func get_image_names():
+func get_image_paths():
 	var image_dir_path = get_data_path() + "/images"
 	var image_names = []
 	var d = DirAccess.open(image_dir_path)
@@ -43,10 +43,11 @@ func get_image_names():
 			if not dir.current_is_dir():
 				print("Found file: " + file_name + " " + file_name.to_lower().get_extension())
 				if supported_image_ext.has(file_name.to_lower().get_extension()):
-					image_names.append(file_name)
+					image_names.append(image_dir_path + '/' + file_name)
 			file_name = dir.get_next()
 	else:
 		print("An error occurred when trying to access the path.")
+	image_names.sort()
 	return image_names
 
 
@@ -210,7 +211,6 @@ func get_new_tag_id():
 	return db.query_result[0].id
 
 
-
 func pull_items_data():
 	items_data.clear()
 	var stock_db_data = db.select_rows("item_stocks", "", ["*"])
@@ -239,7 +239,7 @@ func _ready():
 	pull_items_data()
 	pull_categories_data()
 	pull_tags_data()
-
+	
 
 func get_tables():
 	db.query("SELECT name FROM sqlite_schema WHERE type = 'table' AND name NOT LIKE 'sqlite_%';")

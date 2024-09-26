@@ -32,6 +32,12 @@ func _ready():
 	if OS.get_name() == "Android":
 		$MainControl/AnimationPlayer.play("mobile_offset")
 	$MainControl/HSplit/MainInfo/TabContainer.current_tab = 0
+	load_images_to_viewer()
+
+
+func load_images_to_viewer():
+	var image_paths = $Database.get_image_paths()
+	$ImageSelectionDialogue.load_images(image_paths)
 
 
 func _on_viewport_resize():
@@ -39,11 +45,11 @@ func _on_viewport_resize():
 	var aspect = float(window_size.x) / float(window_size.y)
 	$Timers/SideInfoPanelTimer.start()
 	image_grid.columns = image_grid.get_parent().size.x / grid_image_size
-
+	
 
 func refresh_item_list():
 	items_tab.refresh_list()
-
+	
 
 func is_item_passes_filter(item_id):
 	if filter_tag_ids and filter_tag_ids.size() > 0:
