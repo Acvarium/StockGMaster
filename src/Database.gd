@@ -14,7 +14,7 @@ const verbosity_level : int = SQLite.VERBOSE
 
 const db_file_name = "data.db"
 var base_data_paths = ["res://data/", "user://default/"]
-
+var supported_image_ext = ["jpg", "png"]
 
 var locations_data = {}
 var items_data = {}
@@ -24,9 +24,34 @@ var tags_data = {}
 
 func get_db_path():
 	if OS.get_name() == "Android":
-		return base_data_paths[0] + db_file_name
+		return get_data_path() + db_file_name
 	if Global.current_profile_id <= 1:
-		return base_data_paths[Global.current_profile_id] + db_file_name
+		return get_data_path() + db_file_name
+
+
+func get_image_names():
+	var image_dir_path = get_data_path() + "/images"
+	var image_names = []
+	var d = DirAccess.open(image_dir_path)
+	if d == null:
+		DirAccess.make_dir_absolute(image_dir_path)
+	var dir = DirAccess.open(image_dir_path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name : String  = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir():
+				print("Found file: " + file_name + " " + file_name.to_lower().get_extension())
+				if supported_image_ext.has(file_name.to_lower().get_extension()):
+					image_names.append(file_name)
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path.")
+	return image_names
+
+
+func get_data_path():
+	return base_data_paths[Global.current_profile_id]
 
 
 func move_all_stocks_from_loc_to(from_location_id, to_location_id):
@@ -203,9 +228,9 @@ func pull_items_data():
 	
 
 func _ready():
-	var d = DirAccess.open(base_data_paths[1])
+	var d = DirAccess.open(get_data_path())
 	if d == null:
-		DirAccess.make_dir_absolute(base_data_paths[1])
+		DirAccess.make_dir_absolute(get_data_path())
 	db = SQLite.new()
 	db.path = get_db_path()
 	db.open_db()
@@ -214,7 +239,7 @@ func _ready():
 	pull_items_data()
 	pull_categories_data()
 	pull_tags_data()
-	
+
 
 func get_tables():
 	db.query("SELECT name FROM sqlite_schema WHERE type = 'table' AND name NOT LIKE 'sqlite_%';")

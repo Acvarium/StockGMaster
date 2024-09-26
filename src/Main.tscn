@@ -731,7 +731,6 @@ theme_override_font_sizes/font_size = 32
 text = "Create Tag"
 
 [node name="ImageSelectionDialogue" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -779,15 +778,6 @@ columns = 3
 [node name="ImagePreviewHolder" parent="ImageSelectionDialogue/ItemsPanel/ScrollContainer/ImageGridContainer" instance=ExtResource("27_yr3ee")]
 layout_mode = 2
 size_flags_horizontal = 0
-
-[node name="ImagePreviewHolder2" parent="ImageSelectionDialogue/ItemsPanel/ScrollContainer/ImageGridContainer" instance=ExtResource("27_yr3ee")]
-layout_mode = 2
-
-[node name="ImagePreviewHolder3" parent="ImageSelectionDialogue/ItemsPanel/ScrollContainer/ImageGridContainer" instance=ExtResource("27_yr3ee")]
-layout_mode = 2
-
-[node name="ImagePreviewHolder4" parent="ImageSelectionDialogue/ItemsPanel/ScrollContainer/ImageGridContainer" instance=ExtResource("27_yr3ee")]
-layout_mode = 2
 
 [node name="SDCButtons" type="Panel" parent="ImageSelectionDialogue"]
 self_modulate = Color(1, 1, 1, 0)
