@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=44 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_5mhyi"]
 [ext_resource type="Script" path="res://Database.gd" id="2_x8r34"]
@@ -24,6 +24,7 @@
 [ext_resource type="StyleBox" uid="uid://4cmibv0a8kf2" path="res://styles/BGButtonHoverStyle.tres" id="16_uvvjq"]
 [ext_resource type="Script" path="res://objects/ActionConfirmDialogue.gd" id="17_36kog"]
 [ext_resource type="StyleBox" uid="uid://c5i134ur1to60" path="res://styles/EdittextBaseStyle.tres" id="18_luhyk"]
+[ext_resource type="Texture2D" uid="uid://ckc14v3a8oqd5" path="res://icon.svg" id="18_v6yiw"]
 [ext_resource type="Script" path="res://objects/ItemFilteringDialogue.gd" id="19_8mkwf"]
 [ext_resource type="Script" path="res://objects/TagCreationDialogue.gd" id="19_p1s4p"]
 [ext_resource type="Script" path="res://objects/ProfileSelectionDialogue.gd" id="21_nm3mm"]
@@ -44,7 +45,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TabContainer:offset_top")
+tracks/0/path = NodePath("HSplit/MainInfo/TabContainer:offset_top")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -60,7 +61,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TabContainer:offset_top")
+tracks/0/path = NodePath("HSplit/MainInfo/TabContainer:offset_top")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -99,9 +100,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5mhyi")
 tree_element = NodePath("TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree")
-locations_tab_tree = NodePath("MainControl/TabContainer/Locations/LocationStructTree")
-category_tab_tree = NodePath("MainControl/TabContainer/Categories/CategoryStructTree")
-tag_tab = NodePath("MainControl/TabContainer/Tags")
+locations_tab_tree = NodePath("MainControl/HSplit/MainInfo/TabContainer/Locations/LocationStructTree")
+category_tab_tree = NodePath("MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryStructTree")
+tag_tab = NodePath("MainControl/HSplit/MainInfo/TabContainer/Tags")
 tag_selection_viewer = NodePath("TagSelectionDialogue/TSL/AspectRatioContainer/Control/SC/TagViewer")
 
 [node name="Database" type="Node" parent="."]
@@ -129,23 +130,48 @@ libraries = {
 "": SubResource("AnimationLibrary_6lyv6")
 }
 
-[node name="TabContainer" type="TabContainer" parent="MainControl"]
+[node name="Panel" type="Panel" parent="MainControl"]
+visible = false
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HSplit" type="HSplitContainer" parent="MainControl"]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MainInfo" type="Control" parent="MainControl/HSplit"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="MainControl/HSplit/MainInfo"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_right = 6.0
+grow_horizontal = 2
+grow_vertical = 2
 current_tab = 0
 
-[node name="Items" type="Control" parent="MainControl/TabContainer" node_paths=PackedStringArray("items_holder", "temp_items_holder")]
+[node name="Items" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" node_paths=PackedStringArray("items_holder", "temp_items_holder")]
 layout_mode = 2
 script = ExtResource("3_wxfjw")
 items_holder = NodePath("ItemsListPanel/ScrollContainer/VBoxContainer")
 temp_items_holder = NodePath("ItemsListPanel/TempItemHolder")
 metadata/_tab_index = 0
 
-[node name="ItemsToolPanel" type="Panel" parent="MainControl/TabContainer/Items"]
+[node name="ItemsToolPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Items"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -156,7 +182,7 @@ offset_bottom = 85.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("16_uvvjq")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/TabContainer/Items/ItemsToolPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -165,7 +191,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="FilterItemsButton" type="Button" parent="MainControl/TabContainer/Items/ItemsToolPanel/HBoxContainer"]
+[node name="FilterItemsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 focus_mode = 0
@@ -174,7 +200,7 @@ theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("10_ev2os")
 text = "Filter"
 
-[node name="CreateItemButton" type="Button" parent="MainControl/TabContainer/Items/ItemsToolPanel/HBoxContainer"]
+[node name="CreateItemButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 focus_mode = 0
@@ -183,7 +209,7 @@ theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("10_ev2os")
 text = "Create"
 
-[node name="ItemsListPanel" type="Panel" parent="MainControl/TabContainer/Items"]
+[node name="ItemsListPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Items"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -195,7 +221,7 @@ offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainControl/TabContainer/Items/ItemsListPanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsListPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.01
@@ -206,25 +232,25 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainControl/TabContainer/Items/ItemsListPanel/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsListPanel/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("4_a2pk0")
 control_children = true
 
-[node name="TempItemHolder" type="Control" parent="MainControl/TabContainer/Items/ItemsListPanel"]
+[node name="TempItemHolder" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsListPanel"]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 
-[node name="Locations" type="Control" parent="MainControl/TabContainer"]
+[node name="Locations" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="LocationToolPanel" type="Panel" parent="MainControl/TabContainer/Locations"]
+[node name="LocationToolPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Locations"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -235,7 +261,7 @@ offset_bottom = 85.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("16_uvvjq")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/TabContainer/Locations/LocationToolPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -244,7 +270,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="CreateLocationButton2" type="Button" parent="MainControl/TabContainer/Locations/LocationToolPanel/HBoxContainer"]
+[node name="CreateLocationButton2" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 tooltip_text = "Create new location from selected"
@@ -253,7 +279,7 @@ theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("10_ev2os")
 text = "From Selected"
 
-[node name="CreateLocationButton" type="Button" parent="MainControl/TabContainer/Locations/LocationToolPanel/HBoxContainer"]
+[node name="CreateLocationButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 tooltip_text = "Create new location"
@@ -262,7 +288,7 @@ theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("10_ev2os")
 text = "Create"
 
-[node name="LocationStructTree" type="Tree" parent="MainControl/TabContainer/Locations"]
+[node name="LocationStructTree" type="Tree" parent="MainControl/HSplit/MainInfo/TabContainer/Locations"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -276,12 +302,12 @@ grow_vertical = 2
 script = ExtResource("5_ar113")
 has_edit_buttons = true
 
-[node name="Categories" type="Control" parent="MainControl/TabContainer"]
+[node name="Categories" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="CategoryToolPanel" type="Panel" parent="MainControl/TabContainer/Categories"]
+[node name="CategoryToolPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Categories"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -292,7 +318,7 @@ offset_bottom = 85.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("16_uvvjq")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/TabContainer/Categories/CategoryToolPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryToolPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -301,7 +327,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="CreateCategoryButton" type="Button" parent="MainControl/TabContainer/Categories/CategoryToolPanel/HBoxContainer"]
+[node name="CreateCategoryButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryToolPanel/HBoxContainer"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 theme_override_styles/hover = ExtResource("11_wqlnj")
@@ -309,7 +335,7 @@ theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("10_ev2os")
 text = "Create"
 
-[node name="CategoryStructTree" type="Tree" parent="MainControl/TabContainer/Categories"]
+[node name="CategoryStructTree" type="Tree" parent="MainControl/HSplit/MainInfo/TabContainer/Categories"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -323,7 +349,7 @@ grow_vertical = 2
 script = ExtResource("5_ar113")
 has_edit_buttons = true
 
-[node name="Tags" type="Control" parent="MainControl/TabContainer" node_paths=PackedStringArray("tag_viewer", "edit_button", "delete_button")]
+[node name="Tags" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" node_paths=PackedStringArray("tag_viewer", "edit_button", "delete_button")]
 visible = false
 layout_mode = 2
 script = ExtResource("6_2kqfq")
@@ -332,7 +358,7 @@ edit_button = NodePath("TagToolPanel2/HBoxContainer/EditTagsButton")
 delete_button = NodePath("TagToolPanel2/HBoxContainer/DeleteSelectedTagsButton")
 metadata/_tab_index = 3
 
-[node name="Control" type="Control" parent="MainControl/TabContainer/Tags"]
+[node name="Control" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Tags"]
 layout_mode = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -343,7 +369,7 @@ offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainControl/TabContainer/Tags/Control"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -351,14 +377,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TagViewer" type="HFlowContainer" parent="MainControl/TabContainer/Tags/Control/ScrollContainer"]
+[node name="TagViewer" type="HFlowContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/Control/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 script = ExtResource("7_k3n6w")
 
-[node name="TagToolPanel2" type="Panel" parent="MainControl/TabContainer/Tags"]
+[node name="TagToolPanel2" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Tags"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -369,7 +395,7 @@ offset_bottom = 85.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("16_uvvjq")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/TabContainer/Tags/TagToolPanel2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -377,7 +403,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SelectAllTagsButton" type="Button" parent="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+[node name="SelectAllTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -386,7 +412,7 @@ theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("10_ev2os")
 text = "Sel.All"
 
-[node name="DeselectAllTagsButton" type="Button" parent="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+[node name="DeselectAllTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -395,11 +421,11 @@ theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("10_ev2os")
 text = "Deselect"
 
-[node name="Control" type="Control" parent="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+[node name="Control" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
-[node name="EditTagsButton" type="Button" parent="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+[node name="EditTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -410,7 +436,7 @@ theme_override_styles/normal = ExtResource("10_ev2os")
 disabled = true
 text = "Edit"
 
-[node name="DeleteSelectedTagsButton" type="Button" parent="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+[node name="DeleteSelectedTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -421,7 +447,7 @@ theme_override_styles/normal = ExtResource("10_ev2os")
 disabled = true
 text = "Delete"
 
-[node name="CreateTagButton" type="Button" parent="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+[node name="CreateTagButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -430,23 +456,23 @@ theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("10_ev2os")
 text = "Create"
 
-[node name="Projects" type="Control" parent="MainControl/TabContainer"]
+[node name="Projects" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
-[node name="Builds" type="Control" parent="MainControl/TabContainer"]
+[node name="Builds" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 5
 
-[node name="Settings" type="Control" parent="MainControl/TabContainer"]
+[node name="Settings" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
 visible = false
 layout_mode = 2
 script = ExtResource("14_nrmw6")
 metadata/_tab_index = 6
 
-[node name="SettingsPanel" type="Panel" parent="MainControl/TabContainer/Settings"]
+[node name="SettingsPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Settings"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -459,7 +485,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("14_2538q")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainControl/TabContainer/Settings/SettingsPanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -471,45 +497,34 @@ offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainControl/TabContainer/Settings/SettingsPanel/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 script = ExtResource("4_a2pk0")
 
-[node name="ItemDataSeparator" parent="MainControl/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("11_6eucy")]
+[node name="ItemDataSeparator" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("11_6eucy")]
 layout_mode = 2
 separator_text = "Profile"
 
-[node name="ProfileName" parent="MainControl/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("12_ubi7w")]
+[node name="ProfileName" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Current Profile"
 placeholder_text = "Enter an Item Name"
 list_item_mode = 1
 
-[node name="Panel" type="Panel" parent="MainControl"]
-visible = false
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="SearchLine" type="Panel" parent="MainControl"]
+[node name="SearchLine" type="Panel" parent="MainControl/HSplit/MainInfo"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-offset_left = 5.0
+offset_left = 11.0
 offset_top = 38.0
-offset_right = -5.0
+offset_right = 1.0
 offset_bottom = 75.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("16_uvvjq")
 
-[node name="SearchLineEdit" type="LineEdit" parent="MainControl/SearchLine"]
+[node name="SearchLineEdit" type="LineEdit" parent="MainControl/HSplit/MainInfo/SearchLine"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -519,6 +534,26 @@ grow_vertical = 2
 theme_override_styles/focus = ExtResource("10_djmps")
 theme_override_styles/normal = ExtResource("10_djmps")
 clear_button_enabled = true
+
+[node name="SideInfo" type="Control" parent="MainControl/HSplit"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MainControl/HSplit/SideInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainControl/HSplit/SideInfo/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_v6yiw")
 
 [node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "tags_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("9_p6ieq")]
 visible = false
@@ -979,26 +1014,33 @@ vertical_alignment = 1
 autowrap_mode = 3
 text_overrun_behavior = 3
 
+[node name="Timers" type="Node" parent="."]
+
+[node name="SideInfoPanelTimer" type="Timer" parent="Timers"]
+wait_time = 0.05
+one_shot = true
+
 [connection signal="categories_data_loaded" from="Database" to="." method="_on_database_categories_data_loaded"]
 [connection signal="item_data_loaded" from="Database" to="." method="_on_database_item_data_loaded"]
 [connection signal="locations_data_loaded" from="Database" to="." method="_on_database_locations_data_loaded"]
 [connection signal="tags_data_loaded" from="Database" to="." method="_on_database_tags_data_loaded"]
-[connection signal="tab_changed" from="MainControl/TabContainer" to="." method="_on_tab_container_tab_changed"]
-[connection signal="pressed" from="MainControl/TabContainer/Items/ItemsToolPanel/HBoxContainer/FilterItemsButton" to="." method="_on_filter_items_button_pressed"]
-[connection signal="pressed" from="MainControl/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateItemButton" to="." method="_on_create_item_button_pressed"]
-[connection signal="pressed" from="MainControl/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton2" to="." method="create_location_from_selected"]
-[connection signal="pressed" from="MainControl/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton" to="." method="_on_create_location_button_pressed"]
-[connection signal="button_clicked" from="MainControl/TabContainer/Locations/LocationStructTree" to="." method="_on_location_struct_tree_button_clicked"]
-[connection signal="pressed" from="MainControl/TabContainer/Categories/CategoryToolPanel/HBoxContainer/CreateCategoryButton" to="." method="_on_create_category_button_pressed"]
-[connection signal="button_clicked" from="MainControl/TabContainer/Categories/CategoryStructTree" to="." method="_on_category_struct_tree_button_clicked"]
-[connection signal="tag_pressed_sig" from="MainControl/TabContainer/Tags/Control/ScrollContainer/TagViewer" to="MainControl/TabContainer/Tags" method="_on_tag_viewer_tag_pressed_sig"]
-[connection signal="pressed" from="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer/SelectAllTagsButton" to="MainControl/TabContainer/Tags/Control/ScrollContainer/TagViewer" method="select_all" binds= [true]]
-[connection signal="pressed" from="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer/DeselectAllTagsButton" to="MainControl/TabContainer/Tags/Control/ScrollContainer/TagViewer" method="select_all" binds= [false]]
-[connection signal="pressed" from="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer/EditTagsButton" to="MainControl/TabContainer/Tags" method="_on_edit_tags_button_pressed"]
-[connection signal="pressed" from="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer/DeleteSelectedTagsButton" to="MainControl/TabContainer/Tags" method="_on_delete_selected_tags_button_pressed"]
-[connection signal="pressed" from="MainControl/TabContainer/Tags/TagToolPanel2/HBoxContainer/CreateTagButton" to="MainControl/TabContainer/Tags" method="_on_create_tag_button_pressed"]
-[connection signal="location_button_pressed" from="MainControl/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ProfileName" to="MainControl/TabContainer/Settings" method="_on_profile_name_button_pressed"]
-[connection signal="text_changed" from="MainControl/SearchLine/SearchLineEdit" to="." method="_on_search_line_edit_text_changed"]
+[connection signal="dragged" from="MainControl/HSplit" to="." method="_on_h_split_dragged"]
+[connection signal="tab_changed" from="MainControl/HSplit/MainInfo/TabContainer" to="." method="_on_tab_container_tab_changed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/FilterItemsButton" to="." method="_on_filter_items_button_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateItemButton" to="." method="_on_create_item_button_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton2" to="." method="create_location_from_selected"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton" to="." method="_on_create_location_button_pressed"]
+[connection signal="button_clicked" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationStructTree" to="." method="_on_location_struct_tree_button_clicked"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryToolPanel/HBoxContainer/CreateCategoryButton" to="." method="_on_create_category_button_pressed"]
+[connection signal="button_clicked" from="MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryStructTree" to="." method="_on_category_struct_tree_button_clicked"]
+[connection signal="tag_pressed_sig" from="MainControl/HSplit/MainInfo/TabContainer/Tags/Control/ScrollContainer/TagViewer" to="MainControl/HSplit/MainInfo/TabContainer/Tags" method="_on_tag_viewer_tag_pressed_sig"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer/SelectAllTagsButton" to="MainControl/HSplit/MainInfo/TabContainer/Tags/Control/ScrollContainer/TagViewer" method="select_all" binds= [true]]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer/DeselectAllTagsButton" to="MainControl/HSplit/MainInfo/TabContainer/Tags/Control/ScrollContainer/TagViewer" method="select_all" binds= [false]]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer/EditTagsButton" to="MainControl/HSplit/MainInfo/TabContainer/Tags" method="_on_edit_tags_button_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer/DeleteSelectedTagsButton" to="MainControl/HSplit/MainInfo/TabContainer/Tags" method="_on_delete_selected_tags_button_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer/CreateTagButton" to="MainControl/HSplit/MainInfo/TabContainer/Tags" method="_on_create_tag_button_pressed"]
+[connection signal="location_button_pressed" from="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ProfileName" to="MainControl/HSplit/MainInfo/TabContainer/Settings" method="_on_profile_name_button_pressed"]
+[connection signal="text_changed" from="MainControl/HSplit/MainInfo/SearchLine/SearchLineEdit" to="." method="_on_search_line_edit_text_changed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Category" to="ItemCreationDialogue" method="_on_category_selection_button_pressed"]
 [connection signal="edit_tags_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Tags" to="ItemCreationDialogue" method="_on_tags_edit_tags_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Location" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
@@ -1027,6 +1069,7 @@ text_overrun_behavior = 3
 [connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/AcceptButton" to="ActionConfirmDialogue" method="_on_accept_button_pressed"]
 [connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/ConfirmButton" to="ActionConfirmDialogue" method="_on_confirm_button_pressed"]
 [connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/CancelButton" to="ActionConfirmDialogue" method="_on_cancel_button_pressed"]
+[connection signal="timeout" from="Timers/SideInfoPanelTimer" to="." method="_on_side_info_panel_timer_timeout"]
 
 [editable path="ItemCreationDialogue"]
 [editable path="ItemFilteringDialogue"]

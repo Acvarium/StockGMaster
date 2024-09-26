@@ -4,15 +4,16 @@ extends Control
 @export var category_tab_tree : Tree
 @export var tag_tab : Control 
 @export var tag_selection_viewer : Control
-@onready var tab_control : TabContainer = $MainControl/TabContainer
-@onready var items_tab : Control = $MainControl/TabContainer/Items
+@onready var tab_control : TabContainer = $MainControl/HSplit/MainInfo/TabContainer
+@onready var items_tab : Control = $MainControl/HSplit/MainInfo/TabContainer/Items
 @onready var item_creation_dialogue : Control = $ItemCreationDialogue
 @onready var location_creation_dialogue : Control = $LocationCreationDialogue
 @onready var tag_creation_dialogue : Control = $TagCreationDialogue
 @onready var tree_selection_dialogue : Control = $TreeSelectionDialogue
 @onready var action_confirm_dialogue : Control = $ActionConfirmDialogue
-@onready var location_selection_tree : Tree = $MainControl/TabContainer/Locations/LocationStructTree
-@onready var search_line_edit : LineEdit = $MainControl/SearchLine/SearchLineEdit
+@onready var location_selection_tree : Tree = $MainControl/HSplit/MainInfo/TabContainer/Locations/LocationStructTree
+@onready var search_line_edit : LineEdit = $MainControl/HSplit/MainInfo/SearchLine/SearchLineEdit
+@onready var side_info : Control = $MainControl/HSplit/SideInfo
 
 var selected_value : int = -1
 var tree_selection_index : int = -1
@@ -26,9 +27,19 @@ var filter_tag_ids = []
 
 
 func _ready():
+	get_viewport().connect("size_changed", _on_viewport_resize)
+	_on_viewport_resize()
 	if OS.get_name() == "Android":
 		$MainControl/AnimationPlayer.play("mobile_offset")
-	$MainControl/TabContainer.current_tab = 0
+	$MainControl/HSplit/MainInfo/TabContainer.current_tab = 0
+
+
+func _on_viewport_resize():
+	var window_size = DisplayServer.window_get_size()
+	#print(window_size)
+	var aspect = float(window_size.x) / float(window_size.y)
+	#print(aspect)
+	$Timers/SideInfoPanelTimer.start()
 
 
 func refresh_item_list():
@@ -307,7 +318,7 @@ func _on_parent_selection_button_pressed():
 
 func refrash_items_list():
 	if !items_tab:
-		items_tab = $MainControl/TabContainer/Items
+		items_tab = $MainControl/HSplit/MainInfo/TabContainer/Items
 	items_tab.refrash_items_list($Database.items_data)
 
 
@@ -459,3 +470,17 @@ func _on_tab_container_tab_changed(tab):
 	elif tab == 2:
 		var found_categories = search_tree_data_with_text(new_text, $Database.categories_data)
 		category_tab_tree.show_selection(found_categories)
+
+
+func update_side_info_panel():
+	var side_size = side_info.size
+	side_info.get_node("Panel").visible = side_size.x > 150
+	print(side_size)
+	
+
+func _on_h_split_dragged(offset):
+	update_side_info_panel()
+	
+
+func _on_side_info_panel_timer_timeout():
+	update_side_info_panel()
