@@ -4,6 +4,7 @@ extends Control
 @export var category_tab_tree : Tree
 @export var tag_tab : Control 
 @export var tag_selection_viewer : Control
+@export var image_grid : GridContainer
 @onready var tab_control : TabContainer = $MainControl/HSplit/MainInfo/TabContainer
 @onready var items_tab : Control = $MainControl/HSplit/MainInfo/TabContainer/Items
 @onready var item_creation_dialogue : Control = $ItemCreationDialogue
@@ -14,14 +15,13 @@ extends Control
 @onready var location_selection_tree : Tree = $MainControl/HSplit/MainInfo/TabContainer/Locations/LocationStructTree
 @onready var search_line_edit : LineEdit = $MainControl/HSplit/MainInfo/SearchLine/SearchLineEdit
 @onready var side_info : Control = $MainControl/HSplit/SideInfo
-
 var selected_value : int = -1
 var tree_selection_index : int = -1
 
 @onready var current_what_to_do = Global.WhatToDo.None
 @onready var current_action_data_type = Global.ActionDataType.None
 #var current_action_id = -1
-
+var grid_image_size = 150
 
 var filter_tag_ids = []
 
@@ -38,6 +38,7 @@ func _on_viewport_resize():
 	var window_size = DisplayServer.window_get_size()
 	var aspect = float(window_size.x) / float(window_size.y)
 	$Timers/SideInfoPanelTimer.start()
+	image_grid.columns = image_grid.get_parent().size.x / grid_image_size
 
 
 func refresh_item_list():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=51 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_5mhyi"]
 [ext_resource type="Script" path="res://Database.gd" id="2_x8r34"]
@@ -38,7 +38,14 @@
 [ext_resource type="StyleBox" uid="uid://rr274hhkcvol" path="res://styles/ColorButtons/ConfPressed.tres" id="25_veepo"]
 [ext_resource type="StyleBox" uid="uid://c8vhwnw1k36py" path="res://styles/ColorButtons/CancNormal.tres" id="26_dgnrv"]
 [ext_resource type="StyleBox" uid="uid://b42fcqui5l51q" path="res://styles/ColorButtons/CancHover.tres" id="27_xau5b"]
+[ext_resource type="PackedScene" uid="uid://bip2rd6sfk3kn" path="res://objects/ImagePreviewHolder.tscn" id="27_yr3ee"]
 [ext_resource type="StyleBox" uid="uid://bptny03prtwm7" path="res://styles/ColorButtons/CancPressed.tres" id="28_vl2i0"]
+[ext_resource type="StyleBox" uid="uid://3yancno0l5rn" path="res://styles/DelHover.tres" id="29_jen6a"]
+[ext_resource type="StyleBox" uid="uid://bgi7mr6mfmnnl" path="res://styles/DelPressed.tres" id="30_r5wwe"]
+[ext_resource type="StyleBox" uid="uid://cgfpael8bobl2" path="res://styles/ColorButtons/DelNormal.tres" id="31_4mrd2"]
+[ext_resource type="Texture2D" uid="uid://b82gyeyblxd5l" path="res://textures/title.png" id="35_1rfkw"]
+[ext_resource type="FontVariation" uid="uid://bhyikp6mmffmg" path="res://fonts/resources/menu_font01.tres" id="36_8rj5u"]
+[ext_resource type="Script" path="res://objects/FitLabel.gd" id="37_pf2t4"]
 
 [sub_resource type="Animation" id="Animation_uywld"]
 length = 0.001
@@ -91,7 +98,7 @@ shadow_color = Color(0, 0, 0, 0.403922)
 shadow_size = 10
 shadow_offset = Vector2(10, 10)
 
-[node name="Main" type="Control" node_paths=PackedStringArray("tree_element", "locations_tab_tree", "category_tab_tree", "tag_tab", "tag_selection_viewer")]
+[node name="Main" type="Control" node_paths=PackedStringArray("tree_element", "locations_tab_tree", "category_tab_tree", "tag_tab", "tag_selection_viewer", "image_grid")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -104,6 +111,7 @@ locations_tab_tree = NodePath("MainControl/HSplit/MainInfo/TabContainer/Location
 category_tab_tree = NodePath("MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryStructTree")
 tag_tab = NodePath("MainControl/HSplit/MainInfo/TabContainer/Tags")
 tag_selection_viewer = NodePath("TagSelectionDialogue/TSL/AspectRatioContainer/Control/SC/TagViewer")
+image_grid = NodePath("ImageSelectionDialogue/ItemsPanel/ScrollContainer/ImageGridContainer")
 
 [node name="Database" type="Node" parent="."]
 script = ExtResource("2_x8r34")
@@ -722,6 +730,149 @@ visible = false
 theme_override_font_sizes/font_size = 32
 text = "Create Tag"
 
+[node name="ImageSelectionDialogue" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Color" type="ColorRect" parent="ImageSelectionDialogue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[node name="ItemsPanel" type="Panel" parent="ImageSelectionDialogue"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.11
+anchor_right = 0.95
+anchor_bottom = 0.89
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("14_2538q")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ImageSelectionDialogue/ItemsPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ImageGridContainer" type="GridContainer" parent="ImageSelectionDialogue/ItemsPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+columns = 3
+
+[node name="ImagePreviewHolder" parent="ImageSelectionDialogue/ItemsPanel/ScrollContainer/ImageGridContainer" instance=ExtResource("27_yr3ee")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ImagePreviewHolder2" parent="ImageSelectionDialogue/ItemsPanel/ScrollContainer/ImageGridContainer" instance=ExtResource("27_yr3ee")]
+layout_mode = 2
+
+[node name="ImagePreviewHolder3" parent="ImageSelectionDialogue/ItemsPanel/ScrollContainer/ImageGridContainer" instance=ExtResource("27_yr3ee")]
+layout_mode = 2
+
+[node name="ImagePreviewHolder4" parent="ImageSelectionDialogue/ItemsPanel/ScrollContainer/ImageGridContainer" instance=ExtResource("27_yr3ee")]
+layout_mode = 2
+
+[node name="SDCButtons" type="Panel" parent="ImageSelectionDialogue"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.9
+anchor_right = 0.95
+anchor_bottom = 0.97
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ImageSelectionDialogue/SDCButtons"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="SaveItemButton" type="Button" parent="ImageSelectionDialogue/SDCButtons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/hover = ExtResource("24_0srk0")
+theme_override_styles/pressed = ExtResource("25_veepo")
+theme_override_styles/normal = ExtResource("23_rqglp")
+text = "Select"
+
+[node name="DeleteButton" type="Button" parent="ImageSelectionDialogue/SDCButtons/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/hover = ExtResource("29_jen6a")
+theme_override_styles/pressed = ExtResource("30_r5wwe")
+theme_override_styles/normal = ExtResource("31_4mrd2")
+text = "DEL"
+
+[node name="CancelButton" type="Button" parent="ImageSelectionDialogue/SDCButtons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/hover = ExtResource("27_xau5b")
+theme_override_styles/pressed = ExtResource("28_vl2i0")
+theme_override_styles/normal = ExtResource("26_dgnrv")
+text = "Cancel"
+
+[node name="TextureRect" type="NinePatchRect" parent="ImageSelectionDialogue"]
+self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.1
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("35_1rfkw")
+patch_margin_left = 100
+patch_margin_right = 100
+
+[node name="Title" type="Label" parent="ImageSelectionDialogue/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.951
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("36_8rj5u")
+theme_override_font_sizes/font_size = 32
+text = "Select Image"
+horizontal_alignment = 1
+vertical_alignment = 2
+uppercase = true
+script = ExtResource("37_pf2t4")
+aspect = 0.4
+
 [node name="TreeSelectionDialogue" type="Control" parent="."]
 visible = false
 layout_mode = 1
@@ -1063,6 +1214,9 @@ one_shot = true
 [connection signal="pressed" from="TagCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="TagCreationDialogue" method="_on_save_item_button_pressed"]
 [connection signal="pressed" from="TagCreationDialogue/SDCButtons/HBoxContainer/DeleteButton" to="TagCreationDialogue" method="_on_delete_button_pressed"]
 [connection signal="pressed" from="TagCreationDialogue/SDCButtons/HBoxContainer/CancelButton" to="TagCreationDialogue" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="ImageSelectionDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ImageSelectionDialogue" method="_on_save_item_button_pressed"]
+[connection signal="pressed" from="ImageSelectionDialogue/SDCButtons/HBoxContainer/DeleteButton" to="ImageSelectionDialogue" method="_on_delete_button_pressed"]
+[connection signal="pressed" from="ImageSelectionDialogue/SDCButtons/HBoxContainer/CancelButton" to="ImageSelectionDialogue" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="TreeSelectionDialogue/CancelTreeSelection" to="TreeSelectionDialogue" method="_on_cancel_tree_selection_pressed"]
 [connection signal="item_selected" from="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" to="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" method="_on_item_selected"]
 [connection signal="pressed" from="TagSelectionDialogue/CancelTreeSelection" to="TagSelectionDialogue" method="_on_cancel_button_pressed"]

@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://bip2rd6sfk3kn"]
+
+[ext_resource type="Texture2D" uid="uid://bbyqnnuex1kc4" path="res://test_images/0001.jpg" id="1_3ytnu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8xrj8"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_16jm5"]
+bg_color = Color(1, 1, 1, 0.380392)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6okrd"]
+
+[node name="ImagePreviewHolder" type="Control"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_3ytnu")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_8xrj8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_16jm5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6okrd")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6okrd")
