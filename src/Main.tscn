@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=52 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_5mhyi"]
 [ext_resource type="Script" path="res://Database.gd" id="2_x8r34"]
@@ -37,6 +37,7 @@
 [ext_resource type="StyleBox" uid="uid://w4mn1gjpyxfm" path="res://styles/ColorButtons/AccPressed.tres" id="25_vbo60"]
 [ext_resource type="StyleBox" uid="uid://rr274hhkcvol" path="res://styles/ColorButtons/ConfPressed.tres" id="25_veepo"]
 [ext_resource type="StyleBox" uid="uid://c8vhwnw1k36py" path="res://styles/ColorButtons/CancNormal.tres" id="26_dgnrv"]
+[ext_resource type="Script" path="res://objects/ImageSelectionDialogue.gd" id="27_ev1vk"]
 [ext_resource type="StyleBox" uid="uid://b42fcqui5l51q" path="res://styles/ColorButtons/CancHover.tres" id="27_xau5b"]
 [ext_resource type="PackedScene" uid="uid://bip2rd6sfk3kn" path="res://objects/ImagePreviewHolder.tscn" id="27_yr3ee"]
 [ext_resource type="StyleBox" uid="uid://bptny03prtwm7" path="res://styles/ColorButtons/CancPressed.tres" id="28_vl2i0"]
@@ -737,6 +738,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("27_ev1vk")
 
 [node name="Color" type="ColorRect" parent="ImageSelectionDialogue"]
 layout_mode = 1
