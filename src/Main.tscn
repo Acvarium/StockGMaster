@@ -224,10 +224,12 @@ grow_vertical = 2
 [node name="ScrollContainer" type="ScrollContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsListPanel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.01
-anchor_top = 0.01
-anchor_right = 0.99
-anchor_bottom = 0.99
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
@@ -360,6 +362,7 @@ metadata/_tab_index = 3
 
 [node name="Control" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Tags"]
 layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 5.0
@@ -539,6 +542,7 @@ clear_button_enabled = true
 layout_mode = 2
 
 [node name="Panel" type="Panel" parent="MainControl/HSplit/SideInfo"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

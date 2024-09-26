@@ -36,9 +36,7 @@ func _ready():
 
 func _on_viewport_resize():
 	var window_size = DisplayServer.window_get_size()
-	#print(window_size)
 	var aspect = float(window_size.x) / float(window_size.y)
-	#print(aspect)
 	$Timers/SideInfoPanelTimer.start()
 
 
@@ -472,10 +470,13 @@ func _on_tab_container_tab_changed(tab):
 		category_tab_tree.show_selection(found_categories)
 
 
+func select_item(item_element):
+	items_tab.select_item(item_element)
+
+
 func update_side_info_panel():
 	var side_size = side_info.size
 	side_info.get_node("Panel").visible = side_size.x > 150
-	print(side_size)
 	
 
 func _on_h_split_dragged(offset):

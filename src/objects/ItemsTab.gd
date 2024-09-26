@@ -26,7 +26,6 @@ func refrash_items_list(items_data):
 			item.queue_free()
 			continue
 	
-	
 	for i in range(items_data.keys().size()):
 		var current_key = items_data.keys()[i]
 		var next_item_data = items_data[current_key]
@@ -35,6 +34,11 @@ func refrash_items_list(items_data):
 		else:
 			add_item(next_item_data)
 	items_holder.refresh_unfold()
+
+
+func select_item(item_element):
+	for item in items_holder.get_children():
+		item.select(item == item_element)
 
 
 func update_item(item_data, item):

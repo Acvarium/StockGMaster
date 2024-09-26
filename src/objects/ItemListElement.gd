@@ -13,6 +13,14 @@ var unfolded_height = 250.0
 var unfold_offset_for_stocks = 0.0
 var unfold_control
 const BASE_STOCK_OFFSET = 45
+var is_selected = false
+@onready var base_self_modulate = self_modulate
+
+
+func select(to_select = true):
+	is_selected = to_select
+	self_modulate = Color(0, 1, 1) if is_selected else base_self_modulate
+
 
 func set_data(new_data):
 	if !main_node:
@@ -118,3 +126,7 @@ func _on_edit_button_pressed():
 
 func _on_add_stock_button_pressed():
 	main_node.create_stock(item_id)
+
+
+func _on_select_button_pressed():
+	main_node.select_item(self)
