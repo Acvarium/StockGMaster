@@ -138,6 +138,11 @@ func save_item_tags(item_index, current_tag_ids):
 			db.insert_row("item_tags", {"item_id": item_index, "tag_id": t})
 
 
+func save_item_image_path(item_index, item_image_path):
+	db.update_rows("items", "id = '" + str(item_index) + "'", {"image_path" : item_image_path})
+	items_data[item_index].image_path = item_image_path
+
+
 func delete_tags(tag_ids):
 	for i in tag_ids:
 		db.delete_rows("item_tags", "tag_id = '" + str(i) + "'")

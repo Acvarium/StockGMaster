@@ -3,7 +3,7 @@ var item_tab = null
 var item_id = -1
 var item_name = ""
 var item_description = ""
-var item_icon_name = ""
+var item_icon_path = ""
 var is_unfolded = false
 @onready var main_node = get_tree().get_root().get_node("Main")
 @onready var unfold_wait_time = $UnfoldTimer.wait_time
@@ -42,6 +42,7 @@ func set_data(new_data):
 			image_path = new_data.image_path
 		var image = main_node.get_image_by_path(image_path)
 		var image_texture = ImageTexture.create_from_image(image)
+		item_icon_path = image_path
 		$IPanel/ItemIcon.texture = image_texture
 		$DPanel/Panel/Image.texture = image_texture
 		image_loaded = true
@@ -117,6 +118,10 @@ func _ready():
 	set_process(false)
 
 
+func set_image_path(current_image_path):
+	main_node.save_item_image_path(item_id, current_image_path)
+
+
 func _on_unfold_button_pressed():
 	toggle_unfold()
 
@@ -135,3 +140,7 @@ func _on_add_stock_button_pressed():
 
 func _on_select_button_pressed():
 	main_node.select_item(self)
+
+
+func _on_quick_image_select_button_pressed():
+	main_node.select_image_popup(self)

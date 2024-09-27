@@ -17,7 +17,7 @@ func clear_list():
 	elements = {}
 	
 
-func refrash_items_list(items_data):
+func refresh_items_list(items_data):
 	#clear_list()
 	for item in items_holder.get_children():
 		item.clear_stocks()

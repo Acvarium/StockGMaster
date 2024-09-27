@@ -8,7 +8,7 @@ func _ready():
 	_on_tag_viewer_tag_pressed_sig()
 
 
-func refrash_tags_list(tag_data):
+func refresh_items_list(tag_data):
 	tag_viewer.refrash_tags_list(tag_data)
 	await get_tree().process_frame
 	_on_tag_viewer_tag_pressed_sig()

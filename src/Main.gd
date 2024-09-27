@@ -50,8 +50,8 @@ func _on_viewport_resize():
 	image_grid.columns = image_grid.get_parent().size.x / grid_image_size
 	
 
-func refresh_item_list():
-	items_tab.refresh_list()
+#func refresh_item_list():
+	#items_tab.refresh_list()
 	
 
 func is_item_passes_filter(item_id):
@@ -232,6 +232,11 @@ func save_item_tags(item_index, current_tag_ids):
 	$Database.save_item_tags(item_index, current_tag_ids)
 
 
+func save_item_image_path(item_index, item_image_path):
+	$Database.save_item_image_path(item_index, item_image_path)
+	refresh_items_list()
+	
+
 func get_tags_data_by_ids(tag_ids):
 	var current_tags_data = {}
 	for t in tag_ids:
@@ -339,14 +344,14 @@ func _on_parent_selection_button_pressed():
 	#show_tree_selector_dialogue(Global.TreeSelection.ParentLocation)
 
 
-func refrash_items_list():
+func refresh_items_list():
 	if !items_tab:
 		items_tab = $MainControl/HSplit/MainInfo/TabContainer/Items
-	items_tab.refrash_items_list($Database.items_data)
+	items_tab.refresh_items_list($Database.items_data)
 
 
 func _on_database_item_data_loaded():
-	refrash_items_list()
+	refresh_items_list()
 	print("item data loaded")
 
 
@@ -468,7 +473,7 @@ func _on_category_struct_tree_button_clicked(item, column, id, mouse_button_inde
 
 
 func _on_database_tags_data_loaded():
-	tag_tab.refrash_tags_list($Database.tags_data)
+	tag_tab.refresh_items_list($Database.tags_data)
 
 
 func _on_filter_items_button_pressed():
