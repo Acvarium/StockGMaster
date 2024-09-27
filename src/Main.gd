@@ -30,6 +30,7 @@ func get_search_text():
 	return search_line_edit.text
 
 func _ready():
+	randomize()
 	get_viewport().connect("size_changed", _on_viewport_resize)
 	_on_viewport_resize()
 	if OS.get_name() == "Android":
@@ -519,3 +520,23 @@ func _on_h_split_dragged(offset):
 
 func _on_side_info_panel_timer_timeout():
 	update_side_info_panel()
+
+
+func _on_add_image_button_pressed():
+	$FileDialog.popup()
+
+
+func _on_file_dialog_file_selected(path):
+	print(path)
+
+
+func _on_file_dialog_files_selected(paths):
+	for path : String in paths:
+		var file_name = path.get_file()
+		var full_new_path = $Database.get_image_folder_path() + file_name
+		while FileAccess.file_exists(full_new_path):
+			full_new_path = $Database.get_image_folder_path() + \
+				file_name.get_basename() + str(randi()) + "." + file_name.get_extension()
+		print(full_new_path)
+		DirAccess.copy_absolute(path, full_new_path)
+	load_images_to_viewer()
