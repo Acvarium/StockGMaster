@@ -143,4 +143,10 @@ func _on_select_button_pressed():
 
 
 func _on_quick_image_select_button_pressed():
-	main_node.select_image_popup(self)
+	pass
+	#main_node.select_image_popup(self)
+
+
+func _on_quick_image_select_button_gui_input(event):
+	if event is InputEventMouseButton and event.is_pressed() and event.double_click:
+		main_node.select_image_popup(self)

@@ -16,6 +16,7 @@ extends Control
 var item_index = -1
 var current_item_data
 var current_mode = Global.WhatToDo.None
+var current_image_path = ""
 var current_action_data_type = Global.ActionDataType.None
 var current_stock_data = {}
 var current_item_tags_data = {}
@@ -210,6 +211,8 @@ func _on_tags_edit_tags_button_pressed():
 
 
 func set_image_path(image_path):
+	if !current_item_data:
+		current_item_data = {}
 	current_item_data.image_path = image_path
 	update_image(main_node.get_image_by_path(current_item_data.image_path))
 
