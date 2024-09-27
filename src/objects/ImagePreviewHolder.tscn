@@ -1,19 +1,36 @@
-[gd_scene load_steps=6 format=3 uid="uid://bip2rd6sfk3kn"]
+[gd_scene load_steps=7 format=3 uid="uid://bip2rd6sfk3kn"]
 
-[ext_resource type="Texture2D" uid="uid://bbyqnnuex1kc4" path="res://test_images/0001.jpg" id="1_3ytnu"]
 [ext_resource type="Script" path="res://objects/ImagePreviewHolder.gd" id="1_tgylv"]
+[ext_resource type="StyleBox" uid="uid://bbplm1e5vppsh" path="res://styles/BasePanelStyle.tres" id="3_jvr5c"]
+[ext_resource type="Texture2D" uid="uid://djnq3oxirn5gj" path="res://textures/NoImage.jpg" id="3_wafkr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8xrj8"]
-bg_color = Color(1, 1, 1, 0)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_16jm5"]
-bg_color = Color(1, 1, 1, 0.380392)
+bg_color = Color(1, 1, 1, 0.270588)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6okrd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k42qx"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.278431, 0.294118, 0.309804, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.98, 0.90454, 0.2254, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="ImagePreviewHolder" type="Control"]
 custom_minimum_size = Vector2(150, 150)
@@ -24,33 +41,49 @@ offset_right = 151.0
 offset_bottom = 150.0
 script = ExtResource("1_tgylv")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Panel" type="Panel" parent="."]
+clip_children = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("3_jvr5c")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_3ytnu")
+texture = ExtResource("3_wafkr")
 expand_mode = 2
 stretch_mode = 6
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_8xrj8")
-theme_override_styles/hover = SubResource("StyleBoxFlat_16jm5")
+focus_mode = 0
+theme_override_styles/hover = SubResource("StyleBoxFlat_8xrj8")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_6okrd")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6okrd")
+
+[node name="SelectedPanel" type="Panel" parent="."]
+visible = false
+clip_children = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_k42qx")
+
+[connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]

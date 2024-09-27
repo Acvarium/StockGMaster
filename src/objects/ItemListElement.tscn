@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://l7og0lhat66"]
+[gd_scene load_steps=19 format=3 uid="uid://l7og0lhat66"]
 
 [ext_resource type="StyleBox" uid="uid://c285i81pa11sx" path="res://styles/ItemListPanelStyle.tres" id="1_3ptxo"]
 [ext_resource type="Script" path="res://objects/ItemListElement.gd" id="2_7hixr"]
 [ext_resource type="StyleBox" uid="uid://balcxf82udj3t" path="res://styles/EditTextStyle.tres" id="3_i048p"]
 [ext_resource type="Texture2D" uid="uid://bdhl7lo2ybw66" path="res://textures/unfoldButton.png" id="4_eegrw"]
+[ext_resource type="StyleBox" uid="uid://bbplm1e5vppsh" path="res://styles/BasePanelStyle.tres" id="5_5cr2u"]
 [ext_resource type="Texture2D" uid="uid://db60i04y7fo6a" path="res://textures/unfoldButton_hl.png" id="5_mevon"]
 [ext_resource type="Texture2D" uid="uid://cg2o8xgo1gb5w" path="res://textures/unfoldButton_pressed.png" id="6_c5fi6"]
 [ext_resource type="Texture2D" uid="uid://b4156qpi54clp" path="res://textures/edit_button.png" id="7_mfdci"]
@@ -19,43 +20,43 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DPanel/ItemDescription:visible")
+tracks/0/path = NodePath("LPanel:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("LPanel:modulate")
+tracks/1/path = NodePath(".:custom_minimum_size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Vector2(0, 55)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:custom_minimum_size")
+tracks/2/path = NodePath("StocksHolder:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 55)]
+"update": 1,
+"values": [false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("StocksHolder:visible")
+tracks/3/path = NodePath("CreateStock:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -67,26 +68,50 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("CreateStock:visible")
+tracks/4/path = NodePath("DPanel/ItemDescription:self_modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("DPanel/ItemDescription:self_modulate")
+tracks/5/path = NodePath("DPanel:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("IPanel:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ItemName:offset_left")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [65.0]
 }
 
 [sub_resource type="Animation" id="Animation_yxvab"]
@@ -95,43 +120,43 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DPanel/ItemDescription:visible")
+tracks/0/path = NodePath("LPanel:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.9, 0.95),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, false, true]
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("LPanel:modulate")
+tracks/1/path = NodePath(".:custom_minimum_size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Vector2(0, 55), Vector2(0, 250)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/path = NodePath(".:custom_minimum_size")
+tracks/2/enabled = true
+tracks/2/path = NodePath("StocksHolder:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 55), Vector2(0, 250)]
+"times": PackedFloat32Array(0, 0.9, 0.95),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("StocksHolder:visible")
+tracks/3/path = NodePath("CreateStock:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -143,26 +168,50 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("CreateStock:visible")
+tracks/4/path = NodePath("DPanel/ItemDescription:self_modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("DPanel:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.9, 0.95),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, false, true]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("DPanel/ItemDescription:self_modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("IPanel:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.9, 0.95),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ItemName:offset_left")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.9, 0.95),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [65.0, 65.0, 15.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_klpny"]
@@ -186,26 +235,25 @@ theme_override_styles/panel = ExtResource("1_3ptxo")
 script = ExtResource("2_7hixr")
 
 [node name="DPanel" type="Panel" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 15.0
-offset_right = -15.0
-offset_bottom = -50.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = ExtResource("3_i048p")
-
-[node name="ItemDescription" type="Label" parent="DPanel"]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
+offset_left = 15.0
 offset_top = 60.0
+offset_right = -15.0
 offset_bottom = 195.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("3_i048p")
+
+[node name="ItemDescription" type="Label" parent="DPanel"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 140.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/normal = ExtResource("3_i048p")
@@ -213,6 +261,28 @@ text = "Description"
 autowrap_mode = 3
 clip_text = true
 text_overrun_behavior = 4
+
+[node name="Panel" type="Panel" parent="DPanel"]
+clip_children = 2
+custom_minimum_size = Vector2(135, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("5_5cr2u")
+
+[node name="Image" type="TextureRect" parent="DPanel/Panel"]
+custom_minimum_size = Vector2(135, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_q0yka")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="LPanel" type="Panel" parent="."]
 visible = false

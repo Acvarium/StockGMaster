@@ -38,7 +38,9 @@ func set_data(new_data):
 	var image_loaded = false
 	if "image_id" in new_data.keys() and new_data.image_id != null:
 		var image = main_node.get_image_by_id(new_data.image_id)
-		$IPanel/ItemIcon.texture = ImageTexture.create_from_image(image)
+		var image_texture = ImageTexture.create_from_image(image)
+		$IPanel/ItemIcon.texture = image_texture
+		$DPanel/Panel/Image.texture = image_texture
 		image_loaded = true
 	if "location_id" in new_data.keys() and new_data.location_id != null:
 		var location_addr = main_node.get_location_address(new_data.location_id)

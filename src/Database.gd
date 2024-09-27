@@ -30,7 +30,7 @@ func get_db_path():
 
 
 func get_image_paths():
-	var image_dir_path = get_data_path() + "/images"
+	var image_dir_path = get_image_folder_path()
 	var image_names = []
 	var d = DirAccess.open(image_dir_path)
 	if d == null:
@@ -43,7 +43,7 @@ func get_image_paths():
 			if not dir.current_is_dir():
 				print("Found file: " + file_name + " " + file_name.to_lower().get_extension())
 				if supported_image_ext.has(file_name.to_lower().get_extension()):
-					image_names.append(image_dir_path + '/' + file_name)
+					image_names.append(file_name)
 			file_name = dir.get_next()
 	else:
 		print("An error occurred when trying to access the path.")
@@ -154,9 +154,13 @@ func get_unit_name_by_id(_id):
 func get_image_by_id(image_id):
 	db.select_rows("images", "id = '" + str(image_id) + "'", ["*"])
 	for res in db.query_result:
-		var image = Image.new()
-		image.load_jpg_from_buffer(res.image)
+		var image_path = get_image_folder_path() + res.image_path
+		var image = Image.load_from_file(image_path)
 		return image
+
+
+func get_image_folder_path():
+	return get_data_path() + "/images/"
 
 
 func get_location_name_by_id(location_id):

@@ -26,6 +26,9 @@ var grid_image_size = 150
 var filter_tag_ids = []
 
 
+func get_search_text():
+	return search_line_edit.text
+
 func _ready():
 	get_viewport().connect("size_changed", _on_viewport_resize)
 	_on_viewport_resize()
@@ -173,7 +176,10 @@ func get_image_by_id(image_id):
 	var image = $Database.get_image_by_id(image_id)
 	return image
 
-
+func get_image_folder_path():
+	return $Database.get_image_folder_path()
+	
+	
 func hide_tree_selector():
 	tree_selection_dialogue.visible = false
 

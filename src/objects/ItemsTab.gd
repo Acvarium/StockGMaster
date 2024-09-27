@@ -55,7 +55,7 @@ func add_item(item_data):
 
 
 func refresh_list():
-	var search_text = $ItemsToolPanel/ItemsSearchLineEdit.text
+	var search_text = main_node.get_search_text()
 	_on_items_search_line_edit_text_changed(search_text)
 	
 
