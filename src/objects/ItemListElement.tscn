@@ -350,6 +350,19 @@ libraries = {
 "": SubResource("AnimationLibrary_klpny")
 }
 
+[node name="UnfoldTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="SelectButton" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="IPanel" type="Panel" parent="."]
 clip_children = 2
 layout_mode = 0
@@ -366,20 +379,7 @@ offset_right = 50.0
 offset_bottom = 50.0
 texture = ExtResource("10_q0yka")
 expand_mode = 2
-stretch_mode = 4
-
-[node name="UnfoldTimer" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
-
-[node name="SelectButton" type="Button" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+stretch_mode = 6
 
 [node name="StocksHolder" type="VBoxContainer" parent="."]
 visible = false

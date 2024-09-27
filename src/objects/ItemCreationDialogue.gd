@@ -6,6 +6,7 @@ extends Control
 @export var quantity_element : Panel
 @export var category_element : Panel
 @export var tags_element : Panel
+@export var image_element : Panel
 
 @onready var main_node = get_tree().get_root().get_node("Main")
 @export var item_data_components : Array[Control]
@@ -88,6 +89,14 @@ func set_item_data(item_data):
 		description_list_item.set_edit_text(item_data.description)
 	if "category_id" in item_data.keys():
 		update_category_text(main_node.get_category_address(item_data.category_id))	
+	var image_path = ""
+	if "image_path" in item_data.keys() and item_data.image_path:
+		image_path = item_data.image_path
+	update_image(main_node.get_image_by_path(image_path))
+		
+
+func update_image(image):
+	image_element.update_image(image)
 
 
 func update_location_text(new_location_text):
@@ -128,6 +137,7 @@ func _on_save_item_button_pressed():
 		new_item_data.id = item_index
 		new_item_data.name = name_list_item.get_edit_text()
 		new_item_data.description = description_list_item.get_edit_text()
+		new_item_data.image_path = current_item_data.image_path
 		if current_item_data and "category_id" in current_item_data:
 			new_item_data.category_id = current_item_data.category_id
 		item_index = main_node.save_item(new_item_data, quantity == 0)
@@ -197,3 +207,12 @@ func _on_tags_edit_tags_button_pressed():
 	for t in current_item_tags_data:
 		selected_tags.append(current_item_tags_data[t].id)
 	main_node.select_tags_with_dialogue(self, selected_tags)
+
+
+func set_image_path(image_path):
+	current_item_data.image_path = image_path
+	update_image(main_node.get_image_by_path(current_item_data.image_path))
+
+
+func _on_image_image_selection_button_pressed():
+	main_node.select_image_popup(self)

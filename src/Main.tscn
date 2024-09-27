@@ -560,6 +560,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="MainControl/HSplit/SideInfo/Panel"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -568,7 +569,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("18_v6yiw")
 
-[node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "tags_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("9_p6ieq")]
+[node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "tags_element", "image_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("9_p6ieq")]
 visible = false
 layout_mode = 1
 script = ExtResource("10_06y8t")
@@ -579,6 +580,7 @@ location_element = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Location")
 quantity_element = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Quantity")
 category_element = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Category")
 tags_element = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Tags")
+image_element = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Image")
 item_data_components = [NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Description"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Image"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Category"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Tags"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/ItemDataSeparator")]
 stock_data_components = [NodePath("ItemsPanel/ScrollContainer/VBoxContainer/StockDataSeparator"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Location"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Quantity")]
 delete_button = NodePath("SDCButtons/HBoxContainer/DeleteButton")
@@ -804,7 +806,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="SaveItemButton" type="Button" parent="ImageSelectionDialogue/SDCButtons/HBoxContainer"]
+[node name="SaveButton" type="Button" parent="ImageSelectionDialogue/SDCButtons/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -1189,6 +1191,7 @@ one_shot = true
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer/CreateTagButton" to="MainControl/HSplit/MainInfo/TabContainer/Tags" method="_on_create_tag_button_pressed"]
 [connection signal="location_button_pressed" from="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ProfileName" to="MainControl/HSplit/MainInfo/TabContainer/Settings" method="_on_profile_name_button_pressed"]
 [connection signal="text_changed" from="MainControl/HSplit/MainInfo/SearchLine/SearchLineEdit" to="." method="_on_search_line_edit_text_changed"]
+[connection signal="image_selection_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Image" to="ItemCreationDialogue" method="_on_image_image_selection_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Category" to="ItemCreationDialogue" method="_on_category_selection_button_pressed"]
 [connection signal="edit_tags_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Tags" to="ItemCreationDialogue" method="_on_tags_edit_tags_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Location" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
@@ -1207,7 +1210,9 @@ one_shot = true
 [connection signal="pressed" from="TagCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="TagCreationDialogue" method="_on_save_item_button_pressed"]
 [connection signal="pressed" from="TagCreationDialogue/SDCButtons/HBoxContainer/DeleteButton" to="TagCreationDialogue" method="_on_delete_button_pressed"]
 [connection signal="pressed" from="TagCreationDialogue/SDCButtons/HBoxContainer/CancelButton" to="TagCreationDialogue" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="ImageSelectionDialogue/SDCButtons/HBoxContainer/SaveButton" to="ImageSelectionDialogue" method="_on_save_button_pressed"]
 [connection signal="pressed" from="ImageSelectionDialogue/SDCButtons/HBoxContainer/DeleteButton" to="ImageSelectionDialogue" method="_on_delete_button_pressed"]
+[connection signal="pressed" from="ImageSelectionDialogue/SDCButtons/HBoxContainer/CancelButton" to="ImageSelectionDialogue" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="TreeSelectionDialogue/CancelTreeSelection" to="TreeSelectionDialogue" method="_on_cancel_tree_selection_pressed"]
 [connection signal="item_selected" from="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" to="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" method="_on_item_selected"]
 [connection signal="pressed" from="TagSelectionDialogue/CancelTreeSelection" to="TagSelectionDialogue" method="_on_cancel_button_pressed"]

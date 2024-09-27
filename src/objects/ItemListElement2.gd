@@ -26,7 +26,7 @@ var unfold_control = null
 var is_unfolded = false
 signal location_button_pressed
 signal edit_tags_button_pressed
-
+signal image_selection_button_pressed
 
 enum ListItemModes {
 	Text,
@@ -105,6 +105,14 @@ func _on_location_button_pressed():
 	location_button_pressed.emit()
 
 
+func update_image(image):
+	var texture = ImageTexture.create_from_image(image)
+	$IconControl/P/ItemIcon.texture = texture
+
 
 func _on_edit_tags_button_pressed():
 	edit_tags_button_pressed.emit()
+
+
+func _on_icon_button_pressed():
+	image_selection_button_pressed.emit()

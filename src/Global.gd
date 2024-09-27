@@ -18,7 +18,8 @@ enum ActionDataType {
 	ParentCategory,
 	Tag,
 	Item,
-	Stock
+	Stock,
+	Image,
 }
 
 

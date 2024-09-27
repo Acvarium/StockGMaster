@@ -173,11 +173,15 @@ func warning_dialogue(warning_message, title : String = ""):
 	
 
 func get_image_by_path(image_path):
-	var image = Image.load_from_file($Database.get_image_folder_path() + image_path)
+	var image = Image.load_from_file(get_image_folder_path(image_path))
 	return image
 
-func get_image_folder_path():
-	return $Database.get_image_folder_path()
+
+func get_image_folder_path(path):
+	if path != "":
+		return $Database.get_image_folder_path() + path
+	else:
+		return "res://textures/NoImage.jpg"
 	
 	
 func hide_tree_selector():
@@ -218,6 +222,10 @@ func exec_action_popup(what_to_do, action_data_type, for_dialogue = null, item_i
 		tree_selection_dialogue.data_recever_dialogue = for_dialogue
 		tree_selection_dialogue.item_id = item_id
 		tree_selection_dialogue.visible = true
+	if action_data_type == Global.ActionDataType.Image:
+		load_images_to_viewer()
+		$ImageSelectionDialogue.set_receiver_dialogue(for_dialogue)
+		$ImageSelectionDialogue.show()
 
 
 func save_item_tags(item_index, current_tag_ids):
@@ -239,6 +247,10 @@ func get_all_tags_data():
 func select_tags_with_dialogue(recever, selected_tags = []):
 	$TagSelectionDialogue.select_tags_with_dialogue(recever, selected_tags)
 	$TagSelectionDialogue.show()
+
+
+func image_selected(selected_image_path, selected_item_id, selected_action_type):
+	pass
 
 
 func edit_item(item_id):
@@ -366,6 +378,10 @@ func select_parent_category_popup(for_dialogue, item_id = -1):
 	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.ParentCategory, for_dialogue, item_id)
 
 
+func select_image_popup(for_dialogue, item_id = -1):
+	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.Image, for_dialogue, item_id)
+
+
 func edit_location(location_id):
 	if location_id in $Database.locations_data.keys() and location_id > 0:
 		#editing
@@ -376,7 +392,7 @@ func edit_location(location_id):
 		location_creation_dialogue.set_data({})
 		location_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Location)
 
-#TODO create location from selected
+
 func create_location_from_selected():
 	var selected_id = location_selection_tree.get_selected_id()
 	if selected_id >= 0:

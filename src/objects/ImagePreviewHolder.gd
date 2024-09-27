@@ -10,9 +10,7 @@ func set_image_path(image_path):
 	current_image_path = image_path
 	
 
-func load_image(image_path):
-	current_image_path = image_path
-	var image = Image.load_from_file(image_path)
+func load_image(image):
 	var texture = ImageTexture.create_from_image(image)
 	$Panel/TextureRect.texture = texture
 
