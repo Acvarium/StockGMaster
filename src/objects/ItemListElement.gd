@@ -36,8 +36,8 @@ func set_data(new_data):
 	else:
 		$DPanel/ItemDescription.text = ""
 	var image_loaded = false
-	if "image_id" in new_data.keys() and new_data.image_id != null:
-		var image = main_node.get_image_by_id(new_data.image_id)
+	if "image_path" in new_data.keys() and new_data.image_path != null:
+		var image = main_node.get_image_by_path(new_data.image_path)
 		var image_texture = ImageTexture.create_from_image(image)
 		$IPanel/ItemIcon.texture = image_texture
 		$DPanel/Panel/Image.texture = image_texture

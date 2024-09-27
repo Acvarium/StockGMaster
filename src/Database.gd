@@ -151,14 +151,6 @@ func get_unit_name_by_id(_id):
 	return ""
 
 
-func get_image_by_id(image_id):
-	db.select_rows("images", "id = '" + str(image_id) + "'", ["*"])
-	for res in db.query_result:
-		var image_path = get_image_folder_path() + res.image_path
-		var image = Image.load_from_file(image_path)
-		return image
-
-
 func get_image_folder_path():
 	return get_data_path() + "/images/"
 
@@ -269,10 +261,11 @@ func create_tables():
 			"name" : {"data_type" : "TEXT"},
 			"description" : {"data_type" : "TEXT"},
 			"category_id" : {"data_type" : "int"},
-			"image_id" : {"data_type" : "int"},
 			"mark" : {"data_type" : "int"},
 			"variant_of_id" : {"data_type" : "int"},
 			"unit_name_id" : {"data_type" : "int"},
+			"image_path" : {"data_type" : "TEXT"},
+			"image_rect_id" : {"data_type" : "int"},
 		}
 		db.create_table("items", items_table)
 		
@@ -299,15 +292,19 @@ func create_tables():
 			"description" : {"data_type" : "TEXT"},
 			"mark" : {"data_type" : "int"},
 			"is_virtual" : {"data_type" : "int"},
+			"image_path" : {"data_type" : "TEXT"},
+			"image_rect_id" : {"data_type" : "int"},
 		}
 		db.create_table("locations", locations_table)
-		
-		var images_table = {
+
+		var rect_table = {
 			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
-			"image" : {"data_type" : "BLOB"},
-			"image_path" : {"data_type" : "TEXT"},
+			"x" : {"data_type" : "int"},
+			"y" : {"data_type" : "int"},
+			"w" : {"data_type" : "int"},
+			"h" : {"data_type" : "int"},
 		}
-		db.create_table("images", images_table)
+		db.create_table("rect", rect_table)
 		
 		var category_table = {
 			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
@@ -444,13 +441,6 @@ func _on_custom_select_pressed():
 	print(db.query_result)
 
 
-func store_image_example():
-	pass
-	#var pba = image.get_image().save_jpg_to_buffer()
-	#var data = {"image" : pba}
-	#db.insert_row("images", data)
-
-
 func build_location_address(location_id):
 	var addr = "/"
 	var current_locations_data = get_locations_data_by_id(location_id)
@@ -475,12 +465,3 @@ func build_category_address(category_id):
 			current_category_data = null
 	addr = "/" + addr.left(addr.length() - 1)
 	return addr
-
-
-func load_image_example():
-	db.select_rows("images", "id = '1'", ["*"])
-	for res in db.query_result:
-		var image = Image.new()
-		image.load_jpg_from_buffer(res.image)
-		var texture = ImageTexture.create_from_image(image)
-		

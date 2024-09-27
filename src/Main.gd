@@ -172,8 +172,8 @@ func warning_dialogue(warning_message, title : String = ""):
 	action_confirm_dialogue.warning_dialogue(warning_message, title)
 	
 
-func get_image_by_id(image_id):
-	var image = $Database.get_image_by_id(image_id)
+func get_image_by_path(image_path):
+	var image = Image.load_from_file($Database.get_image_folder_path() + image_path)
 	return image
 
 func get_image_folder_path():
