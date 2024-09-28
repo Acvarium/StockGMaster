@@ -1,7 +1,9 @@
 extends Control
 var current_image_path = ""
 var is_selected = false
+var is_active = false
 var image_selection_dialogue : Control
+var is_none_image = false
 
 func _ready():
 	pass
@@ -20,6 +22,14 @@ func select(to_select = false):
 	$SelectedPanel.visible = is_selected
 
 
-func _on_button_pressed():
-	image_selection_dialogue.select_image(self)
-		
+func activate(to_activate = false):
+	is_active = to_activate
+	$ActivePanel.visible = is_active
+
+
+func _on_button_gui_input(event):
+	if event is InputEventMouseButton and event.is_pressed():
+		if Input.is_physical_key_pressed(KEY_SHIFT):
+			image_selection_dialogue.select_image(self, true)
+		else:
+			image_selection_dialogue.select_image(self)

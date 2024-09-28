@@ -51,7 +51,6 @@ func _ready():
 
 func set_unfold_control(value):
 	unfold_control = value
-	print(name + "  " + str(unfold_control != null))
 	unfold_button.visible = unfold_control != null
 
 

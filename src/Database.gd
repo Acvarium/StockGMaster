@@ -41,7 +41,6 @@ func get_image_paths():
 		var file_name : String  = dir.get_next()
 		while file_name != "":
 			if not dir.current_is_dir():
-				print("Found file: " + file_name + " " + file_name.to_lower().get_extension())
 				if supported_image_ext.has(file_name.to_lower().get_extension()):
 					image_names.append(file_name)
 			file_name = dir.get_next()

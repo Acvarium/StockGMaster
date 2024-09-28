@@ -144,7 +144,6 @@ func _on_select_button_pressed():
 
 func _on_quick_image_select_button_pressed():
 	pass
-	#main_node.select_image_popup(self)
 
 
 func _on_quick_image_select_button_gui_input(event):

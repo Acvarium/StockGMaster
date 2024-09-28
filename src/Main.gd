@@ -537,6 +537,5 @@ func _on_file_dialog_files_selected(paths):
 		while FileAccess.file_exists(full_new_path):
 			full_new_path = $Database.get_image_folder_path() + \
 				file_name.get_basename() + str(randi()) + "." + file_name.get_extension()
-		print(full_new_path)
 		DirAccess.copy_absolute(path, full_new_path)
 	load_images_to_viewer()
