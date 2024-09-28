@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=59 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_5mhyi"]
 [ext_resource type="Script" path="res://Database.gd" id="2_x8r34"]
@@ -26,8 +26,12 @@
 [ext_resource type="StyleBox" uid="uid://c5i134ur1to60" path="res://styles/EdittextBaseStyle.tres" id="18_luhyk"]
 [ext_resource type="Texture2D" uid="uid://ckc14v3a8oqd5" path="res://icon.svg" id="18_v6yiw"]
 [ext_resource type="Script" path="res://objects/ItemFilteringDialogue.gd" id="19_8mkwf"]
+[ext_resource type="StyleBox" uid="uid://bbplm1e5vppsh" path="res://styles/BasePanelStyle.tres" id="19_cpq5q"]
 [ext_resource type="Script" path="res://objects/TagCreationDialogue.gd" id="19_p1s4p"]
+[ext_resource type="Texture2D" uid="uid://qkb0qa1u3orf" path="res://textures/HunfoldButton.png" id="20_15jft"]
+[ext_resource type="Texture2D" uid="uid://llfht45tsalb" path="res://textures/HunfoldButton_pressed.png" id="21_65tdk"]
 [ext_resource type="Script" path="res://objects/ProfileSelectionDialogue.gd" id="21_nm3mm"]
+[ext_resource type="Texture2D" uid="uid://bx5eybhbucdq8" path="res://textures/HunfoldButton_hl.png" id="22_8tugv"]
 [ext_resource type="PackedScene" uid="uid://c7bxd60j761mn" path="res://objects/profile_selection_element.tscn" id="22_iv6mq"]
 [ext_resource type="Script" path="res://objects/TagSelectionDialogue.gd" id="23_cbvd4"]
 [ext_resource type="StyleBox" uid="uid://bknj8ahf7w78" path="res://styles/ColorButtons/AccNormal.tres" id="23_cyhx8"]
@@ -155,14 +159,15 @@ grow_vertical = 0
 
 [node name="HSplit" type="HSplitContainer" parent="MainControl"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -42.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MainInfo" type="Control" parent="MainControl/HSplit"]
-custom_minimum_size = Vector2(600, 0)
+custom_minimum_size = Vector2(558, 0)
 layout_mode = 2
 
 [node name="TabContainer" type="TabContainer" parent="MainControl/HSplit/MainInfo"]
@@ -551,16 +556,17 @@ theme_override_styles/normal = ExtResource("10_djmps")
 clear_button_enabled = true
 
 [node name="SideInfo" type="Control" parent="MainControl/HSplit"]
+visible = false
 layout_mode = 2
 
 [node name="Panel" type="Panel" parent="MainControl/HSplit/SideInfo"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("19_cpq5q")
 
 [node name="TextureRect" type="TextureRect" parent="MainControl/HSplit/SideInfo/Panel"]
 visible = false
@@ -571,6 +577,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("18_v6yiw")
+
+[node name="SidePanel" type="Panel" parent="MainControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -36.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("16_uvvjq")
+
+[node name="SideSplitButton" type="TextureButton" parent="MainControl/SidePanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 3.0
+offset_top = 3.0
+grow_horizontal = 2
+texture_normal = ExtResource("20_15jft")
+texture_pressed = ExtResource("21_65tdk")
+texture_hover = ExtResource("22_8tugv")
 
 [node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "tags_element", "image_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("9_p6ieq")]
 visible = false
@@ -1183,6 +1211,10 @@ text_overrun_behavior = 3
 wait_time = 0.05
 one_shot = true
 
+[node name="SideInfoPanelTimer2" type="Timer" parent="Timers"]
+wait_time = 0.05
+one_shot = true
+
 [node name="FileDialog" type="FileDialog" parent="."]
 mode = 3
 title = "Open File(s)"
@@ -1215,6 +1247,7 @@ use_native_dialog = true
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer/CreateTagButton" to="MainControl/HSplit/MainInfo/TabContainer/Tags" method="_on_create_tag_button_pressed"]
 [connection signal="location_button_pressed" from="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ProfileName" to="MainControl/HSplit/MainInfo/TabContainer/Settings" method="_on_profile_name_button_pressed"]
 [connection signal="text_changed" from="MainControl/HSplit/MainInfo/SearchLine/SearchLineEdit" to="." method="_on_search_line_edit_text_changed"]
+[connection signal="pressed" from="MainControl/SidePanel/SideSplitButton" to="." method="_on_side_split_button_pressed"]
 [connection signal="image_selection_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Image" to="ItemCreationDialogue" method="_on_image_image_selection_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Category" to="ItemCreationDialogue" method="_on_category_selection_button_pressed"]
 [connection signal="edit_tags_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Tags" to="ItemCreationDialogue" method="_on_tags_edit_tags_button_pressed"]
@@ -1249,6 +1282,7 @@ use_native_dialog = true
 [connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/ConfirmButton" to="ActionConfirmDialogue" method="_on_confirm_button_pressed"]
 [connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/CancelButton" to="ActionConfirmDialogue" method="_on_cancel_button_pressed"]
 [connection signal="timeout" from="Timers/SideInfoPanelTimer" to="." method="_on_side_info_panel_timer_timeout"]
+[connection signal="timeout" from="Timers/SideInfoPanelTimer2" to="." method="_on_side_info_panel_timer_2_timeout"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="files_selected" from="FileDialog" to="." method="_on_file_dialog_files_selected"]
 

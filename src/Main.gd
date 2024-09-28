@@ -22,9 +22,9 @@ var tree_selection_index : int = -1
 @onready var current_action_data_type = Global.ActionDataType.None
 #var current_action_id = -1
 var grid_image_size = 150
-
+const MIN_SPLIT_SIZE = 150
 var filter_tag_ids = []
-
+var h_split_dragged = false
 
 func get_search_text():
 	return search_line_edit.text
@@ -521,12 +521,14 @@ func select_item(item_element):
 
 func update_side_info_panel():
 	var side_size = side_info.size
-	side_info.get_node("Panel").visible = side_size.x > 150
+	side_info.get_node("Panel").visible = side_size.x > MIN_SPLIT_SIZE
+	#if side_size.x < MIN_SPLIT_SIZE:
+		#unfold_side_split(false)
 	
 
 func _on_h_split_dragged(offset):
 	update_side_info_panel()
-	
+	h_split_dragged = true
 
 func _on_side_info_panel_timer_timeout():
 	update_side_info_panel()
@@ -549,3 +551,31 @@ func _on_file_dialog_files_selected(paths):
 				file_name.get_basename() + str(randi()) + "." + file_name.get_extension()
 		DirAccess.copy_absolute(path, full_new_path)
 	load_images_to_viewer()
+
+
+func unfold_side_split(to_unfold = true):
+	var window_size = DisplayServer.window_get_size()
+	if window_size.x > 700:
+		$MainControl/HSplit/SideInfo.visible = to_unfold
+		$MainControl/SidePanel/SideSplitButton.flip_h = to_unfold
+		var h_split_size = $MainControl/HSplit.size
+		if (h_split_size.x - $MainControl/HSplit.split_offset) < MIN_SPLIT_SIZE:
+			$MainControl/HSplit.split_offset = h_split_size.x - MIN_SPLIT_SIZE * 2
+	$Timers/SideInfoPanelTimer.start()
+
+
+func _on_side_split_button_pressed():
+	var side_info_visible = $MainControl/HSplit/SideInfo.visible
+	unfold_side_split(!side_info_visible)
+
+
+func _input(event):
+	if h_split_dragged and event is InputEventMouseButton and event.is_released() \
+			and event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
+		h_split_dragged = false
+		if not $MainControl/HSplit/SideInfo/Panel.visible:
+			$Timers/SideInfoPanelTimer2.start()
+
+
+func _on_side_info_panel_timer_2_timeout():
+	unfold_side_split(false)

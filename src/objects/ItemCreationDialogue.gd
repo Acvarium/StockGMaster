@@ -138,7 +138,10 @@ func _on_save_item_button_pressed():
 		new_item_data.id = item_index
 		new_item_data.name = name_list_item.get_edit_text()
 		new_item_data.description = description_list_item.get_edit_text()
-		new_item_data.image_path = current_item_data.image_path
+		if current_item_data == null or not current_item_data.keys().has("image_path"):
+			new_item_data.image_path = ""
+		else:
+			new_item_data.image_path = current_item_data.image_path
 		if current_item_data and "category_id" in current_item_data:
 			new_item_data.category_id = current_item_data.category_id
 		item_index = main_node.save_item(new_item_data, quantity == 0)
