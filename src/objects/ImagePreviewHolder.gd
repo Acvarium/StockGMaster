@@ -28,7 +28,7 @@ func activate(to_activate = false):
 
 
 func _on_button_gui_input(event):
-	if event is InputEventMouseButton and event.is_pressed():
+	if event is InputEventMouseButton and event.is_pressed() and event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
 		if Input.is_physical_key_pressed(KEY_SHIFT):
 			image_selection_dialogue.select_image(self, true)
 		else:

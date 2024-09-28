@@ -147,5 +147,5 @@ func _on_quick_image_select_button_pressed():
 
 
 func _on_quick_image_select_button_gui_input(event):
-	if event is InputEventMouseButton and event.is_pressed() and event.double_click:
+	if event is InputEventMouseButton and event.is_pressed() and event.double_click and event.button_index == MouseButton.MOUSE_BUTTON_LEFT:
 		main_node.select_image_popup(self)

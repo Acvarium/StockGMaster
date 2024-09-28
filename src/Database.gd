@@ -257,6 +257,20 @@ func get_number_of_items_in_location(location_id):
 	return 0
 
 
+func get_number_of_items_with_images(list_of_image_paths):
+	var items_count = 0
+	for image_path in list_of_image_paths:
+		db.select_rows("items", "image_path = '" + image_path + "'", ["*"])
+		items_count += db.query_result.size()
+	return items_count
+
+
+func delete_images(list_of_image_paths):
+	for image_path in list_of_image_paths:
+		db.update_rows("items", "image_path = '" + image_path + "'", {"image_path" : ""})
+		DirAccess.remove_absolute(get_image_folder_path() + image_path)
+	
+
 func create_tables():
 	var tables = get_tables()
 	if not "items" in tables:

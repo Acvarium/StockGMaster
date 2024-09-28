@@ -1236,6 +1236,7 @@ use_native_dialog = true
 [connection signal="pressed" from="TagCreationDialogue/SDCButtons/HBoxContainer/CancelButton" to="TagCreationDialogue" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="ImageSelectionDialogue/SDCButtons/HBoxContainer/SaveButton" to="ImageSelectionDialogue" method="_on_save_button_pressed"]
 [connection signal="pressed" from="ImageSelectionDialogue/SDCButtons/HBoxContainer/AddButton" to="." method="_on_add_image_button_pressed"]
+[connection signal="pressed" from="ImageSelectionDialogue/SDCButtons/HBoxContainer/DeleteButton" to="ImageSelectionDialogue" method="_on_delete_button_pressed"]
 [connection signal="pressed" from="ImageSelectionDialogue/SDCButtons/HBoxContainer/CancelButton" to="ImageSelectionDialogue" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="TreeSelectionDialogue/CancelTreeSelection" to="TreeSelectionDialogue" method="_on_cancel_tree_selection_pressed"]
 [connection signal="item_selected" from="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" to="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" method="_on_item_selected"]

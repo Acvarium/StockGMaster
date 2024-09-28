@@ -80,6 +80,16 @@ func get_number_of_items_in_location(location_id):
 	return $Database.get_number_of_items_in_location(location_id)
 
 
+func get_number_of_items_with_images(list_of_image_paths):
+	return $Database.get_number_of_items_with_images(list_of_image_paths)
+
+
+func delete_images(list_of_image_paths):
+	$Database.delete_images(list_of_image_paths)
+	$Database.pull_items_data()
+	load_images_to_viewer()
+
+
 func get_number_of_items_with_category(category_id):
 	return $Database.get_number_of_items_with_category(category_id)
 	
@@ -226,7 +236,7 @@ func exec_action_popup(what_to_do, action_data_type, for_dialogue = null, item_i
 	if action_data_type == Global.ActionDataType.Image:
 		load_images_to_viewer()
 		$ImageSelectionDialogue.set_receiver_dialogue(for_dialogue)
-		$ImageSelectionDialogue.show()
+		$ImageSelectionDialogue._show()
 
 
 func save_item_tags(item_index, current_tag_ids):
