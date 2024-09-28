@@ -131,7 +131,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath(".:custom_minimum_size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -234,56 +234,6 @@ offset_bottom = 55.0
 theme_override_styles/panel = ExtResource("1_3ptxo")
 script = ExtResource("2_7hixr")
 
-[node name="DPanel" type="Panel" parent="."]
-visible = false
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-offset_left = 15.0
-offset_top = 60.0
-offset_right = -15.0
-offset_bottom = 195.0
-grow_horizontal = 2
-theme_override_styles/panel = ExtResource("3_i048p")
-
-[node name="ItemDescription" type="Label" parent="DPanel"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 140.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/normal = ExtResource("3_i048p")
-text = "Description"
-autowrap_mode = 3
-clip_text = true
-text_overrun_behavior = 4
-
-[node name="Panel" type="Panel" parent="DPanel"]
-clip_children = 2
-custom_minimum_size = Vector2(135, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_bottom = 1.0
-grow_vertical = 2
-theme_override_styles/panel = ExtResource("5_5cr2u")
-
-[node name="Image" type="TextureRect" parent="DPanel/Panel"]
-custom_minimum_size = Vector2(135, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("10_q0yka")
-expand_mode = 1
-stretch_mode = 6
-
 [node name="LPanel" type="Panel" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0)
@@ -355,6 +305,66 @@ wait_time = 0.2
 one_shot = true
 
 [node name="SelectButton" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DPanel" type="Panel" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 15.0
+offset_top = 60.0
+offset_right = -15.0
+offset_bottom = 195.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("3_i048p")
+
+[node name="ItemDescription" type="Label" parent="DPanel"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = ExtResource("3_i048p")
+text = "Description"
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 4
+
+[node name="Panel" type="Panel" parent="DPanel"]
+clip_children = 2
+custom_minimum_size = Vector2(135, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_right = 135.0
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("5_5cr2u")
+
+[node name="Image" type="TextureRect" parent="DPanel/Panel"]
+custom_minimum_size = Vector2(135, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_q0yka")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="QuickImageSelectButton2" type="Button" parent="DPanel/Panel/Image"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -480,8 +490,8 @@ stretch_mode = 5
 
 [connection signal="pressed" from="LPanel/ChangeLocationButton" to="." method="_on_change_location_button_pressed"]
 [connection signal="pressed" from="SelectButton" to="." method="_on_select_button_pressed"]
+[connection signal="gui_input" from="DPanel/Panel/Image/QuickImageSelectButton2" to="." method="_on_quick_image_select_button_gui_input"]
 [connection signal="gui_input" from="IPanel/ItemIcon/QuickImageSelectButton" to="." method="_on_quick_image_select_button_gui_input"]
-[connection signal="pressed" from="IPanel/ItemIcon/QuickImageSelectButton" to="." method="_on_quick_image_select_button_pressed"]
 [connection signal="pressed" from="CreateStock/AddStockButton" to="." method="_on_add_stock_button_pressed"]
 [connection signal="pressed" from="UnfoldButton" to="." method="_on_unfold_button_pressed"]
 [connection signal="pressed" from="EditButton" to="." method="_on_edit_button_pressed"]
