@@ -13,7 +13,7 @@ func _on_cancel_button_pressed():
 
 func _on_save_item_button_pressed():
 	main_node.set_fillter_tag_ids(current_item_tags_data)
-	main_node.refresh_item_list()
+	main_node.refresh_items_list()
 	hide()
 
 

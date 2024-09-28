@@ -29,7 +29,7 @@ window/size/viewport_height=1000
 window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/handheld/orientation=5
+window/handheld/orientation=6
 window/vsync/vsync_mode=0
 
 [editor_plugins]

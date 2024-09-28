@@ -228,6 +228,17 @@ func pull_items_data():
 	
 
 func _ready():
+	
+	var dir = DirAccess.open("res://textures/")
+	if dir:
+		dir.list_dir_begin()
+		var file_name : String  = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir():
+				print(file_name)
+			file_name = dir.get_next()
+	
+	
 	var d = DirAccess.open(get_data_path())
 	if d == null:
 		DirAccess.make_dir_absolute(get_data_path())
