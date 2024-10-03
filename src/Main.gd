@@ -29,15 +29,17 @@ var h_split_dragged = false
 func get_search_text():
 	return search_line_edit.text
 
+
 func _ready():
-	OS.request_permissions()
 	randomize()
 	get_viewport().connect("size_changed", _on_viewport_resize)
 	_on_viewport_resize()
 	if OS.get_name() == "Android":
 		$MainControl/AnimationPlayer.play("mobile_offset")
+		$FileDialog.root_subfolder = "/storage/emulated/0"
 	$MainControl/HSplit/MainInfo/TabContainer.current_tab = 0
 	load_images_to_viewer()
+	OS.request_permissions()
 
 
 func load_images_to_viewer():
@@ -194,7 +196,7 @@ func get_image_folder_path(path):
 		return $Database.get_image_folder_path() + path
 	else:
 		if OS.get_name() == "Android":
-			return "res://textures/NoImage.jpg.import"
+			return "res://textures/NoImage.jpg"
 		return "res://textures/NoImage.jpg"
 	
 	
