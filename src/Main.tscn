@@ -215,6 +215,15 @@ theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("10_ev2os")
 text = "Filter"
 
+[node name="CreateFromItemButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/normal = ExtResource("10_ev2os")
+text = "From Selected"
+
 [node name="CreateItemButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
@@ -1231,6 +1240,7 @@ use_native_dialog = true
 [connection signal="dragged" from="MainControl/HSplit" to="." method="_on_h_split_dragged"]
 [connection signal="tab_changed" from="MainControl/HSplit/MainInfo/TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/FilterItemsButton" to="." method="_on_filter_items_button_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateFromItemButton" to="." method="_on_create_from_item_button_pressed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateItemButton" to="." method="_on_create_item_button_pressed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton2" to="." method="create_location_from_selected"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton" to="." method="_on_create_location_button_pressed"]

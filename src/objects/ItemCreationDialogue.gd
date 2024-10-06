@@ -40,11 +40,11 @@ func _show(what_to_do, action_data_type):
 		if what_to_do == Global.WhatToDo.Create:
 			title_label.text = "create item"
 			delete_button.visible = false 
-			current_item_tags_data = {}
 		else:
 			title_label.text = "edit item"
 			delete_button.visible = true
-			current_item_tags_data = main_node.get_tags_for_item(current_item_data.id)
+			if "id" in current_item_data.keys():
+				current_item_tags_data = main_node.get_tags_for_item(current_item_data.id)
 		tags_element.set_tags(current_item_tags_data)
 		show_item_data_components(true)
 		show_stock_data_components(current_mode == Global.WhatToDo.Create)
@@ -71,6 +71,9 @@ func set_stock_data(item_data, stock_data):
 	if "quantity" in stock_data.keys():
 		quantity_element.set_quantity(stock_data.quantity)
 
+
+func set_item_tags(new_tags):
+	current_item_tags_data = new_tags
 
 func set_item_data(item_data):
 	if !main_node:
@@ -116,7 +119,7 @@ func _on_cancel_button_pressed():
 	reset_and_hide()
 
 
-func _reset(reset_stock_data = true, reset_item_data = true):
+func _reset(reset_stock_data = true, reset_item_data = true, reset_tags_data = true):
 	if reset_stock_data:
 		quantity_element.set_quantity(0)
 		current_stock_data = null
@@ -124,7 +127,9 @@ func _reset(reset_stock_data = true, reset_item_data = true):
 	if reset_item_data:
 		current_item_data = null
 		update_category_text("/")
-	
+	if reset_tags_data:
+		current_item_tags_data = {}
+
 
 func reset_and_hide():
 	_reset()
@@ -145,10 +150,14 @@ func _on_save_item_button_pressed():
 		if current_item_data and "category_id" in current_item_data:
 			new_item_data.category_id = current_item_data.category_id
 		item_index = main_node.save_item(new_item_data, quantity == 0)
+		var tag_ids = []
+		if current_item_tags_data and current_item_tags_data.size() > 0:
+			for k in current_item_tags_data:
+				tag_ids.append(current_item_tags_data[k].id)
 		if current_mode == Global.WhatToDo.Create:
-			main_node.save_item_tags(item_index, current_item_tags_data.keys())
+			main_node.save_item_tags(item_index, tag_ids)
 		else:
-			main_node.save_item_tags(new_item_data.id, current_item_tags_data.keys())
+			main_node.save_item_tags(new_item_data.id, tag_ids)
 	var to_save_stock = quantity != 0
 	if current_action_data_type == Global.ActionDataType.Item and \
 			current_mode != Global.WhatToDo.Create:

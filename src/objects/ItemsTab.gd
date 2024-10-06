@@ -41,6 +41,13 @@ func select_item(item_element):
 		item.select(item == item_element)
 
 
+func get_selected_id():
+	for item in items_holder.get_children():
+		if item.is_selected: 
+			return item.get_id()
+	return -1
+
+
 func update_item(item_data, item):
 	item.item_tab = self
 	item.set_data(item_data)

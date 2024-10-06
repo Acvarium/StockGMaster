@@ -22,6 +22,10 @@ func select(to_select = true):
 	self_modulate = Color(0, 1, 1) if is_selected else base_self_modulate
 
 
+func get_id():
+	return item_id
+
+
 func set_data(new_data):
 	if !main_node:
 		main_node = get_tree().get_root().get_node("Main")

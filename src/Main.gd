@@ -422,6 +422,16 @@ func create_location_from_selected():
 		edit_location(-1)
 
 
+func create_item_from(selected_item_id):
+	if selected_item_id in $Database.items_data.keys() and selected_item_id >= 0:
+		var _data = $Database.items_data[selected_item_id]
+		_data.erase("id")
+		item_creation_dialogue.set_item_data(_data)
+		item_creation_dialogue.set_item_tags(get_tags_for_item(selected_item_id))
+		item_creation_dialogue._reset(true, false, false)
+		item_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Item)
+
+
 func create_location_from(selected_location_id):
 	if selected_location_id in $Database.locations_data.keys() and selected_location_id >= 0:
 		var _data = $Database.locations_data[selected_location_id]
@@ -474,6 +484,8 @@ func _on_create_location_button_pressed():
 	var selected_id = location_selection_tree.get_selected_id()
 	if selected_id > 0:
 		create_location_with_parent(selected_id)
+	else:
+		edit_location(-1)
 
 
 func _on_location_struct_tree_button_clicked(item, column, id, mouse_button_index):
@@ -584,3 +596,12 @@ func _input(event):
 
 func _on_side_info_panel_timer_2_timeout():
 	unfold_side_split(false)
+
+
+func _on_create_from_item_button_pressed():
+	var selected_item_id = items_tab.get_selected_id()
+	if selected_item_id == -1:
+		edit_item(-1)
+	else:
+		create_item_from(selected_item_id)
+		
