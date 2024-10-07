@@ -177,9 +177,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 0
+current_tab = 1
 
 [node name="Items" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" node_paths=PackedStringArray("items_holder", "temp_items_holder")]
+visible = false
 layout_mode = 2
 script = ExtResource("3_wxfjw")
 items_holder = NodePath("ItemsListPanel/ScrollContainer/VBoxContainer")
@@ -272,7 +273,6 @@ offset_bottom = 40.0
 mouse_filter = 2
 
 [node name="Locations" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -325,6 +325,8 @@ offset_right = -5.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
+allow_reselect = true
+select_mode = 2
 script = ExtResource("5_ar113")
 has_edit_buttons = true
 
@@ -372,6 +374,7 @@ offset_right = -5.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
+select_mode = 2
 script = ExtResource("5_ar113")
 has_edit_buttons = true
 
@@ -608,6 +611,7 @@ texture_pressed = ExtResource("21_65tdk")
 texture_hover = ExtResource("22_8tugv")
 
 [node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "tags_element", "image_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("9_p6ieq")]
+visible = false
 layout_mode = 1
 script = ExtResource("10_06y8t")
 name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")

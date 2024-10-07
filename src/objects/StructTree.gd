@@ -9,10 +9,10 @@ var item_selection_action_type = Global.ActionDataType.None
 var a_texture: Texture = preload("res://textures/edit_button_sm.png")
 var item_dict = {}
 
-func get_selected_id():
-	var selected = get_selected()
-	if selected:
-		return selected.get_metadata(0)
+func get_active_id():
+	var active = get_selected()
+	if active:
+		return active.get_metadata(0)
 	return -1
 
 
