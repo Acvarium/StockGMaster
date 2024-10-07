@@ -415,9 +415,9 @@ func edit_location(location_id):
 
 
 func create_location_from_selected():
-	var selected_id = location_selection_tree.get_selected_id()
-	if selected_id >= 0:
-		create_location_from(selected_id)
+	var active_id = location_selection_tree.get_active_id()
+	if active_id >= 0:
+		create_location_from(active_id)
 	else:
 		edit_location(-1)
 
