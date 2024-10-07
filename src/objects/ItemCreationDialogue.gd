@@ -96,6 +96,11 @@ func set_item_data(item_data):
 	var image_path = ""
 	if "image_path" in item_data.keys() and item_data.image_path:
 		image_path = item_data.image_path
+	if "stocks" in item_data.keys() and item_data.stocks.size() > 0:
+		if !current_stock_data:
+			current_stock_data = {}
+		current_stock_data.location_id = item_data.stocks.back()["location_id"]
+		update_location_text(main_node.get_location_address(current_stock_data.location_id))
 	update_image(main_node.get_image_by_path(image_path))
 		
 
@@ -130,6 +135,9 @@ func _reset(reset_stock_data = true, reset_item_data = true, reset_tags_data = t
 	if reset_tags_data:
 		current_item_tags_data = {}
 
+
+func _reset_quantity():
+	quantity_element.set_quantity(0)
 
 func reset_and_hide():
 	_reset()

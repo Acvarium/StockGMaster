@@ -428,7 +428,7 @@ func create_item_from(selected_item_id):
 		_data.erase("id")
 		item_creation_dialogue.set_item_data(_data)
 		item_creation_dialogue.set_item_tags(get_tags_for_item(selected_item_id))
-		item_creation_dialogue._reset(true, false, false)
+		item_creation_dialogue._reset_quantity()
 		item_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Item)
 
 
