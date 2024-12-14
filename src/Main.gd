@@ -481,7 +481,7 @@ func get_tags_for_item(id):
 	
 
 func _on_create_location_button_pressed():
-	var selected_id = location_selection_tree.get_selected_id()
+	var selected_id = location_selection_tree.get_active_id()
 	if selected_id > 0:
 		create_location_with_parent(selected_id)
 	else:
