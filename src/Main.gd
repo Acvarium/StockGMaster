@@ -1,5 +1,5 @@
 extends Control
-@export var tree_element : Tree
+#@export var tree_element : Tree
 @export var locations_tab_tree : Tree
 @export var category_tab_tree : Tree
 @export var tag_tab : Control 
@@ -134,7 +134,7 @@ func search_tree_data_with_text(search_text : String, tree_data : Dictionary):
 	for i in tree_data:
 		var current_data = tree_data[i]
 		var data_name = current_data.name
-		var data_descr = "" 
+		var data_descr = ""
 		if "description" in current_data and current_data.description:
 			data_descr = current_data.description
 		var current_text = (data_name + data_descr).to_lower()
@@ -226,18 +226,19 @@ func get_unit_name_by_id(_id):
 func exec_action_popup(what_to_do, action_data_type, for_dialogue = null, item_id = -1):
 	if action_data_type == Global.ActionDataType.Location or \
 			action_data_type == Global.ActionDataType.ParentLocation:
-		tree_element.item_selection_action_type = action_data_type
-		tree_element.build_tree($Database.locations_data, item_id)
+		tree_selection_dialogue.set_tree_element_item_selection_action_type(action_data_type)
+		
+		tree_selection_dialogue.build_tree($Database.locations_data, item_id)
 		tree_selection_dialogue.data_recever_dialogue = for_dialogue
 		tree_selection_dialogue.item_id = item_id
-		tree_selection_dialogue.visible = true
+		tree_selection_dialogue._show()
 	if action_data_type == Global.ActionDataType.Category or \
 			action_data_type == Global.ActionDataType.ParentCategory:
-		tree_element.item_selection_action_type = action_data_type
-		tree_element.build_tree($Database.categories_data, item_id)
+		tree_selection_dialogue.set_tree_element_item_selection_action_type(action_data_type)
+		tree_selection_dialogue.build_tree($Database.categories_data, item_id)
 		tree_selection_dialogue.data_recever_dialogue = for_dialogue
 		tree_selection_dialogue.item_id = item_id
-		tree_selection_dialogue.visible = true
+		tree_selection_dialogue._show()
 	if action_data_type == Global.ActionDataType.Image:
 		load_images_to_viewer()
 		$ImageSelectionDialogue.set_receiver_dialogue(for_dialogue)

@@ -106,7 +106,7 @@ shadow_color = Color(0, 0, 0, 0.403922)
 shadow_size = 10
 shadow_offset = Vector2(10, 10)
 
-[node name="Main" type="Control" node_paths=PackedStringArray("tree_element", "locations_tab_tree", "category_tab_tree", "tag_tab", "tag_selection_viewer", "image_grid")]
+[node name="Main" type="Control" node_paths=PackedStringArray("locations_tab_tree", "category_tab_tree", "tag_tab", "tag_selection_viewer", "image_grid")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -114,7 +114,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5mhyi")
-tree_element = NodePath("TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree")
 locations_tab_tree = NodePath("MainControl/HSplit/MainInfo/TabContainer/Locations/LocationStructTree")
 category_tab_tree = NodePath("MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryStructTree")
 tag_tab = NodePath("MainControl/HSplit/MainInfo/TabContainer/Tags")
@@ -964,6 +963,28 @@ mouse_filter = 2
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_blt5x")
 
+[node name="SearchLine2" type="Panel" parent="TreeSelectionDialogue/TSL/AspectRatioContainer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 30.0
+offset_top = -47.0
+offset_right = -30.0
+offset_bottom = -10.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("16_uvvjq")
+
+[node name="SearchLineEdit" type="LineEdit" parent="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/SearchLine2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = ExtResource("10_djmps")
+theme_override_styles/normal = ExtResource("10_djmps")
+clear_button_enabled = true
+
 [node name="ColorRect" type="ColorRect" parent="TreeSelectionDialogue/TSL/AspectRatioContainer/Control"]
 visible = false
 layout_mode = 1
@@ -1283,6 +1304,7 @@ use_native_dialog = true
 [connection signal="pressed" from="ImageSelectionDialogue/SDCButtons/HBoxContainer/DeleteButton" to="ImageSelectionDialogue" method="_on_delete_button_pressed"]
 [connection signal="pressed" from="ImageSelectionDialogue/SDCButtons/HBoxContainer/CancelButton" to="ImageSelectionDialogue" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="TreeSelectionDialogue/CancelTreeSelection" to="TreeSelectionDialogue" method="_on_cancel_tree_selection_pressed"]
+[connection signal="text_changed" from="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/SearchLine2/SearchLineEdit" to="TreeSelectionDialogue" method="_on_search_line_edit_text_changed"]
 [connection signal="item_selected" from="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" to="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/StructTree" method="_on_item_selected"]
 [connection signal="pressed" from="TagSelectionDialogue/CancelTreeSelection" to="TagSelectionDialogue" method="_on_cancel_button_pressed"]
 [connection signal="tag_pressed_sig" from="TagSelectionDialogue/TSL/AspectRatioContainer/Control/SC/TagViewer" to="TagSelectionDialogue" method="_on_tag_viewer_tag_pressed_sig"]
