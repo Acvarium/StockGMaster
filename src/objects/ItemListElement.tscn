@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://l7og0lhat66"]
 
 [ext_resource type="StyleBox" uid="uid://c285i81pa11sx" path="res://styles/ItemListPanelStyle.tres" id="1_3ptxo"]
-[ext_resource type="Script" path="res://objects/ItemListElement.gd" id="2_7hixr"]
+[ext_resource type="Script" uid="uid://bgpwj074dmjrt" path="res://objects/ItemListElement.gd" id="2_7hixr"]
 [ext_resource type="StyleBox" uid="uid://balcxf82udj3t" path="res://styles/EditTextStyle.tres" id="3_i048p"]
 [ext_resource type="Texture2D" uid="uid://bdhl7lo2ybw66" path="res://textures/unfoldButton.png" id="4_eegrw"]
 [ext_resource type="StyleBox" uid="uid://bbplm1e5vppsh" path="res://styles/BasePanelStyle.tres" id="5_5cr2u"]
@@ -216,8 +216,8 @@ tracks/7/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_klpny"]
 _data = {
-"RESET": SubResource("Animation_g3yh7"),
-"unfold": SubResource("Animation_yxvab")
+&"RESET": SubResource("Animation_g3yh7"),
+&"unfold": SubResource("Animation_yxvab")
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pswmr"]
@@ -297,7 +297,7 @@ clip_text = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_klpny")
+&"": SubResource("AnimationLibrary_klpny")
 }
 
 [node name="UnfoldTimer" type="Timer" parent="."]

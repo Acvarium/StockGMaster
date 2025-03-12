@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bakv7sbbowm6o"]
 
 [ext_resource type="StyleBox" uid="uid://bbplm1e5vppsh" path="res://styles/BasePanelStyle.tres" id="1_2wuii"]
-[ext_resource type="Script" path="res://objects/StockInfoLine.gd" id="2_25jia"]
+[ext_resource type="Script" uid="uid://chg0725li5l5e" path="res://objects/StockInfoLine.gd" id="2_25jia"]
 [ext_resource type="Texture2D" uid="uid://b4156qpi54clp" path="res://textures/edit_button.png" id="3_861wn"]
 [ext_resource type="Texture2D" uid="uid://0dla7un4qfm6" path="res://textures/edit_button_hl.png" id="4_d021e"]
 [ext_resource type="Texture2D" uid="uid://bb4ie2hamo708" path="res://textures/edit_button_pressed.png" id="5_us70l"]

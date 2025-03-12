@@ -1,39 +1,39 @@
 [gd_scene load_steps=59 format=3 uid="uid://bjythu8jrsr5o"]
 
-[ext_resource type="Script" path="res://Main.gd" id="1_5mhyi"]
-[ext_resource type="Script" path="res://Database.gd" id="2_x8r34"]
-[ext_resource type="Script" path="res://objects/ItemsTab.gd" id="3_wxfjw"]
-[ext_resource type="Script" path="res://objects/UnfoldControl.gd" id="4_a2pk0"]
-[ext_resource type="Script" path="res://objects/StructTree.gd" id="5_ar113"]
-[ext_resource type="Script" path="res://objects/TagsTab.gd" id="6_2kqfq"]
-[ext_resource type="Script" path="res://objects/TagViewer.gd" id="7_k3n6w"]
+[ext_resource type="Script" uid="uid://dgrk2ephkslqi" path="res://Main.gd" id="1_5mhyi"]
+[ext_resource type="Script" uid="uid://dln5ryh7py5lt" path="res://Database.gd" id="2_x8r34"]
+[ext_resource type="Script" uid="uid://1p6ymcnu68vj" path="res://objects/ItemsTab.gd" id="3_wxfjw"]
+[ext_resource type="Script" uid="uid://c0mdok2c1ii27" path="res://objects/UnfoldControl.gd" id="4_a2pk0"]
+[ext_resource type="Script" uid="uid://u65m38u1ubgy" path="res://objects/StructTree.gd" id="5_ar113"]
+[ext_resource type="Script" uid="uid://lxtmrs4n24kv" path="res://objects/TagsTab.gd" id="6_2kqfq"]
+[ext_resource type="Script" uid="uid://c6wnbqtn5l73u" path="res://objects/TagViewer.gd" id="7_k3n6w"]
 [ext_resource type="PackedScene" uid="uid://buhtxvdgnu0ki" path="res://objects/DataEditDialogueBase.tscn" id="9_p6ieq"]
-[ext_resource type="Script" path="res://objects/ItemCreationDialogue.gd" id="10_06y8t"]
+[ext_resource type="Script" uid="uid://ca8qxsnwo3c5h" path="res://objects/ItemCreationDialogue.gd" id="10_06y8t"]
 [ext_resource type="StyleBox" uid="uid://bqcd2rx70v1t2" path="res://styles/InputStyle.tres" id="10_djmps"]
 [ext_resource type="StyleBox" uid="uid://djjketxv43ctu" path="res://styles/FramedButtonTool.tres" id="10_ev2os"]
 [ext_resource type="PackedScene" uid="uid://d1c4lov8epmmv" path="res://objects/ItemListSeparator.tscn" id="11_6eucy"]
 [ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/FramedButtonHover.tres" id="11_wqlnj"]
 [ext_resource type="StyleBox" uid="uid://chknldgol0rwk" path="res://styles/FramedButtonPressed.tres" id="12_tclj0"]
 [ext_resource type="PackedScene" uid="uid://ymef651v1yws" path="res://objects/ItemListElement2.tscn" id="12_ubi7w"]
-[ext_resource type="Script" path="res://objects/LocationCreationDialogue.gd" id="13_c6tp3"]
+[ext_resource type="Script" uid="uid://cds6nn3rr4355" path="res://objects/LocationCreationDialogue.gd" id="13_c6tp3"]
 [ext_resource type="StyleBox" uid="uid://balcxf82udj3t" path="res://styles/EditTextStyle.tres" id="14_2538q"]
 [ext_resource type="StyleBox" uid="uid://l5llgxy5lg0o" path="res://styles/FramedButtonDisabled.tres" id="14_celwd"]
-[ext_resource type="Script" path="res://objects/SettingsDialogue.gd" id="14_nrmw6"]
-[ext_resource type="Script" path="res://objects/TreeSelectionDialogue.gd" id="14_qpi1g"]
+[ext_resource type="Script" uid="uid://bnw7s4w7twvhk" path="res://objects/SettingsDialogue.gd" id="14_nrmw6"]
+[ext_resource type="Script" uid="uid://3slnync675ib" path="res://objects/TreeSelectionDialogue.gd" id="14_qpi1g"]
 [ext_resource type="StyleBox" uid="uid://bx3wv2qghdpe8" path="res://styles/BGButtonStyle.tres" id="15_e2j01"]
 [ext_resource type="StyleBox" uid="uid://4cmibv0a8kf2" path="res://styles/BGButtonHoverStyle.tres" id="16_uvvjq"]
-[ext_resource type="Script" path="res://objects/ActionConfirmDialogue.gd" id="17_36kog"]
+[ext_resource type="Script" uid="uid://c3nfr3mjvfde4" path="res://objects/ActionConfirmDialogue.gd" id="17_36kog"]
 [ext_resource type="StyleBox" uid="uid://c5i134ur1to60" path="res://styles/EdittextBaseStyle.tres" id="18_luhyk"]
 [ext_resource type="Texture2D" uid="uid://ckc14v3a8oqd5" path="res://icon.svg" id="18_v6yiw"]
-[ext_resource type="Script" path="res://objects/ItemFilteringDialogue.gd" id="19_8mkwf"]
+[ext_resource type="Script" uid="uid://c2bh4jv7ich8h" path="res://objects/ItemFilteringDialogue.gd" id="19_8mkwf"]
 [ext_resource type="StyleBox" uid="uid://bbplm1e5vppsh" path="res://styles/BasePanelStyle.tres" id="19_cpq5q"]
-[ext_resource type="Script" path="res://objects/TagCreationDialogue.gd" id="19_p1s4p"]
+[ext_resource type="Script" uid="uid://cgms3k2b30lmf" path="res://objects/TagCreationDialogue.gd" id="19_p1s4p"]
 [ext_resource type="Texture2D" uid="uid://qkb0qa1u3orf" path="res://textures/HunfoldButton.png" id="20_15jft"]
 [ext_resource type="Texture2D" uid="uid://llfht45tsalb" path="res://textures/HunfoldButton_pressed.png" id="21_65tdk"]
-[ext_resource type="Script" path="res://objects/ProfileSelectionDialogue.gd" id="21_nm3mm"]
+[ext_resource type="Script" uid="uid://bf8rqjrm4c1pg" path="res://objects/ProfileSelectionDialogue.gd" id="21_nm3mm"]
 [ext_resource type="Texture2D" uid="uid://bx5eybhbucdq8" path="res://textures/HunfoldButton_hl.png" id="22_8tugv"]
 [ext_resource type="PackedScene" uid="uid://c7bxd60j761mn" path="res://objects/profile_selection_element.tscn" id="22_iv6mq"]
-[ext_resource type="Script" path="res://objects/TagSelectionDialogue.gd" id="23_cbvd4"]
+[ext_resource type="Script" uid="uid://elvq7koqkq7n" path="res://objects/TagSelectionDialogue.gd" id="23_cbvd4"]
 [ext_resource type="StyleBox" uid="uid://bknj8ahf7w78" path="res://styles/ColorButtons/AccNormal.tres" id="23_cyhx8"]
 [ext_resource type="StyleBox" uid="uid://3ap7fyegca8y" path="res://styles/ColorButtons/ConfNormal.tres" id="23_rqglp"]
 [ext_resource type="StyleBox" uid="uid://b7fau3jxc43mk" path="res://styles/ColorButtons/ConfHover.tres" id="24_0srk0"]
@@ -41,7 +41,7 @@
 [ext_resource type="StyleBox" uid="uid://w4mn1gjpyxfm" path="res://styles/ColorButtons/AccPressed.tres" id="25_vbo60"]
 [ext_resource type="StyleBox" uid="uid://rr274hhkcvol" path="res://styles/ColorButtons/ConfPressed.tres" id="25_veepo"]
 [ext_resource type="StyleBox" uid="uid://c8vhwnw1k36py" path="res://styles/ColorButtons/CancNormal.tres" id="26_dgnrv"]
-[ext_resource type="Script" path="res://objects/ImageSelectionDialogue.gd" id="27_ev1vk"]
+[ext_resource type="Script" uid="uid://dvf82felc3df4" path="res://objects/ImageSelectionDialogue.gd" id="27_ev1vk"]
 [ext_resource type="StyleBox" uid="uid://b42fcqui5l51q" path="res://styles/ColorButtons/CancHover.tres" id="27_xau5b"]
 [ext_resource type="PackedScene" uid="uid://bip2rd6sfk3kn" path="res://objects/ImagePreviewHolder.tscn" id="27_yr3ee"]
 [ext_resource type="StyleBox" uid="uid://bptny03prtwm7" path="res://styles/ColorButtons/CancPressed.tres" id="28_vl2i0"]
@@ -53,7 +53,7 @@
 [ext_resource type="StyleBox" uid="uid://baocuq3s0ry7c" path="res://styles/ColorButtons/AddNormal.tres" id="33_lw3x1"]
 [ext_resource type="Texture2D" uid="uid://b82gyeyblxd5l" path="res://textures/title.png" id="35_1rfkw"]
 [ext_resource type="FontVariation" uid="uid://bhyikp6mmffmg" path="res://fonts/resources/menu_font01.tres" id="36_8rj5u"]
-[ext_resource type="Script" path="res://objects/FitLabel.gd" id="37_pf2t4"]
+[ext_resource type="Script" uid="uid://x1k54a57isow" path="res://objects/FitLabel.gd" id="37_pf2t4"]
 
 [sub_resource type="Animation" id="Animation_uywld"]
 length = 0.001
@@ -88,8 +88,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6lyv6"]
 _data = {
-"RESET": SubResource("Animation_uywld"),
-"mobile_offset": SubResource("Animation_sniqe")
+&"RESET": SubResource("Animation_uywld"),
+&"mobile_offset": SubResource("Animation_sniqe")
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blt5x"]
@@ -142,7 +142,7 @@ grow_vertical = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MainControl"]
 libraries = {
-"": SubResource("AnimationLibrary_6lyv6")
+&"": SubResource("AnimationLibrary_6lyv6")
 }
 
 [node name="Panel" type="Panel" parent="MainControl"]

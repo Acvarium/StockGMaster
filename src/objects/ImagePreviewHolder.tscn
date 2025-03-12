@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bip2rd6sfk3kn"]
 
-[ext_resource type="Script" path="res://objects/ImagePreviewHolder.gd" id="1_tgylv"]
+[ext_resource type="Script" uid="uid://x1sh7x1acj1f" path="res://objects/ImagePreviewHolder.gd" id="1_tgylv"]
 [ext_resource type="StyleBox" uid="uid://bbplm1e5vppsh" path="res://styles/BasePanelStyle.tres" id="3_jvr5c"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k42qx"]

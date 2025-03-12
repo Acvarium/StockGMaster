@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://c7bxd60j761mn"]
 
 [ext_resource type="StyleBox" uid="uid://bwo64t2nmfot" path="res://styles/ItemList2PanelStyle.tres" id="1_70cbl"]
-[ext_resource type="Script" path="res://objects/ProfileSelectionElement.gd" id="2_echwm"]
+[ext_resource type="Script" uid="uid://dxs82qrtu2w1v" path="res://objects/ProfileSelectionElement.gd" id="2_echwm"]
 [ext_resource type="StyleBox" uid="uid://l5llgxy5lg0o" path="res://styles/FramedButtonDisabled.tres" id="3_m7cux"]
 [ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/FramedButtonHover.tres" id="4_wkyfx"]
 [ext_resource type="StyleBox" uid="uid://chknldgol0rwk" path="res://styles/FramedButtonPressed.tres" id="5_37prc"]
 [ext_resource type="StyleBox" uid="uid://ydrmcbb64npw" path="res://styles/FramedButtonNormal.tres" id="6_s36yy"]
-[ext_resource type="Script" path="res://objects/FitLabel.gd" id="7_bttql"]
+[ext_resource type="Script" uid="uid://x1k54a57isow" path="res://objects/FitLabel.gd" id="7_bttql"]
 
 [node name="ProfileSelectionElement" type="Panel"]
 custom_minimum_size = Vector2(500, 45)
