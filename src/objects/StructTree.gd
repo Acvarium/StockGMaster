@@ -16,7 +16,7 @@ func get_active_id():
 	return -1
 
 
-func build_tree(tree_data : Dictionary, item_id = -1):
+func build_tree(tree_data : Dictionary, item_id = -1, extra_line_data = {}):
 	clear()
 	var root = create_item()
 	root.set_metadata(0, 0)
@@ -35,7 +35,10 @@ func build_tree(tree_data : Dictionary, item_id = -1):
 					current_parent_item = item_dict[index_list[0]]
 				item_dict[current_key] = create_item(current_parent_item)
 				index_list.append(current_key)
-				item_dict[current_key].set_text(0, tree_data[current_key][name_key])
+				var item_text = tree_data[current_key][name_key]
+				if (current_key in extra_line_data.keys()):
+					item_text += " [" + extra_line_data[current_key] + "]"
+				item_dict[current_key].set_text(0, item_text)
 				item_dict[current_key].set_metadata(0, current_key)
 				if current_key == item_id:
 					item_dict[current_key].visible = false

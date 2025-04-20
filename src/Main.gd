@@ -377,11 +377,23 @@ func _on_create_item_button_pressed():
 
 
 func _on_database_locations_data_loaded():
-	locations_tab_tree.build_tree($Database.locations_data)
+	var current_location_data = $Database.locations_data
+	var location_extra_data = {}
+	for key in current_location_data.keys():
+		var items_in_location = get_number_of_items_in_location(key)
+		if items_in_location > 0:
+			location_extra_data[key] = str(items_in_location)
+	locations_tab_tree.build_tree(current_location_data, -1, location_extra_data)
 
 
 func _on_database_categories_data_loaded():
-	category_tab_tree.build_tree($Database.categories_data)
+	var current_cat_data = $Database.categories_data
+	var current_extra_data = {}
+	for key in current_cat_data.keys():
+		var items_in_cat = get_number_of_items_with_category(key)
+		if items_in_cat > 0:
+			current_extra_data[key] = str(items_in_cat)
+	category_tab_tree.build_tree(current_cat_data, -1, current_extra_data)
 
 
 func select_location_popup(for_dialogue, item_id = -1):
