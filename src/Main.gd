@@ -17,6 +17,7 @@ extends Control
 @onready var side_info : Control = $MainControl/HSplit/SideInfo
 var selected_value : int = -1
 var tree_selection_index : int = -1
+const SIDE_PANEL_OFFSET = 42
 
 @onready var current_what_to_do = Global.WhatToDo.None
 @onready var current_action_data_type = Global.ActionDataType.None
@@ -624,11 +625,11 @@ func unfold_side_split(to_unfold = true):
 			to_offset_left = false
 			
 	if to_offset_left:
-		h_split.offset_right = -42
+		h_split.offset_right = -SIDE_PANEL_OFFSET
 		h_split.offset_left = 0
 	else:
 		h_split.offset_right = 0
-		h_split.offset_left = 42
+		h_split.offset_left = SIDE_PANEL_OFFSET
 			
 	$Timers/SideInfoPanelTimer.start()
 

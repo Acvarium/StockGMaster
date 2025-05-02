@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=62 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" uid="uid://dgrk2ephkslqi" path="res://Main.gd" id="1_5mhyi"]
 [ext_resource type="Script" uid="uid://dln5ryh7py5lt" path="res://Database.gd" id="2_x8r34"]
@@ -36,8 +36,11 @@
 [ext_resource type="Script" uid="uid://elvq7koqkq7n" path="res://objects/TagSelectionDialogue.gd" id="23_cbvd4"]
 [ext_resource type="StyleBox" uid="uid://bknj8ahf7w78" path="res://styles/ColorButtons/AccNormal.tres" id="23_cyhx8"]
 [ext_resource type="StyleBox" uid="uid://3ap7fyegca8y" path="res://styles/ColorButtons/ConfNormal.tres" id="23_rqglp"]
+[ext_resource type="Texture2D" uid="uid://dj1w5rl5x6fs7" path="res://textures/unfoldButton_sideButtonNormal.png" id="23_via5u"]
 [ext_resource type="StyleBox" uid="uid://b7fau3jxc43mk" path="res://styles/ColorButtons/ConfHover.tres" id="24_0srk0"]
+[ext_resource type="Texture2D" uid="uid://bdr7rek5oquhk" path="res://textures/unfoldButton_sideButtonPressed.png" id="24_ac6pf"]
 [ext_resource type="StyleBox" uid="uid://bt1svmg5awgeg" path="res://styles/ColorButtons/AccHover.tres" id="24_un7m8"]
+[ext_resource type="Texture2D" uid="uid://cfemtfkucdxjb" path="res://textures/unfoldButton_sideButtonHover.png" id="25_ek63v"]
 [ext_resource type="StyleBox" uid="uid://w4mn1gjpyxfm" path="res://styles/ColorButtons/AccPressed.tres" id="25_vbo60"]
 [ext_resource type="StyleBox" uid="uid://rr274hhkcvol" path="res://styles/ColorButtons/ConfPressed.tres" id="25_veepo"]
 [ext_resource type="StyleBox" uid="uid://c8vhwnw1k36py" path="res://styles/ColorButtons/CancNormal.tres" id="26_dgnrv"]
@@ -548,7 +551,7 @@ anchors_preset = -1
 anchor_right = 1.0
 offset_left = 11.0
 offset_top = 38.0
-offset_right = 1.0
+offset_right = -11.0
 offset_bottom = 75.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("16_uvvjq")
@@ -608,6 +611,36 @@ grow_horizontal = 2
 texture_normal = ExtResource("20_15jft")
 texture_pressed = ExtResource("21_65tdk")
 texture_hover = ExtResource("22_8tugv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainControl/SidePanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 42.0
+offset_right = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NotifSideButton" type="TextureButton" parent="MainControl/SidePanel/VBoxContainer"]
+self_modulate = Color(0.160116, 0.465882, 0.61134, 1)
+layout_mode = 2
+texture_normal = ExtResource("23_via5u")
+texture_pressed = ExtResource("24_ac6pf")
+texture_hover = ExtResource("25_ek63v")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="MainControl/SidePanel/VBoxContainer/NotifSideButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "99+"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SidePanelLeft" type="Panel" parent="MainControl"]
 visible = false
