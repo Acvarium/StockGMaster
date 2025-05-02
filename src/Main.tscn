@@ -176,7 +176,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 1
+current_tab = 2
 
 [node name="Items" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" node_paths=PackedStringArray("items_holder", "temp_items_holder")]
 visible = false
@@ -272,6 +272,7 @@ offset_bottom = 40.0
 mouse_filter = 2
 
 [node name="Locations" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -330,7 +331,6 @@ script = ExtResource("5_ar113")
 has_edit_buttons = true
 
 [node name="Categories" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -608,6 +608,27 @@ grow_horizontal = 2
 texture_normal = ExtResource("20_15jft")
 texture_pressed = ExtResource("21_65tdk")
 texture_hover = ExtResource("22_8tugv")
+
+[node name="SidePanelLeft" type="Panel" parent="MainControl"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_right = 36.0
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("16_uvvjq")
+
+[node name="SideSplitButton" type="TextureButton" parent="MainControl/SidePanelLeft"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 3.0
+offset_top = 3.0
+grow_horizontal = 2
+texture_normal = ExtResource("20_15jft")
+texture_pressed = ExtResource("21_65tdk")
+texture_hover = ExtResource("22_8tugv")
+flip_h = true
 
 [node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "tags_element", "image_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("9_p6ieq")]
 visible = false
@@ -1280,6 +1301,7 @@ use_native_dialog = true
 [connection signal="location_button_pressed" from="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ProfileName" to="MainControl/HSplit/MainInfo/TabContainer/Settings" method="_on_profile_name_button_pressed"]
 [connection signal="text_changed" from="MainControl/HSplit/MainInfo/SearchLine/SearchLineEdit" to="." method="_on_search_line_edit_text_changed"]
 [connection signal="pressed" from="MainControl/SidePanel/SideSplitButton" to="." method="_on_side_split_button_pressed"]
+[connection signal="pressed" from="MainControl/SidePanelLeft/SideSplitButton" to="." method="_on_side_split_button_pressed"]
 [connection signal="image_selection_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Image" to="ItemCreationDialogue" method="_on_image_image_selection_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Category" to="ItemCreationDialogue" method="_on_category_selection_button_pressed"]
 [connection signal="edit_tags_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Tags" to="ItemCreationDialogue" method="_on_tags_edit_tags_button_pressed"]

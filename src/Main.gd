@@ -51,6 +51,8 @@ func _on_viewport_resize():
 	var window_size = DisplayServer.window_get_size()
 	var aspect = float(window_size.x) / float(window_size.y)
 	$Timers/SideInfoPanelTimer.start()
+	var side_info_visible = $MainControl/HSplit/SideInfo.visible
+	unfold_side_split(side_info_visible)
 	image_grid.columns = image_grid.get_parent().size.x / grid_image_size
 	
 
@@ -276,6 +278,7 @@ func image_selected(selected_image_path, selected_item_id, selected_action_type)
 
 
 func edit_item(item_id):
+	remove_ui_focus()
 	if item_id in $Database.items_data.keys() and item_id > 0:
 		item_creation_dialogue.set_item_data($Database.items_data[item_id])
 		item_creation_dialogue._reset(true, false)
@@ -417,6 +420,7 @@ func select_image_popup(for_dialogue, item_id = -1):
 
 
 func edit_location(location_id):
+	remove_ui_focus()
 	if location_id in $Database.locations_data.keys() and location_id > 0:
 		#editing
 		location_creation_dialogue.set_data($Database.locations_data[location_id])
@@ -428,6 +432,7 @@ func edit_location(location_id):
 
 
 func create_location_from_selected():
+	remove_ui_focus()
 	var active_id = location_selection_tree.get_active_id()
 	if active_id >= 0:
 		create_location_from(active_id)
@@ -436,6 +441,7 @@ func create_location_from_selected():
 
 
 func create_item_from(selected_item_id):
+	remove_ui_focus()
 	if selected_item_id in $Database.items_data.keys() and selected_item_id >= 0:
 		var _data = $Database.items_data[selected_item_id]
 		_data.erase("id")
@@ -446,6 +452,7 @@ func create_item_from(selected_item_id):
 
 
 func create_location_from(selected_location_id):
+	remove_ui_focus()
 	if selected_location_id in $Database.locations_data.keys() and selected_location_id >= 0:
 		var _data = $Database.locations_data[selected_location_id]
 		_data.erase("id")
@@ -455,6 +462,7 @@ func create_location_from(selected_location_id):
 
 
 func create_location_with_parent(parent_location_id):
+	remove_ui_focus()
 	if parent_location_id in $Database.locations_data.keys() and parent_location_id >= 0:
 		var _data = {}
 		_data.parent_id = parent_location_id
@@ -465,6 +473,7 @@ func create_location_with_parent(parent_location_id):
 
 
 func edit_category(category_id):
+	remove_ui_focus()
 	if category_id in $Database.categories_data.keys() and category_id > 0:
 		#editing
 		location_creation_dialogue.set_data($Database.categories_data[category_id])
@@ -476,6 +485,7 @@ func edit_category(category_id):
 
 
 func edit_tag(tag_id):
+	remove_ui_focus()
 	if tag_id in $Database.tags_data.keys() and tag_id > 0:
 		#edit
 		tag_creation_dialogue.set_data($Database.tags_data[tag_id])
@@ -487,6 +497,7 @@ func edit_tag(tag_id):
 
 
 func show_item_filtering_dialogue():
+	remove_ui_focus()
 	$ItemFilteringDialogue.show()
 
 func get_tags_for_item(id):
@@ -494,6 +505,7 @@ func get_tags_for_item(id):
 	
 
 func _on_create_location_button_pressed():
+	remove_ui_focus()
 	var selected_id = location_selection_tree.get_active_id()
 	if selected_id > 0:
 		create_location_with_parent(selected_id)
@@ -583,14 +595,41 @@ func _on_file_dialog_files_selected(paths):
 	load_images_to_viewer()
 
 
+func remove_ui_focus():
+	var focused = get_viewport().gui_get_focus_owner()
+	if focused:
+		focused.release_focus()
+
+
 func unfold_side_split(to_unfold = true):
 	var window_size = DisplayServer.window_get_size()
+	var h_split : HSplitContainer = $MainControl/HSplit
+	var to_offset_left = true
+	$MainControl/SidePanel/SideSplitButton.flip_h = to_unfold
+	
 	if window_size.x > 700:
+		$MainControl/SidePanelLeft.visible = false
+		$MainControl/SidePanel.visible = true
+		$MainControl/HSplit/MainInfo.visible = true
 		$MainControl/HSplit/SideInfo.visible = to_unfold
-		$MainControl/SidePanel/SideSplitButton.flip_h = to_unfold
 		var h_split_size = $MainControl/HSplit.size
 		if (h_split_size.x - $MainControl/HSplit.split_offset) < MIN_SPLIT_SIZE:
 			$MainControl/HSplit.split_offset = h_split_size.x - MIN_SPLIT_SIZE * 2
+	else:
+		$MainControl/SidePanelLeft.visible = to_unfold
+		$MainControl/SidePanel.visible = not to_unfold
+		$MainControl/HSplit/MainInfo.visible = not to_unfold
+		$MainControl/HSplit/SideInfo.visible = to_unfold
+		if to_unfold:
+			to_offset_left = false
+			
+	if to_offset_left:
+		h_split.offset_right = -42
+		h_split.offset_left = 0
+	else:
+		h_split.offset_right = 0
+		h_split.offset_left = 42
+			
 	$Timers/SideInfoPanelTimer.start()
 
 
@@ -612,6 +651,7 @@ func _on_side_info_panel_timer_2_timeout():
 
 
 func _on_create_from_item_button_pressed():
+	remove_ui_focus()
 	var selected_item_id = items_tab.get_selected_id()
 	if selected_item_id == -1:
 		edit_item(-1)

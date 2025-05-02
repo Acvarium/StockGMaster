@@ -30,6 +30,7 @@ func _on_cancel_tree_selection_pressed():
 func _show():
 	search_line_edit.text = ""
 	visible = true
+	search_line_edit.grab_focus()
 
 
 func _on_search_line_edit_text_changed(new_text):
