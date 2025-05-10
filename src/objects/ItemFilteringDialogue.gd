@@ -35,3 +35,7 @@ func _on_tags_edit_tags_button_pressed():
 	for t in current_item_tags_data:
 		selected_tags.append(current_item_tags_data[t].id)
 	main_node.select_tags_with_dialogue(self, selected_tags)
+
+
+func _on_tags_clear_tags_button_pressed() -> void:
+	clear_selection()

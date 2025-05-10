@@ -20,6 +20,8 @@ extends Panel
 		$DataControl/SpinBox.visible = list_item_mode == ListItemModes.Quantity
 		$DataControl/Tags.visible = list_item_mode == ListItemModes.Tags
 		$TitleControl/EditTagsButton.visible = list_item_mode == ListItemModes.Tags
+		$TitleControl/ClearTagsButton.visible = list_item_mode == ListItemModes.Tags
+		
 
 @onready var unfold_button = get_node("TitleControl/UnfoldButton")
 var unfold_control = null
@@ -27,6 +29,7 @@ var is_unfolded = false
 signal location_button_pressed
 signal edit_tags_button_pressed
 signal image_selection_button_pressed
+signal clear_tags_button_pressed
 
 enum ListItemModes {
 	Text,
@@ -52,9 +55,12 @@ func _ready():
 func set_unfold_control(value):
 	unfold_control = value
 	unfold_button.visible = unfold_control != null
+	if  list_item_mode == ListItemModes.Tags:
+		unfold_button.visible = false
 
 
 func set_tags(tags_data):
+	$TitleControl/ClearTagsButton.disabled = tags_data.size() == 0
 	$DataControl/Tags/TagViewer.refrash_tags_list(tags_data)
 
 
@@ -115,3 +121,7 @@ func _on_edit_tags_button_pressed():
 
 func _on_icon_button_pressed():
 	image_selection_button_pressed.emit()
+
+
+func _on_clear_tags_button_pressed() -> void:
+	clear_tags_button_pressed.emit()
