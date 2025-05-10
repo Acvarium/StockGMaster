@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=67 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" uid="uid://dgrk2ephkslqi" path="res://Main.gd" id="1_5mhyi"]
 [ext_resource type="Script" uid="uid://dln5ryh7py5lt" path="res://Database.gd" id="2_x8r34"]
@@ -7,12 +7,17 @@
 [ext_resource type="Script" uid="uid://u65m38u1ubgy" path="res://objects/StructTree.gd" id="5_ar113"]
 [ext_resource type="Script" uid="uid://lxtmrs4n24kv" path="res://objects/TagsTab.gd" id="6_2kqfq"]
 [ext_resource type="Script" uid="uid://c6wnbqtn5l73u" path="res://objects/TagViewer.gd" id="7_k3n6w"]
+[ext_resource type="Texture2D" uid="uid://b4uaiafsrhgju" path="res://textures/BeginingButton_norm.png" id="9_ek63v"]
 [ext_resource type="PackedScene" uid="uid://buhtxvdgnu0ki" path="res://objects/DataEditDialogueBase.tscn" id="9_p6ieq"]
+[ext_resource type="Script" uid="uid://dvo5xu3myuq0j" path="res://objects/PageSwitcher.gd" id="9_uy3go"]
+[ext_resource type="Texture2D" uid="uid://bsr8h180ps7dc" path="res://textures/BeginingButton_pressed.png" id="10_4bst2"]
 [ext_resource type="Script" uid="uid://ca8qxsnwo3c5h" path="res://objects/ItemCreationDialogue.gd" id="10_06y8t"]
 [ext_resource type="StyleBox" uid="uid://bqcd2rx70v1t2" path="res://styles/InputStyle.tres" id="10_djmps"]
 [ext_resource type="StyleBox" uid="uid://djjketxv43ctu" path="res://styles/FramedButtonTool.tres" id="10_ev2os"]
 [ext_resource type="PackedScene" uid="uid://d1c4lov8epmmv" path="res://objects/ItemListSeparator.tscn" id="11_6eucy"]
+[ext_resource type="Texture2D" uid="uid://bqu6a6kin3w6j" path="res://textures/BeginingButton_hover.png" id="11_uy3go"]
 [ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/FramedButtonHover.tres" id="11_wqlnj"]
+[ext_resource type="StyleBox" uid="uid://b0h3lk4j5qtjt" path="res://styles/PagesLineEdit.tres" id="12_ac6pf"]
 [ext_resource type="StyleBox" uid="uid://chknldgol0rwk" path="res://styles/FramedButtonPressed.tres" id="12_tclj0"]
 [ext_resource type="PackedScene" uid="uid://ymef651v1yws" path="res://objects/ItemListElement2.tscn" id="12_ubi7w"]
 [ext_resource type="Script" uid="uid://cds6nn3rr4355" path="res://objects/LocationCreationDialogue.gd" id="13_c6tp3"]
@@ -180,10 +185,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 4
+current_tab = 0
 
 [node name="Items" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" node_paths=PackedStringArray("items_holder", "temp_items_holder")]
-visible = false
 layout_mode = 2
 script = ExtResource("3_wxfjw")
 items_holder = NodePath("ItemsListPanel/ScrollContainer/VBoxContainer")
@@ -257,7 +261,7 @@ anchor_bottom = 1.0
 offset_left = 5.0
 offset_top = 90.0
 offset_right = -5.0
-offset_bottom = -20.0
+offset_bottom = -45.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -286,6 +290,103 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
+
+[node name="ItemPagesPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Items"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -40.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("16_uvvjq")
+script = ExtResource("9_uy3go")
+
+[node name="PagesHBox" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="FirstPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox"]
+layout_mode = 2
+texture_normal = ExtResource("9_ek63v")
+texture_pressed = ExtResource("10_4bst2")
+texture_hover = ExtResource("11_uy3go")
+stretch_mode = 5
+
+[node name="PrevPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox"]
+layout_mode = 2
+texture_normal = ExtResource("20_15jft")
+texture_pressed = ExtResource("21_65tdk")
+texture_hover = ExtResource("22_8tugv")
+stretch_mode = 5
+
+[node name="PageNumControl" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="CurrentPageLE" type="LineEdit" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/PageNumControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.473
+anchor_bottom = 1.0
+offset_top = 5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = ExtResource("12_ac6pf")
+theme_override_styles/normal = ExtResource("12_ac6pf")
+text = "5"
+alignment = 2
+max_length = 4
+emoji_menu_enabled = false
+virtual_keyboard_type = 2
+
+[node name="NumberOfPagesLabel" type="Label" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/PageNumControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "/100"
+vertical_alignment = 1
+
+[node name="SpinBox" type="SpinBox" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/PageNumControl"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="NextPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox"]
+layout_mode = 2
+texture_normal = ExtResource("20_15jft")
+texture_pressed = ExtResource("21_65tdk")
+texture_hover = ExtResource("22_8tugv")
+stretch_mode = 5
+flip_h = true
+
+[node name="LastPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox"]
+layout_mode = 2
+texture_normal = ExtResource("9_ek63v")
+texture_pressed = ExtResource("10_4bst2")
+texture_hover = ExtResource("11_uy3go")
+stretch_mode = 5
+flip_h = true
 
 [node name="Locations" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
 visible = false
@@ -338,7 +439,7 @@ anchor_bottom = 1.0
 offset_left = 5.0
 offset_top = 90.0
 offset_right = -5.0
-offset_bottom = -10.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 allow_reselect = true
@@ -387,7 +488,7 @@ anchor_bottom = 1.0
 offset_left = 5.0
 offset_top = 90.0
 offset_right = -5.0
-offset_bottom = -10.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 select_mode = 2
@@ -503,6 +604,7 @@ theme_override_styles/normal = ExtResource("10_ev2os")
 text = "Create"
 
 [node name="Projects" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
@@ -1356,6 +1458,7 @@ use_native_dialog = true
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer/ClearFilter" to="." method="_on_clear_filter_pressed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateFromItemButton" to="." method="_on_create_from_item_button_pressed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateItemButton" to="." method="_on_create_item_button_pressed"]
+[connection signal="text_changed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/PageNumControl/CurrentPageLE" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel" method="_on_current_page_le_text_changed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton2" to="." method="create_location_from_selected"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton" to="." method="_on_create_location_button_pressed"]
 [connection signal="button_clicked" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationStructTree" to="." method="_on_location_struct_tree_button_clicked"]

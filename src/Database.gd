@@ -238,8 +238,8 @@ func _ready():
 		dir.list_dir_begin()
 		var file_name : String  = dir.get_next()
 		while file_name != "":
-			if not dir.current_is_dir():
-				print(file_name)
+			#if not dir.current_is_dir():
+				#print(file_name)
 			file_name = dir.get_next()
 	
 	var d = DirAccess.open(get_data_path())

@@ -27,6 +27,8 @@ func refresh_items_list(items_data):
 			continue
 	
 	for i in range(items_data.keys().size()):
+		if i > 50:
+			break
 		var current_key = items_data.keys()[i]
 		var next_item_data = items_data[current_key]
 		if current_key in elements.keys():
@@ -34,6 +36,14 @@ func refresh_items_list(items_data):
 		else:
 			add_item(next_item_data)
 	items_holder.refresh_unfold()
+
+
+func add_item(item_data):
+	var item_element = item_prefab.instantiate()
+	items_holder.add_child(item_element)
+	item_element.item_tab = self
+	item_element.set_data(item_data)
+	elements[item_data.id] = item_element
 
 
 func select_item(item_element):
@@ -51,14 +61,6 @@ func get_selected_id():
 func update_item(item_data, item):
 	item.item_tab = self
 	item.set_data(item_data)
-
-
-func add_item(item_data):
-	var item_element = item_prefab.instantiate()
-	items_holder.add_child(item_element)
-	item_element.item_tab = self
-	item_element.set_data(item_data)
-	elements[item_data.id] = item_element
 
 
 func refresh_list():
