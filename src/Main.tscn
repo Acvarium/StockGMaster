@@ -730,7 +730,6 @@ list_item_mode = 3
 theme_override_styles/pressed = ExtResource("25_veepo")
 
 [node name="ItemFilteringDialogue" parent="." node_paths=PackedStringArray("tags_element") instance=ExtResource("9_p6ieq")]
-visible = false
 layout_mode = 1
 script = ExtResource("19_8mkwf")
 tags_element = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Tags")

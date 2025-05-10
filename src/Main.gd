@@ -58,7 +58,7 @@ func _on_viewport_resize():
 #func refresh_item_list():
 	#items_tab.refresh_list()
 	
-
+#забрати--------------------------------------
 func is_item_passes_filter(item_id):
 	if filter_tag_ids and filter_tag_ids.size() > 0:
 		var has_selected_tags = false
@@ -73,7 +73,7 @@ func is_item_passes_filter(item_id):
 
 
 func set_fillter_tag_ids(values):
-	filter_tag_ids = values.duplicate()
+	filter_tag_ids = values.duplicate(true)
 
 
 func get_filter_tag_ids():
@@ -353,19 +353,33 @@ func save_location(location_data):
 	$Database.save_location(location_data)
 	$Database.pull_locations_data()
 
+
 func save_category(category_data):
 	$Database.save_category(category_data)
 	$Database.pull_categories_data()
+
 
 func _on_parent_selection_button_pressed():
 	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.ParentLocation, -1)
 	#show_tree_selector_dialogue(Global.TreeSelection.ParentLocation)
 
 
+func get_filtered_item_data():
+	var _items = $Database.items_data
+	var to_filter = false
+	if filter_tag_ids and filter_tag_ids.size() > 0:
+		to_filter = true
+	
+	if to_filter:
+		_items = $Database.get_filtered_items(filter_tag_ids)
+	
+	return _items
+
+
 func refresh_items_list():
 	if !items_tab:
 		items_tab = $MainControl/HSplit/MainInfo/TabContainer/Items
-	items_tab.refresh_items_list($Database.items_data)
+	items_tab.refresh_items_list(get_filtered_item_data())
 
 
 func _on_database_item_data_loaded():

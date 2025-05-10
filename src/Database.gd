@@ -98,6 +98,10 @@ func get_tags_for_item(id):
 		current_item_tags[current_item_tag_data.id] = {"id": current_item_tag_data.tag_id, "name": tags_data[current_item_tag_data.tag_id].name}
 	return current_item_tags
 
+#
+#func get_filtered_items(tag_ids):
+	#pass
+
 
 func get_tag_ids_for_item(item_id):
 	var current_item_tags_db = db.select_rows("item_tags", "item_id = '" + str(item_id) + "'", ["tag_id"])
@@ -237,7 +241,6 @@ func _ready():
 			if not dir.current_is_dir():
 				print(file_name)
 			file_name = dir.get_next()
-	
 	
 	var d = DirAccess.open(get_data_path())
 	if d == null:
@@ -494,3 +497,113 @@ func build_category_address(category_id):
 			current_category_data = null
 	addr = "/" + addr.left(addr.length() - 1)
 	return addr
+
+
+
+func get_all_child_ids(table_name: String, parent_ids: Array) -> Array:
+	var all_ids = parent_ids.duplicate()
+	var queue = parent_ids.duplicate()
+	while not queue.is_empty():
+		var current_id = queue.pop_front()
+		var rows = db.select_rows(table_name, "parent_id = %s" % current_id, ["id"])
+		for row in rows:
+			var child_id = row["id"]
+			if child_id not in all_ids:
+				all_ids.append(child_id)
+				queue.append(child_id)
+	return all_ids
+
+#------------------------
+func get_filtered_items(tag_ids: Array = [], category_ids: Array = [], location_ids: Array = []) -> Dictionary:
+	var all_category_ids := get_all_subcategories(category_ids)
+	var all_location_ids := get_all_sublocations(location_ids)
+
+	var tag_id_strs := []
+	for tag_id in tag_ids:
+		tag_id_strs.append(str(tag_id))
+
+	var category_id_strs := []
+	for cat_id in all_category_ids:
+		category_id_strs.append(str(cat_id))
+
+	var location_id_strs := []
+	for loc_id in all_location_ids:
+		location_id_strs.append(str(loc_id))
+
+	var conditions := []
+
+	if tag_id_strs.size() > 0:
+		conditions.append("items.id IN (SELECT item_id FROM item_tags WHERE tag_id IN (" + ",".join(tag_id_strs) + "))")
+
+	if category_id_strs.size() > 0:
+		conditions.append("category_id IN (" + ",".join(category_id_strs) + ")")
+
+	if location_id_strs.size() > 0:
+		conditions.append("items.id IN (SELECT item_id FROM item_stocks WHERE location_id IN (" + ",".join(location_id_strs) + "))")
+
+	var where_clause := ""
+	if conditions.size() > 0:
+		where_clause = "WHERE " + " OR ".join(conditions)
+
+	var query := """
+		SELECT items.*, item_stocks.id as stock_id, item_stocks.location_id, item_stocks.quantity, item_stocks.amount, item_stocks.mark
+		FROM items
+		LEFT JOIN item_stocks ON item_stocks.item_id = items.id
+	""" + where_clause + ";"
+
+	db.query(query)
+	var result = db.query_result
+
+	var data := {}
+	for row in result:
+		var item_id = row["id"]
+		if not data.has(item_id):
+			var item_data = row.duplicate()
+			item_data.erase("stock_id")
+			item_data.erase("location_id")
+			item_data.erase("quantity")
+			item_data.erase("amount")
+			item_data.erase("mark")
+			item_data["stocks"] = []
+			data[item_id] = item_data
+
+		if row.has("stock_id") and row["stock_id"] != null:
+			var stock = {
+				"id": row["stock_id"],
+				"item_id": item_id,
+				"location_id": row["location_id"],
+				"quantity": row["quantity"],
+				"amount": row["amount"],
+				"mark": row["mark"]
+			}
+			data[item_id]["stocks"].append(stock)
+
+	return data
+
+
+func get_all_subcategories(category_ids: Array) -> Array:
+	var result := category_ids.duplicate()
+	var to_check := category_ids.duplicate()
+	while to_check.size() > 0:
+		var current_id = to_check.pop_back()
+		var rows = db.select_rows("categories", "parent_id = " + str(current_id), ["id"])
+		for row in rows:
+			var child_id = row["id"]
+			if not result.has(child_id):
+				result.append(child_id)
+				to_check.append(child_id)
+	return result
+
+
+func get_all_sublocations(location_ids: Array) -> Array:
+	var result := location_ids.duplicate()
+	var to_check := location_ids.duplicate()
+	while to_check.size() > 0:
+		var current_id = to_check.pop_back()
+		var rows = db.select_rows("locations", "parent_id = " + str(current_id), ["id"])
+		for row in rows:
+			var child_id = row["id"]
+			if not result.has(child_id):
+				result.append(child_id)
+				to_check.append(child_id)
+	return result

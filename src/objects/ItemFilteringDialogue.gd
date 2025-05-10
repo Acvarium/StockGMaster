@@ -12,7 +12,10 @@ func _on_cancel_button_pressed():
 
 
 func _on_save_item_button_pressed():
-	main_node.set_fillter_tag_ids(current_item_tags_data)
+	var selected_tag_ids = []
+	for tag_key in current_item_tags_data:
+		selected_tag_ids.append(tag_key)
+	main_node.set_fillter_tag_ids(selected_tag_ids)
 	main_node.refresh_items_list()
 	hide()
 
