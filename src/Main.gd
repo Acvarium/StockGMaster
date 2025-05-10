@@ -510,7 +510,10 @@ func edit_tag(tag_id):
 
 func show_item_filtering_dialogue():
 	remove_ui_focus()
+	if not filter_tag_ids or filter_tag_ids.size() == 0:
+		$ItemFilteringDialogue.clear_selection()
 	$ItemFilteringDialogue.show()
+
 
 func get_tags_for_item(id):
 	return $Database.get_tags_for_item(id)
@@ -543,6 +546,8 @@ func _on_database_tags_data_loaded():
 
 func _on_filter_items_button_pressed():
 	show_item_filtering_dialogue()
+
+
 
 
 func shoe_profile_selection_dialogue(to_show = true):
@@ -670,4 +675,12 @@ func _on_create_from_item_button_pressed():
 		edit_item(-1)
 	else:
 		create_item_from(selected_item_id)
-		
+
+
+func clear_filter():
+	filter_tag_ids = []
+	refresh_items_list()
+
+
+func _on_clear_filter_pressed() -> void:
+	clear_filter()

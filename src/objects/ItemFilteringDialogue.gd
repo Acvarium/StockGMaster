@@ -20,6 +20,10 @@ func _on_save_item_button_pressed():
 	hide()
 
 
+func clear_selection():
+	update_tags([])
+	
+
 func update_tags(tag_ids):
 	current_item_tags_data = main_node.get_tags_data_by_ids(tag_ids)
 	tags_element.set_tags(current_item_tags_data)
