@@ -15,6 +15,8 @@ extends Control
 @onready var location_selection_tree : Tree = $MainControl/HSplit/MainInfo/TabContainer/Locations/LocationStructTree
 @onready var search_line_edit : LineEdit = $MainControl/HSplit/MainInfo/SearchLine/SearchLineEdit
 @onready var side_info : Control = $MainControl/HSplit/SideInfo
+@export var clear_filter_button : Button
+
 var selected_value : int = -1
 var tree_selection_index : int = -1
 const SIDE_PANEL_OFFSET = 42
@@ -377,6 +379,11 @@ func get_filtered_item_data():
 
 
 func refresh_items_list():
+	var is_filter_on = false
+	if filter_tag_ids and filter_tag_ids.size() > 0:
+		is_filter_on = true
+	clear_filter_button.visible = is_filter_on
+		
 	if !items_tab:
 		items_tab = $MainControl/HSplit/MainInfo/TabContainer/Items
 	items_tab.refresh_items_list(get_filtered_item_data())
