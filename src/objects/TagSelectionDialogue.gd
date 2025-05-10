@@ -14,6 +14,15 @@ func select_tags_with_dialogue(recover, selected_tags = []):
 	tag_viewer.refrash_tags_list(all_tags_data, selected_tags)
 
 
+func select_all_tags(to_select = true):
+	var all_tags_data = main_node.get_all_tags_data()
+	var selected_tags = []
+	if to_select:
+		for tag_key in all_tags_data.keys():
+			selected_tags.append(tag_key)
+	tag_viewer.refrash_tags_list(all_tags_data, selected_tags)
+
+
 func _on_tag_viewer_tag_pressed_sig():
 	pass # Replace with function body.
 
@@ -27,3 +36,11 @@ func _on_confirm_button_pressed():
 
 func _on_cancel_button_pressed():
 	hide()
+
+
+func _on_all_tags_pressed() -> void:
+	select_all_tags()
+
+
+func _on_none_tags_pressed() -> void:
+	select_all_tags(false)

@@ -180,9 +180,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 0
+current_tab = 4
 
 [node name="Items" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" node_paths=PackedStringArray("items_holder", "temp_items_holder")]
+visible = false
 layout_mode = 2
 script = ExtResource("3_wxfjw")
 items_holder = NodePath("ItemsListPanel/ScrollContainer/VBoxContainer")
@@ -502,7 +503,6 @@ theme_override_styles/normal = ExtResource("10_ev2os")
 text = "Create"
 
 [node name="Projects" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
@@ -1164,6 +1164,28 @@ theme_override_styles/pressed = ExtResource("25_veepo")
 theme_override_styles/normal = ExtResource("23_rqglp")
 text = "Confirm"
 
+[node name="AllTags" type="Button" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/hover = ExtResource("31_br1a5")
+theme_override_styles/pressed = ExtResource("32_apjd1")
+theme_override_styles/normal = ExtResource("33_lw3x1")
+text = "All"
+
+[node name="NoneTags" type="Button" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/hover = ExtResource("29_jen6a")
+theme_override_styles/pressed = ExtResource("29_jen6a")
+theme_override_styles/normal = ExtResource("31_4mrd2")
+text = "None"
+
 [node name="CancelButton" type="Button" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1379,6 +1401,8 @@ use_native_dialog = true
 [connection signal="pressed" from="TagSelectionDialogue/CancelTreeSelection" to="TagSelectionDialogue" method="_on_cancel_button_pressed"]
 [connection signal="tag_pressed_sig" from="TagSelectionDialogue/TSL/AspectRatioContainer/Control/SC/TagViewer" to="TagSelectionDialogue" method="_on_tag_viewer_tag_pressed_sig"]
 [connection signal="pressed" from="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/ConfirmButton" to="TagSelectionDialogue" method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/AllTags" to="TagSelectionDialogue" method="_on_all_tags_pressed"]
+[connection signal="pressed" from="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/NoneTags" to="TagSelectionDialogue" method="_on_none_tags_pressed"]
 [connection signal="pressed" from="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/CancelButton" to="TagSelectionDialogue" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="ActionConfirmDialogue/CancelTreeSelection" to="ActionConfirmDialogue" method="_on_cancel_tree_selection_pressed"]
 [connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/AcceptButton" to="ActionConfirmDialogue" method="_on_accept_button_pressed"]

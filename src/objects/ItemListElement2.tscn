@@ -130,7 +130,7 @@ focus_mode = 0
 theme_override_styles/hover = ExtResource("8_bgha2")
 theme_override_styles/pressed = ExtResource("9_llh3k")
 theme_override_styles/normal = ExtResource("7_b7ah0")
-text = "Edit Tags"
+text = "Select Tags"
 
 [node name="ClearTagsButton" type="Button" parent="TitleControl"]
 visible = false
