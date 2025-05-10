@@ -17,6 +17,7 @@ func set_data(_data):
 
 
 func _show():
+	$ItemsPanel/ScrollContainer/VBoxContainer/Name.focus_name_input()
 	show()
 	
 	

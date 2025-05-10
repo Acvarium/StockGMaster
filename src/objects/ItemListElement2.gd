@@ -125,3 +125,8 @@ func _on_icon_button_pressed():
 
 func _on_clear_tags_button_pressed() -> void:
 	clear_tags_button_pressed.emit()
+
+
+
+func focus_name_input():
+	$DataControl/Edit.grab_focus()
