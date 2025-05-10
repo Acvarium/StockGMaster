@@ -4,7 +4,7 @@ extends Control
 var current_data
 
 func _ready():
-	reset_and_hide
+	reset_and_hide()
 
 
 func set_data(_data):

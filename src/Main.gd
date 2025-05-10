@@ -49,8 +49,6 @@ func load_images_to_viewer():
 
 
 func _on_viewport_resize():
-	var window_size = DisplayServer.window_get_size()
-	var aspect = float(window_size.x) / float(window_size.y)
 	$Timers/SideInfoPanelTimer.start()
 	var side_info_visible = $MainControl/HSplit/SideInfo.visible
 	unfold_side_split(side_info_visible)
@@ -169,9 +167,7 @@ func delete_category(category_id):
 
 func tag_exists(tag_name):
 	tag_name = tag_name.to_lower()
-	var db_tags_data = $Database.tags_data
 	for t in $Database.tags_data:
-		var current_tag_name = $Database.tags_data[t]
 		if "name" in $Database.tags_data[t] and $Database.tags_data[t].name == tag_name:
 			return true
 	return false
@@ -190,17 +186,18 @@ func warning_dialogue(warning_message, title : String = ""):
 	
 
 func get_image_by_path(image_path):
-	var image = Image.load_from_file(get_image_folder_path(image_path))
-	return image
+	if image_path != "":
+		return Image.load_from_file(get_image_folder_path(image_path))
+	return load("res://textures/NoImage.jpg")
 
 
 func get_image_folder_path(path):
 	if path != "":
 		return $Database.get_image_folder_path() + path
 	else:
-		if OS.get_name() == "Android":
-			return "res://textures/NoImage.jpg"
-		return "res://textures/NoImage.jpg"
+		#if OS.get_name() == "Android":
+			#return "res://textures/NoImage.jpg"
+		return ""
 	
 	
 func hide_tree_selector():
@@ -274,8 +271,8 @@ func select_tags_with_dialogue(recever, selected_tags = []):
 	$TagSelectionDialogue.show()
 
 
-func image_selected(selected_image_path, selected_item_id, selected_action_type):
-	pass
+#func image_selected(selected_image_path, selected_item_id, selected_action_type):
+	#pass
 
 
 func edit_item(item_id):
@@ -567,11 +564,12 @@ func update_side_info_panel():
 	side_info.get_node("Panel").visible = side_size.x > MIN_SPLIT_SIZE
 	#if side_size.x < MIN_SPLIT_SIZE:
 		#unfold_side_split(false)
-	
+
 
 func _on_h_split_dragged(offset):
 	update_side_info_panel()
 	h_split_dragged = true
+
 
 func _on_side_info_panel_timer_timeout():
 	update_side_info_panel()

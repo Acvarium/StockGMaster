@@ -18,9 +18,9 @@ func set_tree_element_item_selection_action_type(action_data_type):
 	tree_element.item_selection_action_type = action_data_type
 
 
-func build_tree(tree_data : Dictionary, item_id = -1):
+func build_tree(tree_data : Dictionary, _item_id = -1):
 	current_tree_data = tree_data
-	tree_element.build_tree(tree_data, item_id)
+	tree_element.build_tree(tree_data, _item_id)
 	
 
 func _on_cancel_tree_selection_pressed():

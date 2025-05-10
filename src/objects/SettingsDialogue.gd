@@ -5,9 +5,5 @@ func _ready():
 	pass # Replace with function body.
 
 
-func _process(delta):
-	pass
-
-
 func _on_profile_name_button_pressed():
 	main_node.shoe_profile_selection_dialogue()
