@@ -4,9 +4,8 @@ import string
 import argparse
 from pathlib import Path
 
-#usage:
-#python3 generate_inventory_test_data.py --count 50000 --db "inventory_test.db"
-
+# usage:
+# python3 generate_inventory_test_data.py --count 50000 --db "inventory_test.db"
 
 DB_PATH = "test_inventory.db"
 
@@ -123,14 +122,18 @@ def insert_seed_data(conn):
                     (f"Category {i}", f"Desc {i}", None if i == 0 else random.randint(1, i)))
 
     # Rectangles
-    for i in range(10):
+    for _ in range(10):
         cur.execute("INSERT INTO rect (x, y, w, h) VALUES (?, ?, ?, ?)",
                     (random.randint(0, 100), random.randint(0, 100), 10, 10))
 
     # Locations
     for i in range(10):
         cur.execute("INSERT INTO locations (name, parent_id, description, mark, is_virtual, image_path, image_rect_id) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                    (f"Location {i}", None if i == 0 else random.randint(1, i), f"Loc {i}", 0, 0, "img.png", random.randint(1, 10)))
+                    (f"Location {i}", None if i == 0 else random.randint(1, i), f"Loc {i}", 0, 0, "", None))
+
+    # Tags
+    for i in range(20):
+        cur.execute("INSERT INTO tags (name) VALUES (?)", (f"Tag {i}",))
 
     conn.commit()
 
@@ -138,19 +141,24 @@ def insert_items(conn, count):
     cur = conn.cursor()
     unit_ids = [row[0] for row in cur.execute("SELECT id FROM unit_names")]
     category_ids = [row[0] for row in cur.execute("SELECT id FROM categories")]
-    rect_ids = [row[0] for row in cur.execute("SELECT id FROM rect")]
+    tag_ids = [row[0] for row in cur.execute("SELECT id FROM tags")]
 
     for i in range(count):
         name = f"Item {i}"
         desc = f"Description of item {i}"
         category_id = random.choice(category_ids)
         unit_name_id = random.choice(unit_ids)
-        rect_id = random.choice(rect_ids)
 
         cur.execute('''INSERT INTO items (name, description, category_id, mark, variant_of_id,
                         unit_name_id, image_path, image_rect_id)
                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
-                    (name, desc, category_id, 0, None, unit_name_id, "img.png", rect_id))
+                    (name, desc, category_id, 0, None, unit_name_id, "", None))
+
+        item_id = cur.lastrowid
+
+        # Randomly assign 1–3 tags to the item
+        for tag_id in random.sample(tag_ids, random.randint(1, 3)):
+            cur.execute("INSERT INTO item_tags (item_id, tag_id) VALUES (?, ?)", (item_id, tag_id))
 
         if i % 1000 == 0:
             print(f"Inserted {i} items...")

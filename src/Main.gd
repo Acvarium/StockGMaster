@@ -188,8 +188,12 @@ func warning_dialogue(warning_message, title : String = ""):
 	
 
 func get_image_by_path(image_path):
+	
 	if image_path != "":
-		return Image.load_from_file(get_image_folder_path(image_path))
+		var full_path = get_image_folder_path(image_path)
+		if FileAccess.file_exists(full_path):
+			return Image.load_from_file(full_path)
+
 	return load("res://textures/NoImage.jpg")
 
 
