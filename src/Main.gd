@@ -115,17 +115,18 @@ func delete_location(location_id):
 func search_items_with_text(search_text):
 	if search_text.is_empty():
 		return null
-	var found_item_ids = []
+	var found_item_ids = {}
 	var search_text_split = search_text.to_lower().split(" ")
-	for i in $Database.items_data:
-		var current_item_data = $Database.items_data[i]
+	var filtered_data = get_filtered_item_data()
+	for i in filtered_data:
+		var current_item_data = filtered_data[i]
 		var item_name = current_item_data.name
 		var item_descr = "" 
 		if "description" in current_item_data and current_item_data.description:
 			item_descr = current_item_data.description
 		var current_text = (item_name + item_descr).to_lower()
 		if does_text_contain_words(search_text_split, current_text):
-			found_item_ids.append(i)
+			found_item_ids[i] = filtered_data[i]
 	return found_item_ids
 
 
@@ -390,7 +391,8 @@ func refresh_items_list():
 		
 	if !items_tab:
 		items_tab = $MainControl/HSplit/MainInfo/TabContainer/Items
-	items_tab.refresh_items_list(get_filtered_item_data())
+	items_tab.refrash_item_data_list(get_filtered_item_data())
+	#items_tab.refresh_items_list(get_filtered_item_data())
 
 
 func _on_database_item_data_loaded():
@@ -575,8 +577,12 @@ func _on_tab_container_tab_changed(tab):
 		return
 	var new_text = search_line_edit.text
 	if tab == 0:
-		var found_items = search_items_with_text(new_text)
-		items_tab.show_selection(found_items)
+		if new_text == "":
+			refresh_items_list()
+		else:
+			var found_items = search_items_with_text(new_text)
+			items_tab.refrash_item_data_list(found_items)
+		
 	elif tab == 1:
 		var found_locations = search_tree_data_with_text(new_text, $Database.locations_data)
 		locations_tab_tree.show_selection(found_locations)
@@ -688,9 +694,19 @@ func _on_create_from_item_button_pressed():
 		create_item_from(selected_item_id)
 
 
+func apply_filter():
+	if search_line_edit.text != "":
+		_on_search_line_edit_text_changed(search_line_edit.text)
+	else:
+		refresh_items_list()
+
+
 func clear_filter():
 	filter_tag_ids = []
-	refresh_items_list()
+	if search_line_edit.text != "":
+		_on_search_line_edit_text_changed(search_line_edit.text)
+	else:
+		refresh_items_list()
 
 
 func _on_clear_filter_pressed() -> void:

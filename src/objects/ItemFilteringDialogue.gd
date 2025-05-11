@@ -17,7 +17,7 @@ func _on_save_item_button_pressed():
 		selected_tag_ids.append(tag_key)
 
 	main_node.set_fillter_tag_ids(selected_tag_ids)
-	main_node.refresh_items_list()
+	main_node.apply_filter()
 	hide()
 
 

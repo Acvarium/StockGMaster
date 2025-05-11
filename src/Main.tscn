@@ -187,11 +187,12 @@ grow_horizontal = 2
 grow_vertical = 2
 current_tab = 0
 
-[node name="Items" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" node_paths=PackedStringArray("items_holder", "temp_items_holder")]
+[node name="Items" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" node_paths=PackedStringArray("items_holder", "temp_items_holder", "item_page_switcher")]
 layout_mode = 2
 script = ExtResource("3_wxfjw")
 items_holder = NodePath("ItemsListPanel/ScrollContainer/VBoxContainer")
 temp_items_holder = NodePath("ItemsListPanel/TempItemHolder")
+item_page_switcher = NodePath("ItemPageSwitcher")
 metadata/_tab_index = 0
 
 [node name="ItemsToolPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Items"]
@@ -291,7 +292,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 
-[node name="ItemPagesPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Items"]
+[node name="ItemPageSwitcher" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Items"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -306,7 +307,7 @@ grow_vertical = 0
 theme_override_styles/panel = ExtResource("16_uvvjq")
 script = ExtResource("9_uy3go")
 
-[node name="PagesHBox" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel"]
+[node name="PagesHBox" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -315,25 +316,25 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="FirstPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox"]
+[node name="FirstPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox"]
 layout_mode = 2
 texture_normal = ExtResource("9_ek63v")
 texture_pressed = ExtResource("10_4bst2")
 texture_hover = ExtResource("11_uy3go")
 stretch_mode = 5
 
-[node name="PrevPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox"]
+[node name="PrevPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox"]
 layout_mode = 2
 texture_normal = ExtResource("20_15jft")
 texture_pressed = ExtResource("21_65tdk")
 texture_hover = ExtResource("22_8tugv")
 stretch_mode = 5
 
-[node name="PageNumControl" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox"]
+[node name="PageNumControl" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="CurrentPageLE" type="LineEdit" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/PageNumControl"]
+[node name="CurrentPageLE" type="LineEdit" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/PageNumControl"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.473
@@ -350,7 +351,7 @@ max_length = 4
 emoji_menu_enabled = false
 virtual_keyboard_type = 2
 
-[node name="NumberOfPagesLabel" type="Label" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/PageNumControl"]
+[node name="NumberOfPagesLabel" type="Label" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/PageNumControl"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -365,7 +366,7 @@ text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Slash" type="Label" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/PageNumControl"]
+[node name="Slash" type="Label" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/PageNumControl"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -378,7 +379,7 @@ text = "/"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NextPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox"]
+[node name="NextPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox"]
 layout_mode = 2
 texture_normal = ExtResource("20_15jft")
 texture_pressed = ExtResource("21_65tdk")
@@ -386,13 +387,37 @@ texture_hover = ExtResource("22_8tugv")
 stretch_mode = 5
 flip_h = true
 
-[node name="LastPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox"]
+[node name="LastPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox"]
 layout_mode = 2
 texture_normal = ExtResource("9_ek63v")
 texture_pressed = ExtResource("10_4bst2")
 texture_hover = ExtResource("11_uy3go")
 stretch_mode = 5
 flip_h = true
+
+[node name="OptionButton" type="OptionButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -15.5
+offset_right = -5.0
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+selected = 3
+item_count = 4
+popup/item_0/text = "100"
+popup/item_0/id = 0
+popup/item_1/text = "50"
+popup/item_1/id = 1
+popup/item_2/text = "25"
+popup/item_2/id = 2
+popup/item_3/text = "10"
+popup/item_3/id = 3
 
 [node name="Locations" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
 visible = false
@@ -1465,11 +1490,14 @@ use_native_dialog = true
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer/ClearFilter" to="." method="_on_clear_filter_pressed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateFromItemButton" to="." method="_on_create_from_item_button_pressed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateItemButton" to="." method="_on_create_item_button_pressed"]
-[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/FirstPageButton" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel" method="_on_first_page_button_pressed"]
-[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/PrevPageButton" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel" method="_on_prev_page_button_pressed"]
-[connection signal="text_changed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/PageNumControl/CurrentPageLE" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel" method="_on_current_page_le_text_changed"]
-[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/NextPageButton" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel" method="_on_next_page_button_pressed"]
-[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/LastPageButton" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel" method="_on_last_page_button_pressed"]
+[connection signal="page_changed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher" to="MainControl/HSplit/MainInfo/TabContainer/Items" method="_on_item_page_switcher_page_changed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/FirstPageButton" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher" method="_on_first_page_button_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/PrevPageButton" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher" method="_on_prev_page_button_pressed"]
+[connection signal="text_changed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/PageNumControl/CurrentPageLE" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher" method="_on_current_page_le_text_changed"]
+[connection signal="text_submitted" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/PageNumControl/CurrentPageLE" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher" method="_on_current_page_le_text_submitted"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/NextPageButton" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher" method="_on_next_page_button_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/LastPageButton" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher" method="_on_last_page_button_pressed"]
+[connection signal="item_selected" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/OptionButton" to="MainControl/HSplit/MainInfo/TabContainer/Items" method="_on_option_button_item_selected"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton2" to="." method="create_location_from_selected"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton" to="." method="_on_create_location_button_pressed"]
 [connection signal="button_clicked" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationStructTree" to="." method="_on_location_struct_tree_button_clicked"]
