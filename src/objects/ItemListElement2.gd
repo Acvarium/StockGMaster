@@ -20,9 +20,9 @@ extends Panel
 		$DataControl/SpinBox.visible = list_item_mode == ListItemModes.Quantity
 		$DataControl/Tags.visible = list_item_mode == ListItemModes.Tags
 		$TitleControl/EditTagsButton.visible = list_item_mode == ListItemModes.Tags
-		$TitleControl/ClearTagsButton.visible = list_item_mode == ListItemModes.Tags
+		$TitleControl/ClearTagsButton.visible = list_item_mode == ListItemModes.Tags and show_clear_button
 		
-
+@export var show_clear_button = false
 @onready var unfold_button = get_node("TitleControl/UnfoldButton")
 var unfold_control = null
 var is_unfolded = false

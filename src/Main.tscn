@@ -345,7 +345,7 @@ grow_vertical = 2
 theme_override_styles/focus = ExtResource("12_ac6pf")
 theme_override_styles/normal = ExtResource("12_ac6pf")
 text = "5"
-alignment = 2
+alignment = 1
 max_length = 4
 emoji_menu_enabled = false
 virtual_keyboard_type = 2
@@ -357,20 +357,26 @@ anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -4.0
+offset_top = 5.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "/100"
+text = "1"
+horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpinBox" type="SpinBox" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/PageNumControl"]
-visible = false
+[node name="Slash" type="Label" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/PageNumControl"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 5.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 2
+text = "/"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="NextPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox"]
 layout_mode = 2
@@ -858,6 +864,7 @@ layout_mode = 2
 title_text = "Tags"
 placeholder_text = "Enter an Item Name"
 list_item_mode = 4
+show_clear_button = true
 
 [node name="SaveItemButton" parent="ItemFilteringDialogue/SDCButtons/HBoxContainer" index="0"]
 theme_override_styles/pressed = ExtResource("25_veepo")
@@ -1458,7 +1465,11 @@ use_native_dialog = true
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer/ClearFilter" to="." method="_on_clear_filter_pressed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateFromItemButton" to="." method="_on_create_from_item_button_pressed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateItemButton" to="." method="_on_create_item_button_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/FirstPageButton" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel" method="_on_first_page_button_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/PrevPageButton" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel" method="_on_prev_page_button_pressed"]
 [connection signal="text_changed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/PageNumControl/CurrentPageLE" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel" method="_on_current_page_le_text_changed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/NextPageButton" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel" method="_on_next_page_button_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel/PagesHBox/LastPageButton" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPagesPanel" method="_on_last_page_button_pressed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton2" to="." method="create_location_from_selected"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton" to="." method="_on_create_location_button_pressed"]
 [connection signal="button_clicked" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationStructTree" to="." method="_on_location_struct_tree_button_clicked"]
