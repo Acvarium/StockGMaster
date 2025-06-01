@@ -32,7 +32,10 @@ func update_number_of_pages():
 	if current_items_data.keys().size() == 0:
 		item_page_switcher.set_last_page(0)
 	else:
-		var last_page_num = current_items_data.keys().size() / current_items_per_page
+		var number_of_items = current_items_data.keys().size()
+		var last_page_num = number_of_items / current_items_per_page
+		if (number_of_items % current_items_per_page) != 0:
+			last_page_num += 1
 		if last_page_num == 0:
 			last_page_num = 1
 		item_page_switcher.set_last_page(last_page_num)  

@@ -113,11 +113,11 @@ func delete_location(location_id):
 
 
 func search_items_with_text(search_text):
+	var filtered_data = get_filtered_item_data()
 	if search_text.is_empty():
 		return null
 	var found_item_ids = {}
 	var search_text_split = search_text.to_lower().split(" ")
-	var filtered_data = get_filtered_item_data()
 	for i in filtered_data:
 		var current_item_data = filtered_data[i]
 		var item_name = current_item_data.name
@@ -376,7 +376,7 @@ func get_filtered_item_data():
 	var to_filter = false
 	if filter_tag_ids and filter_tag_ids.size() > 0:
 		to_filter = true
-	
+	clear_filter_button.visible = to_filter
 	if to_filter:
 		_items = $Database.get_filtered_items(filter_tag_ids)
 	
@@ -711,3 +711,7 @@ func clear_filter():
 
 func _on_clear_filter_pressed() -> void:
 	clear_filter()
+
+
+func _on_items_in_selected_locations_pressed() -> void:
+	tab_control.current_tab = 0

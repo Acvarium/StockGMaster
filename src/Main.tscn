@@ -444,7 +444,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="ShowInSelectedLocations" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer"]
+[node name="ItemsInSelectedLocations" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 tooltip_text = "Create new location from selected"
@@ -1507,6 +1507,7 @@ use_native_dialog = true
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/NextPageButton" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher" method="_on_next_page_button_pressed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/LastPageButton" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher" method="_on_last_page_button_pressed"]
 [connection signal="item_selected" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/OptionButton" to="MainControl/HSplit/MainInfo/TabContainer/Items" method="_on_option_button_item_selected"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/ItemsInSelectedLocations" to="." method="_on_items_in_selected_locations_pressed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton2" to="." method="create_location_from_selected"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton" to="." method="_on_create_location_button_pressed"]
 [connection signal="button_clicked" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationStructTree" to="." method="_on_location_struct_tree_button_clicked"]

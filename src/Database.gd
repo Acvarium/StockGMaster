@@ -543,7 +543,7 @@ func get_filtered_items(tag_ids: Array = [], category_ids: Array = [], location_
 
 	var where_clause := ""
 	if conditions.size() > 0:
-		where_clause = "WHERE " + " OR ".join(conditions)
+		where_clause = "WHERE " + " AND ".join(conditions)
 
 	var query := """
 		SELECT items.*, item_stocks.id as stock_id, item_stocks.location_id, item_stocks.quantity, item_stocks.amount, item_stocks.mark
