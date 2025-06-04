@@ -1,12 +1,19 @@
-[gd_scene load_steps=67 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=82 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" uid="uid://dgrk2ephkslqi" path="res://Main.gd" id="1_5mhyi"]
 [ext_resource type="Script" uid="uid://dln5ryh7py5lt" path="res://Database.gd" id="2_x8r34"]
 [ext_resource type="Script" uid="uid://1p6ymcnu68vj" path="res://objects/ItemsTab.gd" id="3_wxfjw"]
 [ext_resource type="Script" uid="uid://c0mdok2c1ii27" path="res://objects/UnfoldControl.gd" id="4_a2pk0"]
+[ext_resource type="Texture2D" uid="uid://hctilvcyciu7" path="res://textures/button_base32.png" id="5_a43ws"]
 [ext_resource type="Script" uid="uid://u65m38u1ubgy" path="res://objects/StructTree.gd" id="5_ar113"]
+[ext_resource type="Texture2D" uid="uid://c88f7dg72vdg7" path="res://textures/filter_button.png" id="5_skfvt"]
 [ext_resource type="Script" uid="uid://lxtmrs4n24kv" path="res://objects/TagsTab.gd" id="6_2kqfq"]
+[ext_resource type="Texture2D" uid="uid://ce3bu3s0eexfb" path="res://textures/button_base32_pressed.png" id="6_aoymy"]
 [ext_resource type="Script" uid="uid://c6wnbqtn5l73u" path="res://objects/TagViewer.gd" id="7_k3n6w"]
+[ext_resource type="Texture2D" uid="uid://df3vr6m3qb0ot" path="res://textures/button_base32_hover.png" id="7_ytdkf"]
+[ext_resource type="Texture2D" uid="uid://cg4wo0p3ejjn0" path="res://textures/create_from_selected.png" id="8_cfjnh"]
+[ext_resource type="Texture2D" uid="uid://qlh6pq0lakok" path="res://textures/x_button.png" id="8_mplfx"]
+[ext_resource type="Texture2D" uid="uid://oak2dwyfxd0u" path="res://textures/button_base18.png" id="9_cfjnh"]
 [ext_resource type="Texture2D" uid="uid://b4uaiafsrhgju" path="res://textures/BeginingButton_norm.png" id="9_ek63v"]
 [ext_resource type="PackedScene" uid="uid://buhtxvdgnu0ki" path="res://objects/DataEditDialogueBase.tscn" id="9_p6ieq"]
 [ext_resource type="Script" uid="uid://dvo5xu3myuq0j" path="res://objects/PageSwitcher.gd" id="9_uy3go"]
@@ -14,6 +21,7 @@
 [ext_resource type="Script" uid="uid://ca8qxsnwo3c5h" path="res://objects/ItemCreationDialogue.gd" id="10_06y8t"]
 [ext_resource type="StyleBox" uid="uid://bqcd2rx70v1t2" path="res://styles/InputStyle.tres" id="10_djmps"]
 [ext_resource type="StyleBox" uid="uid://djjketxv43ctu" path="res://styles/FramedButtonTool.tres" id="10_ev2os"]
+[ext_resource type="Texture2D" uid="uid://cgg5ph32qxqk5" path="res://textures/button_base18_hover.png" id="10_mplfx"]
 [ext_resource type="PackedScene" uid="uid://d1c4lov8epmmv" path="res://objects/ItemListSeparator.tscn" id="11_6eucy"]
 [ext_resource type="Texture2D" uid="uid://bqu6a6kin3w6j" path="res://textures/BeginingButton_hover.png" id="11_uy3go"]
 [ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/FramedButtonHover.tres" id="11_wqlnj"]
@@ -28,6 +36,7 @@
 [ext_resource type="StyleBox" uid="uid://bx3wv2qghdpe8" path="res://styles/BGButtonStyle.tres" id="15_e2j01"]
 [ext_resource type="StyleBox" uid="uid://4cmibv0a8kf2" path="res://styles/BGButtonHoverStyle.tres" id="16_uvvjq"]
 [ext_resource type="Script" uid="uid://c3nfr3mjvfde4" path="res://objects/ActionConfirmDialogue.gd" id="17_36kog"]
+[ext_resource type="Texture2D" uid="uid://b44v6j001ycso" path="res://textures/create_button.png" id="17_yf3a2"]
 [ext_resource type="StyleBox" uid="uid://c5i134ur1to60" path="res://styles/EdittextBaseStyle.tres" id="18_luhyk"]
 [ext_resource type="Texture2D" uid="uid://ckc14v3a8oqd5" path="res://icon.svg" id="18_v6yiw"]
 [ext_resource type="Script" uid="uid://c2bh4jv7ich8h" path="res://objects/ItemFilteringDialogue.gd" id="19_8mkwf"]
@@ -59,9 +68,15 @@
 [ext_resource type="StyleBox" uid="uid://ct651p3nlogff" path="res://styles/ColorButtons/AddHover.tres" id="31_br1a5"]
 [ext_resource type="StyleBox" uid="uid://8ur8mxdjtjhj" path="res://styles/ColorButtons/AddPressed.tres" id="32_apjd1"]
 [ext_resource type="StyleBox" uid="uid://baocuq3s0ry7c" path="res://styles/ColorButtons/AddNormal.tres" id="33_lw3x1"]
+[ext_resource type="StyleBox" uid="uid://bwo64t2nmfot" path="res://styles/ItemList2PanelStyle.tres" id="34_ytdkf"]
 [ext_resource type="Texture2D" uid="uid://b82gyeyblxd5l" path="res://textures/title.png" id="35_1rfkw"]
 [ext_resource type="FontVariation" uid="uid://bhyikp6mmffmg" path="res://fonts/resources/menu_font01.tres" id="36_8rj5u"]
 [ext_resource type="Script" uid="uid://x1k54a57isow" path="res://objects/FitLabel.gd" id="37_pf2t4"]
+[ext_resource type="Texture2D" uid="uid://bdhl7lo2ybw66" path="res://textures/unfoldButton.png" id="37_wnkxs"]
+[ext_resource type="Texture2D" uid="uid://cg2o8xgo1gb5w" path="res://textures/unfoldButton_pressed.png" id="38_8qby0"]
+[ext_resource type="Texture2D" uid="uid://db60i04y7fo6a" path="res://textures/unfoldButton_hl.png" id="39_lo0ny"]
+[ext_resource type="StyleBox" uid="uid://ydrmcbb64npw" path="res://styles/FramedButtonNormal.tres" id="40_mitij"]
+[ext_resource type="StyleBox" uid="uid://cjovq65yf3tov" path="res://styles/FramedButtonPressedDown.tres" id="40_ytdkf"]
 
 [sub_resource type="Animation" id="Animation_uywld"]
 length = 0.001
@@ -127,7 +142,7 @@ category_tab_tree = NodePath("MainControl/HSplit/MainInfo/TabContainer/Categorie
 tag_tab = NodePath("MainControl/HSplit/MainInfo/TabContainer/Tags")
 tag_selection_viewer = NodePath("TagSelectionDialogue/TSL/AspectRatioContainer/Control/SC/TagViewer")
 image_grid = NodePath("ImageSelectionDialogue/ItemsPanel/ScrollContainer/ImageGridContainer")
-clear_filter_button = NodePath("MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer/ClearFilter")
+clear_filter_button = NodePath("MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer/ClearFilterButton")
 
 [node name="Database" type="Node" parent="."]
 script = ExtResource("2_x8r34")
@@ -175,7 +190,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MainInfo" type="Control" parent="MainControl/HSplit"]
-custom_minimum_size = Vector2(558, 0)
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 
 [node name="TabContainer" type="TabContainer" parent="MainControl/HSplit/MainInfo"]
@@ -185,7 +200,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 1
+current_tab = 6
+tab_focus_mode = 0
 
 [node name="Items" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" node_paths=PackedStringArray("items_holder", "temp_items_holder", "item_page_switcher")]
 visible = false
@@ -209,51 +225,104 @@ theme_override_styles/panel = ExtResource("16_uvvjq")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 2
 
-[node name="FilterItemsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(30, 0)
+[node name="FilterItemsButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer"]
 layout_mode = 2
-focus_mode = 0
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
-theme_override_styles/normal = ExtResource("10_ev2os")
-text = "Filter"
+tooltip_text = "Filter Items"
+texture_normal = ExtResource("5_a43ws")
+texture_pressed = ExtResource("6_aoymy")
+texture_hover = ExtResource("7_ytdkf")
+stretch_mode = 5
 
-[node name="ClearFilter" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-focus_mode = 0
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
-theme_override_styles/normal = ExtResource("10_ev2os")
-text = "X"
+[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer/FilterItemsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_skfvt")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="CreateFromItemButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer"]
-custom_minimum_size = Vector2(70, 0)
+[node name="ClearFilterButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer"]
 layout_mode = 2
-focus_mode = 0
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
-theme_override_styles/normal = ExtResource("10_ev2os")
-text = "From Selected"
+tooltip_text = "Clear Filter"
+texture_normal = ExtResource("9_cfjnh")
+texture_pressed = ExtResource("10_mplfx")
+texture_hover = ExtResource("10_mplfx")
+stretch_mode = 5
 
-[node name="CreateItemButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer"]
-custom_minimum_size = Vector2(70, 0)
+[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer/ClearFilterButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_mplfx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Spacer" type="ColorRect" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
-focus_mode = 0
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
-theme_override_styles/normal = ExtResource("10_ev2os")
-text = "Create"
+color = Color(1, 1, 1, 0)
+
+[node name="CreateFromItemButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Create Item Based On Selected"
+texture_normal = ExtResource("5_a43ws")
+texture_pressed = ExtResource("6_aoymy")
+texture_hover = ExtResource("7_ytdkf")
+stretch_mode = 5
+
+[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateFromItemButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_cfjnh")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CreateItemButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Create New Item"
+texture_normal = ExtResource("5_a43ws")
+texture_pressed = ExtResource("6_aoymy")
+texture_hover = ExtResource("7_ytdkf")
+stretch_mode = 5
+
+[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateItemButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("17_yf3a2")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="ItemsListPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Items"]
 layout_mode = 1
@@ -421,6 +490,7 @@ popup/item_3/text = "10"
 popup/item_3/id = 3
 
 [node name="Locations" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -453,23 +523,45 @@ theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("10_ev2os")
 text = "Items in Selected"
 
-[node name="CreateLocationButton2" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer"]
-custom_minimum_size = Vector2(70, 0)
+[node name="CreateFromSelectedButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer"]
 layout_mode = 2
-tooltip_text = "Create new location from selected"
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
-theme_override_styles/normal = ExtResource("10_ev2os")
-text = "From Selected"
+tooltip_text = "Create Item Based On Selected"
+texture_normal = ExtResource("5_a43ws")
+texture_pressed = ExtResource("6_aoymy")
+texture_hover = ExtResource("7_ytdkf")
+stretch_mode = 5
 
-[node name="CreateLocationButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer"]
-custom_minimum_size = Vector2(70, 0)
+[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateFromSelectedButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_cfjnh")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CreateLocationButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer"]
 layout_mode = 2
-tooltip_text = "Create new location"
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
-theme_override_styles/normal = ExtResource("10_ev2os")
-text = "Create"
+tooltip_text = "Create New Item"
+texture_normal = ExtResource("5_a43ws")
+texture_pressed = ExtResource("6_aoymy")
+texture_hover = ExtResource("7_ytdkf")
+stretch_mode = 5
+
+[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("17_yf3a2")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="LocationStructTree" type="Tree" parent="MainControl/HSplit/MainInfo/TabContainer/Locations"]
 layout_mode = 1
@@ -512,13 +604,25 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="CreateCategoryButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryToolPanel/HBoxContainer"]
-custom_minimum_size = Vector2(70, 0)
+[node name="CreateCategoryButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryToolPanel/HBoxContainer"]
 layout_mode = 2
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
-theme_override_styles/normal = ExtResource("10_ev2os")
-text = "Create"
+tooltip_text = "Create New Item"
+texture_normal = ExtResource("5_a43ws")
+texture_pressed = ExtResource("6_aoymy")
+texture_hover = ExtResource("7_ytdkf")
+stretch_mode = 5
+
+[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryToolPanel/HBoxContainer/CreateCategoryButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("17_yf3a2")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="CategoryStructTree" type="Tree" parent="MainControl/HSplit/MainInfo/TabContainer/Categories"]
 layout_mode = 1
@@ -654,7 +758,6 @@ layout_mode = 2
 metadata/_tab_index = 5
 
 [node name="Settings" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
-visible = false
 layout_mode = 2
 script = ExtResource("14_nrmw6")
 metadata/_tab_index = 6
@@ -691,6 +794,7 @@ theme_override_constants/separation = 5
 script = ExtResource("4_a2pk0")
 
 [node name="ItemDataSeparator" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("11_6eucy")]
+custom_minimum_size = Vector2(280, 60)
 layout_mode = 2
 separator_text = "Profile"
 
@@ -699,6 +803,148 @@ layout_mode = 2
 title_text = "Current Profile"
 placeholder_text = "Enter an Item Name"
 list_item_mode = 1
+
+[node name="UIScale" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(250, 150)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("34_ytdkf")
+
+[node name="TitleControl" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/TitleControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.84
+anchor_bottom = 1.0
+offset_left = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+text = "UI Scale Factor"
+vertical_alignment = 1
+script = ExtResource("37_pf2t4")
+
+[node name="UnfoldButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/TitleControl"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 5.0
+offset_right = -10.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("37_wnkxs")
+texture_pressed = ExtResource("38_8qby0")
+texture_hover = ExtResource("39_lo0ny")
+stretch_mode = 3
+
+[node name="EditTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/TitleControl"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = 5.0
+offset_right = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/normal = ExtResource("40_mitij")
+text = "Select Tags"
+
+[node name="ClearTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/TitleControl"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = 5.0
+offset_right = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/normal = ExtResource("40_mitij")
+disabled = true
+text = "X"
+
+[node name="Control" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 45.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 15.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UIX0_5Button" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/disabled = ExtResource("40_ytdkf")
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/normal = ExtResource("40_mitij")
+text = "0.75x"
+
+[node name="UIX1Button" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/disabled = ExtResource("40_ytdkf")
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/normal = ExtResource("40_mitij")
+text = "1x"
+
+[node name="UIX1_5Button" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/disabled = ExtResource("40_ytdkf")
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/normal = ExtResource("40_mitij")
+text = "1.25x"
+
+[node name="UIX2Button" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_styles/disabled = ExtResource("40_ytdkf")
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/normal = ExtResource("40_mitij")
+text = "2x"
 
 [node name="SearchLine" type="Panel" parent="MainControl/HSplit/MainInfo"]
 layout_mode = 1
@@ -1496,7 +1742,7 @@ use_native_dialog = true
 [connection signal="dragged" from="MainControl/HSplit" to="." method="_on_h_split_dragged"]
 [connection signal="tab_changed" from="MainControl/HSplit/MainInfo/TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer/FilterItemsButton" to="." method="_on_filter_items_button_pressed"]
-[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer/ClearFilter" to="." method="_on_clear_filter_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer/ClearFilterButton" to="." method="_on_clear_filter_pressed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateFromItemButton" to="." method="_on_create_from_item_button_pressed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateItemButton" to="." method="_on_create_item_button_pressed"]
 [connection signal="page_changed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher" to="MainControl/HSplit/MainInfo/TabContainer/Items" method="_on_item_page_switcher_page_changed"]
@@ -1508,7 +1754,7 @@ use_native_dialog = true
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/LastPageButton" to="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher" method="_on_last_page_button_pressed"]
 [connection signal="item_selected" from="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/OptionButton" to="MainControl/HSplit/MainInfo/TabContainer/Items" method="_on_option_button_item_selected"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/ItemsInSelectedLocations" to="." method="_on_items_in_selected_locations_pressed"]
-[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton2" to="." method="create_location_from_selected"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateFromSelectedButton" to="." method="create_location_from_selected"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton" to="." method="_on_create_location_button_pressed"]
 [connection signal="button_clicked" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationStructTree" to="." method="_on_location_struct_tree_button_clicked"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryToolPanel/HBoxContainer/CreateCategoryButton" to="." method="_on_create_category_button_pressed"]
@@ -1520,6 +1766,13 @@ use_native_dialog = true
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer/DeleteSelectedTagsButton" to="MainControl/HSplit/MainInfo/TabContainer/Tags" method="_on_delete_selected_tags_button_pressed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer/CreateTagButton" to="MainControl/HSplit/MainInfo/TabContainer/Tags" method="_on_create_tag_button_pressed"]
 [connection signal="location_button_pressed" from="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ProfileName" to="MainControl/HSplit/MainInfo/TabContainer/Settings" method="_on_profile_name_button_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/TitleControl/UnfoldButton" to="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale" method="toggle_unfold"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/TitleControl/EditTagsButton" to="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale" method="_on_edit_tags_button_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/TitleControl/ClearTagsButton" to="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale" method="_on_clear_tags_button_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer/UIX0_5Button" to="MainControl/HSplit/MainInfo/TabContainer/Settings" method="_on_uix_0_5_button_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer/UIX1Button" to="MainControl/HSplit/MainInfo/TabContainer/Settings" method="_on_uix_1_button_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer/UIX1_5Button" to="MainControl/HSplit/MainInfo/TabContainer/Settings" method="_on_uix_1_5_button_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer/UIX2Button" to="MainControl/HSplit/MainInfo/TabContainer/Settings" method="_on_uix_2_button_pressed"]
 [connection signal="text_changed" from="MainControl/HSplit/MainInfo/SearchLine/SearchLineEdit" to="." method="_on_search_line_edit_text_changed"]
 [connection signal="pressed" from="MainControl/SidePanel/SideSplitButton" to="." method="_on_side_split_button_pressed"]
 [connection signal="pressed" from="MainControl/SidePanelLeft/SideSplitButton" to="." method="_on_side_split_button_pressed"]

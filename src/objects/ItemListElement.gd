@@ -14,12 +14,12 @@ var unfold_offset_for_stocks = 0.0
 var unfold_control
 const BASE_STOCK_OFFSET = 45
 var is_selected = false
-@onready var base_self_modulate = self_modulate
+var has_stock = false
 
 
 func select(to_select = true):
 	is_selected = to_select
-	self_modulate = Color(0, 1, 1) if is_selected else base_self_modulate
+	update_color(is_selected)
 
 
 func get_id():
@@ -59,15 +59,21 @@ func set_data(new_data):
 	$IPanel/ItemIcon.visible = image_loaded
 	$IPanel.self_modulate.a = 1.0 if image_loaded else 0.5
 	if "stocks" in new_data.keys():
+		has_stock = true
 		unfold_offset_for_stocks = (new_data.stocks.size()) * BASE_STOCK_OFFSET
 		for s in new_data.stocks:
 			var current_stock_line = stock_line_prefab.instantiate()
 			var unit_name = main_node.get_unit_name_by_id(new_data.unit_name_id)
 			$StocksHolder.add_child(current_stock_line)
 			current_stock_line.set_data(s, unit_name)
-		self_modulate = Color.LIGHT_GRAY
+	update_color()
+
+
+func update_color(_selected = false):
+	if has_stock:
+		self_modulate = Color.AQUA if _selected else Color.LIGHT_GRAY
 	else:
-		self_modulate = Color.MISTY_ROSE
+		self_modulate = Color.AQUAMARINE if _selected else Color.MISTY_ROSE
 
 
 func clear_stocks():

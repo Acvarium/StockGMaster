@@ -15,7 +15,7 @@ extends Control
 @onready var location_selection_tree : Tree = $MainControl/HSplit/MainInfo/TabContainer/Locations/LocationStructTree
 @onready var search_line_edit : LineEdit = $MainControl/HSplit/MainInfo/SearchLine/SearchLineEdit
 @onready var side_info : Control = $MainControl/HSplit/SideInfo
-@export var clear_filter_button : Button
+@export var clear_filter_button : TextureButton
 
 var selected_value : int = -1
 var tree_selection_index : int = -1
@@ -636,13 +636,14 @@ func remove_ui_focus():
 		focused.release_focus()
 
 
+
 func unfold_side_split(to_unfold = true):
 	var window_size = DisplayServer.window_get_size()
 	var h_split : HSplitContainer = $MainControl/HSplit
 	var to_offset_left = true
 	$MainControl/SidePanel/SideSplitButton.flip_h = to_unfold
 	
-	if window_size.x > 700:
+	if not Global.isWindowVertical():
 		$MainControl/SidePanelLeft.visible = false
 		$MainControl/SidePanel.visible = true
 		$MainControl/HSplit/MainInfo.visible = true
