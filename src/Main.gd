@@ -29,16 +29,24 @@ const MIN_SPLIT_SIZE = 150
 var filter_tag_ids = []
 var h_split_dragged = false
 
+enum ScreenOrientation {
+	NONE,
+	VERTICAL,
+	HORIZONTAL
+}
+var last_screen_orientation = ScreenOrientation.NONE
+
+
 func get_search_text():
 	return search_line_edit.text
 
 
 func _ready():
+	$CanvasLayer.visible = true
 	randomize()
 	get_viewport().connect("size_changed", _on_viewport_resize)
 	_on_viewport_resize()
-	if OS.get_name() == "Android":
-		$MainControl/AnimationPlayer.play("mobile_offset")
+	if Global.is_on_mobule():
 		$FileDialog.root_subfolder = "/storage/emulated/0"
 	$MainControl/HSplit/MainInfo/TabContainer.current_tab = 0
 	load_images_to_viewer()
@@ -51,15 +59,21 @@ func load_images_to_viewer():
 
 
 func _on_viewport_resize():
+	Global.get_scaled_safe_area()
+	if Global.is_on_mobule():
+		var offset_rect = Global.get_scaled_safe_area()
+		offset_left = offset_rect.position.x
+		offset_top = offset_rect.position.y
+		offset_right = -offset_rect.size.x
+		offset_bottom = -offset_rect.size.y
+		
+	Global.update_ui_scale()
 	$Timers/SideInfoPanelTimer.start()
 	var side_info_visible = $MainControl/HSplit/SideInfo.visible
 	unfold_side_split(side_info_visible)
 	image_grid.columns = image_grid.get_parent().size.x / grid_image_size
 	
 
-#func refresh_item_list():
-	#items_tab.refresh_list()
-	
 #забрати--------------------------------------
 func is_item_passes_filter(item_id):
 	if filter_tag_ids and filter_tag_ids.size() > 0:
@@ -643,28 +657,28 @@ func unfold_side_split(to_unfold = true):
 	var to_offset_left = true
 	$MainControl/SidePanel/SideSplitButton.flip_h = to_unfold
 	
-	if not Global.isWindowVertical():
-		$MainControl/SidePanelLeft.visible = false
-		$MainControl/SidePanel.visible = true
+	if not Global.is_window_vertical():
+		#$MainControl/SidePanelLeft.visible = false
+		#$MainControl/SidePanel.visible = true
 		$MainControl/HSplit/MainInfo.visible = true
 		$MainControl/HSplit/SideInfo.visible = to_unfold
 		var h_split_size = $MainControl/HSplit.size
 		if (h_split_size.x - $MainControl/HSplit.split_offset) < MIN_SPLIT_SIZE:
 			$MainControl/HSplit.split_offset = h_split_size.x - MIN_SPLIT_SIZE * 2
 	else:
-		$MainControl/SidePanelLeft.visible = to_unfold
-		$MainControl/SidePanel.visible = not to_unfold
+		#$MainControl/SidePanelLeft.visible = to_unfold
+		#$MainControl/SidePanel.visible = not to_unfold
 		$MainControl/HSplit/MainInfo.visible = not to_unfold
 		$MainControl/HSplit/SideInfo.visible = to_unfold
 		if to_unfold:
 			to_offset_left = false
 			
-	if to_offset_left:
-		h_split.offset_right = -SIDE_PANEL_OFFSET
-		h_split.offset_left = 0
-	else:
-		h_split.offset_right = 0
-		h_split.offset_left = SIDE_PANEL_OFFSET
+	#if to_offset_left:
+		#h_split.offset_right = -SIDE_PANEL_OFFSET
+		#h_split.offset_left = 0
+	#else:
+		#h_split.offset_right = 0
+		#h_split.offset_left = SIDE_PANEL_OFFSET
 			
 	$Timers/SideInfoPanelTimer.start()
 
