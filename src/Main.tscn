@@ -94,6 +94,7 @@ shadow_offset = Vector2(10, 10)
 
 [node name="Main" type="Control" node_paths=PackedStringArray("locations_tab_tree", "category_tab_tree", "tag_tab", "tag_selection_viewer", "image_grid", "clear_filter_button")]
 layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -930,15 +931,33 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("19_cpq5q")
 
-[node name="TextureRect" type="TextureRect" parent="MainControl/HSplit/SideInfo/Panel"]
-visible = false
+[node name="TabContainer" type="TabContainer" parent="MainControl/HSplit/SideInfo/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+current_tab = 0
+tabs_visible = false
+
+[node name="Panel" type="Panel" parent="MainControl/HSplit/SideInfo/Panel/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="TextureRect" type="TextureRect" parent="MainControl/HSplit/SideInfo/Panel/TabContainer/Panel"]
+visible = false
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("18_v6yiw")
+
+[node name="Panel2" type="Panel" parent="MainControl/HSplit/SideInfo/Panel/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="SidePanel" type="Panel" parent="MainControl"]
 layout_mode = 1
