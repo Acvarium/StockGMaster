@@ -1,15 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7bxd60j761mn"]
+[gd_scene load_steps=11 format=3 uid="uid://c7bxd60j761mn"]
 
 [ext_resource type="StyleBox" uid="uid://bwo64t2nmfot" path="res://styles/ItemList2PanelStyle.tres" id="1_70cbl"]
 [ext_resource type="Script" uid="uid://dxs82qrtu2w1v" path="res://objects/ProfileSelectionElement.gd" id="2_echwm"]
 [ext_resource type="StyleBox" uid="uid://l5llgxy5lg0o" path="res://styles/FramedButtonDisabled.tres" id="3_m7cux"]
+[ext_resource type="StyleBox" uid="uid://cjovq65yf3tov" path="res://styles/FramedButtonPressedDown.tres" id="3_svja6"]
 [ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/FramedButtonHover.tres" id="4_wkyfx"]
 [ext_resource type="StyleBox" uid="uid://chknldgol0rwk" path="res://styles/FramedButtonPressed.tres" id="5_37prc"]
-[ext_resource type="StyleBox" uid="uid://ydrmcbb64npw" path="res://styles/FramedButtonNormal.tres" id="6_s36yy"]
 [ext_resource type="Script" uid="uid://x1k54a57isow" path="res://objects/FitLabel.gd" id="7_bttql"]
+[ext_resource type="Texture2D" uid="uid://b4156qpi54clp" path="res://textures/edit_button.png" id="8_svja6"]
+[ext_resource type="Texture2D" uid="uid://0dla7un4qfm6" path="res://textures/edit_button_hl.png" id="9_qyrfj"]
+[ext_resource type="Texture2D" uid="uid://bb4ie2hamo708" path="res://textures/edit_button_pressed.png" id="10_et75d"]
 
 [node name="ProfileSelectionElement" type="Panel"]
-custom_minimum_size = Vector2(500, 45)
+custom_minimum_size = Vector2(350, 50)
 theme_override_styles/panel = ExtResource("1_70cbl")
 script = ExtResource("2_echwm")
 
@@ -21,7 +24,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
-theme_override_styles/disabled = ExtResource("6_s36yy")
+theme_override_styles/disabled = ExtResource("3_svja6")
 theme_override_styles/hover = ExtResource("4_wkyfx")
 theme_override_styles/pressed = ExtResource("5_37prc")
 theme_override_styles/normal = ExtResource("3_m7cux")
@@ -41,6 +44,7 @@ anchors_preset = -1
 anchor_right = 0.84
 anchor_bottom = 1.0
 offset_left = 20.0
+offset_right = -57.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 0
@@ -48,23 +52,25 @@ text = "Profile Name"
 vertical_alignment = 1
 script = ExtResource("7_bttql")
 
-[node name="EditTagsButton" type="Button" parent="TitleControl"]
+[node name="EditButton" type="TextureButton" parent="TitleControl"]
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -80.0
-offset_top = 5.0
-offset_right = -5.0
-offset_bottom = -5.0
-grow_horizontal = 2
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -15.0
+offset_right = -15.0
+offset_bottom = 15.0
+grow_horizontal = 0
 grow_vertical = 2
-focus_mode = 0
-theme_override_styles/hover = ExtResource("4_wkyfx")
-theme_override_styles/pressed = ExtResource("5_37prc")
-theme_override_styles/normal = ExtResource("6_s36yy")
-text = "Edit"
+texture_normal = ExtResource("8_svja6")
+texture_pressed = ExtResource("9_qyrfj")
+texture_hover = ExtResource("10_et75d")
+texture_disabled = ExtResource("10_et75d")
+ignore_texture_size = true
+stretch_mode = 5
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="TitleControl/EditTagsButton" to="." method="_on_edit_tags_button_pressed"]

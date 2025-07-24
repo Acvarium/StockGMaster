@@ -31,6 +31,12 @@ func show_stock_data_components(to_show = true):
 		s.visible = to_show
 
 
+func _notification(what):
+	if what == NOTIFICATION_VISIBILITY_CHANGED and visible:
+		$ItemsPanel/ScrollContainer.scroll_vertical = 0
+
+
+
 func _show(what_to_do, action_data_type):
 	#_reset()
 	current_mode = what_to_do

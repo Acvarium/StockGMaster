@@ -1,10 +1,11 @@
 extends Node
 var save_file = "user://StockGMaster.conf.json"
-var profile_names = ['In Game Folder', 'Default']
-var current_profile_id = 1
+var current_profile_id : int = 1
 var ui_scale_factor = 1.0
 var last_orientation_is_portrait: bool = false
 const base_window_size = Vector2(600, 1000)
+var profiles = []
+signal profiles_loaded
 
 enum WhatToDo {
 	None,
@@ -36,6 +37,7 @@ func get_scaled_safe_area():
 	return Rect2i(vec_1, vec_2)
 
 
+
 func set_ui_scale(ui_scale_value):
 	ui_scale_factor = ui_scale_value
 	if is_on_mobule():
@@ -54,7 +56,6 @@ func update_ui_scale():
 
 func is_on_mobule():
 	return OS.get_name() == "Android" or OS.get_name() == "iOS"
-	
 
 
 func is_window_vertical():
@@ -63,7 +64,7 @@ func is_window_vertical():
 
 
 func get_current_profile_name():
-	return profile_names[current_profile_id]
+	return profiles[current_profile_id].name
 
 
 func _ready() -> void:
@@ -75,27 +76,52 @@ func load_config():
 	var file = FileAccess.open(save_file, FileAccess.READ)
 	if is_instance_valid(file):
 		var data = JSON.parse_string(file.get_as_text())
-		if "profile_names" in data:
-			profile_names = data.profile_names
 		if "current_profile_id" in data:
-			current_profile_id = data.current_profile_id
+			current_profile_id = int(data.current_profile_id)
 		if "ui_scale_factor" in data:
 			set_ui_scale(data.ui_scale_factor)
+		if "profiles" in data and data.profiles.size() > 1:
+			profiles.clear()
+			profiles = data.profiles
+		else:
+			gen_default_profiles()
 	else:
 		default_values()
+	await get_tree().create_timer(0.1).timeout
+	profiles_loaded.emit()
+	
+
+func get_data_path():
+	return profiles[current_profile_id].path
 
 
 func save_config():
 	var data = {}
-	data.profile_names = profile_names
 	data.current_profile_id = current_profile_id
 	data.ui_scale_factor = ui_scale_factor
+	data.profiles = profiles
 	var file = FileAccess.open(save_file, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data, "\t"))
 	file = null
 
 
-func default_values():
-	profile_names = ['default']
+func gen_default_profiles():
+	profiles.clear()
+	var ingame_profile = {}
+	ingame_profile.name = 'Ingame(dev)'
+	ingame_profile.editable = false
+	ingame_profile.path = "res://profile_data/"
+	
+	var default_profile = {}
+	default_profile.name = 'Default'
+	default_profile.editable = false
+	default_profile.path = "user://default/"
+	
+	profiles.append(ingame_profile)
+	profiles.append(default_profile)
 	current_profile_id = 1
+
+func default_values():
+	gen_default_profiles()
+	current_profile_id = 0
 	ui_scale_factor = 1.0

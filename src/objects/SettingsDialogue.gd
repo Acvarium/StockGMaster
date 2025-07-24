@@ -5,7 +5,13 @@ extends Control
 @export var x1_25_button : Button
 
 func _ready():
+	Global.profiles_loaded.connect(profiles_loaded)
 	update_ui_scale_buttons()
+
+
+func profiles_loaded():
+	var _profile_name = Global.profiles[Global.current_profile_id].name
+	$SettingsPanel/ScrollContainer/VBoxContainer/ProfileName.set_location_button_text(_profile_name)
 
 
 func _on_profile_name_button_pressed():

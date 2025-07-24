@@ -1,13 +1,20 @@
 extends Panel
 var profile_id = 0
-
 var profile_selection_dialogue
+var is_editable = true
+var profile = {}
 
 
-func set_profile_id(_id):
+func set_editable(value = true):
+	is_editable = value
+	$TitleControl/EditButton.disabled = !is_editable
+	
+
+func set_profile(_id, _profile):
 	profile_id = _id
-	var profile_name = Global.profile_names[profile_id]
-	$TitleControl/Label.text = profile_name
+	profile = _profile
+	set_editable(profile.editable)
+	$TitleControl/Label.text = profile.name
 
 
 func set_selected(is_selected = false):

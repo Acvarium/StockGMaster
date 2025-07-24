@@ -13,13 +13,17 @@ const verbosity_level : int = SQLite.VERBOSE
 #var database_path = "res://data/data.db"
 
 const db_file_name = "data.db"
-var base_data_paths = ["res://data/", "user://default/"]
+#var base_data_paths = ["res://data/", "user://default/"]
 var supported_image_ext = ["jpg", "png"]
 
 var locations_data = {}
 var items_data = {}
 var categories_data = {}
 var tags_data = {}
+
+
+func _ready() -> void:
+	Global.profiles_loaded.connect(load_data)
 
 
 func get_db_path():
@@ -51,7 +55,7 @@ func get_image_paths():
 
 
 func get_data_path():
-	return base_data_paths[Global.current_profile_id]
+	return Global.get_data_path()
 
 
 func move_all_stocks_from_loc_to(from_location_id, to_location_id):
@@ -231,8 +235,7 @@ func pull_items_data():
 	item_data_loaded.emit()
 	
 
-func _ready():
-	
+func load_data():
 	var dir = DirAccess.open("res://textures/")
 	if dir:
 		dir.list_dir_begin()
@@ -253,7 +256,7 @@ func _ready():
 	pull_items_data()
 	pull_categories_data()
 	pull_tags_data()
-	
+
 
 func get_tables():
 	db.query("SELECT name FROM sqlite_schema WHERE type = 'table' AND name NOT LIKE 'sqlite_%';")

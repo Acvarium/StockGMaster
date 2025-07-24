@@ -21,7 +21,7 @@ extends Panel
 		$DataControl/Tags.visible = list_item_mode == ListItemModes.Tags
 		$TitleControl/EditTagsButton.visible = list_item_mode == ListItemModes.Tags
 		$TitleControl/ClearTagsButton.visible = list_item_mode == ListItemModes.Tags and show_clear_button
-		
+
 @export var show_clear_button = false
 @onready var unfold_button = get_node("TitleControl/UnfoldButton")
 var unfold_control = null
@@ -90,7 +90,6 @@ func unfold(to_unfold = true, to_force = false, immediate = false):
 			$AnimationPlayer.play_backwards("unfold")
 	is_unfolded = to_unfold
 	unfold_button.flip_v = is_unfolded
-
 
 
 func set_quantity(quantity):

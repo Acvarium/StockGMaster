@@ -755,7 +755,6 @@ theme_override_constants/separation = 5
 script = ExtResource("4_a2pk0")
 
 [node name="ItemDataSeparator" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("11_6eucy")]
-custom_minimum_size = Vector2(280, 60)
 layout_mode = 2
 separator_text = "Profile"
 
@@ -764,6 +763,7 @@ layout_mode = 2
 title_text = "Current Profile"
 placeholder_text = "Enter an Item Name"
 list_item_mode = 1
+show_clear_button = false
 
 [node name="UIScale" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 150)
@@ -1134,6 +1134,7 @@ profiles_holder = NodePath("ItemsPanel/ScrollContainer/VBoxContainer")
 unfold_item_list = Array[NodePath]([NodePath("ProfileSelectionElement"), NodePath("")])
 
 [node name="ProfileSelectionElement" parent="ProfileSelectionDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("22_iv6mq")]
+visible = false
 layout_mode = 2
 
 [node name="SaveItemButton" parent="ProfileSelectionDialogue/SDCButtons/HBoxContainer" index="0"]
