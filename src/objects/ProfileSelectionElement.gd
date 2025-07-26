@@ -8,13 +8,20 @@ var profile = {}
 func set_editable(value = true):
 	is_editable = value
 	$TitleControl/EditButton.disabled = !is_editable
-	
+
+
+func select_profile_element(to_select : bool):
+	$Button.disabled = to_select
+
 
 func set_profile(_id, _profile):
 	profile_id = _id
 	profile = _profile
 	set_editable(profile.editable)
-	$TitleControl/Label.text = profile.name
+	var mark = ""
+	if profile_id == Global.current_profile_id:
+		mark = "* "
+	$TitleControl/Label.text = mark + profile.name
 
 
 func set_selected(is_selected = false):

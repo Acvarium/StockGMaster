@@ -37,7 +37,6 @@ func get_scaled_safe_area():
 	return Rect2i(vec_1, vec_2)
 
 
-
 func set_ui_scale(ui_scale_value):
 	ui_scale_factor = ui_scale_value
 	if is_on_mobule():
@@ -70,7 +69,11 @@ func get_current_profile_name():
 func _ready() -> void:
 	get_scaled_safe_area()
 	load_config()
-	
+
+
+func restart():
+	get_tree().reload_current_scene()
+	_ready()
 
 func load_config():
 	var file = FileAccess.open(save_file, FileAccess.READ)

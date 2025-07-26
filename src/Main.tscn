@@ -158,11 +158,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 6
+current_tab = 0
 tab_focus_mode = 0
 
 [node name="Items" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" node_paths=PackedStringArray("items_holder", "temp_items_holder", "item_page_switcher")]
-visible = false
 layout_mode = 2
 script = ExtResource("3_wxfjw")
 items_holder = NodePath("ItemsListPanel/ScrollContainer/VBoxContainer")
@@ -716,6 +715,7 @@ layout_mode = 2
 metadata/_tab_index = 5
 
 [node name="Settings" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" node_paths=PackedStringArray("x0_75_button", "x1_0_button", "x1_25_button")]
+visible = false
 layout_mode = 2
 script = ExtResource("14_nrmw6")
 x0_75_button = NodePath("SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer/UIX0_75Button")
@@ -1134,7 +1134,6 @@ profiles_holder = NodePath("ItemsPanel/ScrollContainer/VBoxContainer")
 unfold_item_list = Array[NodePath]([NodePath("ProfileSelectionElement"), NodePath("")])
 
 [node name="ProfileSelectionElement" parent="ProfileSelectionDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("22_iv6mq")]
-visible = false
 layout_mode = 2
 
 [node name="SaveItemButton" parent="ProfileSelectionDialogue/SDCButtons/HBoxContainer" index="0"]
@@ -1770,6 +1769,7 @@ color = Color(0.0905704, 0.0783957, 0.0685412, 1)
 [connection signal="edit_tags_button_pressed" from="ItemFilteringDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Tags" to="ItemFilteringDialogue" method="_on_tags_edit_tags_button_pressed"]
 [connection signal="pressed" from="ItemFilteringDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ItemFilteringDialogue" method="_on_save_item_button_pressed"]
 [connection signal="pressed" from="ItemFilteringDialogue/SDCButtons/HBoxContainer/CancelButton" to="ItemFilteringDialogue" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="ProfileSelectionDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ProfileSelectionDialogue" method="_on_save_item_button_pressed"]
 [connection signal="pressed" from="ProfileSelectionDialogue/SDCButtons/HBoxContainer/CancelButton" to="ProfileSelectionDialogue" method="_on_cancel_button_pressed"]
 [connection signal="location_button_pressed" from="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Parent" to="LocationCreationDialogue" method="_on_parent_selection_button_pressed"]
 [connection signal="pressed" from="LocationCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="LocationCreationDialogue" method="_on_save_item_button_pressed"]
