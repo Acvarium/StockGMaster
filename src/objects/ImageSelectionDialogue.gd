@@ -14,8 +14,9 @@ func clear_images():
 	update_delete_button()
 	
 
-func load_images(image_paths):
+func load_images(image_paths, image_to_select = ""):
 	clear_images()
+	var image_holder_to_select
 	for im in [""] + image_paths:
 		var new_image_holder = image_holder_prefab.instantiate()
 		image_grid.add_child(new_image_holder)
@@ -25,7 +26,11 @@ func load_images(image_paths):
 			new_image_holder.is_none_image = true
 			new_image_holder.activate(true)
 		new_image_holder.image_selection_dialogue = self
+		if image_to_select == im:
+			image_holder_to_select = new_image_holder
 	update_delete_button()
+	if image_holder_to_select != null:
+		select_image(image_holder_to_select)
 
 
 func delete_selected_images():
@@ -36,7 +41,7 @@ func delete_selected_images():
 		message = str(number_of_items_with_image) + " item uses this image."
 	elif number_of_items_with_image > 1:
 		message = str(number_of_items_with_image) + " items use this image."
-	main_node.confirme_action_dialogue(self, Global.WhatToDo.Delete, message)
+	Global.action_dialogue.emit(self, Global.WhatToDo.Delete, message)
 
 
 func update_delete_button():
@@ -53,6 +58,21 @@ func _show():
 	visible = true
 	deselect_all()
 	update_delete_button()
+	if current_reciver_dialogue != null and \
+			current_reciver_dialogue.has_method("get_current_item_image_path"):
+		var image_path_to_select : String = current_reciver_dialogue.get_current_item_image_path()
+		if !image_path_to_select.is_empty():
+			select_image_by_path(image_path_to_select)
+			
+
+func select_image_by_path(image_path):
+	await get_tree().create_timer(0.02).timeout
+
+	for image_prev in image_grid.get_children():
+		var current_image_path = image_prev.current_image_path
+		if image_path == current_image_path:
+			select_image(image_prev)
+			return
 
 
 func deselect_all():
@@ -108,7 +128,6 @@ func get_list_of_selected():
 
 func _ready() -> void:
 	pass
-	
 
 
 func _on_save_button_pressed():

@@ -57,3 +57,7 @@ func _on_save_item_button_pressed() -> void:
 		Global.save_config()
 		Global.restart()
 	main_node.shoe_profile_selection_dialogue(false)
+
+
+func _on_add_button_pressed() -> void:
+	main_node.create_profile()

@@ -183,6 +183,7 @@ wrap_mode = 1
 caret_blink = true
 
 [node name="SpinBox" type="SpinBox" parent="DataControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -335,5 +336,6 @@ stretch_mode = 6
 [connection signal="pressed" from="TitleControl/UnfoldButton" to="." method="toggle_unfold"]
 [connection signal="pressed" from="TitleControl/EditTagsButton" to="." method="_on_edit_tags_button_pressed"]
 [connection signal="pressed" from="TitleControl/ClearTagsButton" to="." method="_on_clear_tags_button_pressed"]
+[connection signal="text_changed" from="DataControl/Edit" to="." method="_on_edit_text_changed"]
 [connection signal="pressed" from="DataControl/Button" to="." method="_on_location_button_pressed"]
 [connection signal="pressed" from="IconControl/IconButton" to="." method="_on_icon_button_pressed"]

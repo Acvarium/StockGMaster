@@ -10,7 +10,6 @@ extends Panel
 		placeholder_text = new_value
 		$DataControl/Edit.placeholder_text = new_value
 		$CheckControl/CheckBox.text = new_value
-
 @export var list_item_mode = ListItemModes.Text :
 	set(new_value):
 		list_item_mode = new_value
@@ -22,7 +21,12 @@ extends Panel
 		$TitleControl/EditTagsButton.visible = list_item_mode == ListItemModes.Tags
 		$TitleControl/ClearTagsButton.visible = list_item_mode == ListItemModes.Tags and show_clear_button
 
+
 @export var show_clear_button = false
+
+@export var edit_regex_line = ""
+
+
 @onready var unfold_button = get_node("TitleControl/UnfoldButton")
 var unfold_control = null
 var is_unfolded = false
@@ -30,6 +34,7 @@ signal location_button_pressed
 signal edit_tags_button_pressed
 signal image_selection_button_pressed
 signal clear_tags_button_pressed
+signal edit_text_changed
 
 enum ListItemModes {
 	Text,
@@ -39,12 +44,15 @@ enum ListItemModes {
 	Tags
 }
 
+@onready var regex = RegEx.new()
 
 func set_editable(value):
 	$DataControl/Edit.editable = value
 
 
 func _ready():
+	if edit_regex_line != "":
+		regex.compile(edit_regex_line)
 	if Engine.is_editor_hint():
 		return
 	list_item_mode = list_item_mode
@@ -129,3 +137,26 @@ func _on_clear_tags_button_pressed() -> void:
 
 func focus_name_input():
 	$DataControl/Edit.grab_focus()
+
+
+func _on_edit_text_changed() -> void:
+	if edit_regex_line == "":
+		edit_text_changed.emit()
+		return
+		
+	var final_text = ""
+
+	var regex = RegEx.new()
+	regex.compile("[a-zA-Z0-9 ]")
+
+	var regex_match = regex.search_all($DataControl/Edit.text)
+	if regex_match:
+		for i in range(0,regex_match.size()):
+			final_text += regex_match[i].get_string()
+	$DataControl/Edit.text = final_text
+	
+	var last_line = $DataControl/Edit.get_line_count() - 1
+	var last_column = $DataControl/Edit.get_line(last_line).length()
+	$DataControl/Edit.set_caret_line(last_line)
+	$DataControl/Edit.set_caret_column(last_column)
+	edit_text_changed.emit()

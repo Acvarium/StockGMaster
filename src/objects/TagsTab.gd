@@ -38,7 +38,7 @@ func _on_delete_selected_tags_button_pressed():
 	var mess = ""
 	if number_of_items > 0:
 		mess = str(number_of_items) +  " items use tags that will be removed"
-	main_node.confirme_action_dialogue(self, Global.WhatToDo.Delete, mess)
+	Global.action_dialogue.emit(self, Global.WhatToDo.Delete, mess)
 
 
 func _on_edit_tags_button_pressed():

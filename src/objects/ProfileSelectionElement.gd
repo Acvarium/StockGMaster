@@ -3,6 +3,7 @@ var profile_id = 0
 var profile_selection_dialogue
 var is_editable = true
 var profile = {}
+@onready var main_node = get_tree().get_root().get_node("Main")
 
 
 func set_editable(value = true):
@@ -35,3 +36,7 @@ func _ready():
 func _on_button_pressed():
 	if profile_selection_dialogue:
 		profile_selection_dialogue.select_profile(profile_id)
+
+
+func _on_edit_button_pressed() -> void:
+	main_node.edit_profile(profile_id)

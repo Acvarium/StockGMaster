@@ -29,8 +29,7 @@ func _ready() -> void:
 func get_db_path():
 	if OS.get_name() == "Android":
 		return get_data_path() + db_file_name
-	if Global.current_profile_id <= 1:
-		return get_data_path() + db_file_name
+	return get_data_path() + db_file_name
 
 
 func get_image_paths():

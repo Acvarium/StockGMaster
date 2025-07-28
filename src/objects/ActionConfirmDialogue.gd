@@ -10,6 +10,7 @@ var what_to_do = Global.WhatToDo.None
 var base_title_label = "Are you sure?"
 
 func _ready():
+	Global.action_dialogue.connect(confirme_action_dialogue)
 	hide()
 
 

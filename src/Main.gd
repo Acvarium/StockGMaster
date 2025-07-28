@@ -9,6 +9,7 @@ extends Control
 @onready var items_tab : Control = $MainControl/HSplit/MainInfo/TabContainer/Items
 @onready var item_creation_dialogue : Control = $ItemCreationDialogue
 @onready var location_creation_dialogue : Control = $LocationCreationDialogue
+@onready var profile_creation_dialogue : Control = $ProfileCreationDialogue
 @onready var tag_creation_dialogue : Control = $TagCreationDialogue
 @onready var tree_selection_dialogue : Control = $TreeSelectionDialogue
 @onready var action_confirm_dialogue : Control = $ActionConfirmDialogue
@@ -53,9 +54,9 @@ func _ready():
 	OS.request_permissions()
 
 
-func load_images_to_viewer():
+func load_images_to_viewer(image_to_select = ""):
 	var image_paths = $Database.get_image_paths()
-	$ImageSelectionDialogue.load_images(image_paths)
+	$ImageSelectionDialogue.load_images(image_paths, image_to_select)
 
 
 func _on_viewport_resize():
@@ -193,10 +194,6 @@ func tag_exists(tag_name):
 func get_number_of_items_with_tags(tag_ids):
 	return $Database.get_number_of_items_with_tags(tag_ids)
 
-
-func confirme_action_dialogue(recever, conf_what_to_do, message = ""):
-	action_confirm_dialogue.confirme_action_dialogue(recever, conf_what_to_do, message)
-	
 
 func warning_dialogue(warning_message, title : String = ""):
 	action_confirm_dialogue.warning_dialogue(warning_message, title)
@@ -479,6 +476,26 @@ func create_location_from_selected():
 		edit_location(-1)
 
 
+func edit_profile(profile_id):
+	remove_ui_focus()
+	if profile_id >= 0 and profile_id < Global.profiles.size():
+		#editing
+		var profile_data = {}
+		profile_data.id = profile_id
+		profile_data.name = Global.profiles[profile_id].name
+		profile_data.path = Global.profiles[profile_id].path
+		profile_creation_dialogue.set_data(profile_data)
+		profile_creation_dialogue._show(Global.WhatToDo.Change, Global.ActionDataType.Profile)
+	else:
+		#creating
+		profile_creation_dialogue.set_data({})
+		profile_creation_dialogue._show(Global.WhatToDo.Create, Global.ActionDataType.Profile)
+
+
+func create_profile():
+	edit_profile(-1)
+	
+
 func create_item_from(selected_item_id):
 	remove_ui_focus()
 	if selected_item_id in $Database.items_data.keys() and selected_item_id >= 0:
@@ -634,14 +651,16 @@ func _on_file_dialog_file_selected(path):
 
 
 func _on_file_dialog_files_selected(paths):
+	var image_name_to_select = ""
 	for path : String in paths:
 		var file_name = path.get_file()
+		image_name_to_select = file_name
 		var full_new_path = $Database.get_image_folder_path() + file_name
 		while FileAccess.file_exists(full_new_path):
 			full_new_path = $Database.get_image_folder_path() + \
 				file_name.get_basename() + str(randi()) + "." + file_name.get_extension()
 		DirAccess.copy_absolute(path, full_new_path)
-	load_images_to_viewer()
+	load_images_to_viewer(image_name_to_select)
 
 
 func remove_ui_focus():

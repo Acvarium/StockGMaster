@@ -21,6 +21,7 @@ var current_action_data_type = Global.ActionDataType.None
 var current_stock_data = {}
 var current_item_tags_data = {}
 
+
 func show_item_data_components(to_show = true):
 	for i in item_data_components:
 		i.visible = to_show
@@ -34,7 +35,6 @@ func show_stock_data_components(to_show = true):
 func _notification(what):
 	if what == NOTIFICATION_VISIBILITY_CHANGED and visible:
 		$ItemsPanel/ScrollContainer.scroll_vertical = 0
-
 
 
 func _show(what_to_do, action_data_type):
@@ -217,7 +217,7 @@ func _on_category_selection_button_pressed():
 
 
 func _on_delete_button_pressed():
-	main_node.confirme_action_dialogue(self, Global.WhatToDo.Delete, "Do you want to delete this item?")
+	Global.action_dialogue.emit(self, Global.WhatToDo.Delete, "Do you want to delete this item?")
 
 
 func confirme_action(conf_what_to_do):
@@ -234,6 +234,14 @@ func _on_tags_edit_tags_button_pressed():
 	for t in current_item_tags_data:
 		selected_tags.append(current_item_tags_data[t].id)
 	main_node.select_tags_with_dialogue(self, selected_tags)
+
+
+func get_current_item_image_path():
+	if !current_item_data:
+		return ""
+	if not "image_path" in current_item_data.keys():
+		return ""
+	return current_item_data.image_path
 
 
 func set_image_path(image_path):

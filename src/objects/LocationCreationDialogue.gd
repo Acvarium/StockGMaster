@@ -77,7 +77,7 @@ func _on_delete_button_pressed():
 			message = str(number_of_items_with_category) + " item is in this category."
 		elif number_of_items_with_category > 1:
 			message = str(number_of_items_with_category) + " items are in this category."
-	main_node.confirme_action_dialogue(self, Global.WhatToDo.Delete, message)
+	Global.action_dialogue.emit(self, Global.WhatToDo.Delete, message)
 
 
 func confirme_action(conf_what_to_do):

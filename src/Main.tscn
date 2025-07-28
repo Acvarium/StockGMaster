@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=81 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" uid="uid://dgrk2ephkslqi" path="res://Main.gd" id="1_5mhyi"]
 [ext_resource type="Script" uid="uid://dln5ryh7py5lt" path="res://Database.gd" id="2_x8r34"]
@@ -77,6 +77,8 @@
 [ext_resource type="Texture2D" uid="uid://db60i04y7fo6a" path="res://textures/unfoldButton_hl.png" id="39_lo0ny"]
 [ext_resource type="StyleBox" uid="uid://ydrmcbb64npw" path="res://styles/FramedButtonNormal.tres" id="40_mitij"]
 [ext_resource type="StyleBox" uid="uid://cjovq65yf3tov" path="res://styles/FramedButtonPressedDown.tres" id="40_ytdkf"]
+[ext_resource type="Script" uid="uid://c1jv063eh2y4j" path="res://objects/ProfileCreationDialogue.gd" id="54_0a21m"]
+[ext_resource type="Script" uid="uid://cdcsugqa44xiy" path="res://objects/WarningMessageDialogue.gd" id="79_wnkxs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blt5x"]
 bg_color = Color(0.168627, 0.168627, 0.168627, 1)
@@ -1033,7 +1035,6 @@ texture_hover = ExtResource("22_8tugv")
 flip_h = true
 
 [node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "tags_element", "image_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("9_p6ieq")]
-visible = false
 layout_mode = 1
 script = ExtResource("10_06y8t")
 name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
@@ -1140,11 +1141,46 @@ layout_mode = 2
 theme_override_styles/pressed = ExtResource("25_veepo")
 text = "Apply"
 
-[node name="DeleteButton" parent="ProfileSelectionDialogue/SDCButtons/HBoxContainer" index="1"]
+[node name="AddButton" type="Button" parent="ProfileSelectionDialogue/SDCButtons/HBoxContainer" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/hover = ExtResource("31_br1a5")
+theme_override_styles/pressed = ExtResource("32_apjd1")
+theme_override_styles/normal = ExtResource("33_lw3x1")
+text = "ADD"
+
+[node name="DeleteButton" parent="ProfileSelectionDialogue/SDCButtons/HBoxContainer" index="2"]
 visible = false
 
 [node name="Title" parent="ProfileSelectionDialogue/TextureRect" index="0"]
 text = "Select profile"
+
+[node name="ProfileCreationDialogue" parent="." node_paths=PackedStringArray("title_label", "name_list_item", "dir_name_list_item", "delete_button") instance=ExtResource("9_p6ieq")]
+visible = false
+layout_mode = 1
+script = ExtResource("54_0a21m")
+title_label = NodePath("TextureRect/Title")
+name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
+dir_name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/DirName")
+delete_button = NodePath("SDCButtons/HBoxContainer/DeleteButton")
+
+[node name="Name" parent="ProfileCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("12_ubi7w")]
+layout_mode = 2
+title_text = "Name"
+placeholder_text = "Enter a Profile Name"
+
+[node name="DirName" parent="ProfileCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="1" instance=ExtResource("12_ubi7w")]
+layout_mode = 2
+title_text = "Directory Name"
+placeholder_text = "Enter a Directory Name"
+edit_regex_line = "[a-zA-Z0-9]"
+
+[node name="Title" parent="ProfileCreationDialogue/TextureRect" index="0"]
+theme_override_font_sizes/font_size = 32
+text = "Create Profile"
 
 [node name="LocationCreationDialogue" parent="." node_paths=PackedStringArray("title_label", "name_list_item", "description_list_item", "parent_list_item", "delete_button") instance=ExtResource("9_p6ieq")]
 visible = false
@@ -1581,9 +1617,10 @@ theme_override_styles/normal = ExtResource("15_e2j01")
 
 [node name="TSL" type="Control" parent="ActionConfirmDialogue"]
 layout_mode = 1
-anchor_top = 0.3
-anchor_right = 1.0
-anchor_bottom = 0.7
+anchor_left = 0.05
+anchor_top = 0.2
+anchor_right = 0.95
+anchor_bottom = 0.8
 offset_left = 15.0
 offset_right = -15.0
 grow_horizontal = 2
@@ -1598,7 +1635,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-ratio = 1.7
 
 [node name="Control" type="Panel" parent="ActionConfirmDialogue/TSL/AR"]
 layout_mode = 2
@@ -1608,7 +1644,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_blt5x")
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 0.273
+anchor_bottom = 0.243
 offset_left = 15.0
 offset_top = 15.0
 offset_right = -15.0
@@ -1622,7 +1658,7 @@ vertical_alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="ActionConfirmDialogue/TSL/AR/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.647
+anchor_top = 0.75
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
@@ -1667,9 +1703,126 @@ text = "Cancel"
 [node name="WarningLabel" type="Label" parent="ActionConfirmDialogue/TSL/AR/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.3
+anchor_top = 0.25
 anchor_right = 1.0
-anchor_bottom = 0.65
+anchor_bottom = 0.75
+offset_left = 15.0
+offset_right = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.396078, 0.329412, 1)
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = ExtResource("18_luhyk")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 3
+
+[node name="WarningMessageDialogue" type="Control" parent="." node_paths=PackedStringArray("title_label", "message_label")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("79_wnkxs")
+title_label = NodePath("TSL/AR/Control/TitleLabel")
+message_label = NodePath("TSL/AR/Control/WarningLabel")
+
+[node name="BGButton" type="Button" parent="WarningMessageDialogue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = ExtResource("16_uvvjq")
+theme_override_styles/pressed = ExtResource("15_e2j01")
+theme_override_styles/normal = ExtResource("15_e2j01")
+
+[node name="TSL" type="Control" parent="WarningMessageDialogue"]
+layout_mode = 1
+anchor_left = 0.05
+anchor_top = 0.2
+anchor_right = 0.95
+anchor_bottom = 0.8
+offset_left = 15.0
+offset_right = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AR" type="AspectRatioContainer" parent="WarningMessageDialogue/TSL"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Control" type="Panel" parent="WarningMessageDialogue/TSL/AR"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_blt5x")
+
+[node name="TitleLabel" type="Label" parent="WarningMessageDialogue/TSL/AR/Control"]
+self_modulate = Color(1, 0.57, 0.57, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.243
+offset_left = 15.0
+offset_top = 15.0
+offset_right = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Are you sure?aasdas asd asd "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WarningMessageDialogue/TSL/AR/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.75
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 15.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="AcceptButton" type="Button" parent="WarningMessageDialogue/TSL/AR/Control/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/hover = ExtResource("24_un7m8")
+theme_override_styles/pressed = ExtResource("25_vbo60")
+theme_override_styles/normal = ExtResource("23_cyhx8")
+text = "Accept"
+
+[node name="ConfirmButton" type="Button" parent="WarningMessageDialogue/TSL/AR/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/hover = ExtResource("29_jen6a")
+theme_override_styles/pressed = ExtResource("30_r5wwe")
+theme_override_styles/normal = ExtResource("31_4mrd2")
+text = "Ok"
+
+[node name="WarningLabel" type="Label" parent="WarningMessageDialogue/TSL/AR/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.75
 offset_left = 15.0
 offset_right = -15.0
 grow_horizontal = 2
@@ -1770,7 +1923,13 @@ color = Color(0.0905704, 0.0783957, 0.0685412, 1)
 [connection signal="pressed" from="ItemFilteringDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ItemFilteringDialogue" method="_on_save_item_button_pressed"]
 [connection signal="pressed" from="ItemFilteringDialogue/SDCButtons/HBoxContainer/CancelButton" to="ItemFilteringDialogue" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="ProfileSelectionDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ProfileSelectionDialogue" method="_on_save_item_button_pressed"]
+[connection signal="pressed" from="ProfileSelectionDialogue/SDCButtons/HBoxContainer/AddButton" to="ProfileSelectionDialogue" method="_on_add_button_pressed"]
 [connection signal="pressed" from="ProfileSelectionDialogue/SDCButtons/HBoxContainer/CancelButton" to="ProfileSelectionDialogue" method="_on_cancel_button_pressed"]
+[connection signal="edit_text_changed" from="ProfileCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Name" to="ProfileCreationDialogue" method="_on_name_edit_text_changed"]
+[connection signal="edit_text_changed" from="ProfileCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/DirName" to="ProfileCreationDialogue" method="_on_dir_name_edit_text_changed"]
+[connection signal="pressed" from="ProfileCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ProfileCreationDialogue" method="_on_save_item_button_pressed"]
+[connection signal="pressed" from="ProfileCreationDialogue/SDCButtons/HBoxContainer/DeleteButton" to="ProfileCreationDialogue" method="_on_delete_button_pressed"]
+[connection signal="pressed" from="ProfileCreationDialogue/SDCButtons/HBoxContainer/CancelButton" to="ProfileCreationDialogue" method="_on_cancel_button_pressed"]
 [connection signal="location_button_pressed" from="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Parent" to="LocationCreationDialogue" method="_on_parent_selection_button_pressed"]
 [connection signal="pressed" from="LocationCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="LocationCreationDialogue" method="_on_save_item_button_pressed"]
 [connection signal="pressed" from="LocationCreationDialogue/SDCButtons/HBoxContainer/DeleteButton" to="LocationCreationDialogue" method="_on_delete_button_pressed"]
@@ -1795,6 +1954,9 @@ color = Color(0.0905704, 0.0783957, 0.0685412, 1)
 [connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/AcceptButton" to="ActionConfirmDialogue" method="_on_accept_button_pressed"]
 [connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/ConfirmButton" to="ActionConfirmDialogue" method="_on_confirm_button_pressed"]
 [connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/CancelButton" to="ActionConfirmDialogue" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="WarningMessageDialogue/BGButton" to="WarningMessageDialogue" method="_on_bg_button_pressed"]
+[connection signal="pressed" from="WarningMessageDialogue/TSL/AR/Control/HBoxContainer/AcceptButton" to="WarningMessageDialogue" method="_on_accept_button_pressed"]
+[connection signal="pressed" from="WarningMessageDialogue/TSL/AR/Control/HBoxContainer/ConfirmButton" to="WarningMessageDialogue" method="_on_confirm_button_pressed"]
 [connection signal="timeout" from="Timers/SideInfoPanelTimer" to="." method="_on_side_info_panel_timer_timeout"]
 [connection signal="timeout" from="Timers/SideInfoPanelTimer2" to="." method="_on_side_info_panel_timer_2_timeout"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
@@ -1803,5 +1965,6 @@ color = Color(0.0905704, 0.0783957, 0.0685412, 1)
 [editable path="ItemCreationDialogue"]
 [editable path="ItemFilteringDialogue"]
 [editable path="ProfileSelectionDialogue"]
+[editable path="ProfileCreationDialogue"]
 [editable path="LocationCreationDialogue"]
 [editable path="TagCreationDialogue"]
