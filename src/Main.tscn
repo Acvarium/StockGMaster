@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=82 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" uid="uid://dgrk2ephkslqi" path="res://Main.gd" id="1_5mhyi"]
 [ext_resource type="Script" uid="uid://dln5ryh7py5lt" path="res://Database.gd" id="2_x8r34"]
@@ -79,6 +79,9 @@
 [ext_resource type="StyleBox" uid="uid://cjovq65yf3tov" path="res://styles/FramedButtonPressedDown.tres" id="40_ytdkf"]
 [ext_resource type="Script" uid="uid://c1jv063eh2y4j" path="res://objects/ProfileCreationDialogue.gd" id="54_0a21m"]
 [ext_resource type="Script" uid="uid://cdcsugqa44xiy" path="res://objects/WarningMessageDialogue.gd" id="79_wnkxs"]
+
+[sub_resource type="Theme" id="Theme_xicdx"]
+default_font_size = 45
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_blt5x"]
 bg_color = Color(0.168627, 0.168627, 0.168627, 1)
@@ -716,13 +719,14 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 5
 
-[node name="Settings" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" node_paths=PackedStringArray("x0_75_button", "x1_0_button", "x1_25_button")]
+[node name="Settings" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" node_paths=PackedStringArray("x0_75_button", "x1_0_button", "x1_25_button", "image_size_spinebox")]
 visible = false
 layout_mode = 2
 script = ExtResource("14_nrmw6")
 x0_75_button = NodePath("SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer/UIX0_75Button")
 x1_0_button = NodePath("SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer/UIX1_0Button")
 x1_25_button = NodePath("SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer/UIX1_25Button")
+image_size_spinebox = NodePath("SettingsPanel/ScrollContainer/VBoxContainer/ImageSize/DataControl/SpinBox")
 metadata/_tab_index = 6
 
 [node name="SettingsPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Settings"]
@@ -766,6 +770,7 @@ title_text = "Current Profile"
 placeholder_text = "Enter an Item Name"
 list_item_mode = 1
 show_clear_button = false
+quantity_range = Vector2i(0, 0)
 
 [node name="UIScale" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 150)
@@ -897,6 +902,76 @@ theme_override_styles/hover = ExtResource("11_wqlnj")
 theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("40_mitij")
 text = "1.25x"
+
+[node name="ImageSize" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(280, 150)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("34_ytdkf")
+
+[node name="TitleControl" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize/TitleControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.84
+anchor_bottom = 1.0
+offset_left = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+text = "Max Image Size (px)"
+vertical_alignment = 1
+script = ExtResource("37_pf2t4")
+
+[node name="ApplyButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize/TitleControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -217.0
+offset_top = 5.0
+offset_right = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/hover = ExtResource("24_un7m8")
+theme_override_styles/pressed = ExtResource("25_vbo60")
+theme_override_styles/normal = ExtResource("23_cyhx8")
+text = "Apply"
+
+[node name="DataControl" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 45.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpinBox" type="SpinBox" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize/DataControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_xicdx")
+theme_override_constants/buttons_width = 30
+theme_override_constants/field_and_buttons_separation = 0
+theme_override_constants/buttons_vertical_separation = 0
+max_value = 5000.0
+alignment = 1
+update_on_text_changed = true
 
 [node name="SearchLine" type="Panel" parent="MainControl/HSplit/MainInfo"]
 layout_mode = 1
@@ -1035,6 +1110,7 @@ texture_hover = ExtResource("22_8tugv")
 flip_h = true
 
 [node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "tags_element", "image_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("9_p6ieq")]
+visible = false
 layout_mode = 1
 script = ExtResource("10_06y8t")
 name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
@@ -1060,27 +1136,37 @@ separator_text = "Item Data"
 layout_mode = 2
 title_text = "Name"
 placeholder_text = "Enter an Item Name"
+show_clear_button = false
+quantity_range = Vector2i(0, 0)
 
 [node name="Description" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="2" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Description"
 placeholder_text = "Enter an Item Description"
+show_clear_button = false
+quantity_range = Vector2i(0, 0)
 
 [node name="Image" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="3" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Image"
 list_item_mode = 2
+show_clear_button = false
+quantity_range = Vector2i(0, 0)
 
 [node name="Category" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="4" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Category"
 list_item_mode = 1
+show_clear_button = false
+quantity_range = Vector2i(0, 0)
 
 [node name="Tags" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="5" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Tags"
 placeholder_text = "Enter tags separated by comma"
 list_item_mode = 4
+show_clear_button = false
+quantity_range = Vector2i(0, 0)
 
 [node name="StockDataSeparator" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="6" instance=ExtResource("11_6eucy")]
 layout_mode = 2
@@ -1090,11 +1176,15 @@ separator_text = "Initial Stock"
 layout_mode = 2
 title_text = "Location"
 list_item_mode = 1
+show_clear_button = false
+quantity_range = Vector2i(0, 0)
 
 [node name="Quantity" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="8" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Quantity"
 list_item_mode = 3
+show_clear_button = false
+quantity_range = Vector2i(0, 0)
 
 [node name="SaveItemButton" parent="ItemCreationDialogue/SDCButtons/HBoxContainer" index="0"]
 theme_override_styles/pressed = ExtResource("25_veepo")
@@ -1114,6 +1204,7 @@ title_text = "Tags"
 placeholder_text = "Enter an Item Name"
 list_item_mode = 4
 show_clear_button = true
+quantity_range = Vector2i(0, 0)
 
 [node name="SaveItemButton" parent="ItemFilteringDialogue/SDCButtons/HBoxContainer" index="0"]
 theme_override_styles/pressed = ExtResource("25_veepo")
@@ -1171,12 +1262,16 @@ delete_button = NodePath("SDCButtons/HBoxContainer/DeleteButton")
 layout_mode = 2
 title_text = "Name"
 placeholder_text = "Enter a Profile Name"
+show_clear_button = false
+quantity_range = Vector2i(0, 0)
 
 [node name="DirName" parent="ProfileCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="1" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Directory Name"
 placeholder_text = "Enter a Directory Name"
+show_clear_button = false
 edit_regex_line = "[a-zA-Z0-9]"
+quantity_range = Vector2i(0, 0)
 
 [node name="Title" parent="ProfileCreationDialogue/TextureRect" index="0"]
 theme_override_font_sizes/font_size = 32
@@ -1196,17 +1291,23 @@ delete_button = NodePath("SDCButtons/HBoxContainer/DeleteButton")
 layout_mode = 2
 title_text = "Name"
 placeholder_text = "Enter a Location Name"
+show_clear_button = false
+quantity_range = Vector2i(0, 0)
 
 [node name="Description" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="1" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Description"
 placeholder_text = "Enter a Location Description"
+show_clear_button = false
+quantity_range = Vector2i(0, 0)
 
 [node name="Parent" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="2" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Parent"
 placeholder_text = "Enter a Location Name"
 list_item_mode = 1
+show_clear_button = false
+quantity_range = Vector2i(0, 0)
 
 [node name="Title" parent="LocationCreationDialogue/TextureRect" index="0"]
 theme_override_font_sizes/font_size = 32
@@ -1222,6 +1323,8 @@ name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
 layout_mode = 2
 title_text = "Name"
 placeholder_text = "Enter a Location Name"
+show_clear_button = false
+quantity_range = Vector2i(0, 0)
 
 [node name="SaveItemButton" parent="TagCreationDialogue/SDCButtons/HBoxContainer" index="0"]
 theme_override_styles/pressed = ExtResource("25_veepo")
@@ -1907,6 +2010,8 @@ color = Color(0.0905704, 0.0783957, 0.0685412, 1)
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer/UIX0_75Button" to="MainControl/HSplit/MainInfo/TabContainer/Settings" method="_on_uix_0_75_button_pressed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer/UIX1_0Button" to="MainControl/HSplit/MainInfo/TabContainer/Settings" method="_on_uix_1_0_button_pressed"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer/UIX1_25Button" to="MainControl/HSplit/MainInfo/TabContainer/Settings" method="_on_uix_1_25_button_pressed"]
+[connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize/TitleControl/ApplyButton" to="MainControl/HSplit/MainInfo/TabContainer/Settings" method="_on_apply_button_pressed"]
+[connection signal="value_changed" from="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize/DataControl/SpinBox" to="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize" method="_on_spin_box_value_changed"]
 [connection signal="text_changed" from="MainControl/HSplit/MainInfo/SearchLine/SearchLineEdit" to="." method="_on_search_line_edit_text_changed"]
 [connection signal="pressed" from="MainControl/SidePanel/SideSplitButton" to="." method="_on_side_split_button_pressed"]
 [connection signal="pressed" from="MainControl/SidePanelLeft/SideSplitButton" to="." method="_on_side_split_button_pressed"]

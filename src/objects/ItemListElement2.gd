@@ -26,6 +26,7 @@ extends Panel
 
 @export var edit_regex_line = ""
 
+@export var quantity_range : Vector2i 
 
 @onready var unfold_button = get_node("TitleControl/UnfoldButton")
 var unfold_control = null
@@ -35,6 +36,7 @@ signal edit_tags_button_pressed
 signal image_selection_button_pressed
 signal clear_tags_button_pressed
 signal edit_text_changed
+signal quantity_changed(new_value)
 
 enum ListItemModes {
 	Text,
@@ -51,6 +53,11 @@ func set_editable(value):
 
 
 func _ready():
+	if quantity_range.x != quantity_range.y:
+		$DataControl/SpinBox.min_value = quantity_range.x
+		$DataControl/SpinBox.max_value = quantity_range.y
+		$DataControl/SpinBox.allow_greater = false
+	
 	if edit_regex_line != "":
 		regex.compile(edit_regex_line)
 	if Engine.is_editor_hint():
@@ -160,3 +167,7 @@ func _on_edit_text_changed() -> void:
 	$DataControl/Edit.set_caret_line(last_line)
 	$DataControl/Edit.set_caret_column(last_column)
 	edit_text_changed.emit()
+
+
+func _on_spin_box_value_changed(value: float) -> void:
+	quantity_changed.emit(int(value))

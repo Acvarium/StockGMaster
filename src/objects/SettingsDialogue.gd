@@ -3,6 +3,13 @@ extends Control
 @export var x0_75_button : Button
 @export var x1_0_button : Button
 @export var x1_25_button : Button
+@export var image_size_spinebox : SpinBox
+
+
+func _notification(what):
+	if image_size_spinebox:
+		image_size_spinebox.value = Global.max_image_size
+
 
 func _ready():
 	Global.profiles_loaded.connect(profiles_loaded)
@@ -35,3 +42,8 @@ func _on_uix_1_0_button_pressed() -> void:
 func _on_uix_1_25_button_pressed() -> void:
 	Global.set_ui_scale(1.2)
 	update_ui_scale_buttons()
+
+
+func _on_apply_button_pressed() -> void:
+	Global.max_image_size = int(image_size_spinebox.value)
+	Global.save_config()

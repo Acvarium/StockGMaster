@@ -77,6 +77,7 @@ custom_minimum_size = Vector2(280, 150)
 theme_override_styles/panel = ExtResource("1_a1fgo")
 script = ExtResource("1_80c12")
 show_clear_button = null
+quantity_range = null
 
 [node name="TitleControl" type="Control" parent="."]
 layout_mode = 1
@@ -194,7 +195,7 @@ theme = SubResource("Theme_xicdx")
 theme_override_constants/buttons_width = 30
 theme_override_constants/field_and_buttons_separation = 0
 theme_override_constants/buttons_vertical_separation = 0
-max_value = 10000.0
+max_value = 100000.0
 allow_greater = true
 alignment = 1
 update_on_text_changed = true
@@ -337,5 +338,6 @@ stretch_mode = 6
 [connection signal="pressed" from="TitleControl/EditTagsButton" to="." method="_on_edit_tags_button_pressed"]
 [connection signal="pressed" from="TitleControl/ClearTagsButton" to="." method="_on_clear_tags_button_pressed"]
 [connection signal="text_changed" from="DataControl/Edit" to="." method="_on_edit_text_changed"]
+[connection signal="value_changed" from="DataControl/SpinBox" to="." method="_on_spin_box_value_changed"]
 [connection signal="pressed" from="DataControl/Button" to="." method="_on_location_button_pressed"]
 [connection signal="pressed" from="IconControl/IconButton" to="." method="_on_icon_button_pressed"]

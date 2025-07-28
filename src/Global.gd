@@ -5,6 +5,7 @@ var ui_scale_factor = 1.0
 var last_orientation_is_portrait: bool = false
 const base_window_size = Vector2(600, 1000)
 var profiles = []
+
 signal profiles_loaded
 signal warning_message(title : String, message : String)
 signal action_dialogue(recever, conf_what_to_do, warning_message)
@@ -38,6 +39,7 @@ enum ProfileValidationStatus {
 	EmptyName,
 	EmptyPath
 }
+
 
 func get_scaled_safe_area():
 	var safe_area := DisplayServer.get_display_safe_area()
@@ -95,6 +97,8 @@ func load_config():
 			current_profile_id = int(data.current_profile_id)
 		if "ui_scale_factor" in data:
 			set_ui_scale(data.ui_scale_factor)
+		if "max_image_size" in data:
+			max_image_size = data.max_image_size
 		if "profiles" in data and data.profiles.size() > 1:
 			profiles.clear()
 			profiles = data.profiles
@@ -115,6 +119,7 @@ func save_config():
 	data.current_profile_id = current_profile_id
 	data.ui_scale_factor = ui_scale_factor
 	data.profiles = profiles
+	data.max_image_size = max_image_size
 	var file = FileAccess.open(save_file, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data, "\t"))
 	file = null
