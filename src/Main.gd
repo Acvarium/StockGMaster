@@ -654,20 +654,59 @@ func _on_file_dialog_files_selected(paths):
 	var image_name_to_select = ""
 	for path : String in paths:
 		var file_name = path.get_file()
-		image_name_to_select = file_name
 		var full_new_path = $Database.get_image_folder_path() + file_name
-		while FileAccess.file_exists(full_new_path):
-			full_new_path = $Database.get_image_folder_path() + \
-				file_name.get_basename() + str(randi()) + "." + file_name.get_extension()
-		DirAccess.copy_absolute(path, full_new_path)
+		var resized_image_path = resize_and_save_image(path)
+		if resized_image_path != null and !resized_image_path.is_empty():
+			image_name_to_select = resized_image_path.get_file()
 	load_images_to_viewer(image_name_to_select)
 
+
+func resize_and_save_image(path):
+	var file_name = path.get_file()
+	var full_new_path = $Database.get_image_folder_path() + file_name
+
+	while FileAccess.file_exists(full_new_path):
+		full_new_path = $Database.get_image_folder_path() + \
+			file_name.get_basename() + str(randi()) + "." + file_name.get_extension()
+
+	var original_image = Image.new()
+	var err = original_image.load(path)
+	if err != OK:
+		push_error("Не вдалося завантажити зображення: ", path, " Помилка: ", err)
+		return null
+
+	var original_width = original_image.get_width()
+	var original_height = original_image.get_height()
+
+	var crop_side = min(original_width, original_height)
+	var x_offset = (original_width - crop_side) / 2
+	var y_offset = (original_height - crop_side) / 2
+
+	var cropped_image = Image.create_empty(crop_side, crop_side, false, original_image.get_format())
+	cropped_image.blit_rect(original_image, Rect2(x_offset, y_offset, crop_side, crop_side), Vector2(0, 0))
+	cropped_image.resize(Global.max_image_size, Global.max_image_size, Image.INTERPOLATE_CUBIC)
+	
+	var save_err = ERR_FILE_CANT_OPEN
+	var file_extension = file_name.get_extension().to_lower()
+	if file_extension == "png":
+		save_err = cropped_image.save_png(full_new_path)
+	elif file_extension == "jpg" or file_extension == "jpeg":
+		save_err = cropped_image.save_jpg(full_new_path)
+	elif file_extension == "webp":
+		save_err = cropped_image.save_webp(full_new_path)
+	else:
+		push_error("Непідтримуваний формат файлу для збереження: ", file_extension)
+		full_new_path += ".png"
+		save_err = cropped_image.save_png(full_new_path) 
+	if save_err != OK:
+		push_error("Не вдалося зберегти змінене зображення до: ", full_new_path, " Помилка: ", save_err)
+		return null
+	return full_new_path
 
 func remove_ui_focus():
 	var focused = get_viewport().gui_get_focus_owner()
 	if focused:
 		focused.release_focus()
-
 
 
 func unfold_side_split(to_unfold = true):

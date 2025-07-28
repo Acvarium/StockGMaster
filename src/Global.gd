@@ -9,6 +9,7 @@ signal profiles_loaded
 signal warning_message(title : String, message : String)
 signal action_dialogue(recever, conf_what_to_do, warning_message)
 
+var max_image_size = 200
 
 enum WhatToDo {
 	None,
