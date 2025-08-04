@@ -77,7 +77,6 @@ custom_minimum_size = Vector2(280, 150)
 theme_override_styles/panel = ExtResource("1_a1fgo")
 script = ExtResource("1_80c12")
 show_clear_button = null
-quantity_range = null
 
 [node name="TitleControl" type="Control" parent="."]
 layout_mode = 1

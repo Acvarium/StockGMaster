@@ -221,6 +221,8 @@ func get_new_tag_id():
 func pull_items_data():
 	items_data.clear()
 	var stock_db_data = db.select_rows("item_stocks", "", ["*"])
+	var attachment_db_data = db.select_rows("item_attachments", "", ["*"])
+	
 	var items_db_data = db.select_rows("items", "", ["*"])
 	for i in range(items_db_data.size()):
 		items_data[items_db_data[i].id] = items_db_data[i]
@@ -231,6 +233,15 @@ func pull_items_data():
 				items_data[current_stock["item_id"]].stocks = [current_stock]
 			else:
 				items_data[current_stock["item_id"]].stocks.append(current_stock)
+				
+	for i in range(attachment_db_data.size()):
+		var current_attachment = attachment_db_data[i]
+		if "item_id" in current_attachment.keys() and current_attachment["item_id"] in items_data.keys():
+			if not "attachment" in items_data[current_attachment["item_id"]].keys():
+				items_data[current_attachment["item_id"]].attachment = [current_attachment]
+			else:
+				items_data[current_attachment["item_id"]].attachment.append(current_attachment)
+	
 	item_data_loaded.emit()
 	
 
@@ -251,6 +262,7 @@ func load_data():
 	db.path = get_db_path()
 	db.open_db()
 	create_tables()
+	update_tables()
 	pull_locations_data()
 	pull_items_data()
 	pull_categories_data()
@@ -285,7 +297,19 @@ func delete_images(list_of_image_paths):
 	for image_path in list_of_image_paths:
 		db.update_rows("items", "image_path = '" + image_path + "'", {"image_path" : ""})
 		DirAccess.remove_absolute(get_image_folder_path() + image_path)
-	
+
+
+func update_tables():
+	var tables = get_tables()
+	if not "item_attachments" in tables:
+		var item_attachments_table = {
+			"id" : {"data_type" : "int", "primary_key" : true, "not_null" : true, "auto_increment" : true},
+			"item_id" : {"data_type" : "int"},
+			"path" : {"data_type" : "TEXT"},
+			"description" : {"data_type" : "TEXT"},
+		}
+		db.create_table("item_attachments", item_attachments_table)
+
 
 func create_tables():
 	var tables = get_tables()
@@ -392,8 +416,9 @@ func create_tables():
 			"data" : {"data_type" : "TEXT"},
 		}
 		db.create_table("stock_g_master_meta", meta_table)
-		
-		
+
+
+
 func update_value(action_data_type, for_id, with_value):
 	if action_data_type == Global.ActionDataType.Location:
 		db.update_rows("items", "id = '" + str(for_id) + "'", {"location_id" : with_value})

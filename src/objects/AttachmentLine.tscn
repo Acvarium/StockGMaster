@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://5usg4kabptj4"]
+
+[ext_resource type="StyleBox" uid="uid://bbplm1e5vppsh" path="res://styles/BasePanelStyle.tres" id="1_wb812"]
+[ext_resource type="Script" uid="uid://g0miwmlvwjt7" path="res://objects/AttachmentLine.gd" id="2_wb812"]
+[ext_resource type="Texture2D" uid="uid://b4156qpi54clp" path="res://textures/edit_button.png" id="3_tuime"]
+[ext_resource type="Texture2D" uid="uid://0dla7un4qfm6" path="res://textures/edit_button_hl.png" id="4_kvf0j"]
+[ext_resource type="Texture2D" uid="uid://bb4ie2hamo708" path="res://textures/edit_button_pressed.png" id="5_xu6b1"]
+[ext_resource type="Texture2D" uid="uid://ckc14v3a8oqd5" path="res://icon.svg" id="6_bph8p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wy16"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0.129412, 0.129412, 0.129412, 0)
+draw_center = false
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="StockInfoLine" type="Panel"]
+custom_minimum_size = Vector2(400, 40)
+theme_override_styles/panel = ExtResource("1_wb812")
+script = ExtResource("2_wb812")
+
+[node name="AddressLine" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 36.0
+offset_right = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "/lasdasdl/asdlasd/asdlasdlaskdoqwdalsd/asdasd/ asd /asasd asd as dasd asd asd asddasd asd asd asd  /"
+theme_override_styles/focus = SubResource("StyleBoxFlat_4wy16")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_4wy16")
+theme_override_styles/normal = SubResource("StyleBoxFlat_4wy16")
+text = "/lasdasdl/asdlasd/asdlasdlaskdoqwdalsd/asdasd/ asd /asasd asd as dasd asd asd asddasd asd asd asd  /"
+editable = false
+
+[node name="OpenButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_right = -5.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("3_tuime")
+texture_pressed = ExtResource("4_kvf0j")
+texture_hover = ExtResource("5_xu6b1")
+ignore_texture_size = true
+stretch_mode = 5
+flip_h = true
+flip_v = true
+
+[node name="IconRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 32.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_bph8p")
+expand_mode = 1
+stretch_mode = 4
