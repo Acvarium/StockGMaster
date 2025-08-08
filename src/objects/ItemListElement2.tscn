@@ -133,6 +133,24 @@ theme_override_styles/pressed = ExtResource("9_llh3k")
 theme_override_styles/normal = ExtResource("7_b7ah0")
 text = "Select Tags"
 
+[node name="EditAttachmentsButton" type="Button" parent="TitleControl"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = 5.0
+offset_right = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/hover = ExtResource("8_bgha2")
+theme_override_styles/pressed = ExtResource("9_llh3k")
+theme_override_styles/normal = ExtResource("7_b7ah0")
+text = "Edit"
+
 [node name="ClearTagsButton" type="Button" parent="TitleControl"]
 visible = false
 layout_mode = 1
@@ -235,7 +253,6 @@ clip_text = true
 text_overrun_behavior = 1
 
 [node name="Tags" type="ScrollContainer" parent="DataControl"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -335,6 +352,7 @@ stretch_mode = 6
 
 [connection signal="pressed" from="TitleControl/UnfoldButton" to="." method="toggle_unfold"]
 [connection signal="pressed" from="TitleControl/EditTagsButton" to="." method="_on_edit_tags_button_pressed"]
+[connection signal="pressed" from="TitleControl/EditAttachmentsButton" to="." method="_on_edit_tags_button_pressed"]
 [connection signal="pressed" from="TitleControl/ClearTagsButton" to="." method="_on_clear_tags_button_pressed"]
 [connection signal="text_changed" from="DataControl/Edit" to="." method="_on_edit_text_changed"]
 [connection signal="value_changed" from="DataControl/SpinBox" to="." method="_on_spin_box_value_changed"]

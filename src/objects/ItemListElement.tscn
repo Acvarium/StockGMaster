@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://l7og0lhat66"]
+[gd_scene load_steps=23 format=3 uid="uid://l7og0lhat66"]
 
 [ext_resource type="StyleBox" uid="uid://c285i81pa11sx" path="res://styles/ItemListPanelStyle.tres" id="1_3ptxo"]
 [ext_resource type="Script" uid="uid://bgpwj074dmjrt" path="res://objects/ItemListElement.gd" id="2_7hixr"]
@@ -10,9 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://b4156qpi54clp" path="res://textures/edit_button.png" id="7_mfdci"]
 [ext_resource type="Texture2D" uid="uid://0dla7un4qfm6" path="res://textures/edit_button_hl.png" id="8_o48cu"]
 [ext_resource type="Texture2D" uid="uid://bb4ie2hamo708" path="res://textures/edit_button_pressed.png" id="9_fvw1m"]
+[ext_resource type="Texture2D" uid="uid://dx1g6b4wftlcv" path="res://textures/button_base30.png" id="9_jcipg"]
 [ext_resource type="Texture2D" uid="uid://dn1q6s8e7t55l" path="res://w_rect.png" id="10_q0yka"]
+[ext_resource type="Texture2D" uid="uid://72s06t4p8ehi" path="res://textures/button_base30_pressed.png" id="10_yp725"]
 [ext_resource type="StyleBox" uid="uid://ydrmcbb64npw" path="res://styles/FramedButtonNormal.tres" id="11_5e1i3"]
+[ext_resource type="Texture2D" uid="uid://bwbq82kh7mx7v" path="res://textures/button_base30_hover.png" id="11_ynti5"]
 [ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/FramedButtonHover.tres" id="12_j0lc1"]
+[ext_resource type="Texture2D" uid="uid://bun2djsoy0gb" path="res://textures/attachments.png" id="12_qvljs"]
 [ext_resource type="StyleBox" uid="uid://chknldgol0rwk" path="res://styles/FramedButtonPressed.tres" id="13_edbsu"]
 
 [sub_resource type="Animation" id="Animation_g3yh7"]
@@ -227,12 +231,13 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[node name="ItemListElement" type="Panel"]
+[node name="ItemListElement" type="Panel" node_paths=PackedStringArray("attachmetn_button")]
 custom_minimum_size = Vector2(0, 55)
 offset_right = 600.0
 offset_bottom = 55.0
 theme_override_styles/panel = ExtResource("1_3ptxo")
 script = ExtResource("2_7hixr")
+attachmetn_button = NodePath("DPanel/Panel/Image/AttachmentButton")
 
 [node name="LPanel" type="Panel" parent="."]
 visible = false
@@ -372,6 +377,35 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AttachmentButton" type="TextureButton" parent="DPanel/Panel/Image"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("9_jcipg")
+texture_pressed = ExtResource("10_yp725")
+texture_hover = ExtResource("11_ynti5")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="DPanel/Panel/Image/AttachmentButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_qvljs")
 
 [node name="IPanel" type="Panel" parent="."]
 clip_children = 2

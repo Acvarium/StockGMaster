@@ -1112,7 +1112,7 @@ texture_pressed = ExtResource("21_65tdk")
 texture_hover = ExtResource("22_8tugv")
 flip_h = true
 
-[node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "tags_element", "image_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("9_p6ieq")]
+[node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "tags_element", "attachment_element", "image_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("9_p6ieq")]
 visible = false
 layout_mode = 1
 script = ExtResource("10_06y8t")
@@ -1123,10 +1123,14 @@ location_element = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Location")
 quantity_element = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Quantity")
 category_element = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Category")
 tags_element = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Tags")
+attachment_element = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Attachments")
 image_element = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Image")
-item_data_components = [NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Description"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Image"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Category"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Tags"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/ItemDataSeparator")]
+item_data_components = [NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Description"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Image"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Category"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Tags"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/ItemDataSeparator"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Attachments")]
 stock_data_components = [NodePath("ItemsPanel/ScrollContainer/VBoxContainer/StockDataSeparator"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Location"), NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Quantity")]
 delete_button = NodePath("SDCButtons/HBoxContainer/DeleteButton")
+
+[node name="ScrollContainer" parent="ItemCreationDialogue/ItemsPanel" index="0"]
+scroll_vertical = 100
 
 [node name="VBoxContainer" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer" index="0"]
 unfold_item_list = Array[NodePath]([NodePath("Name"), NodePath("Description")])
@@ -1166,17 +1170,23 @@ placeholder_text = "Enter tags separated by comma"
 list_item_mode = 4
 show_clear_button = false
 
-[node name="StockDataSeparator" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="6" instance=ExtResource("11_6eucy")]
+[node name="Attachments" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="6" instance=ExtResource("12_ubi7w")]
+layout_mode = 2
+title_text = "Attachments"
+list_item_mode = 5
+show_clear_button = false
+
+[node name="StockDataSeparator" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="7" instance=ExtResource("11_6eucy")]
 layout_mode = 2
 separator_text = "Initial Stock"
 
-[node name="Location" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="7" instance=ExtResource("12_ubi7w")]
+[node name="Location" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="8" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Location"
 list_item_mode = 1
 show_clear_button = false
 
-[node name="Quantity" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="8" instance=ExtResource("12_ubi7w")]
+[node name="Quantity" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="9" instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Quantity"
 list_item_mode = 3
@@ -2007,6 +2017,7 @@ color = Color(0.0905704, 0.0783957, 0.0685412, 1)
 [connection signal="image_selection_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Image" to="ItemCreationDialogue" method="_on_image_image_selection_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Category" to="ItemCreationDialogue" method="_on_category_selection_button_pressed"]
 [connection signal="edit_tags_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Tags" to="ItemCreationDialogue" method="_on_tags_edit_tags_button_pressed"]
+[connection signal="edit_tags_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Attachments" to="ItemCreationDialogue" method="_on_tags_edit_tags_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Location" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Quantity" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ItemCreationDialogue" method="_on_save_item_button_pressed"]

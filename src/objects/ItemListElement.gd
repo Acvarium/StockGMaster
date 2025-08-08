@@ -8,12 +8,11 @@ var is_unfolded = false
 @onready var main_node = get_tree().get_root().get_node("Main")
 @onready var unfold_wait_time = $UnfoldTimer.wait_time
 var stock_line_prefab = preload("res://objects/StockInfoLine.tscn")
-var attachment_line_prefab = preload("res://objects/AttachmentLine.tscn")
+@export var attachmetn_button : TextureButton
 
 var folded_height = 55.0
 var unfolded_height = 250.0
 var unfold_offset_for_stocks = 0.0
-var unfold_offset_for_attachments = 0.0
 
 var unfold_control
 const BASE_STOCK_OFFSET = 45
@@ -63,12 +62,7 @@ func set_data(new_data):
 	$IPanel/ItemIcon.visible = image_loaded
 	$IPanel.self_modulate.a = 1.0 if image_loaded else 0.5
 	
-	if "attachments" in new_data.keys():
-		unfold_offset_for_attachments = (new_data.attachments.size()) * BASE_STOCK_OFFSET
-		for a in new_data.attachments:
-			var current_attachment_line = attachment_line_prefab.instantiate()
-			$StocksHolder.add_child(current_attachment_line)
-			
+	attachmetn_button.visible = "attachments" in new_data.keys() and new_data.attachments.size() > 0
 	
 	if "stocks" in new_data.keys():
 		has_stock = true
@@ -95,7 +89,7 @@ func clear_stocks():
 
 func unfold(to_unfold = true, to_force = false, immediate = false):
 	if to_force and immediate and is_unfolded and to_unfold:
-		var new_unfolded_height = unfolded_height + unfold_offset_for_stocks + unfold_offset_for_attachments
+		var new_unfolded_height = unfolded_height + unfold_offset_for_stocks 
 		custom_minimum_size.y = new_unfolded_height
 		return
 	if to_unfold == is_unfolded and !to_force:
@@ -109,7 +103,7 @@ func unfold(to_unfold = true, to_force = false, immediate = false):
 
 
 func _process(delta):
-	var new_unfolded_height = unfolded_height + unfold_offset_for_stocks + unfold_offset_for_attachments
+	var new_unfolded_height = unfolded_height + unfold_offset_for_stocks 
 	if !$UnfoldTimer.is_stopped():
 		var time_left_normalized = $UnfoldTimer.time_left / unfold_wait_time
 		if is_unfolded:

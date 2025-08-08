@@ -1,7 +1,9 @@
 extends HFlowContainer
 var tag_element_prefab = preload("res://objects/TagElement.tscn")
+var att_element_prefab = preload("res://objects/AttachmentElement.tscn")
 signal tag_pressed_sig
 @export var selectable_tags = true
+
 
 func _ready():
 	pass # Replace with function body.
@@ -10,6 +12,11 @@ func _ready():
 func clear_tags():
 	for t in get_children():
 		t.queue_free()
+
+
+func add_attachment(file_name):
+	var new_att = att_element_prefab.instantiate()
+	add_child(new_att)
 
 
 func tag_pressed():

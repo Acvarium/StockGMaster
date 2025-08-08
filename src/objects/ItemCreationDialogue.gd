@@ -6,6 +6,7 @@ extends Control
 @export var quantity_element : Panel
 @export var category_element : Panel
 @export var tags_element : Panel
+@export var attachment_element : Panel
 @export var image_element : Panel
 
 @onready var main_node = get_tree().get_root().get_node("Main")

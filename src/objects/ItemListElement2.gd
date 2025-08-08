@@ -17,9 +17,10 @@ extends Panel
 		$DataControl/Button.visible = list_item_mode == ListItemModes.tButton
 		$IconControl.visible = list_item_mode == ListItemModes.Icon
 		$DataControl/SpinBox.visible = list_item_mode == ListItemModes.Quantity
-		$DataControl/Tags.visible = list_item_mode == ListItemModes.Tags
+		$DataControl/Tags.visible = list_item_mode == ListItemModes.Tags or list_item_mode == ListItemModes.Attachments
 		$TitleControl/EditTagsButton.visible = list_item_mode == ListItemModes.Tags
 		$TitleControl/ClearTagsButton.visible = list_item_mode == ListItemModes.Tags and show_clear_button
+		$TitleControl/EditAttachmentsButton.visible = list_item_mode == ListItemModes.Attachments
 
 
 @export var show_clear_button = false
@@ -43,7 +44,8 @@ enum ListItemModes {
 	tButton,
 	Icon,
 	Quantity,
-	Tags
+	Tags,
+	Attachments
 }
 
 @onready var regex = RegEx.new()
@@ -63,6 +65,8 @@ func _ready():
 	if Engine.is_editor_hint():
 		return
 	list_item_mode = list_item_mode
+	if list_item_mode == ListItemModes.Attachments:
+		$DataControl/Tags/TagViewer.add_attachment("some_text_file.txt")
 	#$TitleControl/Label.text = title_text
 	#$DataControl/Edit.placeholder_text = placeholder_text
 

@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqoi0sehwmuut"]
+
+[ext_resource type="StyleBox" uid="uid://ydrmcbb64npw" path="res://styles/FramedButtonNormal.tres" id="2_j0mia"]
+[ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/FramedButtonHover.tres" id="3_ltyhk"]
+[ext_resource type="StyleBox" uid="uid://cjovq65yf3tov" path="res://styles/FramedButtonPressedDown.tres" id="4_hmp3u"]
+[ext_resource type="Texture2D" uid="uid://bun2djsoy0gb" path="res://textures/attachments.png" id="5_btpw2"]
+
+[node name="TagElement" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 40)
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/disabled = ExtResource("2_j0mia")
+theme_override_styles/hover = ExtResource("3_ltyhk")
+theme_override_styles/pressed = ExtResource("4_hmp3u")
+theme_override_styles/normal = ExtResource("2_j0mia")
+
+[node name="HB" type="HBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Spacer1" type="Control" parent="HB"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="HB"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="HB/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_btpw2")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HB"]
+layout_mode = 2
+text = "image_file.jpg"
+
+[node name="Spacer2" type="Control" parent="HB"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+mouse_filter = 2
