@@ -101,6 +101,11 @@ func get_tags_for_item(id):
 		current_item_tags[current_item_tag_data.id] = {"id": current_item_tag_data.tag_id, "name": tags_data[current_item_tag_data.tag_id].name}
 	return current_item_tags
 
+
+func get_atachmetns_for_item(id):
+	var current_item_attachments_db = db.select_rows("item_attachments", "item_id = '" + str(id) + "'", ["*"])
+	return current_item_attachments_db
+
 #
 #func get_filtered_items(tag_ids):
 	#pass
@@ -233,15 +238,14 @@ func pull_items_data():
 				items_data[current_stock["item_id"]].stocks = [current_stock]
 			else:
 				items_data[current_stock["item_id"]].stocks.append(current_stock)
-				
+	
 	for i in range(attachment_db_data.size()):
 		var current_attachment = attachment_db_data[i]
 		if "item_id" in current_attachment.keys() and current_attachment["item_id"] in items_data.keys():
-			if not "attachment" in items_data[current_attachment["item_id"]].keys():
-				items_data[current_attachment["item_id"]].attachment = [current_attachment]
+			if not "attachments" in items_data[current_attachment["item_id"]].keys():
+				items_data[current_attachment["item_id"]].attachments = [current_attachment]
 			else:
-				items_data[current_attachment["item_id"]].attachment.append(current_attachment)
-	
+				items_data[current_attachment["item_id"]].attachments.append(current_attachment)
 	item_data_loaded.emit()
 	
 
