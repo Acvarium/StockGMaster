@@ -17,10 +17,11 @@ extends Panel
 		$DataControl/Button.visible = list_item_mode == ListItemModes.tButton
 		$IconControl.visible = list_item_mode == ListItemModes.Icon
 		$DataControl/SpinBox.visible = list_item_mode == ListItemModes.Quantity
-		$DataControl/Tags.visible = list_item_mode == ListItemModes.Tags or list_item_mode == ListItemModes.Attachments
+		$DataControl/Tags.visible = list_item_mode == ListItemModes.Tags
 		$TitleControl/EditTagsButton.visible = list_item_mode == ListItemModes.Tags
 		$TitleControl/ClearTagsButton.visible = list_item_mode == ListItemModes.Tags and show_clear_button
 		$TitleControl/EditAttachmentsButton.visible = list_item_mode == ListItemModes.Attachments
+		$DataControl/Attachments.visible = list_item_mode == ListItemModes.Attachments
 
 
 @export var show_clear_button = false
@@ -65,8 +66,8 @@ func _ready():
 	if Engine.is_editor_hint():
 		return
 	list_item_mode = list_item_mode
-	if list_item_mode == ListItemModes.Attachments:
-		$DataControl/Tags/TagViewer.add_attachment("some_text_file.txt")
+	#if list_item_mode == ListItemModes.Attachments:
+		#$DataControl/Tags/TagViewer.add_attachment("some_text_file.txt")
 	#$TitleControl/Label.text = title_text
 	#$DataControl/Edit.placeholder_text = placeholder_text
 
@@ -81,6 +82,10 @@ func set_unfold_control(value):
 func set_tags(tags_data):
 	$TitleControl/ClearTagsButton.disabled = tags_data.size() == 0
 	$DataControl/Tags/TagViewer.refrash_tags_list(tags_data)
+
+
+func set_attachments(att_data):
+	$DataControl/Attachments/AttachmentViewer.refrash_att_list(att_data)
 
 
 func set_location_button_text(_text):

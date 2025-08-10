@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqoi0sehwmuut"]
+[gd_scene load_steps=6 format=3 uid="uid://dqoi0sehwmuut"]
 
+[ext_resource type="Script" uid="uid://kqjesa8ksd1r" path="res://objects/AttachmentElement.gd" id="1_r5y8h"]
 [ext_resource type="StyleBox" uid="uid://ydrmcbb64npw" path="res://styles/FramedButtonNormal.tres" id="2_j0mia"]
 [ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/FramedButtonHover.tres" id="3_ltyhk"]
 [ext_resource type="StyleBox" uid="uid://cjovq65yf3tov" path="res://styles/FramedButtonPressedDown.tres" id="4_hmp3u"]
 [ext_resource type="Texture2D" uid="uid://bun2djsoy0gb" path="res://textures/attachments.png" id="5_btpw2"]
 
-[node name="TagElement" type="PanelContainer"]
+[node name="AttElement" type="PanelContainer"]
 custom_minimum_size = Vector2(0, 40)
+script = ExtResource("1_r5y8h")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2

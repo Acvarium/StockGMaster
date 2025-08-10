@@ -102,7 +102,7 @@ func get_tags_for_item(id):
 	return current_item_tags
 
 
-func get_atachmetns_for_item(id):
+func get_attachmetns_for_item(id):
 	var current_item_attachments_db = db.select_rows("item_attachments", "item_id = '" + str(id) + "'", ["*"])
 	return current_item_attachments_db
 

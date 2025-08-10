@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ymef651v1yws"]
+[gd_scene load_steps=19 format=3 uid="uid://ymef651v1yws"]
 
 [ext_resource type="Script" uid="uid://btgdynxo0eoev" path="res://objects/ItemListElement2.gd" id="1_80c12"]
 [ext_resource type="StyleBox" uid="uid://bwo64t2nmfot" path="res://styles/ItemList2PanelStyle.tres" id="1_a1fgo"]
@@ -10,6 +10,7 @@
 [ext_resource type="StyleBox" uid="uid://ydrmcbb64npw" path="res://styles/FramedButtonNormal.tres" id="7_b7ah0"]
 [ext_resource type="StyleBox" uid="uid://bfdnm6y4j5a11" path="res://styles/FramedButtonHover.tres" id="8_bgha2"]
 [ext_resource type="StyleBox" uid="uid://chknldgol0rwk" path="res://styles/FramedButtonPressed.tres" id="9_llh3k"]
+[ext_resource type="Script" uid="uid://c568l80yoksa6" path="res://objects/AttachmentViewer.gd" id="11_4tjhw"]
 [ext_resource type="Script" uid="uid://c6wnbqtn5l73u" path="res://objects/TagViewer.gd" id="11_kkqct"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wy16"]
@@ -265,6 +266,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("11_kkqct")
 selectable_tags = false
+
+[node name="Attachments" type="ScrollContainer" parent="DataControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AttachmentViewer" type="HFlowContainer" parent="DataControl/Attachments"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("11_4tjhw")
 
 [node name="CheckControl" type="Control" parent="."]
 visible = false

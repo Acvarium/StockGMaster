@@ -21,7 +21,7 @@ var current_image_path = ""
 var current_action_data_type = Global.ActionDataType.None
 var current_stock_data = {}
 var current_item_tags_data = {}
-
+var current_item_att_data = {}
 
 func show_item_data_components(to_show = true):
 	for i in item_data_components:
@@ -53,6 +53,10 @@ func _show(what_to_do, action_data_type):
 			if "id" in current_item_data.keys():
 				current_item_tags_data = main_node.get_tags_for_item(current_item_data.id)
 		tags_element.set_tags(current_item_tags_data)
+		if "attachments" in current_item_data.keys():
+			attachment_element.set_attachments(current_item_data.attachments)
+		else:
+			attachment_element.set_attachments(null)
 		show_item_data_components(true)
 		show_stock_data_components(current_mode == Global.WhatToDo.Create)
 	elif action_data_type == Global.ActionDataType.Stock:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=83 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" uid="uid://dgrk2ephkslqi" path="res://Main.gd" id="1_5mhyi"]
 [ext_resource type="Script" uid="uid://dln5ryh7py5lt" path="res://Database.gd" id="2_x8r34"]
@@ -78,6 +78,7 @@
 [ext_resource type="StyleBox" uid="uid://ydrmcbb64npw" path="res://styles/FramedButtonNormal.tres" id="40_mitij"]
 [ext_resource type="StyleBox" uid="uid://cjovq65yf3tov" path="res://styles/FramedButtonPressedDown.tres" id="40_ytdkf"]
 [ext_resource type="Script" uid="uid://c1jv063eh2y4j" path="res://objects/ProfileCreationDialogue.gd" id="54_0a21m"]
+[ext_resource type="Script" uid="uid://cayabd4ctj3nj" path="res://objects/AttachmentsDialogue.gd" id="77_8qby0"]
 [ext_resource type="Script" uid="uid://cdcsugqa44xiy" path="res://objects/WarningMessageDialogue.gd" id="79_wnkxs"]
 
 [sub_resource type="Theme" id="Theme_xicdx"]
@@ -1113,7 +1114,6 @@ texture_hover = ExtResource("22_8tugv")
 flip_h = true
 
 [node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "tags_element", "attachment_element", "image_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("9_p6ieq")]
-visible = false
 layout_mode = 1
 script = ExtResource("10_06y8t")
 name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
@@ -1657,7 +1657,7 @@ theme_override_font_sizes/font_size = 36
 theme_override_styles/hover = ExtResource("24_0srk0")
 theme_override_styles/pressed = ExtResource("25_veepo")
 theme_override_styles/normal = ExtResource("23_rqglp")
-text = "Confirm"
+text = "Save"
 
 [node name="AllTags" type="Button" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
 layout_mode = 2
@@ -1682,6 +1682,127 @@ theme_override_styles/normal = ExtResource("31_4mrd2")
 text = "None"
 
 [node name="CancelButton" type="Button" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/hover = ExtResource("27_xau5b")
+theme_override_styles/pressed = ExtResource("28_vl2i0")
+theme_override_styles/normal = ExtResource("26_dgnrv")
+text = "Cancel"
+
+[node name="AttachmentsDialogue" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("77_8qby0")
+
+[node name="CancelTreeSelection" type="Button" parent="AttachmentsDialogue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = ExtResource("16_uvvjq")
+theme_override_styles/pressed = ExtResource("15_e2j01")
+theme_override_styles/normal = ExtResource("15_e2j01")
+
+[node name="TSL" type="Control" parent="AttachmentsDialogue"]
+layout_mode = 1
+anchor_top = 0.09
+anchor_right = 1.0
+anchor_bottom = 0.91
+offset_left = 15.0
+offset_right = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="AttachmentsDialogue/TSL"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+ratio = 0.9
+
+[node name="Control" type="Panel" parent="AttachmentsDialogue/TSL/AspectRatioContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_blt5x")
+
+[node name="SC" type="ScrollContainer" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = -15.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="AttachmentViewer" type="HFlowContainer" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/SC"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -80.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="ConfirmButton" type="Button" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/hover = ExtResource("24_0srk0")
+theme_override_styles/pressed = ExtResource("25_veepo")
+theme_override_styles/normal = ExtResource("23_rqglp")
+text = "Save"
+
+[node name="AllTags" type="Button" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/hover = ExtResource("31_br1a5")
+theme_override_styles/pressed = ExtResource("32_apjd1")
+theme_override_styles/normal = ExtResource("33_lw3x1")
+text = "Add"
+
+[node name="NoneTags" type="Button" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+theme_override_styles/hover = ExtResource("29_jen6a")
+theme_override_styles/pressed = ExtResource("29_jen6a")
+theme_override_styles/normal = ExtResource("31_4mrd2")
+text = "Del"
+
+[node name="CancelButton" type="Button" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -2055,6 +2176,11 @@ color = Color(0.0905704, 0.0783957, 0.0685412, 1)
 [connection signal="pressed" from="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/AllTags" to="TagSelectionDialogue" method="_on_all_tags_pressed"]
 [connection signal="pressed" from="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/NoneTags" to="TagSelectionDialogue" method="_on_none_tags_pressed"]
 [connection signal="pressed" from="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/CancelButton" to="TagSelectionDialogue" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="AttachmentsDialogue/CancelTreeSelection" to="AttachmentsDialogue" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/ConfirmButton" to="AttachmentsDialogue" method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/AllTags" to="AttachmentsDialogue" method="_on_all_tags_pressed"]
+[connection signal="pressed" from="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/NoneTags" to="AttachmentsDialogue" method="_on_none_tags_pressed"]
+[connection signal="pressed" from="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/CancelButton" to="AttachmentsDialogue" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="ActionConfirmDialogue/CancelTreeSelection" to="ActionConfirmDialogue" method="_on_cancel_tree_selection_pressed"]
 [connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/AcceptButton" to="ActionConfirmDialogue" method="_on_accept_button_pressed"]
 [connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/ConfirmButton" to="ActionConfirmDialogue" method="_on_confirm_button_pressed"]
