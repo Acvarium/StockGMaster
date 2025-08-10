@@ -52,3 +52,5 @@ text = "image_file.jpg"
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 mouse_filter = 2
+
+[connection signal="gui_input" from="Button" to="." method="_on_button_gui_input"]

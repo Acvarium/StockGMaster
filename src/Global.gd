@@ -9,6 +9,7 @@ var profiles = []
 signal profiles_loaded
 signal warning_message(title : String, message : String)
 signal action_dialogue(recever, conf_what_to_do, warning_message)
+signal open_file_popup(filepath, event_pos)
 
 var max_image_size = 200
 
@@ -112,6 +113,25 @@ func load_config():
 
 func get_data_path():
 	return profiles[current_profile_id].path
+
+
+func get_image_folder_path():
+	return get_data_path() + "images/"
+
+
+func get_attachments_folder_path():
+	return get_data_path() + "attachments/"
+
+
+func open_file_at(file_path):
+	var absolute_path = ProjectSettings.globalize_path(file_path)
+	if DirAccess.dir_exists_absolute(absolute_path):
+		OS.shell_open(absolute_path)
+	elif FileAccess.file_exists(absolute_path):
+		OS.shell_open(absolute_path)
+	else:
+		push_error("File Not Found")
+
 
 
 func save_config():

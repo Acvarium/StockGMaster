@@ -52,11 +52,11 @@ func _show(what_to_do, action_data_type):
 			delete_button.visible = true
 			if "id" in current_item_data.keys():
 				current_item_tags_data = main_node.get_tags_for_item(current_item_data.id)
+			if "attachments" in current_item_data.keys():
+				attachment_element.set_attachments(current_item_data.attachments)
+			else:
+				attachment_element.set_attachments(null)
 		tags_element.set_tags(current_item_tags_data)
-		if "attachments" in current_item_data.keys():
-			attachment_element.set_attachments(current_item_data.attachments)
-		else:
-			attachment_element.set_attachments(null)
 		show_item_data_components(true)
 		show_stock_data_components(current_mode == Global.WhatToDo.Create)
 	elif action_data_type == Global.ActionDataType.Stock:

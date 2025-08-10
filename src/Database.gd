@@ -33,7 +33,7 @@ func get_db_path():
 
 
 func get_image_paths():
-	var image_dir_path = get_image_folder_path()
+	var image_dir_path = Global.get_image_folder_path()
 	var image_names = []
 	var d = DirAccess.open(image_dir_path)
 	if d == null:
@@ -166,9 +166,9 @@ func get_unit_name_by_id(_id):
 		return unit_name_data[0].name
 	return ""
 
+#func get_image_folder_path():
+	#return get_data_path() + "/images/"
 
-func get_image_folder_path():
-	return get_data_path() + "/images/"
 
 
 func get_location_name_by_id(location_id):
@@ -300,7 +300,7 @@ func get_number_of_items_with_images(list_of_image_paths):
 func delete_images(list_of_image_paths):
 	for image_path in list_of_image_paths:
 		db.update_rows("items", "image_path = '" + image_path + "'", {"image_path" : ""})
-		DirAccess.remove_absolute(get_image_folder_path() + image_path)
+		DirAccess.remove_absolute(Global.get_image_folder_path() + image_path)
 
 
 func update_tables():

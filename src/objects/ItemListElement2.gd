@@ -39,6 +39,7 @@ signal image_selection_button_pressed
 signal clear_tags_button_pressed
 signal edit_text_changed
 signal quantity_changed(new_value)
+signal edit_attachments_button_pressed
 
 enum ListItemModes {
 	Text,
@@ -139,7 +140,10 @@ func update_image(image):
 
 
 func _on_edit_tags_button_pressed():
-	edit_tags_button_pressed.emit()
+	if list_item_mode == ListItemModes.Tags:
+		edit_tags_button_pressed.emit()
+	elif list_item_mode == ListItemModes.Attachments:
+		edit_attachments_button_pressed.emit()
 
 
 func _on_icon_button_pressed():

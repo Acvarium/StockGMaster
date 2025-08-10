@@ -50,6 +50,7 @@ func _ready():
 	if Global.is_on_mobule():
 		$FileDialog.root_subfolder = "/storage/emulated/0"
 	$MainControl/HSplit/MainInfo/TabContainer.current_tab = 0
+	
 	load_images_to_viewer()
 	OS.request_permissions()
 
@@ -200,7 +201,6 @@ func warning_dialogue(warning_message, title : String = ""):
 	
 
 func get_image_by_path(image_path):
-	
 	if image_path != "":
 		var full_path = get_image_folder_path(image_path)
 		if FileAccess.file_exists(full_path):
@@ -211,7 +211,7 @@ func get_image_by_path(image_path):
 
 func get_image_folder_path(path):
 	if path != "":
-		return $Database.get_image_folder_path() + path
+		return Global.get_image_folder_path() + path
 	else:
 		#if OS.get_name() == "Android":
 			#return "res://textures/NoImage.jpg"
@@ -654,7 +654,7 @@ func _on_file_dialog_files_selected(paths):
 	var image_name_to_select = ""
 	for path : String in paths:
 		var file_name = path.get_file()
-		var full_new_path = $Database.get_image_folder_path() + file_name
+		var full_new_path = Global.get_image_folder_path() + file_name
 		var resized_image_path = resize_and_save_image(path)
 		if resized_image_path != null and !resized_image_path.is_empty():
 			image_name_to_select = resized_image_path.get_file()
@@ -663,10 +663,10 @@ func _on_file_dialog_files_selected(paths):
 
 func resize_and_save_image(path):
 	var file_name = path.get_file()
-	var full_new_path = $Database.get_image_folder_path() + file_name
+	var full_new_path = Global.get_image_folder_path() + file_name
 
 	while FileAccess.file_exists(full_new_path):
-		full_new_path = $Database.get_image_folder_path() + \
+		full_new_path = Global.get_image_folder_path() + \
 			file_name.get_basename() + str(randi()) + "." + file_name.get_extension()
 
 	var original_image = Image.new()

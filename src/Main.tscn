@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=85 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" uid="uid://dgrk2ephkslqi" path="res://Main.gd" id="1_5mhyi"]
 [ext_resource type="Script" uid="uid://dln5ryh7py5lt" path="res://Database.gd" id="2_x8r34"]
@@ -80,6 +80,8 @@
 [ext_resource type="Script" uid="uid://c1jv063eh2y4j" path="res://objects/ProfileCreationDialogue.gd" id="54_0a21m"]
 [ext_resource type="Script" uid="uid://cayabd4ctj3nj" path="res://objects/AttachmentsDialogue.gd" id="77_8qby0"]
 [ext_resource type="Script" uid="uid://cdcsugqa44xiy" path="res://objects/WarningMessageDialogue.gd" id="79_wnkxs"]
+[ext_resource type="StyleBox" uid="uid://c285i81pa11sx" path="res://styles/ItemListPanelStyle.tres" id="81_lo0ny"]
+[ext_resource type="Script" uid="uid://c8vgv7181ac52" path="res://objects/OpenFilePopupMenu.gd" id="82_mitij"]
 
 [sub_resource type="Theme" id="Theme_xicdx"]
 default_font_size = 45
@@ -1114,6 +1116,7 @@ texture_hover = ExtResource("22_8tugv")
 flip_h = true
 
 [node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "tags_element", "attachment_element", "image_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("9_p6ieq")]
+visible = false
 layout_mode = 1
 script = ExtResource("10_06y8t")
 name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
@@ -2093,6 +2096,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0.0905704, 0.0783957, 0.0685412, 1)
 
+[node name="OpenFilePopupMenu" type="PopupMenu" parent="."]
+size = Vector2i(197, 100)
+theme_override_styles/panel = ExtResource("81_lo0ny")
+item_count = 2
+item_0/text = "Open"
+item_0/id = 0
+item_1/text = "Open in File Manager"
+item_1/id = 1
+script = ExtResource("82_mitij")
+
 [connection signal="categories_data_loaded" from="Database" to="." method="_on_database_categories_data_loaded"]
 [connection signal="item_data_loaded" from="Database" to="." method="_on_database_item_data_loaded"]
 [connection signal="locations_data_loaded" from="Database" to="." method="_on_database_locations_data_loaded"]
@@ -2192,6 +2205,7 @@ color = Color(0.0905704, 0.0783957, 0.0685412, 1)
 [connection signal="timeout" from="Timers/SideInfoPanelTimer2" to="." method="_on_side_info_panel_timer_2_timeout"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="files_selected" from="FileDialog" to="." method="_on_file_dialog_files_selected"]
+[connection signal="id_pressed" from="OpenFilePopupMenu" to="OpenFilePopupMenu" method="_on_id_pressed"]
 
 [editable path="ItemCreationDialogue"]
 [editable path="ItemFilteringDialogue"]
