@@ -79,7 +79,7 @@ func set_unfold_control(value):
 
 
 func set_tags(tags_data):
-	$TitleControl/ClearTagsButton.disabled = tags_data.size() == 0
+	$TitleControl/ClearTagsButton.disabled = tags_data == null or tags_data.size() == 0
 	$DataControl/Tags/TagViewer.refrash_tags_list(tags_data)
 
 

@@ -46,6 +46,7 @@ func _show(what_to_do, action_data_type):
 		name_list_item.set_editable(true)
 		if what_to_do == Global.WhatToDo.Create:
 			title_label.text = "create item"
+			attachment_element.set_tags(null)
 			delete_button.visible = false 
 		else:
 			title_label.text = "edit item"
@@ -55,7 +56,7 @@ func _show(what_to_do, action_data_type):
 			if "attachments" in current_item_data.keys():
 				attachment_element.set_tags(current_item_data.attachments)
 			else:
-				attachment_element.set_attachments(null)
+				attachment_element.set_tags(null)
 		tags_element.set_tags(current_item_tags_data)
 		show_item_data_components(true)
 		show_stock_data_components(current_mode == Global.WhatToDo.Create)
@@ -261,4 +262,5 @@ func _on_image_image_selection_button_pressed():
 
 
 func _on_attachments_edit_attachments_button_pressed() -> void:
-	Global.edit_attachments_for_item.emit(self, current_item_data.id)
+	if current_item_data != null and "id" in current_item_data.keys():
+		Global.edit_attachments_for_item.emit(self, current_item_data.id)
