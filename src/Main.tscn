@@ -1179,6 +1179,18 @@ title_text = "Attachments"
 list_item_mode = 5
 show_clear_button = false
 
+[node name="Label" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Attachments/TitleControl" index="0"]
+text = "Attachments"
+
+[node name="EditAttachmentsButton" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Attachments/TitleControl" index="3"]
+visible = true
+
+[node name="Edit" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Attachments/DataControl" index="0"]
+visible = false
+
+[node name="Tags" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Attachments/DataControl" index="3"]
+visible = true
+
 [node name="StockDataSeparator" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="7" instance=ExtResource("11_6eucy")]
 layout_mode = 2
 separator_text = "Initial Stock"
@@ -1694,7 +1706,7 @@ theme_override_styles/pressed = ExtResource("28_vl2i0")
 theme_override_styles/normal = ExtResource("26_dgnrv")
 text = "Cancel"
 
-[node name="AttachmentsDialogue" type="Control" parent="."]
+[node name="AttachmentsDialogue" type="Control" parent="." node_paths=PackedStringArray("attachment_viewer")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1703,8 +1715,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("77_8qby0")
+attachment_viewer = NodePath("TSL/AspectRatioContainer/Control/SC/AttachmentViewer")
 
-[node name="CancelTreeSelection" type="Button" parent="AttachmentsDialogue"]
+[node name="CancelBgButton" type="Button" parent="AttachmentsDialogue"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1758,6 +1771,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
+script = ExtResource("7_k3n6w")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control"]
 layout_mode = 1
@@ -2151,7 +2165,7 @@ script = ExtResource("82_mitij")
 [connection signal="image_selection_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Image" to="ItemCreationDialogue" method="_on_image_image_selection_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Category" to="ItemCreationDialogue" method="_on_category_selection_button_pressed"]
 [connection signal="edit_tags_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Tags" to="ItemCreationDialogue" method="_on_tags_edit_tags_button_pressed"]
-[connection signal="edit_tags_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Attachments" to="ItemCreationDialogue" method="_on_tags_edit_tags_button_pressed"]
+[connection signal="edit_attachments_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Attachments" to="ItemCreationDialogue" method="_on_attachments_edit_attachments_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Location" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
 [connection signal="location_button_pressed" from="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Quantity" to="ItemCreationDialogue" method="_on_location_selection_button_pressed"]
 [connection signal="pressed" from="ItemCreationDialogue/SDCButtons/HBoxContainer/SaveItemButton" to="ItemCreationDialogue" method="_on_save_item_button_pressed"]
@@ -2189,7 +2203,7 @@ script = ExtResource("82_mitij")
 [connection signal="pressed" from="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/AllTags" to="TagSelectionDialogue" method="_on_all_tags_pressed"]
 [connection signal="pressed" from="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/NoneTags" to="TagSelectionDialogue" method="_on_none_tags_pressed"]
 [connection signal="pressed" from="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/CancelButton" to="TagSelectionDialogue" method="_on_cancel_button_pressed"]
-[connection signal="pressed" from="AttachmentsDialogue/CancelTreeSelection" to="AttachmentsDialogue" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="AttachmentsDialogue/CancelBgButton" to="AttachmentsDialogue" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/ConfirmButton" to="AttachmentsDialogue" method="_on_confirm_button_pressed"]
 [connection signal="pressed" from="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/AllTags" to="AttachmentsDialogue" method="_on_all_tags_pressed"]
 [connection signal="pressed" from="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/NoneTags" to="AttachmentsDialogue" method="_on_none_tags_pressed"]
@@ -2208,6 +2222,7 @@ script = ExtResource("82_mitij")
 [connection signal="id_pressed" from="OpenFilePopupMenu" to="OpenFilePopupMenu" method="_on_id_pressed"]
 
 [editable path="ItemCreationDialogue"]
+[editable path="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Attachments"]
 [editable path="ItemFilteringDialogue"]
 [editable path="ProfileSelectionDialogue"]
 [editable path="ProfileCreationDialogue"]

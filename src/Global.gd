@@ -10,6 +10,8 @@ signal profiles_loaded
 signal warning_message(title : String, message : String)
 signal action_dialogue(recever, conf_what_to_do, warning_message)
 signal open_file_popup(filepath, event_pos)
+signal edit_attachments_for_item(recever, item_id)
+
 
 var max_image_size = 200
 

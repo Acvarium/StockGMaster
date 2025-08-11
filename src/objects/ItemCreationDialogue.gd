@@ -53,7 +53,7 @@ func _show(what_to_do, action_data_type):
 			if "id" in current_item_data.keys():
 				current_item_tags_data = main_node.get_tags_for_item(current_item_data.id)
 			if "attachments" in current_item_data.keys():
-				attachment_element.set_attachments(current_item_data.attachments)
+				attachment_element.set_tags(current_item_data.attachments)
 			else:
 				attachment_element.set_attachments(null)
 		tags_element.set_tags(current_item_tags_data)
@@ -258,3 +258,7 @@ func set_image_path(image_path):
 
 func _on_image_image_selection_button_pressed():
 	main_node.select_image_popup(self)
+
+
+func _on_attachments_edit_attachments_button_pressed() -> void:
+	Global.edit_attachments_for_item.emit(self, current_item_data.id)

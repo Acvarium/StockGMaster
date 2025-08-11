@@ -106,10 +106,6 @@ func get_attachmetns_for_item(id):
 	var current_item_attachments_db = db.select_rows("item_attachments", "item_id = '" + str(id) + "'", ["*"])
 	return current_item_attachments_db
 
-#
-#func get_filtered_items(tag_ids):
-	#pass
-
 
 func get_tag_ids_for_item(item_id):
 	var current_item_tags_db = db.select_rows("item_tags", "item_id = '" + str(item_id) + "'", ["tag_id"])

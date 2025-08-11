@@ -767,6 +767,9 @@ func _on_create_from_item_button_pressed():
 		create_item_from(selected_item_id)
 
 
+func get_attachmetns_for_item(item_id):
+	return $Database.get_attachmetns_for_item(item_id)
+
 func apply_filter():
 	if search_line_edit.text != "":
 		_on_search_line_edit_text_changed(search_line_edit.text)
