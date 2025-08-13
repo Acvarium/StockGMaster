@@ -18,9 +18,15 @@ extends Control
 @onready var side_info : Control = $MainControl/HSplit/SideInfo
 @export var clear_filter_button : TextureButton
 
+var last_image_dir = ""
+
+const image_files_filter = "*.jpg,*.png;Image Files"
+
 var selected_value : int = -1
 var tree_selection_index : int = -1
 const SIDE_PANEL_OFFSET = 42
+var file_dialogue_image_mode = true
+
 
 @onready var current_what_to_do = Global.WhatToDo.None
 @onready var current_action_data_type = Global.ActionDataType.None
@@ -643,7 +649,17 @@ func _on_side_info_panel_timer_timeout():
 
 
 func _on_add_image_button_pressed():
-	$FileDialog.popup()
+	open_image_selection_dialogue()
+
+
+func open_image_selection_dialogue():
+	file_dialogue_image_mode = true
+	var file_dialog = $FileDialog
+	file_dialog.clear_filters()
+	file_dialog.filters = ["*.jpg,*.png;Image Files"]
+	if DirAccess.dir_exists_absolute(last_image_dir):
+		file_dialog.current_dir = last_image_dir
+	file_dialog.popup()
 
 
 func _on_file_dialog_file_selected(path):
@@ -651,14 +667,18 @@ func _on_file_dialog_file_selected(path):
 
 
 func _on_file_dialog_files_selected(paths):
-	var image_name_to_select = ""
-	for path : String in paths:
-		var file_name = path.get_file()
-		var full_new_path = Global.get_image_folder_path() + file_name
-		var resized_image_path = resize_and_save_image(path)
-		if resized_image_path != null and !resized_image_path.is_empty():
-			image_name_to_select = resized_image_path.get_file()
-	load_images_to_viewer(image_name_to_select)
+	if file_dialogue_image_mode:
+		var image_name_to_select = ""
+		for path : String in paths:
+			image_name_to_select = path.get_base_dir()
+			var file_name = path.get_file()
+			var full_new_path = Global.get_image_folder_path() + file_name
+			var resized_image_path = resize_and_save_image(path)
+			if resized_image_path != null and !resized_image_path.is_empty():
+				image_name_to_select = resized_image_path.get_file()
+		load_images_to_viewer(image_name_to_select)
+	else:
+		pass
 
 
 func resize_and_save_image(path):

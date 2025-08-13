@@ -10,7 +10,7 @@ var what_to_do = Global.WhatToDo.None
 var base_title_label = "Are you sure?"
 
 func _ready():
-	Global.action_dialogue.connect(confirme_action_dialogue)
+	Global.action_dialogue.connect(confirme_action)
 	hide()
 
 
@@ -19,7 +19,7 @@ func _on_cancel_tree_selection_pressed():
 	hide()
 
 
-func confirme_action_dialogue(recever, conf_what_to_do, warning_message : String = ""):
+func confirme_action(recever, conf_what_to_do, warning_message : String = ""):
 	warning_label.text = warning_message
 	warning_label.visible = !warning_message.is_empty()
 	action_recever = recever
