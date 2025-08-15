@@ -1706,7 +1706,7 @@ theme_override_styles/pressed = ExtResource("28_vl2i0")
 theme_override_styles/normal = ExtResource("26_dgnrv")
 text = "Cancel"
 
-[node name="AttachmentsDialogue" type="Control" parent="." node_paths=PackedStringArray("attachment_viewer")]
+[node name="AttachmentsDialogue" type="Control" parent="." node_paths=PackedStringArray("attachment_viewer", "del_button")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1716,6 +1716,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("77_8qby0")
 attachment_viewer = NodePath("TSL/AspectRatioContainer/Control/SC/AttachmentViewer")
+del_button = NodePath("TSL/AspectRatioContainer/Control/HBoxContainer/DelAtt")
 
 [node name="CancelBgButton" type="Button" parent="AttachmentsDialogue"]
 layout_mode = 1
@@ -1797,7 +1798,7 @@ theme_override_styles/pressed = ExtResource("25_veepo")
 theme_override_styles/normal = ExtResource("23_rqglp")
 text = "Save"
 
-[node name="AllTags" type="Button" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
+[node name="AddAtt" type="Button" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
@@ -1808,7 +1809,7 @@ theme_override_styles/pressed = ExtResource("32_apjd1")
 theme_override_styles/normal = ExtResource("33_lw3x1")
 text = "Add"
 
-[node name="NoneTags" type="Button" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
+[node name="DelAtt" type="Button" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
@@ -2203,9 +2204,10 @@ script = ExtResource("82_mitij")
 [connection signal="pressed" from="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/NoneTags" to="TagSelectionDialogue" method="_on_none_tags_pressed"]
 [connection signal="pressed" from="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/CancelButton" to="TagSelectionDialogue" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="AttachmentsDialogue/CancelBgButton" to="AttachmentsDialogue" method="_on_cancel_button_pressed"]
+[connection signal="tag_pressed_sig" from="AttachmentsDialogue/TSL/AspectRatioContainer/Control/SC/AttachmentViewer" to="AttachmentsDialogue" method="_on_attachment_viewer_tag_pressed_sig"]
 [connection signal="pressed" from="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/ConfirmButton" to="AttachmentsDialogue" method="_on_confirm_button_pressed"]
-[connection signal="pressed" from="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/AllTags" to="AttachmentsDialogue" method="_on_all_tags_pressed"]
-[connection signal="pressed" from="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/NoneTags" to="AttachmentsDialogue" method="_on_none_tags_pressed"]
+[connection signal="pressed" from="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/AddAtt" to="AttachmentsDialogue" method="_on_add_att_pressed"]
+[connection signal="pressed" from="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/DelAtt" to="AttachmentsDialogue" method="_on_del_att_pressed"]
 [connection signal="pressed" from="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer/CancelButton" to="AttachmentsDialogue" method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="ActionConfirmDialogue/CancelTreeSelection" to="ActionConfirmDialogue" method="_on_cancel_tree_selection_pressed"]
 [connection signal="pressed" from="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer/AcceptButton" to="ActionConfirmDialogue" method="_on_accept_button_pressed"]

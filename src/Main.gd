@@ -19,14 +19,16 @@ extends Control
 @export var clear_filter_button : TextureButton
 
 var last_image_dir = ""
+var last_file_dir = ""
 
 const image_files_filter = "*.jpg,*.png;Image Files"
 
 var selected_value : int = -1
 var tree_selection_index : int = -1
 const SIDE_PANEL_OFFSET = 42
-var file_dialogue_image_mode = true
 
+var file_dialogue_mode = Global.FileDialogueModes.Images
+var file_dialogue_reveiver
 
 @onready var current_what_to_do = Global.WhatToDo.None
 @onready var current_action_data_type = Global.ActionDataType.None
@@ -253,14 +255,14 @@ func exec_action_popup(what_to_do, action_data_type, for_dialogue = null, item_i
 		tree_selection_dialogue.set_tree_element_item_selection_action_type(action_data_type)
 		
 		tree_selection_dialogue.build_tree($Database.locations_data, item_id)
-		tree_selection_dialogue.data_recever_dialogue = for_dialogue
+		tree_selection_dialogue.data_receiver_dialogue = for_dialogue
 		tree_selection_dialogue.item_id = item_id
 		tree_selection_dialogue._show()
 	if action_data_type == Global.ActionDataType.Category or \
 			action_data_type == Global.ActionDataType.ParentCategory:
 		tree_selection_dialogue.set_tree_element_item_selection_action_type(action_data_type)
 		tree_selection_dialogue.build_tree($Database.categories_data, item_id)
-		tree_selection_dialogue.data_recever_dialogue = for_dialogue
+		tree_selection_dialogue.data_receiver_dialogue = for_dialogue
 		tree_selection_dialogue.item_id = item_id
 		tree_selection_dialogue._show()
 	if action_data_type == Global.ActionDataType.Image:
@@ -290,8 +292,8 @@ func get_all_tags_data():
 	return $Database.tags_data
 
 
-func select_tags_with_dialogue(recever, selected_tags = []):
-	$TagSelectionDialogue.select_tags_with_dialogue(recever, selected_tags)
+func select_tags_with_dialogue(receiver, selected_tags = []):
+	$TagSelectionDialogue.select_tags_with_dialogue(receiver, selected_tags)
 	$TagSelectionDialogue.show()
 
 
@@ -354,10 +356,14 @@ func delete_tags(tag_ids):
 
 
 func save_item(item_data, to_pull = true):
-	$Database.save_item(item_data)
+	var item_id = $Database.save_item(item_data)
 	if to_pull:
 		$Database.pull_items_data()
-	return $Database.get_new_item_id()
+	return item_id
+
+
+func pull_items_data():
+	$Database.pull_items_data()
 
 
 func save_tag(tag_data, to_pull = true):
@@ -396,7 +402,6 @@ func get_filtered_item_data():
 	clear_filter_button.visible = to_filter
 	if to_filter:
 		_items = $Database.get_filtered_items(filter_tag_ids)
-	
 	return _items
 
 
@@ -653,7 +658,7 @@ func _on_add_image_button_pressed():
 
 
 func open_image_selection_dialogue():
-	file_dialogue_image_mode = true
+	file_dialogue_mode = Global.FileDialogueModes.Images
 	var file_dialog = $FileDialog
 	file_dialog.clear_filters()
 	file_dialog.filters = ["*.jpg,*.png;Image Files"]
@@ -662,32 +667,58 @@ func open_image_selection_dialogue():
 	file_dialog.popup()
 
 
+func open_file_selection_dialogue(receiver = null):
+	file_dialogue_reveiver = receiver
+	file_dialogue_mode = Global.FileDialogueModes.Files
+	var file_dialog = $FileDialog
+	file_dialog.clear_filters()
+	if DirAccess.dir_exists_absolute(last_file_dir):
+		file_dialog.current_dir = last_file_dir
+	file_dialog.popup()
+
+
 func _on_file_dialog_file_selected(path):
 	print(path)
 
 
+func attach_file_to_item(item_id, file_path):
+	if not FileAccess.file_exists(file_path):
+		return
+	var file_name = file_path.get_file()
+	var full_new_path = get_uniguen_file_name(Global.get_attachments_folder_path(), file_name)
+	var dir := DirAccess.open("res://")
+	dir.copy(file_path, full_new_path)
+	$Database.add_attachment(item_id, file_name)
+	
+
 func _on_file_dialog_files_selected(paths):
-	if file_dialogue_image_mode:
+	if file_dialogue_mode == Global.FileDialogueModes.Images:
 		var image_name_to_select = ""
 		for path : String in paths:
-			image_name_to_select = path.get_base_dir()
+			last_image_dir = path.get_base_dir()
 			var file_name = path.get_file()
 			var full_new_path = Global.get_image_folder_path() + file_name
 			var resized_image_path = resize_and_save_image(path)
 			if resized_image_path != null and !resized_image_path.is_empty():
 				image_name_to_select = resized_image_path.get_file()
 		load_images_to_viewer(image_name_to_select)
-	else:
-		pass
+	elif file_dialogue_mode == Global.FileDialogueModes.Files:
+		if file_dialogue_reveiver != null:
+			file_dialogue_reveiver.add_files_from_paths(paths)
+
+
+func get_uniguen_file_name(dir_path : String, file_name : String):
+	file_name = file_name.get_file()
+	var full_new_path = dir_path + file_name
+	while FileAccess.file_exists(full_new_path):
+		full_new_path = dir_path + \
+			file_name.get_basename() + str(randi()) + "." + file_name.get_extension()
+	return full_new_path
 
 
 func resize_and_save_image(path):
 	var file_name = path.get_file()
-	var full_new_path = Global.get_image_folder_path() + file_name
-
-	while FileAccess.file_exists(full_new_path):
-		full_new_path = Global.get_image_folder_path() + \
-			file_name.get_basename() + str(randi()) + "." + file_name.get_extension()
+	var full_new_path = get_uniguen_file_name(Global.get_image_folder_path(), file_name)
 
 	var original_image = Image.new()
 	var err = original_image.load(path)
@@ -789,6 +820,7 @@ func _on_create_from_item_button_pressed():
 
 func get_attachmetns_for_item(item_id):
 	return $Database.get_attachmetns_for_item(item_id)
+
 
 func apply_filter():
 	if search_line_edit.text != "":

@@ -427,11 +427,12 @@ func update_value(action_data_type, for_id, with_value):
 func save_item(new_item_data):
 	if new_item_data.id in items_data.keys():
 		db.update_rows("items", "id = '" + str(new_item_data.id) + "'", new_item_data)
+		return new_item_data.id
 #TODO add the rest of the data
 	else:
 		new_item_data.erase('id')
 		db.insert_row("items", new_item_data)
-
+		return get_new_item_id()
 
 func save_tag(new_tag_data):
 	if "name" in new_tag_data:
@@ -450,6 +451,13 @@ func save_location(new_location_data):
 	else:
 		new_location_data.erase('id')
 		db.insert_row("locations", new_location_data)
+
+
+func add_attachment(item_id, file_path):
+	var new_attachment_data = {}
+	new_attachment_data.item_id = item_id
+	new_attachment_data.path = file_path
+	db.insert_row("item_attachments", new_attachment_data)
 
 
 func save_category(new_category_data):

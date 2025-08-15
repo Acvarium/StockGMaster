@@ -78,9 +78,9 @@ func set_unfold_control(value):
 		unfold_button.visible = false
 
 
-func set_tags(tags_data):
+func set_tags(tags_data, current_selected_tags = [], tag_colors = {}):
 	$TitleControl/ClearTagsButton.disabled = tags_data == null or tags_data.size() == 0
-	$DataControl/Tags/TagViewer.refrash_tags_list(tags_data)
+	$DataControl/Tags/TagViewer.refrash_tags_list(tags_data, current_selected_tags, tag_colors)
 
 
 func set_location_button_text(_text):

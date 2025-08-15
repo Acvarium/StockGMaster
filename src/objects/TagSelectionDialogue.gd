@@ -1,8 +1,8 @@
 extends Control
 @export var tag_viewer : Control
-var data_recever_dialogue = null
+var data_receiver_dialogue = null
 @onready var main_node = get_tree().get_root().get_node("Main")
-var action_recever
+var action_receiver
 
 func _ready():
 	pass # Replace with function body.
@@ -10,7 +10,7 @@ func _ready():
 
 func select_tags_with_dialogue(recover, selected_tags = []):
 	var all_tags_data = main_node.get_all_tags_data()
-	action_recever = recover
+	action_receiver = recover
 	tag_viewer.refrash_tags_list(all_tags_data, selected_tags)
 
 
@@ -29,8 +29,8 @@ func _on_tag_viewer_tag_pressed_sig():
 
 func _on_confirm_button_pressed():
 	var tags_selected = tag_viewer.get_selected_ids()
-	if action_recever:
-		action_recever.update_tags(tags_selected)
+	if action_receiver:
+		action_receiver.update_tags(tags_selected)
 	hide()
 
 

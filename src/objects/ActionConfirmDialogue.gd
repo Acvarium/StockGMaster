@@ -5,7 +5,7 @@ extends Control
 @export var canc_button : Button
 @export var acc_button : Button
 
-var action_recever = null
+var action_receiver = null
 var what_to_do = Global.WhatToDo.None
 var base_title_label = "Are you sure?"
 
@@ -19,10 +19,10 @@ func _on_cancel_tree_selection_pressed():
 	hide()
 
 
-func confirme_action(recever, conf_what_to_do, warning_message : String = ""):
+func confirme_action(receiver, conf_what_to_do, warning_message : String = ""):
 	warning_label.text = warning_message
 	warning_label.visible = !warning_message.is_empty()
-	action_recever = recever
+	action_receiver = receiver
 	what_to_do = conf_what_to_do
 	title_label.text = base_title_label
 	conf_button.visible = true
@@ -47,12 +47,12 @@ func warning_dialogue(warning_message, title : String = ""):
 
 func reset_values():
 	what_to_do = Global.WhatToDo.None
-	action_recever = null
+	action_receiver = null
 
 
 func _on_confirm_button_pressed():
-	if action_recever and what_to_do != Global.WhatToDo.None:
-		action_recever.confirme_action(what_to_do)
+	if action_receiver and what_to_do != Global.WhatToDo.None:
+		action_receiver.confirme_action(what_to_do)
 	reset_values()
 	hide()
 

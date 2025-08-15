@@ -21,7 +21,7 @@ var current_image_path = ""
 var current_action_data_type = Global.ActionDataType.None
 var current_stock_data = {}
 var current_item_tags_data = {}
-var current_item_att_data = {}
+var current_item_att_data = []
 
 func show_item_data_components(to_show = true):
 	for i in item_data_components:
@@ -36,6 +36,15 @@ func show_stock_data_components(to_show = true):
 func _notification(what):
 	if what == NOTIFICATION_VISIBILITY_CHANGED and visible:
 		$ItemsPanel/ScrollContainer.scroll_vertical = 0
+
+
+func update_attachments(new_att_data : Array):
+	current_item_att_data = new_att_data.duplicate(true)
+	update_attachments_view()
+
+
+func update_attachments_view():
+	attachment_element.set_tags(current_item_att_data)
 
 
 func _show(what_to_do, action_data_type):
@@ -53,10 +62,7 @@ func _show(what_to_do, action_data_type):
 			delete_button.visible = true
 			if "id" in current_item_data.keys():
 				current_item_tags_data = main_node.get_tags_for_item(current_item_data.id)
-			if "attachments" in current_item_data.keys():
-				attachment_element.set_tags(current_item_data.attachments)
-			else:
-				attachment_element.set_tags(null)
+			update_attachments_view()
 		tags_element.set_tags(current_item_tags_data)
 		show_item_data_components(true)
 		show_stock_data_components(current_mode == Global.WhatToDo.Create)
@@ -87,6 +93,7 @@ func set_stock_data(item_data, stock_data):
 func set_item_tags(new_tags):
 	current_item_tags_data = new_tags
 
+
 func set_item_data(item_data):
 	if !main_node:
 		main_node = get_tree().get_root().get_node("Main")
@@ -97,6 +104,11 @@ func set_item_data(item_data):
 		item_index = item_data.id
 	else:
 		title_label.text = "Create Item"
+	
+	current_item_att_data = null
+	if "attachments" in current_item_data.keys():
+		current_item_att_data = current_item_data.attachments
+		
 	name_list_item.set_edit_text("")
 	if "name" in item_data.keys() and item_data.name:
 		name_list_item.set_edit_text(item_data.name)
@@ -169,7 +181,7 @@ func _on_save_item_button_pressed():
 			new_item_data.image_path = current_item_data.image_path
 		if current_item_data and "category_id" in current_item_data:
 			new_item_data.category_id = current_item_data.category_id
-		item_index = main_node.save_item(new_item_data, quantity == 0)
+		item_index = main_node.save_item(new_item_data, false)
 		var tag_ids = []
 		if current_item_tags_data and current_item_tags_data.size() > 0:
 			for k in current_item_tags_data:
@@ -178,6 +190,11 @@ func _on_save_item_button_pressed():
 			main_node.save_item_tags(item_index, tag_ids)
 		else:
 			main_node.save_item_tags(new_item_data.id, tag_ids)
+		
+		if current_item_att_data != null and current_item_att_data.size() != 0:
+			for a in current_item_att_data:
+				if "id" in a.keys() and a.id < 0:
+					main_node.attach_file_to_item(item_index, a.path)
 	var to_save_stock = quantity != 0
 	if current_action_data_type == Global.ActionDataType.Item and \
 			current_mode != Global.WhatToDo.Create:
@@ -191,6 +208,8 @@ func _on_save_item_button_pressed():
 			current_stock_data.item_id = item_index
 		current_stock_data.quantity = quantity
 		main_node.save_stock(current_stock_data)
+	else:
+		main_node.pull_items_data()
 	reset_and_hide()
 	main_node.refresh_items_list()
 
@@ -262,5 +281,7 @@ func _on_image_image_selection_button_pressed():
 
 
 func _on_attachments_edit_attachments_button_pressed() -> void:
-	if current_item_data != null and "id" in current_item_data.keys():
-		Global.edit_attachments_for_item.emit(self, current_item_data.id)
+	var _att_data = []
+	if current_item_att_data != null:
+		_att_data = current_item_att_data
+	Global.edit_attachments_for_item.emit(self, _att_data)

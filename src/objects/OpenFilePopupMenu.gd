@@ -8,7 +8,6 @@ func _ready() -> void:
 func open_event(file_path, event_pos):
 	current_file_path = file_path
 	position = event_pos
-	print(file_path)
 	popup()
 
 

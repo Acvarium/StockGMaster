@@ -1,5 +1,5 @@
 extends Control
-var data_recever_dialogue = null
+var data_receiver_dialogue = null
 var item_id = -1
 @onready var main_node = get_tree().get_root().get_node("Main")
 @onready var search_line_edit : LineEdit = $TSL/AspectRatioContainer/Control/SearchLine2/SearchLineEdit
@@ -7,8 +7,8 @@ var item_id = -1
 var current_tree_data : Dictionary
 
 func tree_value_selected(value, item_selection_action_type):
-	if data_recever_dialogue:
-		data_recever_dialogue.tree_value_selected(value, item_selection_action_type)
+	if data_receiver_dialogue:
+		data_receiver_dialogue.tree_value_selected(value, item_selection_action_type)
 	else:
 		main_node.tree_value_selected(value, item_selection_action_type)
 	hide()

@@ -1,18 +1,36 @@
 extends PanelContainer
 const texture_base_path = "res://textures/file_icons/"
 var file_path : String
+var tag_id : int = -1
 
 func set_file_path(_path):
 	file_path = _path
 	$HB/Label.text = _path
 	var extension = _path.get_extension().to_lower()
-	print(extension)
 	set_icon_by_ext(extension)
-	if FileAccess.file_exists(Global.get_attachments_folder_path() + file_path):
+	if FileAccess.file_exists(Global.get_attachments_folder_path() + file_path) or \
+			FileAccess.file_exists(file_path):
 		modulate.a = 1
 	else:
 		modulate.a = 0.5
+
+
+func get_button():
+	return $Button
+
+func set_color(new_color : Color):
+	modulate.r = new_color.r
+	modulate.g = new_color.g
+	modulate.b = new_color.b
 	
+
+func get_pressed():
+	return $Button.button_pressed
+
+
+func set_selectable(value):
+	$Button.toggle_mode = value
+
 
 func set_icon_by_ext(ext):
 	if ext == "mp4" or ext == "mkv" or ext == "mov":

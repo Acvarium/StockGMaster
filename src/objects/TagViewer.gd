@@ -15,7 +15,7 @@ func tag_pressed():
 	tag_pressed_sig.emit()
 
 
-func refrash_tags_list(_data, current_selected_tags = []):
+func refrash_tags_list(_data, current_selected_tags = [], tag_colors = {}):
 	clear_tags()
 	if _data == null:
 		return
@@ -24,6 +24,15 @@ func refrash_tags_list(_data, current_selected_tags = []):
 			var new_att = att_element_prefab.instantiate()
 			new_att.set_file_path(a.path)
 			add_child(new_att)
+			new_att.set_selectable(selectable_tags)
+			new_att.tag_id = a.id
+			if a.id < 0:
+				new_att.set_color(Color.DARK_SEA_GREEN)
+			if "delete" in a.keys() and a.delete == true:
+				new_att.set_color(Color(0.4, 0.352, 0.352))
+			if a.id in tag_colors.keys():
+				new_att.set_color(tag_colors[a.id])
+			new_att.get_button().pressed.connect(tag_pressed)
 	else:
 		for t in _data:
 			var new_tag = tag_element_prefab.instantiate()
@@ -32,6 +41,8 @@ func refrash_tags_list(_data, current_selected_tags = []):
 			new_tag.tag_id = t
 			new_tag.set_selectable(selectable_tags)
 			new_tag.set_pressed(t in current_selected_tags)
+			if t in tag_colors.keys():
+				new_tag.set_color(tag_colors[t])
 			add_child(new_tag)
 
 

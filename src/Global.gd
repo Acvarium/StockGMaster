@@ -8,9 +8,9 @@ var profiles = []
 
 signal profiles_loaded
 signal warning_message(title : String, message : String)
-signal action_dialogue(recever, conf_what_to_do, warning_message)
+signal action_dialogue(receiver, conf_what_to_do, warning_message)
 signal open_file_popup(filepath, event_pos)
-signal edit_attachments_for_item(recever, item_id)
+signal edit_attachments_for_item(receiver, att_data)
 
 
 var max_image_size = 200
@@ -41,6 +41,11 @@ enum ProfileValidationStatus {
 	PathExists,
 	EmptyName,
 	EmptyPath
+}
+
+enum FileDialogueModes {
+	Images,
+	Files
 }
 
 
@@ -131,8 +136,6 @@ func open_file_at(file_path):
 		OS.shell_open(absolute_path)
 	elif FileAccess.file_exists(absolute_path):
 		OS.shell_open(absolute_path)
-	else:
-		push_error("File Not Found")
 
 
 
