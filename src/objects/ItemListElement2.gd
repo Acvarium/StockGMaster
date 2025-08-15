@@ -17,7 +17,7 @@ extends Panel
 		$DataControl/Button.visible = list_item_mode == ListItemModes.tButton
 		$IconControl.visible = list_item_mode == ListItemModes.Icon
 		$DataControl/SpinBox.visible = list_item_mode == ListItemModes.Quantity
-		$DataControl/Tags.visible = list_item_mode == ListItemModes.Tags or ListItemModes.Attachments
+		$DataControl/Tags.visible = list_item_mode == ListItemModes.Tags or list_item_mode == ListItemModes.Attachments
 		$TitleControl/EditTagsButton.visible = list_item_mode == ListItemModes.Tags
 		$TitleControl/ClearTagsButton.visible = list_item_mode == ListItemModes.Tags and show_clear_button
 		$TitleControl/EditAttachmentsButton.visible = list_item_mode == ListItemModes.Attachments
