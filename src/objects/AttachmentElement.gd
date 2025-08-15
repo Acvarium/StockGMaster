@@ -8,8 +8,10 @@ func set_file_path(_path):
 	$HB/Label.text = _path
 	var extension = _path.get_extension().to_lower()
 	set_icon_by_ext(extension)
-	if FileAccess.file_exists(Global.get_attachments_folder_path() + file_path) or \
-			FileAccess.file_exists(file_path):
+	var file_exists = FileAccess.file_exists(Global.get_attachments_folder_path() + file_path)
+	if file_path != file_path.get_file():
+		file_exists = FileAccess.file_exists(file_path)
+	if file_exists:
 		modulate.a = 1
 	else:
 		modulate.a = 0.5
