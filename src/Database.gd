@@ -211,7 +211,10 @@ func pull_tags_data():
 
 func get_new_item_id():
 	db.query("SELECT * FROM 'items' ORDER BY id DESC LIMIT 1;")
-	return db.query_result[0].id
+	if db.query_result.size() > 0:
+		return db.query_result[0].id
+	else:
+		return 0
 
 
 func get_new_tag_id():

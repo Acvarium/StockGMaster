@@ -691,8 +691,12 @@ func attach_file_to_item(item_id, file_path):
 		return
 	var file_name = file_path.get_file()
 	var full_new_path = get_uniguen_file_name(Global.get_attachments_folder_path(), file_name)
-	var dir := DirAccess.open("res://")
-	dir.copy(file_path, full_new_path)
+	#var dir := DirAccess.open("user://")
+	#dir.copy(file_path, full_new_path)
+	DirAccess.make_dir_recursive_absolute(Global.get_attachments_folder_path())
+	var err = DirAccess.copy_absolute(file_path, full_new_path)
+	if err != OK:
+		push_error("Не вдалося скопіювати файл: %s -> %s" % [file_path, full_new_path])
 	$Database.add_attachment(item_id, file_name)
 	
 

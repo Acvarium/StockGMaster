@@ -3,9 +3,12 @@ const texture_base_path = "res://textures/file_icons/"
 var file_path : String
 var tag_id : int = -1
 
-func set_file_path(_path):
+func set_file_path(_path : String):
 	file_path = _path
-	$HB/Label.text = _path
+	var path_text = _path
+	if _path.length() > 50:
+		path_text = "..." + _path.substr(max(_path.length() - 50, 0), 50)
+	$HB/Label.text = path_text
 	var extension = _path.get_extension().to_lower()
 	set_icon_by_ext(extension)
 	var file_exists = FileAccess.file_exists(Global.get_attachments_folder_path() + file_path)
