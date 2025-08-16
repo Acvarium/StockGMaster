@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene load_steps=86 format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" uid="uid://dgrk2ephkslqi" path="res://Main.gd" id="1_5mhyi"]
 [ext_resource type="Script" uid="uid://dln5ryh7py5lt" path="res://Database.gd" id="2_x8r34"]
@@ -77,6 +77,7 @@
 [ext_resource type="Texture2D" uid="uid://db60i04y7fo6a" path="res://textures/unfoldButton_hl.png" id="39_lo0ny"]
 [ext_resource type="StyleBox" uid="uid://ydrmcbb64npw" path="res://styles/FramedButtonNormal.tres" id="40_mitij"]
 [ext_resource type="StyleBox" uid="uid://cjovq65yf3tov" path="res://styles/FramedButtonPressedDown.tres" id="40_ytdkf"]
+[ext_resource type="Script" uid="uid://byg3grvbkdnf4" path="res://objects/GrabScroll.gd" id="52_nmx32"]
 [ext_resource type="Script" uid="uid://c1jv063eh2y4j" path="res://objects/ProfileCreationDialogue.gd" id="54_0a21m"]
 [ext_resource type="Script" uid="uid://cayabd4ctj3nj" path="res://objects/AttachmentsDialogue.gd" id="77_8qby0"]
 [ext_resource type="Script" uid="uid://cdcsugqa44xiy" path="res://objects/WarningMessageDialogue.gd" id="79_wnkxs"]
@@ -1116,7 +1117,6 @@ texture_hover = ExtResource("22_8tugv")
 flip_h = true
 
 [node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "tags_element", "attachment_element", "image_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("9_p6ieq")]
-visible = false
 layout_mode = 1
 script = ExtResource("10_06y8t")
 name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
@@ -1134,8 +1134,10 @@ delete_button = NodePath("SDCButtons/HBoxContainer/DeleteButton")
 
 [node name="ScrollContainer" parent="ItemCreationDialogue/ItemsPanel" index="0"]
 scroll_vertical = 100
+script = ExtResource("52_nmx32")
 
 [node name="VBoxContainer" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer" index="0"]
+mouse_filter = 2
 unfold_item_list = Array[NodePath]([NodePath("Name"), NodePath("Description")])
 
 [node name="ItemDataSeparator" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("11_6eucy")]
