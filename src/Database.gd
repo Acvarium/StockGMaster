@@ -299,6 +299,12 @@ func delete_images(list_of_image_paths):
 		DirAccess.remove_absolute(Global.get_image_folder_path() + image_path)
 
 
+func delete_attachments(attachments_paths):
+	for _path in attachments_paths:
+		db.delete_rows("item_attachments", "path = '" + _path + "'")
+		DirAccess.remove_absolute(Global.get_attachments_folder_path() + _path)
+
+
 func update_tables():
 	var tables = get_tables()
 	if not "item_attachments" in tables:

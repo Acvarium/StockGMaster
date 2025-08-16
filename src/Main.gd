@@ -120,6 +120,11 @@ func delete_images(list_of_image_paths):
 	load_images_to_viewer()
 
 
+func delete_attachments(attachments_paths):
+	$Database.delete_attachments(attachments_paths)
+	$Database.pull_items_data()
+
+
 func get_number_of_items_with_category(category_id):
 	return $Database.get_number_of_items_with_category(category_id)
 	
