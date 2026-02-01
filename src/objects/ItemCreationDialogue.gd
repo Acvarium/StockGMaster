@@ -190,18 +190,7 @@ func _on_save_item_button_pressed():
 			main_node.save_item_tags(item_index, tag_ids)
 		else:
 			main_node.save_item_tags(new_item_data.id, tag_ids)
-		
-		if current_item_att_data != null and current_item_att_data.size() != 0:
-			var att_to_delete = []
-			for a in current_item_att_data:
-				if "id" in a.keys() and a.id < 0 and \
-						((not "delete" in a.keys()) or a.delete != true):
-					main_node.attach_file_to_item(item_index, a.path)
-				if "id" in a.keys() and a.id >= 0 and \
-						"delete" in a.keys() and a.delete == true:
-					att_to_delete.append(a.path)
-			if att_to_delete.size() != 0:
-				main_node.delete_attachments(att_to_delete)
+		main_node.save_item_att_data(item_index, current_item_att_data)
 				
 	var to_save_stock = quantity != 0
 	if current_action_data_type == Global.ActionDataType.Item and \

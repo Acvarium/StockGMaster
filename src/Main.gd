@@ -716,6 +716,20 @@ func _on_file_dialog_files_selected(paths):
 			file_dialogue_reveiver.add_files_from_paths(paths)
 
 
+func save_item_att_data(item_id, att_data):
+	if att_data != null and att_data.size() != 0:
+		var att_to_delete = []
+		for a in att_data:
+			if "id" in a.keys() and a.id < 0 and \
+					((not "delete" in a.keys()) or a.delete != true):
+				attach_file_to_item(item_id, a.path)
+			if "id" in a.keys() and a.id >= 0 and \
+					"delete" in a.keys() and a.delete == true:
+				att_to_delete.append(a.path)
+		if att_to_delete.size() != 0:
+			delete_attachments(att_to_delete)
+
+
 func get_uniguen_file_name(dir_path : String, file_name : String):
 	file_name = file_name.get_file()
 	var full_new_path = dir_path + file_name
