@@ -22,6 +22,12 @@ enum WhatToDo {
 	Delete
 }
 
+
+func print_out(message : String):
+	print("<game-output>")
+	print(message)
+	print("</game-output>")
+
 enum ActionDataType {
 	None,
 	Location,

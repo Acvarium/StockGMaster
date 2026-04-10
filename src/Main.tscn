@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://bjythu8jrsr5o"]
+[gd_scene format=3 uid="uid://bjythu8jrsr5o"]
 
 [ext_resource type="Script" uid="uid://dgrk2ephkslqi" path="res://Main.gd" id="1_5mhyi"]
 [ext_resource type="Script" uid="uid://dln5ryh7py5lt" path="res://Database.gd" id="2_x8r34"]
@@ -101,7 +101,7 @@ shadow_color = Color(0, 0, 0, 0.403922)
 shadow_size = 10
 shadow_offset = Vector2(10, 10)
 
-[node name="Main" type="Control" node_paths=PackedStringArray("locations_tab_tree", "category_tab_tree", "tag_tab", "tag_selection_viewer", "image_grid", "clear_filter_button")]
+[node name="Main" type="Control" unique_id=1211903065 node_paths=PackedStringArray("locations_tab_tree", "category_tab_tree", "tag_tab", "tag_selection_viewer", "image_grid", "clear_filter_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -116,10 +116,10 @@ tag_selection_viewer = NodePath("TagSelectionDialogue/TSL/AspectRatioContainer/C
 image_grid = NodePath("ImageSelectionDialogue/ItemsPanel/ScrollContainer/ImageGridContainer")
 clear_filter_button = NodePath("MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer/ClearFilterButton")
 
-[node name="Database" type="Node" parent="."]
+[node name="Database" type="Node" parent="." unique_id=133490994]
 script = ExtResource("2_x8r34")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=726181272]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -128,7 +128,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.168627, 0.168627, 0.168627, 1)
 
-[node name="MainControl" type="Control" parent="."]
+[node name="MainControl" type="Control" parent="." unique_id=1241887737]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -136,7 +136,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="MainControl"]
+[node name="Panel" type="Panel" parent="MainControl" unique_id=1727081242]
 visible = false
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
@@ -147,7 +147,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="HSplit" type="HSplitContainer" parent="MainControl"]
+[node name="HSplit" type="HSplitContainer" parent="MainControl" unique_id=719458597]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -156,11 +156,11 @@ offset_right = -42.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MainInfo" type="Control" parent="MainControl/HSplit"]
+[node name="MainInfo" type="Control" parent="MainControl/HSplit" unique_id=1971143243]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 
-[node name="TabContainer" type="TabContainer" parent="MainControl/HSplit/MainInfo"]
+[node name="TabContainer" type="TabContainer" parent="MainControl/HSplit/MainInfo" unique_id=2113338249]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -170,7 +170,7 @@ grow_vertical = 2
 current_tab = 0
 tab_focus_mode = 0
 
-[node name="Items" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" node_paths=PackedStringArray("items_holder", "temp_items_holder", "item_page_switcher")]
+[node name="Items" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" unique_id=1150823501 node_paths=PackedStringArray("items_holder", "temp_items_holder", "item_page_switcher")]
 layout_mode = 2
 script = ExtResource("3_wxfjw")
 items_holder = NodePath("ItemsListPanel/ScrollContainer/VBoxContainer")
@@ -178,7 +178,7 @@ temp_items_holder = NodePath("ItemsListPanel/TempItemHolder")
 item_page_switcher = NodePath("ItemPageSwitcher")
 metadata/_tab_index = 0
 
-[node name="ItemsToolPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Items"]
+[node name="ItemsToolPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Items" unique_id=57042229]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -189,7 +189,7 @@ offset_bottom = 85.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("16_uvvjq")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel" unique_id=1446383833]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -200,11 +200,11 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer" unique_id=1759517890]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="FilterItemsButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer"]
+[node name="FilterItemsButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer" unique_id=1715733821]
 layout_mode = 2
 tooltip_text = "Filter Items"
 texture_normal = ExtResource("5_a43ws")
@@ -212,7 +212,7 @@ texture_pressed = ExtResource("6_aoymy")
 texture_hover = ExtResource("7_ytdkf")
 stretch_mode = 5
 
-[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer/FilterItemsButton"]
+[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer/FilterItemsButton" unique_id=549801885]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -224,7 +224,7 @@ texture = ExtResource("5_skfvt")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ClearFilterButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer"]
+[node name="ClearFilterButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer" unique_id=336936474]
 layout_mode = 2
 tooltip_text = "Clear Filter"
 texture_normal = ExtResource("9_cfjnh")
@@ -232,7 +232,7 @@ texture_pressed = ExtResource("10_mplfx")
 texture_hover = ExtResource("10_mplfx")
 stretch_mode = 5
 
-[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer/ClearFilterButton"]
+[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer/ClearFilterButton" unique_id=1077900953]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -244,13 +244,13 @@ texture = ExtResource("8_mplfx")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Spacer" type="ColorRect" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer"]
+[node name="Spacer" type="ColorRect" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer" unique_id=1634359770]
 visible = false
 custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
 color = Color(1, 1, 1, 0)
 
-[node name="CreateFromItemButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer"]
+[node name="CreateFromItemButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer" unique_id=1865759595]
 layout_mode = 2
 tooltip_text = "Create Item Based On Selected"
 texture_normal = ExtResource("5_a43ws")
@@ -258,7 +258,7 @@ texture_pressed = ExtResource("6_aoymy")
 texture_hover = ExtResource("7_ytdkf")
 stretch_mode = 5
 
-[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateFromItemButton"]
+[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateFromItemButton" unique_id=1510883985]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -270,7 +270,7 @@ texture = ExtResource("8_cfjnh")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="CreateItemButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer"]
+[node name="CreateItemButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer" unique_id=486587439]
 layout_mode = 2
 tooltip_text = "Create New Item"
 texture_normal = ExtResource("5_a43ws")
@@ -278,7 +278,7 @@ texture_pressed = ExtResource("6_aoymy")
 texture_hover = ExtResource("7_ytdkf")
 stretch_mode = 5
 
-[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateItemButton"]
+[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/CreateItemButton" unique_id=1070222200]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -290,7 +290,7 @@ texture = ExtResource("17_yf3a2")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ItemsListPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Items"]
+[node name="ItemsListPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Items" unique_id=77437167]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -302,7 +302,7 @@ offset_bottom = -45.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsListPanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsListPanel" unique_id=354442874]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -315,20 +315,20 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsListPanel/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsListPanel/ScrollContainer" unique_id=425059727]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("4_a2pk0")
 control_children = true
 
-[node name="TempItemHolder" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsListPanel"]
+[node name="TempItemHolder" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemsListPanel" unique_id=1307222276]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 
-[node name="ItemPageSwitcher" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Items"]
+[node name="ItemPageSwitcher" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Items" unique_id=542702846]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -343,7 +343,7 @@ grow_vertical = 0
 theme_override_styles/panel = ExtResource("16_uvvjq")
 script = ExtResource("9_uy3go")
 
-[node name="PagesHBox" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher"]
+[node name="PagesHBox" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher" unique_id=1836001472]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -352,25 +352,25 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="FirstPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox"]
+[node name="FirstPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox" unique_id=1535808077]
 layout_mode = 2
 texture_normal = ExtResource("9_ek63v")
 texture_pressed = ExtResource("10_4bst2")
 texture_hover = ExtResource("11_uy3go")
 stretch_mode = 5
 
-[node name="PrevPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox"]
+[node name="PrevPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox" unique_id=1055191179]
 layout_mode = 2
 texture_normal = ExtResource("20_15jft")
 texture_pressed = ExtResource("21_65tdk")
 texture_hover = ExtResource("22_8tugv")
 stretch_mode = 5
 
-[node name="PageNumControl" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox"]
+[node name="PageNumControl" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox" unique_id=611217286]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="CurrentPageLE" type="LineEdit" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/PageNumControl"]
+[node name="CurrentPageLE" type="LineEdit" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/PageNumControl" unique_id=1730383965]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.473
@@ -379,15 +379,15 @@ offset_top = 5.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/focus = ExtResource("12_ac6pf")
 theme_override_styles/normal = ExtResource("12_ac6pf")
+theme_override_styles/focus = ExtResource("12_ac6pf")
 text = "5"
 alignment = 1
 max_length = 4
 emoji_menu_enabled = false
 virtual_keyboard_type = 2
 
-[node name="NumberOfPagesLabel" type="Label" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/PageNumControl"]
+[node name="NumberOfPagesLabel" type="Label" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/PageNumControl" unique_id=1859639464]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -402,7 +402,7 @@ text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Slash" type="Label" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/PageNumControl"]
+[node name="Slash" type="Label" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox/PageNumControl" unique_id=1982020590]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -415,7 +415,7 @@ text = "/"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NextPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox"]
+[node name="NextPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox" unique_id=624725948]
 layout_mode = 2
 texture_normal = ExtResource("20_15jft")
 texture_pressed = ExtResource("21_65tdk")
@@ -423,7 +423,7 @@ texture_hover = ExtResource("22_8tugv")
 stretch_mode = 5
 flip_h = true
 
-[node name="LastPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox"]
+[node name="LastPageButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher/PagesHBox" unique_id=370972057]
 layout_mode = 2
 texture_normal = ExtResource("9_ek63v")
 texture_pressed = ExtResource("10_4bst2")
@@ -431,7 +431,7 @@ texture_hover = ExtResource("11_uy3go")
 stretch_mode = 5
 flip_h = true
 
-[node name="OptionButton" type="OptionButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher"]
+[node name="OptionButton" type="OptionButton" parent="MainControl/HSplit/MainInfo/TabContainer/Items/ItemPageSwitcher" unique_id=400233412]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -455,12 +455,12 @@ popup/item_2/id = 2
 popup/item_3/text = "10"
 popup/item_3/id = 3
 
-[node name="Locations" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
+[node name="Locations" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" unique_id=1412319488]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="LocationToolPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Locations"]
+[node name="LocationToolPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Locations" unique_id=985997274]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -471,7 +471,7 @@ offset_bottom = 85.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("16_uvvjq")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel" unique_id=500362866]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -480,16 +480,16 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="ItemsInSelectedLocations" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer"]
+[node name="ItemsInSelectedLocations" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer" unique_id=18642846]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 tooltip_text = "Create new location from selected"
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("10_ev2os")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/hover = ExtResource("11_wqlnj")
 text = "Items in Selected"
 
-[node name="CreateFromSelectedButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer"]
+[node name="CreateFromSelectedButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer" unique_id=217237274]
 layout_mode = 2
 tooltip_text = "Create Item Based On Selected"
 texture_normal = ExtResource("5_a43ws")
@@ -497,7 +497,7 @@ texture_pressed = ExtResource("6_aoymy")
 texture_hover = ExtResource("7_ytdkf")
 stretch_mode = 5
 
-[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateFromSelectedButton"]
+[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateFromSelectedButton" unique_id=1000055166]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -509,7 +509,7 @@ texture = ExtResource("8_cfjnh")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="CreateLocationButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer"]
+[node name="CreateLocationButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer" unique_id=1350129562]
 layout_mode = 2
 tooltip_text = "Create New Item"
 texture_normal = ExtResource("5_a43ws")
@@ -517,7 +517,7 @@ texture_pressed = ExtResource("6_aoymy")
 texture_hover = ExtResource("7_ytdkf")
 stretch_mode = 5
 
-[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton"]
+[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton" unique_id=1143122301]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -529,7 +529,7 @@ texture = ExtResource("17_yf3a2")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LocationStructTree" type="Tree" parent="MainControl/HSplit/MainInfo/TabContainer/Locations"]
+[node name="LocationStructTree" type="Tree" parent="MainControl/HSplit/MainInfo/TabContainer/Locations" unique_id=1522429638]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -545,12 +545,12 @@ select_mode = 2
 script = ExtResource("5_ar113")
 has_edit_buttons = true
 
-[node name="Categories" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
+[node name="Categories" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" unique_id=1017804187]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="CategoryToolPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Categories"]
+[node name="CategoryToolPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Categories" unique_id=428407561]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -561,7 +561,7 @@ offset_bottom = 85.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("16_uvvjq")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryToolPanel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryToolPanel" unique_id=627491517]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -570,7 +570,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="CreateCategoryButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryToolPanel/HBoxContainer"]
+[node name="CreateCategoryButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryToolPanel/HBoxContainer" unique_id=933783573]
 layout_mode = 2
 tooltip_text = "Create New Item"
 texture_normal = ExtResource("5_a43ws")
@@ -578,7 +578,7 @@ texture_pressed = ExtResource("6_aoymy")
 texture_hover = ExtResource("7_ytdkf")
 stretch_mode = 5
 
-[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryToolPanel/HBoxContainer/CreateCategoryButton"]
+[node name="Icon" type="TextureRect" parent="MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryToolPanel/HBoxContainer/CreateCategoryButton" unique_id=1529285701]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -590,7 +590,7 @@ texture = ExtResource("17_yf3a2")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="CategoryStructTree" type="Tree" parent="MainControl/HSplit/MainInfo/TabContainer/Categories"]
+[node name="CategoryStructTree" type="Tree" parent="MainControl/HSplit/MainInfo/TabContainer/Categories" unique_id=681291254]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -605,7 +605,7 @@ select_mode = 2
 script = ExtResource("5_ar113")
 has_edit_buttons = true
 
-[node name="Tags" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" node_paths=PackedStringArray("tag_viewer", "edit_button", "delete_button")]
+[node name="Tags" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" unique_id=777395414 node_paths=PackedStringArray("tag_viewer", "edit_button", "delete_button")]
 visible = false
 layout_mode = 2
 script = ExtResource("6_2kqfq")
@@ -614,7 +614,7 @@ edit_button = NodePath("TagToolPanel2/HBoxContainer/EditTagsButton")
 delete_button = NodePath("TagToolPanel2/HBoxContainer/DeleteSelectedTagsButton")
 metadata/_tab_index = 3
 
-[node name="Control" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Tags"]
+[node name="Control" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Tags" unique_id=840642925]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -626,7 +626,7 @@ offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/Control"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/Control" unique_id=751084581]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -634,14 +634,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TagViewer" type="HFlowContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/Control/ScrollContainer"]
+[node name="TagViewer" type="HFlowContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/Control/ScrollContainer" unique_id=1264689896]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 script = ExtResource("7_k3n6w")
 
-[node name="TagToolPanel2" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Tags"]
+[node name="TagToolPanel2" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Tags" unique_id=1485889746]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -652,7 +652,7 @@ offset_bottom = 85.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("16_uvvjq")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2" unique_id=1161007033]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -660,70 +660,70 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SelectAllTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+[node name="SelectAllTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer" unique_id=854927300]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("10_ev2os")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/hover = ExtResource("11_wqlnj")
 text = "Sel.All"
 
-[node name="DeselectAllTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+[node name="DeselectAllTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer" unique_id=80375426]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("10_ev2os")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/hover = ExtResource("11_wqlnj")
 text = "Deselect"
 
-[node name="Control" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+[node name="Control" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer" unique_id=469866654]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
-[node name="EditTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+[node name="EditTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer" unique_id=625541316]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-theme_override_styles/disabled = ExtResource("14_celwd")
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("10_ev2os")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/disabled = ExtResource("14_celwd")
 disabled = true
 text = "Edit"
 
-[node name="DeleteSelectedTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+[node name="DeleteSelectedTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer" unique_id=939527263]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-theme_override_styles/disabled = ExtResource("14_celwd")
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("10_ev2os")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/disabled = ExtResource("14_celwd")
 disabled = true
 text = "Delete"
 
-[node name="CreateTagButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer"]
+[node name="CreateTagButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Tags/TagToolPanel2/HBoxContainer" unique_id=1184035987]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("10_ev2os")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/hover = ExtResource("11_wqlnj")
 text = "Create"
 
-[node name="Projects" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
+[node name="Projects" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" unique_id=639046360]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
-[node name="Builds" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer"]
+[node name="Builds" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" unique_id=168878376]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 5
 
-[node name="Settings" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" node_paths=PackedStringArray("x0_75_button", "x1_0_button", "x1_25_button", "image_size_spinebox")]
+[node name="Settings" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer" unique_id=1498615069 node_paths=PackedStringArray("x0_75_button", "x1_0_button", "x1_25_button", "image_size_spinebox")]
 visible = false
 layout_mode = 2
 script = ExtResource("14_nrmw6")
@@ -733,7 +733,7 @@ x1_25_button = NodePath("SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Con
 image_size_spinebox = NodePath("SettingsPanel/ScrollContainer/VBoxContainer/ImageSize/DataControl/SpinBox")
 metadata/_tab_index = 6
 
-[node name="SettingsPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Settings"]
+[node name="SettingsPanel" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Settings" unique_id=1445937582]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -746,7 +746,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("14_2538q")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel" unique_id=667943890]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -758,22 +758,22 @@ offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer" unique_id=665665325]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 script = ExtResource("4_a2pk0")
 
-[node name="Separator" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("11_6eucy")]
+[node name="Separator" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer" unique_id=1443630023 instance=ExtResource("11_6eucy")]
 layout_mode = 2
 separator_text = "Global Settings"
 
-[node name="UIScale" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer"]
+[node name="UIScale" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer" unique_id=1688479994]
 custom_minimum_size = Vector2(250, 150)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("34_ytdkf")
 
-[node name="TitleControl" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale"]
+[node name="TitleControl" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale" unique_id=387505476]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -781,7 +781,7 @@ offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/TitleControl"]
+[node name="Label" type="Label" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/TitleControl" unique_id=1928148566]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.84
@@ -794,7 +794,7 @@ text = "UI Scale Factor"
 vertical_alignment = 1
 script = ExtResource("37_pf2t4")
 
-[node name="UnfoldButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/TitleControl"]
+[node name="UnfoldButton" type="TextureButton" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/TitleControl" unique_id=1849373543]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -810,7 +810,7 @@ texture_pressed = ExtResource("38_8qby0")
 texture_hover = ExtResource("39_lo0ny")
 stretch_mode = 3
 
-[node name="EditTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/TitleControl"]
+[node name="EditTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/TitleControl" unique_id=1113327660]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -823,12 +823,12 @@ offset_right = -45.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("40_mitij")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/hover = ExtResource("11_wqlnj")
 text = "Select Tags"
 
-[node name="ClearTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/TitleControl"]
+[node name="ClearTagsButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/TitleControl" unique_id=26441631]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -841,13 +841,13 @@ offset_right = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("40_mitij")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/hover = ExtResource("11_wqlnj")
 disabled = true
 text = "X"
 
-[node name="Control" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale"]
+[node name="Control" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale" unique_id=1979343092]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -859,7 +859,7 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control" unique_id=998785127]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -869,53 +869,53 @@ offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="UIX0_75Button" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer"]
+[node name="UIX0_75Button" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer" unique_id=1815569626]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-theme_override_styles/disabled = ExtResource("40_ytdkf")
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("40_mitij")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/disabled = ExtResource("40_ytdkf")
 text = "0.75x"
 
-[node name="UIX1_0Button" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer"]
+[node name="UIX1_0Button" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer" unique_id=1881511719]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-theme_override_styles/disabled = ExtResource("40_ytdkf")
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("40_mitij")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/disabled = ExtResource("40_ytdkf")
 text = "1x"
 
-[node name="UIX1_25Button" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer"]
+[node name="UIX1_25Button" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/UIScale/Control/HBoxContainer" unique_id=1280066341]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-theme_override_styles/disabled = ExtResource("40_ytdkf")
-theme_override_styles/hover = ExtResource("11_wqlnj")
-theme_override_styles/pressed = ExtResource("12_tclj0")
 theme_override_styles/normal = ExtResource("40_mitij")
+theme_override_styles/pressed = ExtResource("12_tclj0")
+theme_override_styles/hover = ExtResource("11_wqlnj")
+theme_override_styles/disabled = ExtResource("40_ytdkf")
 text = "1.25x"
 
-[node name="ItemDataSeparator" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("11_6eucy")]
+[node name="ItemDataSeparator" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer" unique_id=263932345 instance=ExtResource("11_6eucy")]
 layout_mode = 2
 separator_text = "Profile Settings"
 
-[node name="ProfileName" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer" instance=ExtResource("12_ubi7w")]
+[node name="ProfileName" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer" unique_id=758253013 instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Current Profile"
 placeholder_text = "Enter an Item Name"
 list_item_mode = 1
 show_clear_button = false
 
-[node name="ImageSize" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer"]
+[node name="ImageSize" type="Panel" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer" unique_id=541455571]
 custom_minimum_size = Vector2(280, 150)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("34_ytdkf")
 
-[node name="TitleControl" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize"]
+[node name="TitleControl" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize" unique_id=624660877]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -923,7 +923,7 @@ offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize/TitleControl"]
+[node name="Label" type="Label" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize/TitleControl" unique_id=564681609]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.84
@@ -936,7 +936,7 @@ text = "Max Image Size (px)"
 vertical_alignment = 1
 script = ExtResource("37_pf2t4")
 
-[node name="ApplyButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize/TitleControl"]
+[node name="ApplyButton" type="Button" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize/TitleControl" unique_id=364058046]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -948,12 +948,12 @@ offset_right = -40.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
-theme_override_styles/hover = ExtResource("24_un7m8")
-theme_override_styles/pressed = ExtResource("25_vbo60")
 theme_override_styles/normal = ExtResource("23_cyhx8")
+theme_override_styles/pressed = ExtResource("25_vbo60")
+theme_override_styles/hover = ExtResource("24_un7m8")
 text = "Apply"
 
-[node name="DataControl" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize"]
+[node name="DataControl" type="Control" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize" unique_id=1835971153]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -965,7 +965,7 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SpinBox" type="SpinBox" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize/DataControl"]
+[node name="SpinBox" type="SpinBox" parent="MainControl/HSplit/MainInfo/TabContainer/Settings/SettingsPanel/ScrollContainer/VBoxContainer/ImageSize/DataControl" unique_id=1535235810]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -973,14 +973,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_xicdx")
-theme_override_constants/buttons_width = 30
-theme_override_constants/field_and_buttons_separation = 0
 theme_override_constants/buttons_vertical_separation = 0
+theme_override_constants/field_and_buttons_separation = 0
+theme_override_constants/buttons_width = 30
 max_value = 5000.0
 alignment = 1
 update_on_text_changed = true
 
-[node name="SearchLine" type="Panel" parent="MainControl/HSplit/MainInfo"]
+[node name="SearchLine" type="Panel" parent="MainControl/HSplit/MainInfo" unique_id=1933742089]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -991,22 +991,22 @@ offset_bottom = 75.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("16_uvvjq")
 
-[node name="SearchLineEdit" type="LineEdit" parent="MainControl/HSplit/MainInfo/SearchLine"]
+[node name="SearchLineEdit" type="LineEdit" parent="MainControl/HSplit/MainInfo/SearchLine" unique_id=690999072]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/focus = ExtResource("10_djmps")
 theme_override_styles/normal = ExtResource("10_djmps")
+theme_override_styles/focus = ExtResource("10_djmps")
 clear_button_enabled = true
 
-[node name="SideInfo" type="Control" parent="MainControl/HSplit"]
+[node name="SideInfo" type="Control" parent="MainControl/HSplit" unique_id=306912142]
 visible = false
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="MainControl/HSplit/SideInfo"]
+[node name="Panel" type="Panel" parent="MainControl/HSplit/SideInfo" unique_id=1223944035]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1015,7 +1015,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("19_cpq5q")
 
-[node name="TabContainer" type="TabContainer" parent="MainControl/HSplit/SideInfo/Panel"]
+[node name="TabContainer" type="TabContainer" parent="MainControl/HSplit/SideInfo/Panel" unique_id=434670527]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1025,25 +1025,25 @@ grow_vertical = 2
 current_tab = 0
 tabs_visible = false
 
-[node name="Panel" type="Panel" parent="MainControl/HSplit/SideInfo/Panel/TabContainer"]
+[node name="Panel" type="Panel" parent="MainControl/HSplit/SideInfo/Panel/TabContainer" unique_id=185878283]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="TextureRect" type="TextureRect" parent="MainControl/HSplit/SideInfo/Panel/TabContainer/Panel"]
+[node name="TextureRect" type="TextureRect" parent="MainControl/HSplit/SideInfo/Panel/TabContainer/Panel" unique_id=1731435365]
 visible = false
-layout_mode = 2
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("18_v6yiw")
 
-[node name="Panel2" type="Panel" parent="MainControl/HSplit/SideInfo/Panel/TabContainer"]
+[node name="Panel2" type="Panel" parent="MainControl/HSplit/SideInfo/Panel/TabContainer" unique_id=1168447521]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="SidePanel" type="Panel" parent="MainControl"]
+[node name="SidePanel" type="Panel" parent="MainControl" unique_id=1841716134]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -1054,7 +1054,7 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("16_uvvjq")
 
-[node name="SideSplitButton" type="TextureButton" parent="MainControl/SidePanel"]
+[node name="SideSplitButton" type="TextureButton" parent="MainControl/SidePanel" unique_id=1424208342]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1065,7 +1065,7 @@ texture_normal = ExtResource("20_15jft")
 texture_pressed = ExtResource("21_65tdk")
 texture_hover = ExtResource("22_8tugv")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainControl/SidePanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainControl/SidePanel" unique_id=1404550614]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1076,7 +1076,7 @@ offset_right = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NotifSideButton" type="TextureButton" parent="MainControl/SidePanel/VBoxContainer"]
+[node name="NotifSideButton" type="TextureButton" parent="MainControl/SidePanel/VBoxContainer" unique_id=230902163]
 self_modulate = Color(0.160116, 0.465882, 0.61134, 1)
 layout_mode = 2
 texture_normal = ExtResource("23_via5u")
@@ -1084,7 +1084,7 @@ texture_pressed = ExtResource("24_ac6pf")
 texture_hover = ExtResource("25_ek63v")
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="MainControl/SidePanel/VBoxContainer/NotifSideButton"]
+[node name="Label" type="Label" parent="MainControl/SidePanel/VBoxContainer/NotifSideButton" unique_id=2114907818]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1095,7 +1095,7 @@ text = "99+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SidePanelLeft" type="Panel" parent="MainControl"]
+[node name="SidePanelLeft" type="Panel" parent="MainControl" unique_id=300720204]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -1104,7 +1104,7 @@ offset_right = 36.0
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("16_uvvjq")
 
-[node name="SideSplitButton" type="TextureButton" parent="MainControl/SidePanelLeft"]
+[node name="SideSplitButton" type="TextureButton" parent="MainControl/SidePanelLeft" unique_id=1908216566]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1116,7 +1116,7 @@ texture_pressed = ExtResource("21_65tdk")
 texture_hover = ExtResource("22_8tugv")
 flip_h = true
 
-[node name="ItemCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "tags_element", "attachment_element", "image_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("9_p6ieq")]
+[node name="ItemCreationDialogue" parent="." unique_id=75937044 node_paths=PackedStringArray("name_list_item", "description_list_item", "title_label", "location_element", "quantity_element", "category_element", "tags_element", "attachment_element", "image_element", "item_data_components", "stock_data_components", "delete_button") instance=ExtResource("9_p6ieq")]
 layout_mode = 1
 script = ExtResource("10_06y8t")
 name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
@@ -1140,42 +1140,42 @@ script = ExtResource("52_nmx32")
 mouse_filter = 2
 unfold_item_list = Array[NodePath]([NodePath("Name"), NodePath("Description")])
 
-[node name="ItemDataSeparator" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("11_6eucy")]
+[node name="ItemDataSeparator" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" unique_id=1702859100 instance=ExtResource("11_6eucy")]
 layout_mode = 2
 separator_text = "Item Data"
 
-[node name="Name" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="1" instance=ExtResource("12_ubi7w")]
+[node name="Name" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="1" unique_id=1115852971 instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Name"
 placeholder_text = "Enter an Item Name"
 show_clear_button = false
 
-[node name="Description" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="2" instance=ExtResource("12_ubi7w")]
+[node name="Description" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="2" unique_id=1179057051 instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Description"
 placeholder_text = "Enter an Item Description"
 show_clear_button = false
 
-[node name="Image" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="3" instance=ExtResource("12_ubi7w")]
+[node name="Image" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="3" unique_id=1499438444 instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Image"
 list_item_mode = 2
 show_clear_button = false
 
-[node name="Category" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="4" instance=ExtResource("12_ubi7w")]
+[node name="Category" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="4" unique_id=2079239004 instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Category"
 list_item_mode = 1
 show_clear_button = false
 
-[node name="Tags" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="5" instance=ExtResource("12_ubi7w")]
+[node name="Tags" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="5" unique_id=1705997465 instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Tags"
 placeholder_text = "Enter tags separated by comma"
 list_item_mode = 4
 show_clear_button = false
 
-[node name="Attachments" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="6" instance=ExtResource("12_ubi7w")]
+[node name="Attachments" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="6" unique_id=1576442885 instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Attachments"
 list_item_mode = 5
@@ -1193,17 +1193,17 @@ visible = false
 [node name="Tags" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer/Attachments/DataControl" index="3"]
 visible = true
 
-[node name="StockDataSeparator" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="7" instance=ExtResource("11_6eucy")]
+[node name="StockDataSeparator" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="7" unique_id=1212152146 instance=ExtResource("11_6eucy")]
 layout_mode = 2
 separator_text = "Initial Stock"
 
-[node name="Location" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="8" instance=ExtResource("12_ubi7w")]
+[node name="Location" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="8" unique_id=506105052 instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Location"
 list_item_mode = 1
 show_clear_button = false
 
-[node name="Quantity" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="9" instance=ExtResource("12_ubi7w")]
+[node name="Quantity" parent="ItemCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="9" unique_id=51317683 instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Quantity"
 list_item_mode = 3
@@ -1212,7 +1212,7 @@ show_clear_button = false
 [node name="SaveItemButton" parent="ItemCreationDialogue/SDCButtons/HBoxContainer" index="0"]
 theme_override_styles/pressed = ExtResource("25_veepo")
 
-[node name="ItemFilteringDialogue" parent="." node_paths=PackedStringArray("tags_element") instance=ExtResource("9_p6ieq")]
+[node name="ItemFilteringDialogue" parent="." unique_id=173723601 node_paths=PackedStringArray("tags_element") instance=ExtResource("9_p6ieq")]
 visible = false
 layout_mode = 1
 script = ExtResource("19_8mkwf")
@@ -1221,7 +1221,7 @@ tags_element = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Tags")
 [node name="VBoxContainer" parent="ItemFilteringDialogue/ItemsPanel/ScrollContainer" index="0"]
 unfold_item_list = Array[NodePath]([NodePath("Tags"), NodePath("")])
 
-[node name="Tags" parent="ItemFilteringDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("12_ubi7w")]
+[node name="Tags" parent="ItemFilteringDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" unique_id=1773097284 instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Tags"
 placeholder_text = "Enter an Item Name"
@@ -1238,7 +1238,7 @@ visible = false
 [node name="Title" parent="ItemFilteringDialogue/TextureRect" index="0"]
 text = "Filter Items"
 
-[node name="ProfileSelectionDialogue" parent="." node_paths=PackedStringArray("profiles_holder") instance=ExtResource("9_p6ieq")]
+[node name="ProfileSelectionDialogue" parent="." unique_id=878825614 node_paths=PackedStringArray("profiles_holder") instance=ExtResource("9_p6ieq")]
 visible = false
 layout_mode = 1
 script = ExtResource("21_nm3mm")
@@ -1247,22 +1247,22 @@ profiles_holder = NodePath("ItemsPanel/ScrollContainer/VBoxContainer")
 [node name="VBoxContainer" parent="ProfileSelectionDialogue/ItemsPanel/ScrollContainer" index="0"]
 unfold_item_list = Array[NodePath]([NodePath("ProfileSelectionElement"), NodePath("")])
 
-[node name="ProfileSelectionElement" parent="ProfileSelectionDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("22_iv6mq")]
+[node name="ProfileSelectionElement" parent="ProfileSelectionDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" unique_id=1200227856 instance=ExtResource("22_iv6mq")]
 layout_mode = 2
 
 [node name="SaveItemButton" parent="ProfileSelectionDialogue/SDCButtons/HBoxContainer" index="0"]
 theme_override_styles/pressed = ExtResource("25_veepo")
 text = "Apply"
 
-[node name="AddButton" type="Button" parent="ProfileSelectionDialogue/SDCButtons/HBoxContainer" index="1"]
+[node name="AddButton" type="Button" parent="ProfileSelectionDialogue/SDCButtons/HBoxContainer" index="1" unique_id=1504799824]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.6
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("31_br1a5")
-theme_override_styles/pressed = ExtResource("32_apjd1")
 theme_override_styles/normal = ExtResource("33_lw3x1")
+theme_override_styles/pressed = ExtResource("32_apjd1")
+theme_override_styles/hover = ExtResource("31_br1a5")
 text = "ADD"
 
 [node name="DeleteButton" parent="ProfileSelectionDialogue/SDCButtons/HBoxContainer" index="2"]
@@ -1271,7 +1271,7 @@ visible = false
 [node name="Title" parent="ProfileSelectionDialogue/TextureRect" index="0"]
 text = "Select profile"
 
-[node name="ProfileCreationDialogue" parent="." node_paths=PackedStringArray("title_label", "name_list_item", "dir_name_list_item", "delete_button") instance=ExtResource("9_p6ieq")]
+[node name="ProfileCreationDialogue" parent="." unique_id=382314505 node_paths=PackedStringArray("title_label", "name_list_item", "dir_name_list_item", "delete_button") instance=ExtResource("9_p6ieq")]
 visible = false
 layout_mode = 1
 script = ExtResource("54_0a21m")
@@ -1280,13 +1280,13 @@ name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
 dir_name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/DirName")
 delete_button = NodePath("SDCButtons/HBoxContainer/DeleteButton")
 
-[node name="Name" parent="ProfileCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("12_ubi7w")]
+[node name="Name" parent="ProfileCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" unique_id=2089999374 instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Name"
 placeholder_text = "Enter a Profile Name"
 show_clear_button = false
 
-[node name="DirName" parent="ProfileCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="1" instance=ExtResource("12_ubi7w")]
+[node name="DirName" parent="ProfileCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="1" unique_id=837653989 instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Directory Name"
 placeholder_text = "Enter a Directory Name"
@@ -1297,7 +1297,7 @@ edit_regex_line = "[a-zA-Z0-9]"
 theme_override_font_sizes/font_size = 32
 text = "Create Profile"
 
-[node name="LocationCreationDialogue" parent="." node_paths=PackedStringArray("title_label", "name_list_item", "description_list_item", "parent_list_item", "delete_button") instance=ExtResource("9_p6ieq")]
+[node name="LocationCreationDialogue" parent="." unique_id=1921832612 node_paths=PackedStringArray("title_label", "name_list_item", "description_list_item", "parent_list_item", "delete_button") instance=ExtResource("9_p6ieq")]
 visible = false
 layout_mode = 1
 script = ExtResource("13_c6tp3")
@@ -1307,19 +1307,19 @@ description_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Descr
 parent_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Parent")
 delete_button = NodePath("SDCButtons/HBoxContainer/DeleteButton")
 
-[node name="Name" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("12_ubi7w")]
+[node name="Name" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" unique_id=1458347508 instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Name"
 placeholder_text = "Enter a Location Name"
 show_clear_button = false
 
-[node name="Description" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="1" instance=ExtResource("12_ubi7w")]
+[node name="Description" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="1" unique_id=1860332907 instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Description"
 placeholder_text = "Enter a Location Description"
 show_clear_button = false
 
-[node name="Parent" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="2" instance=ExtResource("12_ubi7w")]
+[node name="Parent" parent="LocationCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="2" unique_id=1249489830 instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Parent"
 placeholder_text = "Enter a Location Name"
@@ -1330,13 +1330,13 @@ show_clear_button = false
 theme_override_font_sizes/font_size = 32
 text = "Create Location"
 
-[node name="TagCreationDialogue" parent="." node_paths=PackedStringArray("name_list_item") instance=ExtResource("9_p6ieq")]
+[node name="TagCreationDialogue" parent="." unique_id=1053878607 node_paths=PackedStringArray("name_list_item") instance=ExtResource("9_p6ieq")]
 visible = false
 layout_mode = 1
 script = ExtResource("19_p1s4p")
 name_list_item = NodePath("ItemsPanel/ScrollContainer/VBoxContainer/Name")
 
-[node name="Name" parent="TagCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("12_ubi7w")]
+[node name="Name" parent="TagCreationDialogue/ItemsPanel/ScrollContainer/VBoxContainer" index="0" unique_id=850868027 instance=ExtResource("12_ubi7w")]
 layout_mode = 2
 title_text = "Name"
 placeholder_text = "Enter a Location Name"
@@ -1352,7 +1352,7 @@ visible = false
 theme_override_font_sizes/font_size = 32
 text = "Create Tag"
 
-[node name="ImageSelectionDialogue" type="Control" parent="."]
+[node name="ImageSelectionDialogue" type="Control" parent="." unique_id=1274221375]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1362,7 +1362,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("27_ev1vk")
 
-[node name="Color" type="ColorRect" parent="ImageSelectionDialogue"]
+[node name="Color" type="ColorRect" parent="ImageSelectionDialogue" unique_id=1997318598]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1371,7 +1371,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.215686, 0.215686, 0.215686, 1)
 
-[node name="ItemsPanel" type="Panel" parent="ImageSelectionDialogue"]
+[node name="ItemsPanel" type="Panel" parent="ImageSelectionDialogue" unique_id=887726459]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
@@ -1382,7 +1382,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("14_2538q")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ImageSelectionDialogue/ItemsPanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ImageSelectionDialogue/ItemsPanel" unique_id=1941462133]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1394,16 +1394,16 @@ offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ImageGridContainer" type="GridContainer" parent="ImageSelectionDialogue/ItemsPanel/ScrollContainer"]
+[node name="ImageGridContainer" type="GridContainer" parent="ImageSelectionDialogue/ItemsPanel/ScrollContainer" unique_id=1055667740]
 layout_mode = 2
 size_flags_horizontal = 6
 columns = 3
 
-[node name="ImagePreviewHolder" parent="ImageSelectionDialogue/ItemsPanel/ScrollContainer/ImageGridContainer" instance=ExtResource("27_yr3ee")]
+[node name="ImagePreviewHolder" parent="ImageSelectionDialogue/ItemsPanel/ScrollContainer/ImageGridContainer" unique_id=1694281718 instance=ExtResource("27_yr3ee")]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="SDCButtons" type="Panel" parent="ImageSelectionDialogue"]
+[node name="SDCButtons" type="Panel" parent="ImageSelectionDialogue" unique_id=161948481]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
@@ -1416,7 +1416,7 @@ grow_vertical = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ImageSelectionDialogue/SDCButtons"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ImageSelectionDialogue/SDCButtons" unique_id=335006695]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1425,49 +1425,49 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="SaveButton" type="Button" parent="ImageSelectionDialogue/SDCButtons/HBoxContainer"]
+[node name="SaveButton" type="Button" parent="ImageSelectionDialogue/SDCButtons/HBoxContainer" unique_id=647145945]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("24_0srk0")
-theme_override_styles/pressed = ExtResource("25_veepo")
 theme_override_styles/normal = ExtResource("23_rqglp")
+theme_override_styles/pressed = ExtResource("25_veepo")
+theme_override_styles/hover = ExtResource("24_0srk0")
 text = "Select"
 
-[node name="AddButton" type="Button" parent="ImageSelectionDialogue/SDCButtons/HBoxContainer"]
+[node name="AddButton" type="Button" parent="ImageSelectionDialogue/SDCButtons/HBoxContainer" unique_id=2087648174]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.6
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("31_br1a5")
-theme_override_styles/pressed = ExtResource("32_apjd1")
 theme_override_styles/normal = ExtResource("33_lw3x1")
+theme_override_styles/pressed = ExtResource("32_apjd1")
+theme_override_styles/hover = ExtResource("31_br1a5")
 text = "ADD"
 
-[node name="DeleteButton" type="Button" parent="ImageSelectionDialogue/SDCButtons/HBoxContainer"]
+[node name="DeleteButton" type="Button" parent="ImageSelectionDialogue/SDCButtons/HBoxContainer" unique_id=1101779295]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.6
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("29_jen6a")
-theme_override_styles/pressed = ExtResource("30_r5wwe")
 theme_override_styles/normal = ExtResource("31_4mrd2")
+theme_override_styles/pressed = ExtResource("30_r5wwe")
+theme_override_styles/hover = ExtResource("29_jen6a")
 text = "DEL"
 
-[node name="CancelButton" type="Button" parent="ImageSelectionDialogue/SDCButtons/HBoxContainer"]
+[node name="CancelButton" type="Button" parent="ImageSelectionDialogue/SDCButtons/HBoxContainer" unique_id=983246684]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("27_xau5b")
-theme_override_styles/pressed = ExtResource("28_vl2i0")
 theme_override_styles/normal = ExtResource("26_dgnrv")
+theme_override_styles/pressed = ExtResource("28_vl2i0")
+theme_override_styles/hover = ExtResource("27_xau5b")
 text = "Cancel"
 
-[node name="TextureRect" type="NinePatchRect" parent="ImageSelectionDialogue"]
+[node name="TextureRect" type="NinePatchRect" parent="ImageSelectionDialogue" unique_id=2002860259]
 self_modulate = Color(0.12549, 0.12549, 0.12549, 1)
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 1
@@ -1480,7 +1480,7 @@ texture = ExtResource("35_1rfkw")
 patch_margin_left = 100
 patch_margin_right = 100
 
-[node name="Title" type="Label" parent="ImageSelectionDialogue/TextureRect"]
+[node name="Title" type="Label" parent="ImageSelectionDialogue/TextureRect" unique_id=42785120]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1497,7 +1497,7 @@ uppercase = true
 script = ExtResource("37_pf2t4")
 aspect = 0.4
 
-[node name="TreeSelectionDialogue" type="Control" parent="."]
+[node name="TreeSelectionDialogue" type="Control" parent="." unique_id=526981408]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1507,18 +1507,18 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("14_qpi1g")
 
-[node name="CancelTreeSelection" type="Button" parent="TreeSelectionDialogue"]
+[node name="CancelTreeSelection" type="Button" parent="TreeSelectionDialogue" unique_id=1322845933]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/hover = ExtResource("16_uvvjq")
-theme_override_styles/pressed = ExtResource("15_e2j01")
 theme_override_styles/normal = ExtResource("15_e2j01")
+theme_override_styles/pressed = ExtResource("15_e2j01")
+theme_override_styles/hover = ExtResource("16_uvvjq")
 
-[node name="TSL" type="Control" parent="TreeSelectionDialogue"]
+[node name="TSL" type="Control" parent="TreeSelectionDialogue" unique_id=1936326614]
 layout_mode = 1
 anchor_top = 0.09
 anchor_right = 1.0
@@ -1529,7 +1529,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="TreeSelectionDialogue/TSL"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="TreeSelectionDialogue/TSL" unique_id=1852821999]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1538,11 +1538,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Control" type="Panel" parent="TreeSelectionDialogue/TSL/AspectRatioContainer"]
+[node name="Control" type="Panel" parent="TreeSelectionDialogue/TSL/AspectRatioContainer" unique_id=1325447395]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_blt5x")
 
-[node name="SearchLine2" type="Panel" parent="TreeSelectionDialogue/TSL/AspectRatioContainer/Control"]
+[node name="SearchLine2" type="Panel" parent="TreeSelectionDialogue/TSL/AspectRatioContainer/Control" unique_id=278865878]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1553,18 +1553,18 @@ offset_bottom = -10.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("16_uvvjq")
 
-[node name="SearchLineEdit" type="LineEdit" parent="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/SearchLine2"]
+[node name="SearchLineEdit" type="LineEdit" parent="TreeSelectionDialogue/TSL/AspectRatioContainer/Control/SearchLine2" unique_id=439640282]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/focus = ExtResource("10_djmps")
 theme_override_styles/normal = ExtResource("10_djmps")
+theme_override_styles/focus = ExtResource("10_djmps")
 clear_button_enabled = true
 
-[node name="ColorRect" type="ColorRect" parent="TreeSelectionDialogue/TSL/AspectRatioContainer/Control"]
+[node name="ColorRect" type="ColorRect" parent="TreeSelectionDialogue/TSL/AspectRatioContainer/Control" unique_id=969719723]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1573,7 +1573,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="StructTree" type="Tree" parent="TreeSelectionDialogue/TSL/AspectRatioContainer/Control" node_paths=PackedStringArray("tree_selection_dialogue")]
+[node name="StructTree" type="Tree" parent="TreeSelectionDialogue/TSL/AspectRatioContainer/Control" unique_id=1747807433 node_paths=PackedStringArray("tree_selection_dialogue")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.03
@@ -1585,7 +1585,7 @@ grow_vertical = 2
 script = ExtResource("5_ar113")
 tree_selection_dialogue = NodePath("../../../..")
 
-[node name="TagSelectionDialogue" type="Control" parent="." node_paths=PackedStringArray("tag_viewer")]
+[node name="TagSelectionDialogue" type="Control" parent="." unique_id=534522254 node_paths=PackedStringArray("tag_viewer")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1596,18 +1596,18 @@ grow_vertical = 2
 script = ExtResource("23_cbvd4")
 tag_viewer = NodePath("TSL/AspectRatioContainer/Control/SC/TagViewer")
 
-[node name="CancelTreeSelection" type="Button" parent="TagSelectionDialogue"]
+[node name="CancelTreeSelection" type="Button" parent="TagSelectionDialogue" unique_id=913998744]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/hover = ExtResource("16_uvvjq")
-theme_override_styles/pressed = ExtResource("15_e2j01")
 theme_override_styles/normal = ExtResource("15_e2j01")
+theme_override_styles/pressed = ExtResource("15_e2j01")
+theme_override_styles/hover = ExtResource("16_uvvjq")
 
-[node name="TSL" type="Control" parent="TagSelectionDialogue"]
+[node name="TSL" type="Control" parent="TagSelectionDialogue" unique_id=426853320]
 layout_mode = 1
 anchor_top = 0.09
 anchor_right = 1.0
@@ -1618,7 +1618,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="TagSelectionDialogue/TSL"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="TagSelectionDialogue/TSL" unique_id=2101478761]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1628,11 +1628,11 @@ grow_vertical = 2
 mouse_filter = 2
 ratio = 0.9
 
-[node name="Control" type="Panel" parent="TagSelectionDialogue/TSL/AspectRatioContainer"]
+[node name="Control" type="Panel" parent="TagSelectionDialogue/TSL/AspectRatioContainer" unique_id=812053320]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_blt5x")
 
-[node name="SC" type="ScrollContainer" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control"]
+[node name="SC" type="ScrollContainer" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control" unique_id=1669156218]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1645,14 +1645,14 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
 
-[node name="TagViewer" type="HFlowContainer" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control/SC"]
+[node name="TagViewer" type="HFlowContainer" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control/SC" unique_id=582296651]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 script = ExtResource("7_k3n6w")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control" unique_id=1545775464]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -1666,49 +1666,49 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="ConfirmButton" type="Button" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
+[node name="ConfirmButton" type="Button" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer" unique_id=1941410932]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("24_0srk0")
-theme_override_styles/pressed = ExtResource("25_veepo")
 theme_override_styles/normal = ExtResource("23_rqglp")
+theme_override_styles/pressed = ExtResource("25_veepo")
+theme_override_styles/hover = ExtResource("24_0srk0")
 text = "Save"
 
-[node name="AllTags" type="Button" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
+[node name="AllTags" type="Button" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer" unique_id=1365261126]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("31_br1a5")
-theme_override_styles/pressed = ExtResource("32_apjd1")
 theme_override_styles/normal = ExtResource("33_lw3x1")
+theme_override_styles/pressed = ExtResource("32_apjd1")
+theme_override_styles/hover = ExtResource("31_br1a5")
 text = "All"
 
-[node name="NoneTags" type="Button" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
+[node name="NoneTags" type="Button" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer" unique_id=6515]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("29_jen6a")
-theme_override_styles/pressed = ExtResource("29_jen6a")
 theme_override_styles/normal = ExtResource("31_4mrd2")
+theme_override_styles/pressed = ExtResource("29_jen6a")
+theme_override_styles/hover = ExtResource("29_jen6a")
 text = "None"
 
-[node name="CancelButton" type="Button" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
+[node name="CancelButton" type="Button" parent="TagSelectionDialogue/TSL/AspectRatioContainer/Control/HBoxContainer" unique_id=477374976]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("27_xau5b")
-theme_override_styles/pressed = ExtResource("28_vl2i0")
 theme_override_styles/normal = ExtResource("26_dgnrv")
+theme_override_styles/pressed = ExtResource("28_vl2i0")
+theme_override_styles/hover = ExtResource("27_xau5b")
 text = "Cancel"
 
-[node name="AttachmentsDialogue" type="Control" parent="." node_paths=PackedStringArray("attachment_viewer", "del_button")]
+[node name="AttachmentsDialogue" type="Control" parent="." unique_id=1065941322 node_paths=PackedStringArray("attachment_viewer", "del_button")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1720,18 +1720,18 @@ script = ExtResource("77_8qby0")
 attachment_viewer = NodePath("TSL/AspectRatioContainer/Control/SC/AttachmentViewer")
 del_button = NodePath("TSL/AspectRatioContainer/Control/HBoxContainer/DelAtt")
 
-[node name="CancelBgButton" type="Button" parent="AttachmentsDialogue"]
+[node name="CancelBgButton" type="Button" parent="AttachmentsDialogue" unique_id=1046821137]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/hover = ExtResource("16_uvvjq")
-theme_override_styles/pressed = ExtResource("15_e2j01")
 theme_override_styles/normal = ExtResource("15_e2j01")
+theme_override_styles/pressed = ExtResource("15_e2j01")
+theme_override_styles/hover = ExtResource("16_uvvjq")
 
-[node name="TSL" type="Control" parent="AttachmentsDialogue"]
+[node name="TSL" type="Control" parent="AttachmentsDialogue" unique_id=1071387766]
 layout_mode = 1
 anchor_top = 0.09
 anchor_right = 1.0
@@ -1742,7 +1742,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="AttachmentsDialogue/TSL"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="AttachmentsDialogue/TSL" unique_id=1411329434]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1752,11 +1752,11 @@ grow_vertical = 2
 mouse_filter = 2
 ratio = 0.9
 
-[node name="Control" type="Panel" parent="AttachmentsDialogue/TSL/AspectRatioContainer"]
+[node name="Control" type="Panel" parent="AttachmentsDialogue/TSL/AspectRatioContainer" unique_id=976498877]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_blt5x")
 
-[node name="SC" type="ScrollContainer" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control"]
+[node name="SC" type="ScrollContainer" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control" unique_id=1283169366]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1769,14 +1769,14 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
 
-[node name="AttachmentViewer" type="HFlowContainer" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/SC"]
+[node name="AttachmentViewer" type="HFlowContainer" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/SC" unique_id=1312517552]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 script = ExtResource("7_k3n6w")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control" unique_id=1354314398]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -1790,49 +1790,49 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="ConfirmButton" type="Button" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
+[node name="ConfirmButton" type="Button" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer" unique_id=281639981]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("24_0srk0")
-theme_override_styles/pressed = ExtResource("25_veepo")
 theme_override_styles/normal = ExtResource("23_rqglp")
+theme_override_styles/pressed = ExtResource("25_veepo")
+theme_override_styles/hover = ExtResource("24_0srk0")
 text = "Save"
 
-[node name="AddAtt" type="Button" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
+[node name="AddAtt" type="Button" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer" unique_id=1841913979]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("31_br1a5")
-theme_override_styles/pressed = ExtResource("32_apjd1")
 theme_override_styles/normal = ExtResource("33_lw3x1")
+theme_override_styles/pressed = ExtResource("32_apjd1")
+theme_override_styles/hover = ExtResource("31_br1a5")
 text = "Add"
 
-[node name="DelAtt" type="Button" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
+[node name="DelAtt" type="Button" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer" unique_id=2107396987]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("29_jen6a")
-theme_override_styles/pressed = ExtResource("29_jen6a")
 theme_override_styles/normal = ExtResource("31_4mrd2")
+theme_override_styles/pressed = ExtResource("29_jen6a")
+theme_override_styles/hover = ExtResource("29_jen6a")
 text = "Del"
 
-[node name="CancelButton" type="Button" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer"]
+[node name="CancelButton" type="Button" parent="AttachmentsDialogue/TSL/AspectRatioContainer/Control/HBoxContainer" unique_id=948652358]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("27_xau5b")
-theme_override_styles/pressed = ExtResource("28_vl2i0")
 theme_override_styles/normal = ExtResource("26_dgnrv")
+theme_override_styles/pressed = ExtResource("28_vl2i0")
+theme_override_styles/hover = ExtResource("27_xau5b")
 text = "Cancel"
 
-[node name="ActionConfirmDialogue" type="Control" parent="." node_paths=PackedStringArray("warning_label", "title_label", "conf_button", "canc_button", "acc_button")]
+[node name="ActionConfirmDialogue" type="Control" parent="." unique_id=1469748846 node_paths=PackedStringArray("warning_label", "title_label", "conf_button", "canc_button", "acc_button")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1847,18 +1847,18 @@ conf_button = NodePath("TSL/AR/Control/HBoxContainer/ConfirmButton")
 canc_button = NodePath("TSL/AR/Control/HBoxContainer/CancelButton")
 acc_button = NodePath("TSL/AR/Control/HBoxContainer/AcceptButton")
 
-[node name="CancelTreeSelection" type="Button" parent="ActionConfirmDialogue"]
+[node name="CancelTreeSelection" type="Button" parent="ActionConfirmDialogue" unique_id=1662101777]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/hover = ExtResource("16_uvvjq")
-theme_override_styles/pressed = ExtResource("15_e2j01")
 theme_override_styles/normal = ExtResource("15_e2j01")
+theme_override_styles/pressed = ExtResource("15_e2j01")
+theme_override_styles/hover = ExtResource("16_uvvjq")
 
-[node name="TSL" type="Control" parent="ActionConfirmDialogue"]
+[node name="TSL" type="Control" parent="ActionConfirmDialogue" unique_id=519122881]
 layout_mode = 1
 anchor_left = 0.05
 anchor_top = 0.2
@@ -1870,7 +1870,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="AR" type="AspectRatioContainer" parent="ActionConfirmDialogue/TSL"]
+[node name="AR" type="AspectRatioContainer" parent="ActionConfirmDialogue/TSL" unique_id=1849744593]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1879,11 +1879,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Control" type="Panel" parent="ActionConfirmDialogue/TSL/AR"]
+[node name="Control" type="Panel" parent="ActionConfirmDialogue/TSL/AR" unique_id=1415905904]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_blt5x")
 
-[node name="TitleLabel" type="Label" parent="ActionConfirmDialogue/TSL/AR/Control"]
+[node name="TitleLabel" type="Label" parent="ActionConfirmDialogue/TSL/AR/Control" unique_id=1114581419]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1898,7 +1898,7 @@ text = "Are you sure?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ActionConfirmDialogue/TSL/AR/Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ActionConfirmDialogue/TSL/AR/Control" unique_id=1195118068]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.75
@@ -1912,38 +1912,38 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="AcceptButton" type="Button" parent="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer"]
+[node name="AcceptButton" type="Button" parent="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer" unique_id=1737768358]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("24_un7m8")
-theme_override_styles/pressed = ExtResource("25_vbo60")
 theme_override_styles/normal = ExtResource("23_cyhx8")
+theme_override_styles/pressed = ExtResource("25_vbo60")
+theme_override_styles/hover = ExtResource("24_un7m8")
 text = "Accept"
 
-[node name="ConfirmButton" type="Button" parent="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer"]
+[node name="ConfirmButton" type="Button" parent="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer" unique_id=1479685781]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("24_0srk0")
-theme_override_styles/pressed = ExtResource("25_veepo")
 theme_override_styles/normal = ExtResource("23_rqglp")
+theme_override_styles/pressed = ExtResource("25_veepo")
+theme_override_styles/hover = ExtResource("24_0srk0")
 text = "Confirm"
 
-[node name="CancelButton" type="Button" parent="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer"]
+[node name="CancelButton" type="Button" parent="ActionConfirmDialogue/TSL/AR/Control/HBoxContainer" unique_id=1365749229]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("27_xau5b")
-theme_override_styles/pressed = ExtResource("28_vl2i0")
 theme_override_styles/normal = ExtResource("26_dgnrv")
+theme_override_styles/pressed = ExtResource("28_vl2i0")
+theme_override_styles/hover = ExtResource("27_xau5b")
 text = "Cancel"
 
-[node name="WarningLabel" type="Label" parent="ActionConfirmDialogue/TSL/AR/Control"]
+[node name="WarningLabel" type="Label" parent="ActionConfirmDialogue/TSL/AR/Control" unique_id=1387248814]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.25
@@ -1961,7 +1961,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 text_overrun_behavior = 3
 
-[node name="WarningMessageDialogue" type="Control" parent="." node_paths=PackedStringArray("title_label", "message_label")]
+[node name="WarningMessageDialogue" type="Control" parent="." unique_id=2096425490 node_paths=PackedStringArray("title_label", "message_label")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1973,18 +1973,18 @@ script = ExtResource("79_wnkxs")
 title_label = NodePath("TSL/AR/Control/TitleLabel")
 message_label = NodePath("TSL/AR/Control/WarningLabel")
 
-[node name="BGButton" type="Button" parent="WarningMessageDialogue"]
+[node name="BGButton" type="Button" parent="WarningMessageDialogue" unique_id=409900847]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/hover = ExtResource("16_uvvjq")
-theme_override_styles/pressed = ExtResource("15_e2j01")
 theme_override_styles/normal = ExtResource("15_e2j01")
+theme_override_styles/pressed = ExtResource("15_e2j01")
+theme_override_styles/hover = ExtResource("16_uvvjq")
 
-[node name="TSL" type="Control" parent="WarningMessageDialogue"]
+[node name="TSL" type="Control" parent="WarningMessageDialogue" unique_id=1891996703]
 layout_mode = 1
 anchor_left = 0.05
 anchor_top = 0.2
@@ -1996,7 +1996,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="AR" type="AspectRatioContainer" parent="WarningMessageDialogue/TSL"]
+[node name="AR" type="AspectRatioContainer" parent="WarningMessageDialogue/TSL" unique_id=560177018]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2005,11 +2005,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Control" type="Panel" parent="WarningMessageDialogue/TSL/AR"]
+[node name="Control" type="Panel" parent="WarningMessageDialogue/TSL/AR" unique_id=16251546]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_blt5x")
 
-[node name="TitleLabel" type="Label" parent="WarningMessageDialogue/TSL/AR/Control"]
+[node name="TitleLabel" type="Label" parent="WarningMessageDialogue/TSL/AR/Control" unique_id=1597998232]
 self_modulate = Color(1, 0.57, 0.57, 1)
 layout_mode = 1
 anchors_preset = -1
@@ -2025,7 +2025,7 @@ text = "Are you sure?aasdas asd asd "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="WarningMessageDialogue/TSL/AR/Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="WarningMessageDialogue/TSL/AR/Control" unique_id=1029948647]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.75
@@ -2039,28 +2039,28 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="AcceptButton" type="Button" parent="WarningMessageDialogue/TSL/AR/Control/HBoxContainer"]
+[node name="AcceptButton" type="Button" parent="WarningMessageDialogue/TSL/AR/Control/HBoxContainer" unique_id=1658661365]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("24_un7m8")
-theme_override_styles/pressed = ExtResource("25_vbo60")
 theme_override_styles/normal = ExtResource("23_cyhx8")
+theme_override_styles/pressed = ExtResource("25_vbo60")
+theme_override_styles/hover = ExtResource("24_un7m8")
 text = "Accept"
 
-[node name="ConfirmButton" type="Button" parent="WarningMessageDialogue/TSL/AR/Control/HBoxContainer"]
+[node name="ConfirmButton" type="Button" parent="WarningMessageDialogue/TSL/AR/Control/HBoxContainer" unique_id=1790263891]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = ExtResource("29_jen6a")
-theme_override_styles/pressed = ExtResource("30_r5wwe")
 theme_override_styles/normal = ExtResource("31_4mrd2")
+theme_override_styles/pressed = ExtResource("30_r5wwe")
+theme_override_styles/hover = ExtResource("29_jen6a")
 text = "Ok"
 
-[node name="WarningLabel" type="Label" parent="WarningMessageDialogue/TSL/AR/Control"]
+[node name="WarningLabel" type="Label" parent="WarningMessageDialogue/TSL/AR/Control" unique_id=726342229]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.25
@@ -2078,17 +2078,17 @@ vertical_alignment = 1
 autowrap_mode = 3
 text_overrun_behavior = 3
 
-[node name="Timers" type="Node" parent="."]
+[node name="Timers" type="Node" parent="." unique_id=2064277009]
 
-[node name="SideInfoPanelTimer" type="Timer" parent="Timers"]
+[node name="SideInfoPanelTimer" type="Timer" parent="Timers" unique_id=1917120691]
 wait_time = 0.05
 one_shot = true
 
-[node name="SideInfoPanelTimer2" type="Timer" parent="Timers"]
+[node name="SideInfoPanelTimer2" type="Timer" parent="Timers" unique_id=1379657639]
 wait_time = 0.05
 one_shot = true
 
-[node name="FileDialog" type="FileDialog" parent="."]
+[node name="FileDialog" type="FileDialog" parent="." unique_id=1405515961]
 mode = 3
 title = "Open File(s)"
 initial_position = 2
@@ -2098,11 +2098,11 @@ file_mode = 1
 access = 2
 use_native_dialog = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1438944725]
 layer = -2
 visible = false
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=330078535]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -2112,7 +2112,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0.0905704, 0.0783957, 0.0685412, 1)
 
-[node name="OpenFilePopupMenu" type="PopupMenu" parent="."]
+[node name="OpenFilePopupMenu" type="PopupMenu" parent="." unique_id=1248791736]
 size = Vector2i(197, 100)
 theme_override_styles/panel = ExtResource("81_lo0ny")
 item_count = 2

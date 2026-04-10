@@ -18,6 +18,14 @@ extends Control
 @onready var side_info : Control = $MainControl/HSplit/SideInfo
 @export var clear_filter_button : TextureButton
 
+
+enum CommandLineModes {
+	None,
+	LocationStructOut
+}
+
+var command_line_mode := CommandLineModes.None
+
 var last_image_dir = ""
 var last_file_dir = ""
 
@@ -50,7 +58,15 @@ func get_search_text():
 	return search_line_edit.text
 
 
+func get_cl_args():
+	var args = OS.get_cmdline_args()
+	var user_args = OS.get_cmdline_user_args()
+	if "--locations" in user_args or "-l" in user_args:
+		command_line_mode = CommandLineModes.LocationStructOut
+
+
 func _ready():
+	get_cl_args()
 	$CanvasLayer.visible = true
 	randomize()
 	get_viewport().connect("size_changed", _on_viewport_resize)
@@ -439,6 +455,9 @@ func _on_database_locations_data_loaded():
 		if items_in_location > 0:
 			location_extra_data[key] = str(items_in_location)
 	locations_tab_tree.build_tree(current_location_data, -1, location_extra_data)
+	if command_line_mode == CommandLineModes.LocationStructOut:
+		Global.print_out(get_loc_string(current_location_data))
+		get_tree().quit()
 
 
 func _on_database_categories_data_loaded():
@@ -866,3 +885,25 @@ func _on_clear_filter_pressed() -> void:
 
 func _on_items_in_selected_locations_pressed() -> void:
 	tab_control.current_tab = 0
+
+
+func get_loc_string(data: Dictionary, current_id = null, indent: String = "") -> String:
+	var result = ""
+	
+	var children = []
+	for id in data:
+		if data[id]["parent_id"] == current_id:
+			children.append(data[id])
+	
+	for i in range(children.size()):
+		var child = children[i]
+		var is_last = (i == children.size() - 1)
+		
+		var connector = "└── " if is_last else "├── "
+		result += indent + connector + str(child["name"]) + "\n"
+		
+		var next_indent = indent + ("    " if is_last else "│   ")
+		
+		result += get_loc_string(data, child["id"], next_indent)
+		
+	return result
