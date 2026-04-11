@@ -19,6 +19,8 @@ extends Control
 @export var clear_filter_button : TextureButton
 
 var quit_on_start = false
+var search_on_start = ""
+
 
 enum CommandLineModes {
 	None,
@@ -61,7 +63,7 @@ func get_search_text():
 
 func get_cl_args():
 	var args = OS.get_cmdline_args()
-	var user_args = OS.get_cmdline_user_args()
+	var user_args := OS.get_cmdline_user_args()
 	if "--locations" in user_args or "-l" in user_args:
 		command_line_mode = CommandLineModes.LocationStructOut
 	if "-q" in user_args:
@@ -69,6 +71,30 @@ func get_cl_args():
 	if "--help" in user_args:
 		print_help()
 		get_tree().quit()
+	if "-s" in user_args:
+		var s_value = get_arg_value(user_args, "-s")
+		if s_value != "":
+			Global.print_out(s_value)
+			search_on_start = s_value
+	if command_line_mode == CommandLineModes.None and quit_on_start:
+		get_tree().quit()
+
+
+func get_arg_value(args: PackedStringArray, flag: String) -> String:
+	var idx = args.find(flag)
+	if idx == -1 or idx + 1 >= args.size():
+		return ""
+	var value = args[idx + 1].strip_edges()
+	if (value.begins_with('"') and value.ends_with('"')) or \
+	   (value.begins_with("'") and value.ends_with("'")):
+		return value.substr(1, value.length() - 2)
+	var full_value = []
+	for i in range(idx + 1, args.size()):
+		var current = args[i]
+		if current.begins_with("-"):
+			break
+		full_value.append(current)
+	return " ".join(full_value)
 
 
 func print_help():
@@ -428,7 +454,6 @@ func save_category(category_data):
 
 func _on_parent_selection_button_pressed():
 	exec_action_popup(Global.WhatToDo.Change, Global.ActionDataType.ParentLocation, -1)
-	#show_tree_selector_dialogue(Global.TreeSelection.ParentLocation)
 
 
 func get_filtered_item_data():
@@ -457,6 +482,10 @@ func refresh_items_list():
 func _on_database_item_data_loaded():
 	refresh_items_list()
 	print("item data loaded")
+	if search_on_start != "":
+		search_line_edit.text = search_on_start
+		_on_search_line_edit_text_changed(search_on_start)
+	
 
 
 func _on_create_item_button_pressed():
