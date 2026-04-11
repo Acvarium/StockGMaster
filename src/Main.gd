@@ -24,7 +24,8 @@ var search_on_start = ""
 
 enum CommandLineModes {
 	None,
-	LocationStructOut
+	LocationStructOut,
+	Search
 }
 
 var command_line_mode := CommandLineModes.None
@@ -74,8 +75,11 @@ func get_cl_args():
 	if "-s" in user_args:
 		var s_value = get_arg_value(user_args, "-s")
 		if s_value != "":
-			Global.print_out(s_value)
 			search_on_start = s_value
+			if quit_on_start:
+				command_line_mode = CommandLineModes.Search
+	#search_on_start = "блок"
+	#command_line_mode = CommandLineModes.Search
 	if command_line_mode == CommandLineModes.None and quit_on_start:
 		get_tree().quit()
 
@@ -485,7 +489,23 @@ func _on_database_item_data_loaded():
 	if search_on_start != "":
 		search_line_edit.text = search_on_start
 		_on_search_line_edit_text_changed(search_on_start)
-	
+		if command_line_mode == CommandLineModes.Search:
+			var s_items = search_items_with_text(search_on_start)
+			Global.print_out(item_data_to_str(s_items))
+		if quit_on_start:
+			get_tree().quit()
+
+
+func item_data_to_str(_item_data : Dictionary) -> String:
+	var ss := ""
+	for k in _item_data:
+		ss += "- " + _item_data[k].name + "\n"
+		if "stocks" in _item_data[k].keys():
+			var item_stocks = _item_data[k].stocks
+			if item_stocks and item_stocks.size() > 0:
+				for stock in item_stocks:
+					ss += "    [" + get_location_address(stock.location_id) + "]\n"
+	return ss
 
 
 func _on_create_item_button_pressed():
@@ -692,7 +712,6 @@ func _on_tab_container_tab_changed(tab):
 		else:
 			var found_items = search_items_with_text(new_text)
 			items_tab.refrash_item_data_list(found_items)
-		
 	elif tab == 1:
 		var found_locations = search_tree_data_with_text(new_text, $Database.locations_data)
 		locations_tab_tree.show_selection(found_locations)
