@@ -3,8 +3,24 @@ SCRIPT_DIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 PROJECT_PATH="$SCRIPT_DIR/src"
 GODOT_BIN="Godot"
 
-if [ $# -eq 0 ]; then
-    $GODOT_BIN --path "$PROJECT_PATH"
+[[ " $* " =~ " -h " ]] && HEADLESS=true || HEADLESS=false
+[[ " $* " =~ " -f " ]] && FILTER=true || FILTER=false
+[[ " $* " =~ " --help " ]] && HELP=true || HELP=false
+
+
+CMD_ARGS=("--path" "$PROJECT_PATH")
+
+if [[ "$HEADLESS" == true || "$HELP" == true ]]; then
+    CMD_ARGS+=("--headless")
+fi
+
+USER_ARGS=()
+for arg in "$@"; do
+    [[ "$arg" != "-h" && "$arg" != "-f" ]] && USER_ARGS+=("$arg")
+done
+
+if [[ "$FILTER" == true || "$HELP" == true ]]; then
+    $GODOT_BIN "${CMD_ARGS[@]}" -- "${USER_ARGS[@]}" | sed -n '/<game-output>/,/<\/game-output>/p' | sed '/<game-output>/d; /<\/game-output>/d'
 else
-    $GODOT_BIN --headless --path "$PROJECT_PATH" -- "$@" | sed -n '/<game-output>/,/<\/game-output>/p' | sed '/<game-output>/d; /<\/game-output>/d'
+    $GODOT_BIN "${CMD_ARGS[@]}" -- "${USER_ARGS[@]}"
 fi

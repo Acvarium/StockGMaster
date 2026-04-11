@@ -18,6 +18,7 @@ extends Control
 @onready var side_info : Control = $MainControl/HSplit/SideInfo
 @export var clear_filter_button : TextureButton
 
+var quit_on_start = false
 
 enum CommandLineModes {
 	None,
@@ -63,6 +64,21 @@ func get_cl_args():
 	var user_args = OS.get_cmdline_user_args()
 	if "--locations" in user_args or "-l" in user_args:
 		command_line_mode = CommandLineModes.LocationStructOut
+	if "-q" in user_args:
+		quit_on_start = true
+	if "--help" in user_args:
+		print_help()
+		get_tree().quit()
+
+
+func print_help():
+	var help_str = ""
+	help_str += "--help  print this message\n"
+	help_str += "-h  headless mode\n"
+	help_str += "-q  quit on start\n"
+	help_str += "-l or --location  output the locations tree\n"
+	
+	Global.print_out(help_str)
 
 
 func _ready():
@@ -457,7 +473,8 @@ func _on_database_locations_data_loaded():
 	locations_tab_tree.build_tree(current_location_data, -1, location_extra_data)
 	if command_line_mode == CommandLineModes.LocationStructOut:
 		Global.print_out(get_loc_string(current_location_data))
-		get_tree().quit()
+		if quit_on_start:
+			get_tree().quit()
 
 
 func _on_database_categories_data_loaded():
