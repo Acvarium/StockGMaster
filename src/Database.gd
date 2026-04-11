@@ -166,7 +166,6 @@ func get_unit_name_by_id(_id):
 	#return get_data_path() + "/images/"
 
 
-
 func get_location_name_by_id(location_id):
 	if location_id in locations_data.keys():
 		return locations_data[location_id].name

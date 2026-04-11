@@ -627,8 +627,6 @@ func _on_filter_items_button_pressed():
 	show_item_filtering_dialogue()
 
 
-
-
 func shoe_profile_selection_dialogue(to_show = true):
 	$ProfileSelectionDialogue.visible = to_show
 

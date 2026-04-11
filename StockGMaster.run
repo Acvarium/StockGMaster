@@ -1,0 +1,10 @@
+#!/bin/bash
+SCRIPT_DIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
+PROJECT_PATH="$SCRIPT_DIR/src"
+GODOT_BIN="Godot"
+
+if [ $# -eq 0 ]; then
+    $GODOT_BIN --path "$PROJECT_PATH"
+else
+    $GODOT_BIN --headless --path "$PROJECT_PATH" -- "$@" | sed -n '/<game-output>/,/<\/game-output>/p' | sed '/<game-output>/d; /<\/game-output>/d'
+fi
