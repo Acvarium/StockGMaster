@@ -4,7 +4,7 @@ var profile_elem_prefab = preload("res://objects/profile_selection_element.tscn"
 @export var profiles_holder : Control
 @onready var main_node = get_tree().get_root().get_node("Main")
 var new_profile_id = -1
-
+var json_audit_dir := ""
 func _ready():
 	Global.profiles_loaded.connect(refrash_profile_list)
 

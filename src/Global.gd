@@ -5,7 +5,7 @@ var ui_scale_factor = 1.0
 var last_orientation_is_portrait: bool = false
 const base_window_size = Vector2(600, 1000)
 var profiles = []
-
+var json_audit_dir := ""
 signal profiles_loaded
 signal warning_message(title : String, message : String)
 signal action_dialogue(receiver, conf_what_to_do, warning_message)
@@ -27,6 +27,7 @@ func print_out(message : String):
 	print("<game-output>")
 	print(message)
 	print("</game-output>")
+
 
 enum ActionDataType {
 	None,
@@ -107,6 +108,10 @@ func load_config():
 	var file = FileAccess.open(save_file, FileAccess.READ)
 	if is_instance_valid(file):
 		var data = JSON.parse_string(file.get_as_text())
+		if "json_audit_dir" in data:
+			json_audit_dir = data.json_audit_dir
+		else:
+			json_audit_dir = ""
 		if "current_profile_id" in data:
 			current_profile_id = int(data.current_profile_id)
 		if "ui_scale_factor" in data:
@@ -147,6 +152,7 @@ func open_file_at(file_path):
 
 func save_config():
 	var data = {}
+	data.json_audit_dir = json_audit_dir
 	data.current_profile_id = current_profile_id
 	data.ui_scale_factor = ui_scale_factor
 	data.profiles = profiles

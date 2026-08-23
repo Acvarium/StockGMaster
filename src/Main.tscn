@@ -83,6 +83,7 @@
 [ext_resource type="Script" uid="uid://cdcsugqa44xiy" path="res://objects/WarningMessageDialogue.gd" id="79_wnkxs"]
 [ext_resource type="StyleBox" uid="uid://c285i81pa11sx" path="res://styles/ItemListPanelStyle.tres" id="81_lo0ny"]
 [ext_resource type="Script" uid="uid://c8vgv7181ac52" path="res://objects/OpenFilePopupMenu.gd" id="82_mitij"]
+[ext_resource type="Script" uid="uid://b37p68sge5685" path="res://json_audit_manager.gd" id="84_d646h"]
 
 [sub_resource type="Theme" id="Theme_xicdx"]
 default_font_size = 45
@@ -101,7 +102,7 @@ shadow_color = Color(0, 0, 0, 0.403922)
 shadow_size = 10
 shadow_offset = Vector2(10, 10)
 
-[node name="Main" type="Control" unique_id=1211903065 node_paths=PackedStringArray("locations_tab_tree", "category_tab_tree", "tag_tab", "tag_selection_viewer", "image_grid", "clear_filter_button")]
+[node name="Main" type="Control" unique_id=1211903065 node_paths=PackedStringArray("locations_tab_tree", "category_tab_tree", "tag_tab", "tag_selection_viewer", "image_grid", "clear_filter_button", "audit_manager")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -115,6 +116,7 @@ tag_tab = NodePath("MainControl/HSplit/MainInfo/TabContainer/Tags")
 tag_selection_viewer = NodePath("TagSelectionDialogue/TSL/AspectRatioContainer/Control/SC/TagViewer")
 image_grid = NodePath("ImageSelectionDialogue/ItemsPanel/ScrollContainer/ImageGridContainer")
 clear_filter_button = NodePath("MainControl/HSplit/MainInfo/TabContainer/Items/ItemsToolPanel/HBoxContainer/HBoxContainer/ClearFilterButton")
+audit_manager = NodePath("JSONAuditManager")
 
 [node name="Database" type="Node" parent="." unique_id=133490994]
 script = ExtResource("2_x8r34")
@@ -2122,6 +2124,9 @@ item_0/id = 0
 item_1/text = "Open in File Manager"
 item_1/id = 1
 script = ExtResource("82_mitij")
+
+[node name="JSONAuditManager" type="Node" parent="." unique_id=237615875]
+script = ExtResource("84_d646h")
 
 [connection signal="categories_data_loaded" from="Database" to="." method="_on_database_categories_data_loaded"]
 [connection signal="item_data_loaded" from="Database" to="." method="_on_database_item_data_loaded"]

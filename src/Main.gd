@@ -17,7 +17,7 @@ extends Control
 @onready var search_line_edit : LineEdit = $MainControl/HSplit/MainInfo/SearchLine/SearchLineEdit
 @onready var side_info : Control = $MainControl/HSplit/SideInfo
 @export var clear_filter_button : TextureButton
-
+@export var audit_manager : AuditManager
 var quit_on_start = false
 var search_on_start = ""
 
@@ -78,7 +78,7 @@ func get_cl_args():
 			search_on_start = s_value
 			if quit_on_start:
 				command_line_mode = CommandLineModes.Search
-	#search_on_start = "блок"
+	#search_on_start = "Мочалка"
 	#command_line_mode = CommandLineModes.Search
 	if command_line_mode == CommandLineModes.None and quit_on_start:
 		get_tree().quit()
@@ -107,7 +107,7 @@ func print_help():
 	help_str += "-h  headless mode\n"
 	help_str += "-q  quit on start\n"
 	help_str += "-l or --location  output the locations tree\n"
-	
+	help_str += "-s \"some words\"  search\n"
 	Global.print_out(help_str)
 
 
@@ -121,6 +121,16 @@ func _ready():
 		$FileDialog.root_subfolder = "/storage/emulated/0"
 	$MainControl/HSplit/MainInfo/TabContainer.current_tab = 0
 	
+	if search_on_start != "" and quit_on_start:
+		audit_manager.update_data()
+		var audit_search_result = audit_manager.fuzzy_search_items(search_on_start)
+		if audit_search_result:
+			var audit_search_string := ""
+			for item in audit_search_result:
+				audit_search_string += "[FromA] " + item.item + " [at] " + item.location + "\n"
+				
+			Global.print_out(audit_search_string)
+		pass
 	load_images_to_viewer()
 	OS.request_permissions()
 
