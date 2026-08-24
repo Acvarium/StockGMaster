@@ -213,27 +213,42 @@ func delete_location(location_id):
 		$Database.pull_locations_data()
 
 
-func search_items_with_text(search_text):
+func search_items_with_text(search_text : String):
 	var filtered_data = get_filtered_item_data()
 	if search_text.is_empty():
 		return null
 	var found_item_ids = {}
-	var search_text_split = search_text.to_lower().split(" ")
-	for i in filtered_data:
-		var current_item_data = filtered_data[i]
-		var item_name = current_item_data.name
-		var item_descr = "" 
-		if "description" in current_item_data and current_item_data.description:
-			item_descr = current_item_data.description
-		var current_text = (item_name + item_descr).to_lower()
-		if does_text_contain_words(search_text_split, current_text):
-			found_item_ids[i] = filtered_data[i]
+	var search_location_ids := []
+	if "%l" in search_text:
+		search_text = search_text.replace("%l", "")
+		if not search_text.replace(" ", "").is_empty():
+			search_location_ids = search_tree_data_with_text(search_text, $Database.locations_data)
+	
+	if search_location_ids and search_location_ids.size() > 0:
+		for i in filtered_data:
+			var current_item_data = filtered_data[i]
+			if "stocks" in current_item_data:
+				for stock in current_item_data.stocks:
+					if stock.location_id in search_location_ids:
+						found_item_ids[i] = filtered_data[i]
+	else:
+		var search_text_split = search_text.to_lower().split(" ")
+		for i in filtered_data:
+			var current_item_data = filtered_data[i]
+			var item_name = current_item_data.name
+			var item_descr = "" 
+			if "description" in current_item_data and current_item_data.description:
+				item_descr = current_item_data.description
+			var current_text = (item_name + item_descr).to_lower()
+			if does_text_contain_words(search_text_split, current_text):
+				found_item_ids[i] = filtered_data[i]
 	return found_item_ids
 
 
 func search_tree_data_with_text(search_text : String, tree_data : Dictionary):
 	if search_text.is_empty():
 		return null
+	search_text = search_text.replace("%l", "")
 	var found_ids = []
 	var search_text_split = search_text.to_lower().split(" ")
 	for i in tree_data:
@@ -980,3 +995,12 @@ func get_loc_string(data: Dictionary, current_id = null, indent: String = "") ->
 		result += get_loc_string(data, child["id"], next_indent)
 		
 	return result
+
+
+func _on_location_struct_tree_item_activated() -> void:
+	var selected_loc = locations_tab_tree.get_active_id()
+	if selected_loc >= 0:
+		var location_name = $Database.get_location_name_by_id(selected_loc)
+		search_line_edit.text = "%l " + location_name
+		tab_control.current_tab = 0
+		

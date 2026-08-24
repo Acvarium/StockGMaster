@@ -2150,6 +2150,7 @@ script = ExtResource("84_d646h")
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateFromSelectedButton" to="." method="create_location_from_selected"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationToolPanel/HBoxContainer/CreateLocationButton" to="." method="_on_create_location_button_pressed"]
 [connection signal="button_clicked" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationStructTree" to="." method="_on_location_struct_tree_button_clicked"]
+[connection signal="item_activated" from="MainControl/HSplit/MainInfo/TabContainer/Locations/LocationStructTree" to="." method="_on_location_struct_tree_item_activated"]
 [connection signal="pressed" from="MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryToolPanel/HBoxContainer/CreateCategoryButton" to="." method="_on_create_category_button_pressed"]
 [connection signal="button_clicked" from="MainControl/HSplit/MainInfo/TabContainer/Categories/CategoryStructTree" to="." method="_on_category_struct_tree_button_clicked"]
 [connection signal="tag_pressed_sig" from="MainControl/HSplit/MainInfo/TabContainer/Tags/Control/ScrollContainer/TagViewer" to="MainControl/HSplit/MainInfo/TabContainer/Tags" method="_on_tag_viewer_tag_pressed_sig"]
